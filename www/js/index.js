@@ -124,15 +124,5 @@ var app = {
     {
 	console.log("test");
 	downloadFile();
-    },
-    
-    initFS: function()
-    {
-	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
-	
-	
-	
-	
     }
-    
 };
