@@ -112,5 +112,12 @@ var app = {
     {
 	console.log("test");
 	pgDownload();
-    }
+    },
+    
+    test1: function()
+    {
+	console.log("test");
+	downloadFile();
+    },
+    
 };
