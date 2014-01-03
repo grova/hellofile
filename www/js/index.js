@@ -52,7 +52,26 @@ window.requestFileSystem(LocalFileSystem.PERSISTENT, 0,
     }, fail);
 };
 
- 
+function pgDownload()
+{
+	var filePath = "saved.pdf";
+	var fileTransfer = new FileTransfer();
+	var uri = encodeURI("http://www.storci.com/pdf/products/vsfTVmix.pdf");
+
+	fileTransfer.download(
+	    uri,
+	    filePath,
+	    function(entry) {
+		console.log("download complete: " + entry.fullPath);
+	    },
+	    function(error) {
+		console.log("download error source " + error.source);
+		console.log("download error target " + error.target);
+		console.log("upload error code" + error.code);
+	    },
+	    true
+	);
+} 
  
  
 var app = {
@@ -91,6 +110,6 @@ var app = {
     // metto qui le cose da testare
     test: function()
     {
-    
+	pgDownload();
     }
 };
