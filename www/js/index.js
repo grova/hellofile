@@ -54,7 +54,7 @@ window.requestFileSystem(LocalFileSystem.PERSISTENT, 0,
 
 function pgDownload()
 {
-	var filePath = "saved.pdf";
+	var filePath = "file:///mnt/sdcard/theFile.pdf";
 	var fileTransfer = new FileTransfer();
 	console.log("filetransfer "+fileTransfer);
 	var uri = encodeURI("http://www.storci.com/pdf/products/vsfTVmix.pdf");
