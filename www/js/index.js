@@ -126,7 +126,7 @@ var app = {
     
     
     
-    currentList:"",	// ci salvo il json
+    currentList: null,	// ci salvo il json
     
     
     loadJson: function()
@@ -142,13 +142,17 @@ var app = {
 	{
 		console.log("localstorage OK");
 		this.currentList = localStorage.getItem("prevDocList");
-		console.log(currentList);
+		if (this.currentList != null)
+		{
+			console.log(this.currentList);
+		}
 		supported = true;
 	}
 	
 		
 	// indirizzo del file json
-	var url = "https://www.storci.com/dbfwver.txt";
+	//var url = "https://www.storci.com/dbfwver.txt";
+	var url = "https://dl.dropboxusercontent.com/u/48127483/dbfwver.txt";
 
 	// se ci fossero problemi di crossdomain
 	//$.getJSON(url + "?callback=?", null, function(tweets) {
