@@ -75,14 +75,6 @@ function pgDownload()
 	);
 } 
 
-function supports_html5_storage() 
-{
-  try {
-    return 'localStorage' in window && window['localStorage'] !== null;
-  } catch (e) {
-    return false;
-  }
-}
  
  
 var app = {
@@ -133,23 +125,18 @@ var app = {
     },
     
     
+    
     currentList:"",	// ci salvo il json
+    
     
     loadJson: function()
     {
 	var supported = false;
-	if (supports_html5_storage())
-	{
-		console.log("storage OK");
-	}
-	else
-	{
-		console.log("NO storage");
-	}
 	
-	if (typeof(localStorage) == ‘undefined’ )
+	
+	if (typeof(localStorage) == "undefined" )
 	{
-		console.log(‘Your browser does not support HTML5 localStorage. Try upgrading.’);
+		console.log("Your browser does not support HTML5 localStorage. Try upgrading.");
 	}
 	else
 	{
@@ -179,6 +166,7 @@ var app = {
 	    });
 	jqxhr.error(function(){concole.log("error")});
     }
+    
 }
 
 
