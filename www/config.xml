@@ -54,5 +54,5 @@
     <gap:plugin name="org.apache.cordova.file" />
     <gap:plugin name="org.apache.cordova.file-transfer" />
     
-    <access origin="http://127.0.0.1*" />
+    <access origin="*" />
 </widget>
