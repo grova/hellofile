@@ -26,7 +26,9 @@ function fail(error)
 function downloadFile()
 {
 	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
-		function onFileSystemSuccess(fileSystem) {
+		function onFileSystemSuccess(fileSystem) 
+		{
+			console.log("GOT fs");
 			fileSystem.root.getFile(
 			"dummy.html", {create: true, exclusive: false}, 
 			function gotFileEntry(fileEntry) {
@@ -34,13 +36,12 @@ function downloadFile()
 			    var fileTransfer = new FileTransfer();
 			    fileEntry.remove();
 			    var uri = encodeURI("http://www.storci.com/pdf/products/vsfTVmix.pdf");
-
+			    console.log("start download");	
 			    fileTransfer.download(
 				uri,
 				sPath + "theFile.pdf",
 				function(theFile) {
 				    console.log("download complete: " + theFile.toURI());
-				    showLink(theFile.toURI());
 				},
 				function(error) {
 				    console.log("download error source " + error.source);
