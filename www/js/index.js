@@ -16,46 +16,41 @@
  * specific language governing permissions and limitations
  * under the License.
  */
- 
+
+
 function fail(error)
 {
    console.log(error.code);
 } 
  
- 
 function downloadFile()
 {
 	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
-		function onFileSystemSuccess(fileSystem) 
-		{
+		function onFileSystemSuccess(fileSystem) {
 			fileSystem.root.getFile(
-				"dummy.html", {create: true, exclusive: false}, 
-				function gotFileEntry(fileEntry) 
-				{
-					var sPath = fileEntry.fullPath.replace("dummy.html","");
-					var fileTransfer = new FileTransfer();
-					console.log("filetransfer "+fileTransfer);
-					fileEntry.remove();
-					var uri = encodeURI("http://www.storci.com/pdf/products/vsfTVmix.pdf");
-					fileTransfer.download(
-						uri
-						sPath + "theFile.pdf",
-						function(theFile) {
-							console.log("download complete: " + theFile.toURI());
-						},
-						function(error) {
-						    console.log("download error source " + error.source);
-						    console.log("download error target " + error.target);
-						    console.log("upload error code: " + error.code);
-						}
-					);
+			"dummy.html", {create: true, exclusive: false}, 
+			function gotFileEntry(fileEntry) {
+			    var sPath = fileEntry.fullPath.replace("dummy.html","");
+			    var fileTransfer = new FileTransfer();
+			    fileEntry.remove();
+			    var uri = encodeURI("http://www.storci.com/pdf/products/vsfTVmix.pdf");
+
+			    fileTransfer.download(
+				uri,
+				sPath + "theFile.pdf",
+				function(theFile) {
+				    console.log("download complete: " + theFile.toURI());
+				    showLink(theFile.toURI());
 				},
-				fail
+				function(error) {
+				    console.log("download error source " + error.source);
+				    console.log("download error target " + error.target);
+				    console.log("upload error code: " + error.code);
+				}
 			);
-		},
-		fail
-	);
-};
+			}, fail);
+		}, fail);
+}
 
 function pgDownload()
 {
@@ -125,4 +120,8 @@ var app = {
 	console.log("test");
 	downloadFile();
     }
-};
+}
+
+
+
+
