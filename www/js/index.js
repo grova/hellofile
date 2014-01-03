@@ -41,7 +41,7 @@ function downloadFile()
 				uri,
 				sPath + "theFile.pdf",
 				function(theFile) {
-				    console.log("download complete: " + theFile.toURI());
+				    console.log("download complete: " + theFile.fullPath);
 				},
 				function(error) {
 				    console.log("download error source " + error.source);
@@ -74,6 +74,15 @@ function pgDownload()
 	    true
 	);
 } 
+
+function supports_html5_storage() 
+{
+  try {
+    return 'localStorage' in window && window['localStorage'] !== null;
+  } catch (e) {
+    return false;
+  }
+}
  
  
 var app = {
@@ -112,14 +121,63 @@ var app = {
     // metto qui le cose da testare
     test: function()
     {
-	console.log("test");
-	pgDownload();
+	console.log("loadjson");
+	//pgDownload();
+	this.loadJson();
     },
     
     test1: function()
     {
 	console.log("test");
 	downloadFile();
+    },
+    
+    
+    currentList:"",	// ci salvo il json
+    
+    loadJson: function()
+    {
+	var supported = false;
+	if (supports_html5_storage())
+	{
+		console.log("storage OK");
+	}
+	else
+	{
+		console.log("NO storage");
+	}
+	
+	if (typeof(localStorage) == ‘undefined’ )
+	{
+		console.log(‘Your browser does not support HTML5 localStorage. Try upgrading.’);
+	}
+	else
+	{
+		console.log("localstorage OK");
+		this.currentList = localStorage.getItem("prevDocList");
+		console.log(currentList);
+		supported = true;
+	}
+	
+		
+	// indirizzo del file json
+	var url = "https://www.storci.com/dbfwver.txt";
+
+	// se ci fossero problemi di crossdomain
+	//$.getJSON(url + "?callback=?", null, function(tweets) {
+	concole.log("loading "+url);
+	var jqxhr = $.getJSON(url , null, function(data) {
+		if (supported)
+		{
+			localStorage.setItem("prevDocList",JSON.stringify(data));
+		}
+		console.log(data);
+		console.log("stringificato");
+		console.log(JSON.stringify(data));
+		
+		
+	    });
+	jqxhr.error(function(){concole.log("error")});
     }
 }
 
