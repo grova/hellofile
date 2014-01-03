@@ -152,7 +152,7 @@ var app = {
 
 	// se ci fossero problemi di crossdomain
 	//$.getJSON(url + "?callback=?", null, function(tweets) {
-	concole.log("loading "+url);
+	console.log("loading "+url);
 	var jqxhr = $.getJSON(url , null, function(data) {
 		if (supported)
 		{
