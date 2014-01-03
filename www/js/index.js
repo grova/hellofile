@@ -110,6 +110,7 @@ var app = {
     // metto qui le cose da testare
     test: function()
     {
+	console.log("test");
 	pgDownload();
     }
 };
