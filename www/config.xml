@@ -53,7 +53,7 @@
     
     <gap:plugin name="org.apache.cordova.file" />
     <gap:plugin name="org.apache.cordova.file-transfer" />
-    <gap:plugin name="com.borismus.webintent" />
+    <gap:plugin name="com.borismus.webintent" version="0.1.0" />
     
     <access origin="*" />
 </widget>
