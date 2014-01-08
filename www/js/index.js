@@ -169,6 +169,21 @@ var app = {
 		
 	    });
 	jqxhr.error(function(){concole.log("error")});
+    },
+
+    readPdf: function()
+    {
+    	console.log("start activity read pdf");
+    	var filePath = "file:///mnt/sdcard/theFile.pdf";
+
+    	window.plugins.webintent.startActivity({
+		    action: window.plugins.webintent.ACTION_VIEW,
+		    type: 'application/pdf',
+		    url: filePath}, 
+		    function() {}, 
+		    function() {alert('Failed to open URL via Android Intent')};
+		);
+
     }
     
 }
