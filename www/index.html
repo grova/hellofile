@@ -23,28 +23,109 @@
         <meta name="format-detection" content="telephone=no" />
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+		
+        <link rel="stylesheet" type="text/css" href="js/y3.theme.css">
+        <link rel="stylesheet" type="text/css" href="js/jquery.mobile.icons-1.4.0.css">
+        <link rel="stylesheet" type="text/css" href="js/jquery.mobile.structure-1.4.0.css">
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
-	<script type="text/javascript" src="js/jquery-2.0.3.js"></script>
-	<script type="text/javascript" src="js/jquery.mobile-1.4.0.js"></script>
+        
+		<script type="text/javascript" src="js/jquery-2.0.3.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-1.4.0.js"></script>
+    	<script type="text/javascript" src="phonegap.js"></script>
+		<script type="text/javascript" src="FileTransfer.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+
+		<title>Hello World</title>    
     </head>
     <body>
-        <div class="app">
-            <h1>PhoneGap</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-	    <button onclick = app.test()>load json</button>
-	    <button onclick = app.test1()>load file (request file system)</button>
-	    
-        </div>
-	
-        <script type="text/javascript" src="phonegap.js"></script>
-	<script type="text/javascript" src="FileTransfer.js"></script>
-	
+    	
         
-	<script type="text/javascript" src="js/index.js"></script>
+        <!--  ======================== LOADING PAGE ============================= !-->
+        <div data-role="page" id="loading" data-theme="a" class="y3-gradient-bg">
+
+          <div data-role="content">
+            <div class="y3-splash">
+            	<img src="img/splash_logo.png"><br>
+                <div class="blink">Loading...</div>
+             </div>
+          </div>
+        
+          <div data-role="footer" data-position="fixed" data-theme="b">
+            <div data-role="navbar" data-iconpos="top">
+                <ul>
+                    <li><a href="#testpage" data-icon="action">Test page</a></li>
+                    <li><a href="#" data-icon="gear">Options</a></li>
+                    <li><a href="#" data-icon="refresh">Verifica Aggiornamenti</a></li>
+                </ul>
+            </div><!-- /navbar -->
+          </div><!-- /footer -->
+          
+        </div><!-- /page --> 
+    
+
+
+        <!--  ======================== TESTING PAGE ============================= !-->
+        <div data-role="page" id="testpage" data-theme="a">
+        	<div data-role="header" data-position="fixed"><h1>Testing Page</h1></div>
+            <div data-role="content">
+            
+            	<div class="y3-general-box">
+                	<div class="ui-body ui-body-a">
+                        <p>Testa la lettura del file json sul server remoto</p>
+                        <button class="ui-btn ui-btn-c ui-btn-inline ui-corner-all ui-shadow  ui-icon-action ui-btn-icon-top"  onclick = app.test()>Load json</button>
+                    </div>
+                </div>
+            
+                <div class="y3-general-box">
+                	<div class="ui-body ui-body-a">
+                        <p>Testa il download di un file ed il salavataggio in locale</p>
+                        <button class="ui-btn ui-btn-c ui-btn-inline ui-corner-all ui-shadow ui-icon-edit ui-btn-icon-top" data-theme="c" onclick = app.test1() >Dawnload file</button>
+                    </div>
+				</div>
+
+                <div class="y3-general-box">
+                	<div class="ui-body ui-body-a">
+                        <p>Aggiungere qui ulteriori test...</p>
+                        <button class="ui-btn ui-btn-c ui-btn-inline ui-corner-all ui-shadow ui-icon-edit ui-btn-icon-top" data-theme="c" onclick = app.test() >Bottone espressivo</button>
+                    </div>
+				</div>
+
+                <div class="y3-general-box">
+                	<div class="ui-body ui-body-a">
+                    <p>Aggiungere qui ulteriori test...</p>
+                    <button class="ui-btn ui-btn-c ui-btn-inline ui-corner-all ui-shadow ui-icon-edit ui-btn-icon-top" data-theme="c" onclick = app.test() >Bottone espressivo</button>
+                    </div>
+				</div>
+
+                <div class="y3-general-box">
+                	<div class="ui-body ui-body-a">
+                    <p>Aggiungere qui ulteriori test...</p>
+                    <button class="ui-btn ui-btn-c ui-btn-inline ui-corner-all ui-shadow ui-icon-edit ui-btn-icon-top" data-theme="c" onclick = app.test() >Bottone espressivo</button>
+                    </div>
+				</div>
+
+                <div class="y3-general-box">
+                	<div class="ui-body ui-body-a">
+                    <p>Aggiungere qui ulteriori test...</p>
+                    <button class="ui-btn ui-btn-c ui-btn-inline ui-corner-all ui-shadow ui-icon-edit ui-btn-icon-top" data-theme="c" onclick = app.test() >Bottone espressivo</button>
+                    </div>
+				</div>
+
+            </div>
+
+            <div data-role="footer" data-position="fixed" data-theme="b">
+            	<div data-role="navbar" data-iconpos="top">
+                	<ul>
+                        <li><a href="#loading" data-icon="arrow-l">Back</a></li>
+                        <li><a href="#" data-icon="gear">Options</a></li>
+                        <li><a href="#" data-icon="refresh">Verifica Aggiornamenti</a></li>
+                    </ul>
+                </div><!-- /navbar -->
+            </div><!-- /footer -->
+
+		</div><!-- /page --> 
+
+	
         <script type="text/javascript">
             app.initialize();
         </script>
