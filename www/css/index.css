@@ -23,7 +23,7 @@
 	text-align:center;
 }
 
-.y3-splash img{
+.y3-splash img{ /*make logo image auto resizable*/
     max-width: 100%;
     height: auto;
 	}
@@ -47,8 +47,8 @@
 }
 
 .y3-testpage-description{
-	height:4em;
+	height:3em;
 	text-align:center;
-	padding:0.5em 0.5em 0em 0.5em;
+	padding:1em 0.5em 0em 0.5em;
 	
 }
