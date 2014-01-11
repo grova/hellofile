@@ -17,12 +17,16 @@
 }
 
 .y3-splash{
-	position:absolute;
-	width:99%;
+	padding-top:5em;
+	width:50%;
 	margin:auto;
 	text-align:center;
-	top:30%;
 }
+
+.y3-splash img{
+    max-width: 100%;
+    height: auto;
+	}
 
 
 @keyframes fade {
@@ -42,13 +46,9 @@
     -webkit-animation:fade 2000ms infinite;
 }
 
-.y3-general-box{
-	float:left;
-	width:50%;
+.y3-testpage-description{
+	height:4em;
 	text-align:center;
+	padding:0.5em 0.5em 0em 0.5em;
 	
 }
-
-.y3-general-box p{
-	height:5em;
-	overflow:hidden;}
