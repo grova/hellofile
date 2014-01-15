@@ -97,16 +97,11 @@ var app = {
         app.receivedEvent('deviceready');
 	
 	this.test();
+	
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
+		$("body").pagecontainer("change", "#homepage");
         console.log('Received Event: ' + id);
     },
     
@@ -151,7 +146,7 @@ var app = {
 	
 		
 	// indirizzo del file json
-	//var url = "https://www.storci.com/dbfwver.txt";
+	//var url = "http://www.storci.com/dbfwver.txt";
 	var url = "https://dl.dropboxusercontent.com/u/48127483/dbfwver.txt";
 
 	// se ci fossero problemi di crossdomain
