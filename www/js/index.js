@@ -76,6 +76,14 @@ function pgDownload()
 } 
 
  
+ //per uscire dalla loading page nel browser, premere ESC
+$(document).keydown(function(e){
+	if (e.keyCode == 27) { 
+	   app.receivedEvent('deviceready');
+	   return false;
+	}
+});
+
  
 var app = {
     // Application Constructor
@@ -94,13 +102,13 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        app.receivedEvent('deviceready');
+        app.receivedEvent('deviceready');		
 	
 	this.test();
 	
     },
     // Update DOM on a Received Event
-    receivedEvent: function(id) {
+    receivedEvent: function(id) {				
 		$("body").pagecontainer("change", "#homepage");
         console.log('Received Event: ' + id);
     },
