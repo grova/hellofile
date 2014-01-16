@@ -143,45 +143,46 @@ function downloadFile(remoteRef)
 						console.log("fileentry: " + fileEntry.fullPath);
 			    		localPath = fileEntry.fullPath.replace("dummy.html","");
 			    		fileEntry.remove();
+
+
+						var uri = encodeURI(remoteFilePath);
+					    console.log("start download of " + remoteFilePath);
+					    console.log("to " + localPath + filename);	
+					    var fileTransfer = new FileTransfer();
+					    fileTransfer.download(
+							uri,
+							localPath + filename,
+							function(theFile) {
+							    console.log("download complete: " + theFile.fullPath);
+							    // download completato devo aggiornare il db locale
+							    remoteRef.localPath = localPath + filename; 
+
+							    if (remoteRef.localIndex == -1)
+							    {
+							    	// nuovo record
+							    	if (app.localdb == null)
+							    	{
+							    		app.localdb = new Array();
+							    	}
+							    	app.localdb.push(remoteRef);
+
+							    }
+							    else
+							    {
+							    	app.localdb[remoteRef.localIndex] = remoteRef;
+							    }
+							    app.saveLocalDb();
+							},
+							function(error) {
+							    console.log("download error source " + error.source);
+							    console.log("download error target " + error.target);
+							    console.log("upload error code: " + error.code);
+								}
+						);
+
 					},
 					fail);
 			}
-
-		    //var uri = encodeURI("http://www.storci.com/pdf/products/vsfTVmix.pdf");
-		    var uri = encodeURI(remoteFilePath);
-		    console.log("start download of " + remoteFilePath);
-		    console.log("to " + localPath + filename);	
-		    var fileTransfer = new FileTransfer();
-		    fileTransfer.download(
-				uri,
-				localPath + filename,
-				function(theFile) {
-				    console.log("download complete: " + theFile.fullPath);
-				    // download completato devo aggiornare il db locale
-				    remoteRef.localPath = localPath + filename; 
-
-				    if (remoteRef.localIndex == -1)
-				    {
-				    	// nuovo record
-				    	if (app.localdb == null)
-				    	{
-				    		app.localdb = new Array();
-				    	}
-				    	app.localdb.push(remoteRef);
-
-				    }
-				    else
-				    {
-				    	app.localdb[remoteRef.localIndex] = remoteRef;
-				    }
-				    app.saveLocalDb();
-				},
-				function(error) {
-				    console.log("download error source " + error.source);
-				    console.log("download error target " + error.target);
-				    console.log("upload error code: " + error.code);
-					}
-			);
 		}, 
 		fail);
 }
