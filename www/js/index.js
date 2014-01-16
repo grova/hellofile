@@ -130,6 +130,7 @@ function downloadFile(remoteRef)
 		{
 			var localPath = remoteRef.localPath;
 			console.log("GOT fs");
+			console.log("localpath:" + localPath);
 
 			if (localPath == null)
 			{
@@ -138,6 +139,7 @@ function downloadFile(remoteRef)
 					"dummy.html", {create: true, exclusive: false}, 
 					function gotFileEntry(fileEntry) 
 					{
+						console.log("fileentry: " + fileEntry.fullPath);
 			    		localPath = fileEntry.fullPath.replace("dummy.html","");
 			    		fileEntry.remove();
 					},
