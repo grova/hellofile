@@ -134,6 +134,7 @@ function downloadFile(remoteRef)
 
 			if (localPath == null)
 			{
+				console.log("chiedo il path a FS");
 				// nuovo file mi devo cercare il path da solo
 				fileSystem.root.getFile(
 					"dummy.html", {create: true, exclusive: false}, 
