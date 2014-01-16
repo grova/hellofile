@@ -24,6 +24,48 @@ function fail(error)
 }
 
 
+function simulateFS(remoteRef)
+{
+	var remoteFilePath = remoteRef.filePath;
+	// nome file senza path
+	var filename = remoteFilePath.substring(remoteFilePath.lastIndexOf('/')+1);
+
+	var localPath = remoteRef.localPath;
+	console.log("simulate fs");
+
+	if (localPath == null)
+	{
+		console.log("nuovo file mi devo cercare il path da solo")
+		// nuovo file mi devo cercare il path da solo
+		localPath = "fake://";
+	}
+
+    var uri = encodeURI(remoteFilePath);
+    console.log("start download of " + remoteFilePath);
+    console.log("to " + localPath + filename);	
+
+    //console.log("download complete: " + theFile.fullPath);
+    remoteRef.localPath = localPath + filename;
+    // download completato devo aggiornare il db locale
+
+    if (remoteRef.localIndex == -1)
+    {
+    	// nuovo record
+    	if (app.localdb == null)
+    	{
+    		app.localdb = new Array();
+    	}
+    	app.localdb.push(remoteRef);
+
+    }
+    else
+    {
+    	app.localdb[remoteRef.localIndex] = remoteRef;
+    }
+    app.saveLocalDb();
+}
+
+
 function downloadFileChrome(remoteRef)
 {
 	var remoteFilePath = remoteRef.filePath;
@@ -33,7 +75,7 @@ function downloadFileChrome(remoteRef)
 	window.webkitRequestFileSystem(window.PERSISTENT, 0, 
 		function onFileSystemSuccess(fileSystem) 
 		{
-			var localPath = remoteRef.localPth;
+			var localPath = remoteRef.localPath;
 			console.log("GOT fs");
 
 			
@@ -57,7 +99,7 @@ function downloadFileChrome(remoteRef)
 		    var fileTransfer = new FileTransfer();
 		    fileTransfer.download(
 				uri,
-				sPath + filename,
+				localPath + filename,
 				function(theFile) {
 				    console.log("download complete: " + theFile.fullPath);
 				    // download completato devo aggiornare il db locale
@@ -72,7 +114,8 @@ function downloadFileChrome(remoteRef)
 					}
 			);
 		}, 
-		fail);
+		simulateFS(remoteRef)
+		);
 } 
  
 // mi serve il riferimento dal server, quando ho scaricato il file aggiorno il riferimento locale 
@@ -85,10 +128,8 @@ function downloadFile(remoteRef)
 	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
 		function onFileSystemSuccess(fileSystem) 
 		{
-			var localPath = remoteRef.localPth;
+			var localPath = remoteRef.localPath;
 			console.log("GOT fs");
-
-			
 
 			if (localPath == null)
 			{
@@ -105,17 +146,32 @@ function downloadFile(remoteRef)
 
 		    //var uri = encodeURI("http://www.storci.com/pdf/products/vsfTVmix.pdf");
 		    var uri = encodeURI(remoteFilePath);
-		    console.log("start download");	
+		    console.log("start download of " + remoteFilePath);
+		    console.log("to " + localPath + filename);	
 		    var fileTransfer = new FileTransfer();
 		    fileTransfer.download(
 				uri,
-				sPath + filename,
+				localPath + filename,
 				function(theFile) {
 				    console.log("download complete: " + theFile.fullPath);
 				    // download completato devo aggiornare il db locale
+				    remoteRef.localPath = localPath + filename; 
 
+				    if (remoteRef.localIndex == -1)
+				    {
+				    	// nuovo record
+				    	if (app.localdb == null)
+				    	{
+				    		app.localdb = new Array();
+				    	}
+				    	app.localdb.push(remoteRef);
 
-
+				    }
+				    else
+				    {
+				    	app.localdb[remoteRef.localIndex] = remoteRef;
+				    }
+				    app.saveLocalDb();
 				},
 				function(error) {
 				    console.log("download error source " + error.source);
@@ -185,45 +241,63 @@ var app = {
     },
     
        
-    
-    
-    
-    currentList: null,	// ci salvo il json locale
+    currentList: null,	// ci salvo il db locale in json
 
-    toDownloadList: null,
-    
-    
-    loadJson: function()
+    toDownloadList: null,  
+
+    localdb: null,	// db locale (object)
+
+    isLocalStorageSupported: function()
     {
-		var supported = false;
+    	if (typeof(localStorage) == "undefined" )
+    	{
+    		return false;
+    	}
+    	return true;
+    },
 
-		var localdb = null;
-		
-		
-		if (typeof(localStorage) == "undefined" )
+    initLocalDb: function () 
+    {
+    	if (!this.isLocalStorageSupported())
 		{
 			console.log("Your browser does not support HTML5 localStorage. Try upgrading.");
 		}
 		else
 		{
 			console.log("localstorage OK");
-			//this.currentList = localStorage.getItem("prevDocList");
+			isLocalStorageSupported = true;
+			this.currentList = localStorage.getItem("prevDocList");
 			if (this.currentList != null)
 			{
 				console.log(this.currentList);
 				try
 				{
-					localdb = $.parseJSON(this.currentList);
+					this.localdb = $.parseJSON(this.currentList);
 				}
 				catch(err)
 				{
 					console.log("error parsing local json");
-					localdb = null;
+					this.localdb = null;
 				}
 			}
-			supported = true;
 		}
-		
+    },
+
+
+    saveLocalDb: function()
+    {
+    	if (this.isLocalStorageSupported())
+    	{
+    		localStorage.setItem("prevDocList",JSON.stringify(this.localdb));
+			
+			console.log("stringificato");
+			console.log(JSON.stringify(this.localdb));
+    	}
+    },
+    
+    
+    loadJson: function()
+    {
 		this.toDownloadList = new Array();	// qui ci metto quelli da scaricare
 
 
@@ -245,19 +319,19 @@ var app = {
 				// guardo se ce l'ho
 				// se e' lento si sortera'
 				var found = false;
-				if (localdb != null)
+				if (app.localdb != null)
 				{
-					for (var i1=0;i1<localdb.length;i1++)
+					for (var i1 = 0; i1 < app.localdb.length; i1++)
 					{
-						if (data[i].fileid == localdb[i1].fileid)
+						if (data[i].fileid == app.localdb[i1].fileid)
 						{
 							found = true;
 							// trovato
 							// guardo se e' aggiornato
-							if (data[i].revision > localdb[i1].revision)
+							if (data[i].revision > app.localdb[i1].revision)
 							{
 								// lo devo scaricare
-								data[i].localPath = localdb[i1].localPath;	// cosi' lo sostituisco
+								data[i].localPath = app.localdb[i1].localPath;	// cosi' lo sostituisco
 								data[i].localIndex = i1;	// cosi' lo sostituisco
 								// this non e' visibile qui dentro devo usare app
 								app.toDownloadList.push(data[i]);
@@ -276,7 +350,7 @@ var app = {
 				}
 			}
 
-			
+			console.log("file(s) to download: " + app.toDownloadList.length)
 
 			// nella lista toDownloadList ho aggiungo i campi localPtah e localIndex per aggiornare il db locale 
 			// nel momento in cui il file remoto viene downloadato con successo
