@@ -34,6 +34,7 @@
     	<script type="text/javascript" src="phonegap.js"></script>
 		<script type="text/javascript" src="FileTransfer.js"></script>
 		<script type="text/javascript" src="js/index.js"></script>
+		<script type="text/javascript" src="js/y3.js"></script>
 
 		<title>Hello World</title>    
     </head>
@@ -98,17 +99,24 @@
             	<img src="img/splash_logo.png" style="width:30%; height:auto;">
             </div>
             
-            <div data-role="content">
-				
+            <div data-role="content" id="homecontent">
+
+                <div class="ui-corner-all custom-corners">
+                  <div class="ui-bar ui-bar-a">
+                    <h3>Genera lista contenuti</h3>
+                  </div>
+                  <div class="ui-body ui-body-a">
+                    <p><input type="button" value="Fill it!" data-theme="c" onclick = y3.initialize('homecontent')></p>
+                  </div>
+                </div>				
+                
+                
+                <!--
                 <div data-role="collapsible" data-theme="c">
                     <h2>Per genere <span class="ui-li-count">489</span></h2>
                 
                     <ul data-role="listview">
-                        <li><a href="#filelist">
-                        <h2>Cataloghi e Schede tecniche</h2>
-                        <p>Linee, Prodotti ed impianti</p>
-                            <p class="ui-li-aside"><strong>74</strong> files</p>
-                        </a></li>
+                        <li><a href="#filelist"><h2>Cataloghi e Schede tecniche</h2><p>Linee, Prodotti ed impianti</p><p class="ui-li-aside"><strong>74</strong> files</p></a></li>
                         <li><a href="#filelist">
                         <h2>Documenti tecnici</h2>
                         <p>Documenti riservati a meccanici ed operatori tecnici</p>
@@ -218,6 +226,7 @@
                     
                     </ul>
                 </div>
+                !-->
             </div>
 
             <div data-role="footer" data-position="fixed" data-theme="b">

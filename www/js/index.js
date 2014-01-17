@@ -371,7 +371,7 @@ var app = {
 			
 			
 		});
-		jqxhr.error(function(){concole.log("error")});
+		jqxhr.error(function(){console.log("error")});
 	}
     
 }
