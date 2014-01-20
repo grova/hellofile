@@ -380,7 +380,7 @@ var app = {
 		{
 			if (this.localdb.length>0)
 			{
-				var filename = localdb[0].localPath;
+				var filename = this.localdb[0].localPath;
 				console.log("provo ad aprire:" + filename);
 				window.open(filename,'_blank','location=no');
 			}
