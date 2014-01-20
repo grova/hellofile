@@ -53,6 +53,7 @@
     
     <gap:plugin name="org.apache.cordova.file" />
     <gap:plugin name="org.apache.cordova.file-transfer" />
+    <gap:plugin name="org.apache.cordova.inappbrowser" />
     
     <access origin="*" />
 </widget>
