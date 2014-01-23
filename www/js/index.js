@@ -133,7 +133,7 @@ function fileSystemTest()
 }
 
 
-function getGlobalPath(relativePath)
+function getGlobalPath(relativePath,_success,_fail)
 {
 	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
 		function onFileSystemSuccess(fileSystem) 
@@ -151,16 +151,18 @@ function getGlobalPath(relativePath)
 					fileEntry.remove();
 					var retvalue = localPath + relativePath;
 					console.log("globalpath:"+retvalue);
-					return retvalue;
+					_success(retvalue);
 				},
 				function fail(error)
 				{
 					console.log("getglobalpath fail:"+error.code);
+					_fail(error);
 				});
 		},
 		function fail(error)
 		{
 			console.log("requestfilesystem fail"+error.code);
+			_fail(error);
 		}
 		);
 }
@@ -430,43 +432,36 @@ var app = {
 			{
 				var filenametot = this.localdb[0].localPath;
 				var filename = filenametot.substring(filenametot.lastIndexOf('/')+1);
-				var global = getGlobalPath(filename);
-
-
-				console.log("provo ad aprire:" + global);
-				var ref;
-				if (location == true)
-				{
-					ref = window.open(global,'_blank','location=yes');
-				}
-				else
-				{
-					ref = window.open(global,'_blank','location=no');
-				}
-				
-				ref.addEventListener('loaderror',
-					function()
+				getGlobalPath(filename,
+					function success(global)
 					{
-						console.log("error loading:" + global);
-					}
+						console.log("provo ad aprire:" + global);
+						var ref;
+						if (location == true)
+						{
+							ref = window.open(global,'_blank','location=yes');
+						}
+						else
+						{
+							ref = window.open(global,'_blank','location=no');
+						}
+						
+						ref.addEventListener('loaderror',
+							function()
+							{
+								console.log("error loading:" + global);
+							}
 
+							);
+
+					},
+					function fail(error)
+					{
+
+					}
 					);
 			}
 		}
-	},
-
-	loadFile : function(path)
-	{
-		var globalPath = getGlobalPath(path);
-		console.log("globalpath:"+globalPath);
-		var ref = window.open(globalPath,'_blank','location=yes');
-		ref.addEventListener('loaderror',
-			function()
-			{
-				console.log("error loading:" + filename);
-			}
-
-		);
 	}
     
 }
