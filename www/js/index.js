@@ -374,7 +374,7 @@ var app = {
 		jqxhr.error(function(){console.log("error")});
 	},
 
-	loadFirstFile : function()
+	loadFirstFile : function(location)
 	{
 		if (this.localdb != null)
 		{
@@ -382,7 +382,16 @@ var app = {
 			{
 				var filename = this.localdb[0].localPath;
 				console.log("provo ad aprire:" + filename);
-				var ref = window.open(filename,'_blank','location=yes');
+				var ref;
+				if (location == true)
+				{
+					ref = window.open(filename,'_blank','location=yes');
+				}
+				else
+				{
+					ref = window.open(filename,'_blank','location=no');
+				}
+				
 				ref.addEventListener('loaderror',
 					function()
 					{
