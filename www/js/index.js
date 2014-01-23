@@ -147,9 +147,9 @@ function getGlobalPath(relativePath)
 				function gotFileEntry(fileEntry) 
 				{
 					console.log("fileentry: " + fileEntry.fullPath);
-			    	localPath = fileEntry.fullPath.replace("dummy.html","");
+			    	var localPath = fileEntry.fullPath.replace("dummy.html","");
 					fileEntry.remove();
-					var retvalue = localPath + relativepath;
+					var retvalue = localPath + relativePath;
 					console.log("globalpath:"+retvalue);
 					return retvalue;
 				},
