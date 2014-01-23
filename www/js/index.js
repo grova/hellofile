@@ -452,8 +452,8 @@ var app = {
 	loadFile : function(path)
 	{
 		var globalPath = getGlobalPath(path);
-		console.log("globalpath:"+globalpath);
-		var ref = window.open(globalpath,'_blank','location=yes');
+		console.log("globalpath:"+globalPath);
+		var ref = window.open(globalPath,'_blank','location=yes');
 		ref.addEventListener('loaderror',
 			function()
 			{
