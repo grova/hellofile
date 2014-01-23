@@ -131,6 +131,37 @@ function fileSystemTest()
 			console.log(error.code);
 		});
 }
+
+
+function getGlobalPath(relativePath)
+{
+	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
+		function onFileSystemSuccess(fileSystem) 
+		{
+			console.log("GOT fs");
+			console.log("relativepath:" + relativePath);
+			console.log("chiedo il path a FS");
+				// nuovo file mi devo cercare il path da solo
+			fileSystem.root.getFile(
+				"dummy.html", {create: true, exclusive: false}, 
+				function gotFileEntry(fileEntry) 
+				{
+					console.log("fileentry: " + fileEntry.fullPath);
+			    	localPath = fileEntry.fullPath.replace("dummy.html","");
+					fileEntry.remove();
+					return localPath + relativepath;
+				},
+				function fail(error)
+				{
+					console.log("getglobalpath fail:"+error.code);
+				});
+		},
+		function fail(error)
+		{
+			console.log("requestfilesystem fail"+error.code);
+		}
+		);
+}
  
 // mi serve il riferimento dal server, quando ho scaricato il file aggiorno il riferimento locale 
 function downloadFile(remoteRef)
