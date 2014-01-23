@@ -117,6 +117,20 @@ function downloadFileChrome(remoteRef)
 		simulateFS(remoteRef)
 		);
 } 
+
+
+function fileSystemTest()
+{
+	window.resolveLocalFileSystemURI("file:///example.txt",
+		function onSuccess(fileEntry)
+		{
+			console.log(fileEntry.name);
+		},
+		function fail(error)
+		{
+			console.log(error.code);
+		});
+}
  
 // mi serve il riferimento dal server, quando ho scaricato il file aggiorno il riferimento locale 
 function downloadFile(remoteRef)
