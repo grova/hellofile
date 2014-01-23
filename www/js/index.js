@@ -236,7 +236,8 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        app.receivedEvent('deviceready');		
+        app.receivedEvent('deviceready');	
+        this.initLocalDb();	
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {				
@@ -381,6 +382,38 @@ var app = {
 			if (this.localdb.length>0)
 			{
 				var filename = this.localdb[0].localPath;
+				console.log("provo ad aprire:" + filename);
+				var ref;
+				if (location == true)
+				{
+					ref = window.open(filename,'_blank','location=yes');
+				}
+				else
+				{
+					ref = window.open(filename,'_blank','location=no');
+				}
+				
+				ref.addEventListener('loaderror',
+					function()
+					{
+						console.log("error loading:" + filename);
+					}
+
+					);
+			}
+		}
+	},
+
+	loadFileFromDocuments : function(location)
+	{
+		if (this.localdb != null)
+		{
+			if (this.localdb.length>0)
+			{
+				var filepath = this.localdb[0].localPath;
+				var filename = filepath.substring(filepath.lastIndexOf('/')+1);
+				filename = "Documents/"+filename;
+
 				console.log("provo ad aprire:" + filename);
 				var ref;
 				if (location == true)
