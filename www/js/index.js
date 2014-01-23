@@ -404,36 +404,17 @@ var app = {
 		}
 	},
 
-	loadFileFromDocuments : function(location)
+	loadFile : function(path)
 	{
-		if (this.localdb != null)
-		{
-			if (this.localdb.length>0)
+
+		var ref = window.open(path,'_blank','location=yes');
+		ref.addEventListener('loaderror',
+			function()
 			{
-				var filepath = this.localdb[0].localPath;
-				var filename = filepath.substring(filepath.lastIndexOf('/')+1);
-				filename = "Documents/"+filename;
-
-				console.log("provo ad aprire:" + filename);
-				var ref;
-				if (location == true)
-				{
-					ref = window.open(filename,'_blank','location=yes');
-				}
-				else
-				{
-					ref = window.open(filename,'_blank','location=no');
-				}
-				
-				ref.addEventListener('loaderror',
-					function()
-					{
-						console.log("error loading:" + filename);
-					}
-
-					);
+				console.log("error loading:" + filename);
 			}
-		}
+
+		);
 	}
     
 }
