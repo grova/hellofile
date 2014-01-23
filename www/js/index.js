@@ -428,22 +428,26 @@ var app = {
 		{
 			if (this.localdb.length>0)
 			{
-				var filename = this.localdb[0].localPath;
-				console.log("provo ad aprire:" + filename);
+				var filenametot = this.localdb[0].localPath;
+				var filename = filenametot.substring(filenametot.lastIndexOf('/')+1);
+				var global = getGlobalPath(filename);
+
+
+				console.log("provo ad aprire:" + global);
 				var ref;
 				if (location == true)
 				{
-					ref = window.open(filename,'_blank','location=yes');
+					ref = window.open(global,'_blank','location=yes');
 				}
 				else
 				{
-					ref = window.open(filename,'_blank','location=no');
+					ref = window.open(global,'_blank','location=no');
 				}
 				
 				ref.addEventListener('loaderror',
 					function()
 					{
-						console.log("error loading:" + filename);
+						console.log("error loading:" + global);
 					}
 
 					);
