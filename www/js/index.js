@@ -284,7 +284,7 @@ var app = {
 		document.addEventListener("backbutton", function(e){
 			if($.mobile.activePage.is('#homepage')){
 				e.preventDefault();
-				this.exitapp();
+				navigator.app.exitApp();
 			}
 			else {
 				navigator.app.backHistory()
