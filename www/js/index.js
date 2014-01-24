@@ -279,6 +279,18 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
+		
+		//se premo back button nella homepage dell'app, la quitto, invece di andare back in history (default)
+		document.addEventListener("backbutton", function(e){
+			if($.mobile.activePage.is('#homepage')){
+				e.preventDefault();
+				navigator.app.exitApp();
+			}
+			else {
+				navigator.app.backHistory()
+			}
+		}, false);
+
     },
     // deviceready Event Handler
     //

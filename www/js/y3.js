@@ -139,6 +139,13 @@ var y3 = {
 				if (includethis) numberoffiles++;
 			};
 			return numberoffiles;
+		},
+		
+		
+		//exit App (Quit)
+		exitapp: function(){
+			console.log('exitApp called! Quit.');
+			navigator.app.exitApp();
 		}
 }
 	
