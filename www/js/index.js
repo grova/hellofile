@@ -284,7 +284,7 @@ var app = {
 		document.addEventListener("backbutton", function(e){
 			if($.mobile.activePage.is('#homepage')){
 				e.preventDefault();
-				navigator.app.exitApp();
+				this.exitapp();
 			}
 			else {
 				navigator.app.backHistory()
@@ -305,6 +305,12 @@ var app = {
 		$("body").pagecontainer("change", "#homepage");
         console.log('Received Event: ' + id);
     },
+	
+	//exit app code
+	exitapp: function(){
+		console.log('Exit request! Quit');
+		navigator.app.exitApp();
+		},
     
        
     currentList: null,	// ci salvo il db locale in json

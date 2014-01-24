@@ -86,7 +86,8 @@
                 	<ul>
                         <li><a href="#homepage" data-icon="arrow-l">Back</a></li>
                         <li><a href="#" data-icon="gear">Options</a></li>
-                        <li><a href="#" data-icon="refresh">Verifica Aggiornamenti</a></li>
+                        <li><a href="#" data-icon="refresh">Sync</a></li>
+                        <li><a href="#" class="y3-exitApp" data-icon="gear">Exit</a></li>
                     </ul>
                 </div><!-- /navbar -->
             </div><!-- /footer -->
@@ -169,6 +170,7 @@
 	
         <script type="text/javascript">
             app.initialize();
+			$(".y3-exitApp").click(app.exitapp());
         </script>
     </body>
 </html>
