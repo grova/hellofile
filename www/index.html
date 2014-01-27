@@ -172,8 +172,10 @@
 		</div><!-- /page --> 
 	
         <script type="text/javascript">
+        	var g_mainInit = false;
         	function mainInit()
         	{
+        		g_mainInit = true;
 	            app.initialize();
 			
 				$(".y3-exitApp").click(function(){
