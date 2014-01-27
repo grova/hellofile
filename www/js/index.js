@@ -299,7 +299,7 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');	
-        this.initLocalDb();	
+        app.initLocalDb();	
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {				
