@@ -43,6 +43,20 @@ var y3 = {
 				"grouptitle":"Linee e macchinari",
 				"desc":"Linee per pasta secca",
 				"notes":"Tutti i documenti relativi alle linee per pasta secca."
+			},
+			{
+				"groupid":4,
+				"grouptags":"#linee,#pasta secca",
+				"grouptitle":"Tipi di documenti",
+				"desc":"Manuali operativi",
+				"notes":"Tutti i manuali operativi."
+			},
+			{
+				"groupid":5,
+				"grouptags":"#linee,#pasta secca",
+				"grouptitle":"Tipi di documenti",
+				"desc":"Immagini",
+				"notes":"Tutte le immagini."
 			}
 		];
 		
@@ -69,34 +83,6 @@ var y3 = {
 				"desc":"Manuale operartivo Pressa 130.1.",
 				"filePath":"http://www.storci.com/pdf/products/vsfTVmix.pdf",
 				"filetags":"#manuali,#linee,#pasta secca"
-			},
-			{
-				"fileid":3,
-				"revision":11,
-				"desc":"Manuale operativo Linea Omnia",
-				"filePath":"http://www.storci.com/pdf/products/vsfTVmix.pdf",
-				"filetags":"#manuali,#presse"
-			},
-			{
-				"fileid":3,
-				"revision":11,
-				"desc":"Manuale operativo Linea Omnia",
-				"filePath":"http://www.storci.com/pdf/products/vsfTVmix.pdf",
-				"filetags":"#manuali,#presse"
-			},
-			{
-				"fileid":3,
-				"revision":11,
-				"desc":"Manuale operativo Linea Omnia",
-				"filePath":"http://www.storci.com/pdf/products/vsfTVmix.pdf",
-				"filetags":"#manuali,#presse"
-			},
-			{
-				"fileid":3,
-				"revision":11,
-				"desc":"Manuale operativo Linea Omnia",
-				"filePath":"http://www.storci.com/pdf/products/vsfTVmix.pdf",
-				"filetags":"#manuali,#presse"
 			},
 			{
 				"fileid":3,
