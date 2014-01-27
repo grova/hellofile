@@ -472,9 +472,16 @@ var app = {
 						}
 						
 						ref.addEventListener('loaderror',
-							function()
+							function(event)
 							{
-								console.log("error loading:" + global);
+								console.log("error loading:" + global + ": "+event.message);
+							}
+
+							);
+						ref.addEventListener('loadstart',
+							function(event)
+							{
+								console.log("start:"+event.url)
 							}
 
 							);
