@@ -458,7 +458,7 @@ var app = {
 					{
 						if (useIBooks)
 						{
-							global = "itms-books://"+global;
+							global = "itms-books:/"+global;
 						}
 						console.log("provo ad aprire:" + global);
 						var ref;
