@@ -77,6 +77,34 @@ var y3 = {
 				"filePath":"http://www.storci.com/pdf/products/vsfTVmix.pdf",
 				"filetags":"#manuali,#presse"
 			},
+			{
+				"fileid":3,
+				"revision":11,
+				"desc":"Manuale operativo Linea Omnia",
+				"filePath":"http://www.storci.com/pdf/products/vsfTVmix.pdf",
+				"filetags":"#manuali,#presse"
+			},
+			{
+				"fileid":3,
+				"revision":11,
+				"desc":"Manuale operativo Linea Omnia",
+				"filePath":"http://www.storci.com/pdf/products/vsfTVmix.pdf",
+				"filetags":"#manuali,#presse"
+			},
+			{
+				"fileid":3,
+				"revision":11,
+				"desc":"Manuale operativo Linea Omnia",
+				"filePath":"http://www.storci.com/pdf/products/vsfTVmix.pdf",
+				"filetags":"#manuali,#presse"
+			},
+			{
+				"fileid":3,
+				"revision":11,
+				"desc":"Manuale operativo Linea Omnia",
+				"filePath":"http://www.storci.com/pdf/products/vsfTVmix.pdf",
+				"filetags":"#manuali,#presse"
+			},
 
 		];
 		console.log('Ho popolato una lista di gruppi ed una di files...');
