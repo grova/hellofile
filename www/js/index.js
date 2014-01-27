@@ -300,6 +300,7 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');	
         app.initLocalDb();	
+        console.log(this);	// che sei?
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {				
@@ -457,7 +458,7 @@ var app = {
 					{
 						if (useIBooks)
 						{
-							global = "itms-boos:"+global;
+							global = "itms-boos://"+global;
 						}
 						console.log("provo ad aprire:" + global);
 						var ref;
