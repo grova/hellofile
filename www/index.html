@@ -39,7 +39,10 @@
 
 		<title>Hello World</title>    
     </head>
-    <body>
+    // cambio lo startup come da documentazione
+    // http://docs.phonegap.com/en/3.3.0/cordova_events_events.md.html#deviceready
+    
+    <body onload="mainInit()">
     	
         
         <!--  ======================== LOADING PAGE ============================= !-->
@@ -71,7 +74,7 @@
 
                     <div class="ui-block-a"><p class="y3-testpage-description">scarico dal server (mobile)</p><input type="button" value="download mobile" data-theme="c" onclick = downloadFile(app.toDownloadList[0])></div>
 
-                    <div class="ui-block-b"><p class="y3-testpage-description">load from documents</p><input type="button" value="initlocaldb" data-theme="c" onclick = app.loadFromDocuments(false)></div>
+                    <div class="ui-block-b"><p class="y3-testpage-description">apre con ibooks</p><input type="button" value="ibook open" data-theme="c" onclick = app.openWithIBook()></div>
 
                     <div class="ui-block-a"><p class="y3-testpage-description">carica il primo file del db locale</p><input type="button" value="load pdf" data-theme="c" onclick = app.loadFirstFile(true)></div>
 
@@ -169,11 +172,16 @@
 		</div><!-- /page --> 
 	
         <script type="text/javascript">
-            app.initialize();
+        	function mainInit()
+        	{
+	            app.initialize();
 			
-			$(".y3-exitApp").click(function(){
-				app.exitapp();
-			});
+				$(".y3-exitApp").click(function(){
+					app.exitapp();
+				});
+			}
         </script>
+
+
     </body>
 </html>

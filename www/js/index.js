@@ -278,6 +278,7 @@ var app = {
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
+    	console.log("add event listener")
         document.addEventListener('deviceready', this.onDeviceReady, false);
 		
 		//se premo back button nella homepage dell'app, la quitto, invece di andare back in history (default)
@@ -328,6 +329,7 @@ var app = {
     	return true;
     },
 
+    // inizializzo il db, lo carico da localstorage
     initLocalDb: function () 
     {
     	if (!this.isLocalStorageSupported())
@@ -355,7 +357,7 @@ var app = {
 		}
     },
 
-
+    // salvo il db corrente su localstorage
     saveLocalDb: function()
     {
     	if (this.isLocalStorageSupported())
@@ -367,7 +369,7 @@ var app = {
     	}
     },
     
-    
+    // carico il file json dal server (cablato)
     loadJson: function()
     {
 		this.toDownloadList = new Array();	// qui ci metto quelli da scaricare
@@ -442,7 +444,7 @@ var app = {
 		jqxhr.error(function(){console.log("error")});
 	},
 
-	loadFirstFile : function(location)
+	loadFirstFile : function(location,useIBooks)
 	{
 		if (this.localdb != null)
 		{
@@ -453,6 +455,10 @@ var app = {
 				getGlobalPath(filename,
 					function success(global)
 					{
+						if (useIBooks)
+						{
+							global = "itms-boos:"+global;
+						}
 						console.log("provo ad aprire:" + global);
 						var ref;
 						if (location == true)
