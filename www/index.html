@@ -45,7 +45,7 @@
     // http://docs.phonegap.com/en/3.3.0/cordova_events_events.md.html#deviceready
 	-->
 
-    <body onload="mainInit()">
+    <body onLoad="mainInit()">
     	
         
         <!--  ======================== LOADING PAGE ============================= !-->
@@ -142,24 +142,9 @@
 	            <h1>Cataloghi e Schede Tecniche</h1>
             </div>
             
-            <div data-role="content">
+            <div data-role="content" id="filelistcontent">
 
-                <ul data-role="listview" data-filter="true" data-filter-placeholder="Filter files..." data-inset="true">
-                    <li><a href="#"><img src="img/acrobat_thumb_80x80.jpg"/><h2>Premix.pdf</h2><p>Pre-impastatrice centrifuga di eccellenza</p></a></li>
-                    <li><a href="#"><img src="img/acrobat_thumb_80x80.jpg"/><h2>Beltmix.pdf</h2><p>Gruppo di preparazione impasto </p></a></li>
-                    <li><a href="#"><img src="img/acrobat_thumb_80x80.jpg"/><h2>Bakmix.pdf</h2><p>Impastatrice continua automatica bivite</p></a></li>
-                    <li><a href="#"><img src="img/acrobat_thumb_80x80.jpg"/><h2>Pressa 130.1 TV.pdf</h2><p>Pressa automatica a vuoto totale per la produzione di pasta corta e lunga</p></a></li>
-                    <li><a href="#"><img src="img/acrobat_thumb_80x80.jpg"/><h2>Pressa 70.1 TV.pdf</h2><p>PRESSA AUTOMATICA A VUOTO TOTALE PER LA PRODUZIONE DI PASTA CORTA, LUNGA E SFOGLIE</p></a></li>
-                    <li><a href="#"><img src="img/acrobat_thumb_80x80.jpg"/><h2>PRESSA V 90.1-250 TV/G.pdf</h2><p>PRESSA AUTOMATICA A VUOTO TOTALE</p></a></li>
-                    <li><a href="#"><img src="img/acrobat_thumb_80x80.jpg"/><h2>PRESSA V70.1-220 TV/G.pdf</h2><p>PRESSA AUTOMATICA A VUOTO TOTALE</p></a></li>
-                    <li><a href="#"><img src="img/acrobat_thumb_80x80.jpg"/><h2>Sfogliatrice STF TV.pdf</h2><p> SFOGLIATRICE AUTOMATICA SOTTOVUOTO </p></a></li>
-                    <li><a href="#"><img src="img/acrobat_thumb_80x80.jpg"/><h2>SFOGLIATRICE VSF TV/MIX.pdf</h2><p> SFOGLIATRICE AUTOMATICA SOTTOVUOTO </p></a></li>
-                    <li><a href="#"><img src="img/acrobat_thumb_80x80.jpg"/><h2>SFOGLIATRICE SVF 540-600-800.pdf</h2><p> SFOGLIATRICE AUTOMATICA DA 540-600-800 MM </p></a></li>
-                    <li><a href="#"><img src="img/acrobat_thumb_80x80.jpg"/><h2>R 540 C.pdf</h2><p> RAVIOLATRICE SFOGLIA SINGOLA </p></a></li>
-                    <li><a href="#"><img src="img/acrobat_thumb_80x80.jpg"/><h2>R160C-R265C-R320C.pdf</h2><p> RAVIOLATRICI SINGOLA SFOGLIA </p></a></li>
-                    <li><a href="#"><img src="img/acrobat_thumb_80x80.jpg"/><h2>RCA 300-540 B.pdf</h2><p> RAVIOLATRICI DOPPIA SFOGLIA AD ASTE </p></a></li>
-                </ul>
-
+				<div class="ui-body"> la lista dei file è vuota</div>
             </div><!-- /content -->
 
             <div data-role="footer" data-position="fixed" data-theme="b">
@@ -184,8 +169,20 @@
 				$(".y3-exitApp").click(function(){
 					app.exitapp();
 				});
+				
+				// binda il click sulle voci al link per visualizzare i files
+				$("#homecontent").on('click','.filelistlink', function(){
+					tags = $( this ).attr("tags")
+					y3.taglist = tags;
+					//alert( y3.taglist); //debug
+					y3.populatefilelist('filelistcontent',tags);
+					
+				});
+
+
 			}
-        </script>
+
+		</script>
 
 
     </body>
