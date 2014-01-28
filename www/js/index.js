@@ -299,7 +299,8 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');	
-        this.initLocalDb();	
+        app.initLocalDb();	
+        console.log(this);	// che sei?
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {				
@@ -457,7 +458,7 @@ var app = {
 					{
 						if (useIBooks)
 						{
-							global = "itms-boos:"+global;
+							global = "itms-books:/"+global;
 						}
 						console.log("provo ad aprire:" + global);
 						var ref;
@@ -471,9 +472,16 @@ var app = {
 						}
 						
 						ref.addEventListener('loaderror',
-							function()
+							function(event)
 							{
-								console.log("error loading:" + global);
+								console.log("error loading:" + global + ": "+event.message);
+							}
+
+							);
+						ref.addEventListener('loadstart',
+							function(event)
+							{
+								console.log("start:"+event.url)
 							}
 
 							);
