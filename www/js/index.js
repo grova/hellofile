@@ -494,6 +494,12 @@ var app = {
 					);
 			}
 		}
+	},
+
+	getFileExtension: function(path)
+	{
+		var ext = path.substring(path.lastIndexOf('.')+1);
+		return ext;
 	}
     
 }
