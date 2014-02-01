@@ -557,9 +557,10 @@ var app = {
 			// tolgo il path se c'era
 			filename = filename.substring(filename.lastIndexOf('/')+1);
 			console.log("fileexists check: "+filename);
+			console.log("fs:"+_fileSystem);
 
 			_fileSystem.root.getFile(
-				filename, {create: false}, 
+				filename, {create: true, exclusive: true}, 
 				function gotFileEntry(fileEntry) 
 				{
 					// c'e' tutto ok
