@@ -267,6 +267,13 @@ $(document).keydown(function(e){
 	}
 });
 
+// metto in y3 i dati veri
+function connectAppY3()
+{
+	y3.grouplist = app.groupList;
+	y3.filelist = app.localdb;
+}
+
  
 var app = {
     // Application Constructor
@@ -319,6 +326,7 @@ var app = {
 
     toDownloadList: null,  
 
+    localGroupList: null,	// db locale, lista dei gruppi
     localdb: null,	// db locale (object)
 
     isLocalStorageSupported: function()
@@ -378,7 +386,7 @@ var app = {
 
 		// indirizzo del file json
 		//var url = "http://www.storci.com/dbfwver.txt";
-		var url = "https://dl.dropboxusercontent.com/u/48127483/dbfwver.txt";
+		var url = "https://dl.dropboxusercontent.com/u/48127483/storci/filelist.txt";
 
 		// se ci fossero problemi di crossdomain
 		//$.getJSON(url + "?callback=?", null, function(tweets) {
@@ -425,26 +433,41 @@ var app = {
 				}
 			}
 
-			console.log("file(s) to download: " + app.toDownloadList.length)
+			console.log("file(s) to download: " + app.toDownloadList.length);
 
 			// nella lista toDownloadList ho aggiungo i campi localPtah e localIndex per aggiornare il db locale 
 			// nel momento in cui il file remoto viene downloadato con successo
 
-			/*
-			if (supported)
-			{
-				localStorage.setItem("prevDocList",JSON.stringify(data));
-			}
-			console.log(data);
-			console.log("stringificato");
-			console.log(JSON.stringify(data));
-			*/
-			
+			// carico anche la lista dei gruppi
+			// che sostituisce sempre la precedente
+			var url = "https://dl.dropboxusercontent.com/u/48127483/storci/grouplist.txt";
+			console.log("loading "+url);
+			var jqxhr2 = $.getJSON(url , null, 
+				function(data)
+				{
+					app.localGroupList = data;
+				});
+			jqxhr2.error(function(){console.log("error loading group")});	 
 			
 		});
-		jqxhr.error(function(){console.log("error")});
+		jqxhr.error(function(){console.log("error loading list")});
 	},
 
+	// carica il file i-esimo, usa il localpath
+	loadFile: function(i,location,useIBooks)
+	{
+		if (this.localdb != null)
+		{
+			if (this.localdb.length>i)
+			{
+				var filepath = this.localdb[i].localpath
+
+			}
+		}
+	},
+
+
+	// carica il primo file del db ricalcolandosi il path
 	loadFirstFile : function(location,useIBooks)
 	{
 		if (this.localdb != null)
@@ -500,6 +523,77 @@ var app = {
 	{
 		var ext = path.substring(path.lastIndexOf('.')+1);
 		return ext;
+	},
+
+	// helper per la integrityCheck
+	fileExistsRecurs: function(_i,_fileSystem,_done)
+	{
+		if (_i == this.localdb.length)
+		{
+			// fine ricorsione
+			_done();
+		}
+		else
+		{
+			var filename = this.localdb[_i].localPath;
+			// tolgo il path se c'era
+			filename = filename.substring(filename.lastIndexOf('/')+1);
+
+			_fileSystem.root.getFile(
+				filename, {create: false, exclusive: false}, 
+				function gotFileEntry(fileEntry) 
+				{
+					// c'e' tutto ok
+					console.log(fileentry.fullPath + " found");
+					// e gia' che ci sono mi salvo il localpath
+					this.localdb[_i].localPath = fileEntry.fullPath;
+					this.fileExistsRecurs(_i+1,_fileSystem,_done);
+				},
+				function error(error)
+				{
+					console.log(filename+" NOT found ("+error.code+")");
+					// non valido lo tolgo
+					this.localdb.splice(_i,1);
+					this.fileExistsRecurs(_i,_fileSystem,_done);
+				}
+			);
+		}
+	},
+
+	// controllo che i file indirizzati dal db siano presenti (in locale)
+	// e ne aggiorno il path locale
+	integrityCheck: function(done)
+	{
+		if (this.localdb == null)
+		{
+			done();	// fine
+		}
+
+		if (this.localdb.length == 0)
+		{
+			his.localdb = null;
+			done();
+		}
+
+		// mi serve il filesystem
+		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
+			function onFileSystemSuccess(fileSystem) 
+			{
+				var i = 0;
+				this.fileExistsRecurs(i,fileSystem,done);
+			},
+			function onFIleSystemError(error)
+			{
+				console.log("filesystem error");
+			}
+		);
+		
+		
+			
+
+
+
+		}
 	}
     
 }
