@@ -511,7 +511,7 @@ var app = {
 			}
 		}
 	},
-
+	
 
 	// carica il primo file del db ricalcolandosi il path
 	loadFirstFile : function(location,useIBooks)
@@ -572,7 +572,7 @@ var app = {
 	},
 
 
-	fileSystemRoot: null;
+	fileSystemRoot: null,
 
 	// helper per la integrityCheck
 	fileExistsRecurs: function(_i,_fileSystem,_done)
