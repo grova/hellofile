@@ -645,6 +645,7 @@ var app = {
 	// e ne aggiorno il path locale
 	integrityCheck: function(done)
 	{
+		console.log("integritycheck");
 		if (this.localdb == null)
 		{
 			done();	// fine
@@ -655,6 +656,8 @@ var app = {
 			this.localdb = null;
 			done();
 		}
+
+		console.log("integritycheck2");
 
 		// mi serve il filesystem
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
