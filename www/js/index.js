@@ -270,7 +270,7 @@ $(document).keydown(function(e){
 // metto in y3 i dati veri
 function connectAppY3()
 {
-	y3.grouplist = app.groupList;
+	y3.grouplist = app.localGroupList;
 	y3.filelist = app.localdb;
 }
 
@@ -476,7 +476,7 @@ var app = {
 		{
 			if (this.localdb.length>i)
 			{
-				var filepath = this.fileSystemRoot + "/" + this.localdb[i].localpath;
+				var filepath = this.fileSystemRoot + "/" + this.localdb[i].localPath;
 
 				if (useIBooks)
 				{
