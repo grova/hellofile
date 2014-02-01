@@ -363,6 +363,20 @@ var app = {
 					this.localdb = null;
 				}
 			}
+			// grouplist
+			this.currentGroupList = localStorage.getItem("prevGroupList");
+			if (this.currentGroupList != null)
+			{
+				try
+				{
+					this.localGroupList = $parseJSON(this.currentGroupList);
+				}
+				catch(err)
+				{
+					console.log("error parsing grouplist");
+					this.localGroupList = null;
+				}
+			}
 		}
     },
 
@@ -372,7 +386,8 @@ var app = {
     	if (this.isLocalStorageSupported())
     	{
     		localStorage.setItem("prevDocList",JSON.stringify(this.localdb));
-			
+    		localStorage.setItem("prevGroupList",JSON.stringify(this.currentGroupList));
+
 			console.log("stringificato");
 			console.log(JSON.stringify(this.localdb));
     	}
@@ -571,7 +586,7 @@ var app = {
 
 		if (this.localdb.length == 0)
 		{
-			his.localdb = null;
+			this.localdb = null;
 			done();
 		}
 
