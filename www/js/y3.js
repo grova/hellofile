@@ -3,7 +3,7 @@
 var y3 = {
     // Application Constructor
     initialize: function(containerid) {
-        this.getlists();
+        //this.getlists(); non lo chiamo perche' lo chiamo a mano dal debugger, cosi' posso cambiare
 		this.populatecontainer(containerid);
     },
 	
