@@ -469,14 +469,44 @@ var app = {
 		jqxhr.error(function(){console.log("error loading list")});
 	},
 
-	// carica il file i-esimo, usa il localpath
+	// carica il file i-esimo, usa il filesystemroot riempito da integritycheck
 	loadFile: function(i,location,useIBooks)
 	{
 		if (this.localdb != null)
 		{
 			if (this.localdb.length>i)
 			{
-				var filepath = this.localdb[i].localpath
+				var filepath = this.fileSystemRoot + "/" + this.localdb[i].localpath;
+
+				if (useIBooks)
+				{
+					filepath = "itms-books:/"+filepath;
+				}
+				console.log("provo ad aprire:" + filepath);
+				var ref;
+				if (location == true)
+				{
+					ref = window.open(filepath,'_blank','location=yes');
+				}
+				else
+				{
+					ref = window.open(filepath,'_blank','location=no');
+				}
+				
+				ref.addEventListener('loaderror',
+					function(event)
+					{
+						console.log("error loading:" + filepath + ": "+event.message);
+					}
+
+					);
+				ref.addEventListener('loadstart',
+					function(event)
+					{
+						console.log("start:"+event.url)
+					}
+
+					);
 
 			}
 		}
@@ -541,6 +571,9 @@ var app = {
 		return ext;
 	},
 
+
+	fileSystemRoot: null;
+
 	// helper per la integrityCheck
 	fileExistsRecurs: function(_i,_fileSystem,_done)
 	{
@@ -557,8 +590,10 @@ var app = {
 			// tolgo il path se c'era
 			filename = filename.substring(filename.lastIndexOf('/')+1);
 			console.log("fileexists check: "+filename);
-			console.log("fs:"+_fileSystem.root.fullPath);
+			this.localdb[_i].localPath = filename;
+			
 
+			/*
 			_fileSystem.root.getFile(
 				filename, {create: false}, 
 				function gotFileEntry(fileEntry) 
@@ -577,8 +612,9 @@ var app = {
 					app.fileExistsRecurs(_i,_fileSystem,_done);
 				}
 			);
+*/
 
-			/*	
+				
 			_fileSystem.root.getFile(
 				filename, {create: true, exclusive: true}, 
 				function gotFileEntry(fileEntry) 
@@ -595,14 +631,11 @@ var app = {
 				function error(error)
 				{
 					console.log(filename+" found ("+error.code+")");
-					
-					// e gia' che ci sono mi salvo il localpath
-					app.localdb[_i].localPath = fileEntry.fullPath;
 					app.fileExistsRecurs(_i+1,_fileSystem,_done);
 					
 				}
 			);
-*/
+
 
 
 		}
@@ -627,6 +660,7 @@ var app = {
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
 			function onFileSystemSuccess(fileSystem) 
 			{
+				app.fileSystemRoot = fileSystemRoot.root.fullPath;
 				console.log("fs ok per integrityCheck");
 				var i = 0;
 				console.log("this vale:"+this);
