@@ -367,6 +367,7 @@ var app = {
 			this.currentGroupList = localStorage.getItem("prevGroupList");
 			if (this.currentGroupList != null)
 			{
+				console.log(this.currentGroupList);
 				try
 				{
 					this.localGroupList = $parseJSON(this.currentGroupList);
