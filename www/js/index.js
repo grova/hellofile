@@ -663,7 +663,7 @@ var app = {
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
 			function onFileSystemSuccess(fileSystem) 
 			{
-				app.fileSystemRoot = fileSystemRoot.root.fullPath;
+				app.fileSystemRoot = fileSystem.root.fullPath;
 				console.log("fs ok per integrityCheck");
 				var i = 0;
 				console.log("this vale:"+this);
