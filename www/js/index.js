@@ -588,6 +588,18 @@ var app = {
 			}
 		);
 		
+	},
+
+	mainIntegrityChek: function()
+	{
+		console.log("integrityCheck...");
+		this.integrityCheck(
+			function()
+			{
+				console.log("integrityCheck done");
+			}
+			);
+
 	}
     
 }
