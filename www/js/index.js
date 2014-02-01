@@ -561,15 +561,15 @@ var app = {
 					// c'e' tutto ok
 					console.log(fileentry.fullPath + " found");
 					// e gia' che ci sono mi salvo il localpath
-					this.localdb[_i].localPath = fileEntry.fullPath;
-					this.fileExistsRecurs(_i+1,_fileSystem,_done);
+					app.localdb[_i].localPath = fileEntry.fullPath;
+					app.fileExistsRecurs(_i+1,_fileSystem,_done);
 				},
 				function error(error)
 				{
 					console.log(filename+" NOT found ("+error.code+")");
 					// non valido lo tolgo
-					this.localdb.splice(_i,1);
-					this.fileExistsRecurs(_i,_fileSystem,_done);
+					app.localdb.splice(_i,1);
+					app.fileExistsRecurs(_i,_fileSystem,_done);
 				}
 			);
 		}
@@ -594,8 +594,10 @@ var app = {
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
 			function onFileSystemSuccess(fileSystem) 
 			{
+				console.log("fs ok per integrityCheck");
 				var i = 0;
-				this.fileExistsRecurs(i,fileSystem,done);
+				console.log("this vale:"+this);
+				app.fileExistsRecurs(i,fileSystem,done);
 			},
 			function onFIleSystemError(error)
 			{
