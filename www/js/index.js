@@ -390,7 +390,7 @@ var app = {
 
 			
 			console.log(JSON.stringify(this.localdb));
-			console.log(JSON.stringify(this.currentGroupList));
+			console.log(JSON.stringify(this.localGroupList));
     	}
     },
     
