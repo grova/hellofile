@@ -386,7 +386,7 @@ var app = {
     	if (this.isLocalStorageSupported())
     	{
     		localStorage.setItem("prevDocList",JSON.stringify(this.localdb));
-    		localStorage.setItem("prevGroupList",JSON.stringify(this.currentGroupList));
+    		localStorage.setItem("prevGroupList",JSON.stringify(this.localGroupList));
 
 			
 			console.log(JSON.stringify(this.localdb));
@@ -557,10 +557,10 @@ var app = {
 			// tolgo il path se c'era
 			filename = filename.substring(filename.lastIndexOf('/')+1);
 			console.log("fileexists check: "+filename);
-			console.log("fs:"+_fileSystem);
+			console.log("fs:"+_fileSystem.root.fullPath);
 
 			_fileSystem.root.getFile(
-				filename, {create: true, exclusive: true}, 
+				filename, {create: false}, 
 				function gotFileEntry(fileEntry) 
 				{
 					// c'e' tutto ok
@@ -577,6 +577,34 @@ var app = {
 					app.fileExistsRecurs(_i,_fileSystem,_done);
 				}
 			);
+
+			/*	
+			_fileSystem.root.getFile(
+				filename, {create: true, exclusive: true}, 
+				function gotFileEntry(fileEntry) 
+				{
+					// lo riesco a creare in esclusiva, non c'era
+					// lo tolgo
+					fileEntry.remove();
+
+					console.log(fileentry.fullPath + " NOT found");
+					app.localdb.splice(_i,1);
+					app.fileExistsRecurs(_i,_fileSystem,_done);
+					
+				},
+				function error(error)
+				{
+					console.log(filename+" found ("+error.code+")");
+					
+					// e gia' che ci sono mi salvo il localpath
+					app.localdb[_i].localPath = fileEntry.fullPath;
+					app.fileExistsRecurs(_i+1,_fileSystem,_done);
+					
+				}
+			);
+*/
+
+
 		}
 	},
 
