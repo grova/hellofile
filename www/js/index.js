@@ -640,6 +640,23 @@ var app = {
 				}
 			);
 
+			/*
+			$.ajax({
+				url:'file///sdcard/myfile.txt',
+				type:'HEAD',
+				error: function()
+				{
+				    //file not exists
+				alert('file does not exist');
+				},
+				success: function()
+				{
+				    //file exists
+				alert('the file is here');
+				}
+				});
+			*/
+
 
 
 		}
