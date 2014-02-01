@@ -349,20 +349,7 @@ var app = {
 		{
 			console.log("localstorage OK");
 			isLocalStorageSupported = true;
-			this.currentList = localStorage.getItem("prevDocList");
-			if (this.currentList != null)
-			{
-				console.log(this.currentList);
-				try
-				{
-					this.localdb = $.parseJSON(this.currentList);
-				}
-				catch(err)
-				{
-					console.log("error parsing local json");
-					this.localdb = null;
-				}
-			}
+			
 			// grouplist
 			this.currentGroupList = localStorage.getItem("prevGroupList");
 			if (this.currentGroupList != null)
@@ -376,6 +363,21 @@ var app = {
 				{
 					console.log("error parsing grouplist");
 					this.localGroupList = null;
+				}
+			}
+
+			this.currentList = localStorage.getItem("prevDocList");
+			if (this.currentList != null)
+			{
+				console.log(this.currentList);
+				try
+				{
+					this.localdb = $.parseJSON(this.currentList);
+				}
+				catch(err)
+				{
+					console.log("error parsing local json");
+					this.localdb = null;
 				}
 			}
 		}
