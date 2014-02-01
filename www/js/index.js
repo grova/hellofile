@@ -463,6 +463,7 @@ var app = {
 				function(data)
 				{
 					app.localGroupList = data;
+					localStorage.setItem("prevGroupList",JSON.stringify(app.localGroupList));
 				});
 			jqxhr2.error(function(){console.log("error loading group")});	 
 			
