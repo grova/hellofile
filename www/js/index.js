@@ -388,8 +388,9 @@ var app = {
     		localStorage.setItem("prevDocList",JSON.stringify(this.localdb));
     		localStorage.setItem("prevGroupList",JSON.stringify(this.currentGroupList));
 
-			console.log("stringificato");
+			
 			console.log(JSON.stringify(this.localdb));
+			console.log(JSON.stringify(this.currentGroupList));
     	}
     },
     
@@ -558,7 +559,7 @@ var app = {
 			console.log("fileexists check: "+filename);
 
 			_fileSystem.root.getFile(
-				filename, {create: false, exclusive: false}, 
+				filename, {create: false}, 
 				function gotFileEntry(fileEntry) 
 				{
 					// c'e' tutto ok
