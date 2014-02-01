@@ -543,9 +543,11 @@ var app = {
 	// helper per la integrityCheck
 	fileExistsRecurs: function(_i,_fileSystem,_done)
 	{
+		console.log("fileExistsRecurs");
 		if (_i == this.localdb.length)
 		{
 			// fine ricorsione
+			console.log("fine");
 			_done();
 		}
 		else
@@ -553,6 +555,7 @@ var app = {
 			var filename = this.localdb[_i].localPath;
 			// tolgo il path se c'era
 			filename = filename.substring(filename.lastIndexOf('/')+1);
+			console.log("fileexists check: "+filename);
 
 			_fileSystem.root.getFile(
 				filename, {create: false, exclusive: false}, 
@@ -607,7 +610,7 @@ var app = {
 		
 	},
 
-	mainIntegrityChek: function()
+	mainIntegrityCheck: function()
 	{
 		console.log("integrityCheck...");
 		this.integrityCheck(
