@@ -357,7 +357,7 @@ var app = {
 				console.log(this.currentGroupList);
 				try
 				{
-					this.localGroupList = $parseJSON(this.currentGroupList);
+					this.localGroupList = $.parseJSON(this.currentGroupList);
 				}
 				catch(err)
 				{
