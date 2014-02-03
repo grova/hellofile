@@ -166,6 +166,55 @@ function getGlobalPath(relativePath,_success,_fail)
 		}
 		);
 }
+
+
+// remoteref e' un record del db remoto
+// serve perche' se il download riesce viene aggiunto al db locale
+// qui uso il fs root inizializzato da checkintegrity
+// per chiamarla usa DownloadFile(app.toDownload[i]);         
+function newDownloadFile(remoteref)
+{
+	var remoteFilePath = remoteRef.filePath;
+	// nome file senza path
+	var filename = remoteFilePath.substring(remoteFilePath.lastIndexOf('/')+1);
+	var localPath = app.fileSystemRoot + "/" + filename;
+	var uri = encodeURI(remoteFilePath);
+    console.log("start download of " + remoteFilePath);
+    console.log("to " + localPath + filename);	
+    var fileTransfer = new FileTransfer();
+    fileTransfer.download(
+		uri,
+		localPath + filename,
+		function(theFile) {
+		    console.log("download complete: " + theFile.fullPath);
+		    // download completato devo aggiornare il db locale
+		    remoteRef.localPath = localPath + filename; 
+
+		    if (remoteRef.localIndex == -1)
+		    {
+		    	// nuovo record
+		    	if (app.localdb == null)
+		    	{
+		    		app.localdb = new Array();
+		    	}
+		    	app.localdb.push(remoteRef);
+
+		    }
+		    else
+		    {
+		    	app.localdb[remoteRef.localIndex] = remoteRef;
+		    }
+		    app.saveLocalDb();
+		},
+		function(error) {
+		    console.log("download error source " + error.source);
+		    console.log("download error target " + error.target);
+		    console.log("upload error code: " + error.code);
+			}
+	);
+}
+
+
  
 // mi serve il riferimento dal server, quando ho scaricato il file aggiorno il riferimento locale 
 function downloadFile(remoteRef)
@@ -275,7 +324,8 @@ function connectAppY3()
 }
 
  
-var app = {
+var app = 
+{
     // Application Constructor
     initialize: function() {
         this.bindEvents();
@@ -582,6 +632,12 @@ var app = {
 	fileExistsRecurs: function(_i,_fileSystem,_done)
 	{
 		console.log("fileExistsRecurs");
+		if (this.localdb == null)
+		{
+			console.log("fine");
+			_done();
+		}
+		else
 		if (_i == this.localdb.length)
 		{
 			// fine ricorsione
@@ -616,7 +672,7 @@ var app = {
 					app.fileExistsRecurs(_i,_fileSystem,_done);
 				}
 			);
-*/
+			*/
 
 				
 			_fileSystem.root.getFile(
@@ -662,23 +718,37 @@ var app = {
 		}
 	},
 
+	useChrome: false,	// per debuggare il filesystem su chrome
+
 	// controllo che i file indirizzati dal db siano presenti (in locale)
 	// e ne aggiorno il path locale
 	integrityCheck: function(done)
 	{
 		console.log("integritycheck");
-		if (this.localdb == null)
-		{
-			done();	// fine
-		}
 
-		if (this.localdb.length == 0)
+		if (this.useChrome)
 		{
-			this.localdb = null;
-			done();
-		}
+			console.log("using chome");
 
-		console.log("integritycheck2");
+			window.webkitRequestFileSystem(window.PERSISTENT, 0, 
+				function onFileSystemSuccess(fileSystem) 
+				{
+					app.fileSystemRoot = fileSystem.root.fullPath;
+					console.log("fs ok per integrityCheck");
+					var i = 0;
+					console.log("this vale:"+this);
+					app.fileExistsRecurs(i,fileSystem,done);
+				}
+				,
+				function onFIleSystemError(error)
+				{
+					console.log("filesystem error");
+				}
+			);
+			return;
+		}
+		
+
 
 		// mi serve il filesystem
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
@@ -690,7 +760,7 @@ var app = {
 				console.log("this vale:"+this);
 				app.fileExistsRecurs(i,fileSystem,done);
 			},
-			function onFIleSystemError(error)
+			function onFileSystemError(error)
 			{
 				console.log("filesystem error");
 			}
@@ -708,9 +778,71 @@ var app = {
 			}
 			);
 
+	},
+
+	// scarica il file i-esimo dalla lista todownload
+	// aggiorna la lista todownload e localdb
+	// in caso di successo
+	downloadFile: function(i)
+	{
+		if (this.toDownloadList==null)
+		{
+			cosnole.log("niente da scaricare");
+			return;
+		}
+		if (i>=this.toDownloadList.length)
+		{
+			console.log("index out of range in downloadfile");
+			return;
+		}
+
+
+		var remoteRef = this.toDownloadList[i];
+		var remoteFilePath = remoteRef.filePath;
+		// nome file senza path
+		var filename = remoteFilePath.substring(remoteFilePath.lastIndexOf('/')+1);
+		var localPath = this.fileSystemRoot + "/" + filename;
+		var uri = encodeURI(remoteFilePath);
+	    console.log("start download of " + remoteFilePath);
+	    console.log("to " + localPath + filename);	
+	    var fileTransfer = new FileTransfer();
+	    fileTransfer.download(
+			uri,
+			localPath + filename,
+			function(theFile) 
+			{
+			    console.log("download complete: " + theFile.fullPath);
+			    // download completato devo aggiornare il db locale
+			    remoteRef.localPath = localPath + filename; 
+
+			    if (remoteRef.localIndex == -1)
+			    {
+			    	// nuovo record
+			    	if (app.localdb == null)
+			    	{
+			    		app.localdb = new Array();
+			    	}
+			    	app.localdb.push(remoteRef);
+
+			    }
+			    else
+			    {
+			    	app.localdb[remoteRef.localIndex] = remoteRef;
+			    }
+			    app.saveLocalDb();
+			    app.toDownloadList.splice(i);
+			},
+			function(error) 
+			{
+			    console.log("download error source " + error.source);
+			    console.log("download error target " + error.target);
+			    console.log("upload error code: " + error.code);
+			}
+		);
 	}
-    
 }
+
+
 
 
 
