@@ -183,7 +183,7 @@ var y3 = {
 			if (y3.havetags(y3.filelist[i].filetags, tags))
 			{
 				// li - aggiungo il file alla lista
-				$("#filelist_ul").append("<li onclick = app.loadFile(" + i +",false,false) ><a href='#'><img src='img/acrobat_thumb_80x80.jpg'/><h2>"+y3.filelist[i].desc+"</h2><p>"+y3.filelist[i].filetags+"</p></a></li>");
+				$("#filelist_ul").append("<li onclick = app.openFile(" + i +",false,false) ><a href='#'><img src='img/acrobat_thumb_80x80.jpg'/><h2>"+y3.filelist[i].desc+"</h2><p>"+y3.filelist[i].filetags+"</p></a></li>");
 			}
 		}
 
