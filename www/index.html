@@ -75,13 +75,13 @@
 
                     <div class="ui-block-b"><p class="y3-testpage-description">Scarica un file pdf dal server e lo salva in locale (chrome).</p><input type="button" value="Download file chrome" data-theme="c" onclick = downloadFileChrome(app.toDownloadList[0])></div>
 
-                    <div class="ui-block-a"><p class="y3-testpage-description">scarico dal server (mobile)</p><input type="button" value="download mobile" data-theme="c" onclick = downloadFile(app.toDownloadList[0])></div>
+                    <div class="ui-block-a"><p class="y3-testpage-description">scarico il primo file da aggiornare (mobile)</p><input type="button" value="download mobile" data-theme="c" onclick = app.downloadFile(0)></div>
 
-                    <div class="ui-block-b"><p class="y3-testpage-description">apre con ibooks</p><input type="button" value="ibook open" data-theme="c" onclick = app.loadFirstFile(true,true)></div>
+                    <div class="ui-block-b"><p class="y3-testpage-description">apre con ibooks</p><input type="button" value="ibook open" data-theme="c" onclick = app.openFile(0,true,true)></div>
 
-                    <div class="ui-block-a"><p class="y3-testpage-description">carica il primo file del db locale</p><input type="button" value="load pdf" data-theme="c" onclick = app.loadFirstFile(true,false)></div>
+                    <div class="ui-block-a"><p class="y3-testpage-description">apre il primo file del db locale</p><input type="button" value="load pdf" data-theme="c" onclick = app.openFile(0,false,false)></div>
 
-                    <div class="ui-block-b"><p class="y3-testpage-description">carica il primo file del db locale (location false)</p><input type="button" value="Azione" data-theme="c" onclick = app.loadFirstFile(false,false)></div>
+                    <div class="ui-block-b"><p class="y3-testpage-description">connetto app a y3</p><input type="button" value="app to y3" data-theme="c" onclick = connectyAppY3()></div>
                 </fieldset>            
                     
 
