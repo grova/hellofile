@@ -188,7 +188,7 @@ var loadingStatus =
 			this.m_percent += .01;
 		}
 	},
-	log: function
+	log: function()
 	{
 		console.log(this.m_percent);
 	}
