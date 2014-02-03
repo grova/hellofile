@@ -172,6 +172,28 @@ function connectAppY3()
 	y3.filelist = app.localdb;
 }
 
+
+var loadingStatus = 
+{
+	m_percent: 0,
+
+	setPercentage: function (x)
+	{
+		this.m_percent = x;
+	},
+	increment: function()
+	{
+		if (this.m_percent<1)
+		{
+			this.m_percent += .01;
+		}
+	},
+	log: function
+	{
+		console.log(this.m_percent);
+	}
+}
+
  
 var app = 
 {
@@ -604,6 +626,21 @@ var app =
 	    console.log("start download of " + remoteFilePath);
 	    console.log("to " + localPath);	
 	    var fileTransfer = new FileTransfer();
+
+	    loadingStatus.m_percent = 0;
+	    fileTransfer.onprogress = function(progressEvent) 
+	    {
+		    if (progressEvent.lengthComputable) 
+		    {
+		      loadingStatus.setPercentage(progressEvent.loaded / progressEvent.total);
+		    } 
+		    else 
+		    {
+		      loadingStatus.increment();
+		    }
+		    loadingStatus.log();
+		};
+
 	    fileTransfer.download(
 			uri,
 			localPath,
