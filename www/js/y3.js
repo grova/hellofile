@@ -11,6 +11,8 @@ var y3 = {
 	filelist: null, //lista files
 	
 	taglist: '', //contiene la stringa di tags necessaria a cercare i files quando si clicca su una voce in homepage
+	
+	progressbar: null, //oggetto progressbar da riempire, manipolare e distruggere quando serve
 
     getlists: function() {
 		
@@ -221,7 +223,24 @@ var y3 = {
 			newfile = {"fileid":5+i, "revision":1, "desc":"Dinamically added file n "+i, "filePath":"http://www.storci.com/pdf/products/vsfTVmix.pdf", "filetags":"#immagini,#presse"}
 			this.filelist.push(newfile)
 			}
+	},
+	
+	createprogressbar: function(target){
+		this.progressbar = TolitoProgressBar(target)
+                    .setOuterTheme('b')
+                    .setInnerTheme('e')
+                    .isMini(true)
+                    .setMax(1)
+                    .setStartFrom(0)
+                    .setInterval(100)
+                    .showCounter(true)
+                    //.logOptions()
+                    .build()
+                    .run();
+					//per settarla ad un valore: y3.progressbar.setValue(300); (30%)
+	},
+	destroyprogressbar: function(){
+		this.progressbar.destroy();
 	}
-
 }
 	

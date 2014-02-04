@@ -626,6 +626,12 @@ var app =
 	    console.log("start download of " + remoteFilePath);
 	    console.log("to " + localPath);	
 	    var fileTransfer = new FileTransfer();
+		
+		//andiamo alla pagina di download....
+		$.mobile.navigate("#downloading");
+		//creiamo la barra di download
+		y3.createprogressbar('progressbarcontainer');
+
 
 	    loadingStatus.m_percent = 0;
 	    fileTransfer.onprogress = function(progressEvent) 
@@ -639,6 +645,8 @@ var app =
 		      loadingStatus.increment();
 		    }
 		    loadingStatus.log();
+  			y3.progressbar.setValue(loadingStatus.m_percent);
+
 		};
 
 	    fileTransfer.download(
