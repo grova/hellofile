@@ -214,6 +214,14 @@ var y3 = {
 			if (filetags.toLowerCase().indexOf(atags[t]) == -1) result = false; //se non ha tutti tag richiesti restituisco false
 		};
 		return result;
+	},
+
+	addlines: function(howmany){
+		for (i=0;i<howmany;i++){
+			newfile = {"fileid":5+i, "revision":1, "desc":"Dinamically added file n "+i, "filePath":"http://www.storci.com/pdf/products/vsfTVmix.pdf", "filetags":"#immagini,#presse"}
+			this.filelist.push(newfile)
+			}
 	}
+
 }
 	
