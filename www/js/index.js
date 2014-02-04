@@ -674,6 +674,10 @@ var app =
 			    }
 			    app.saveLocalDb();
 			    app.toDownloadList.splice(i);
+
+				//distrggo la progressbar
+				y3.destroyprogressbar();
+				
 			},
 			function(error) 
 			{
