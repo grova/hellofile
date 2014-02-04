@@ -28,6 +28,8 @@
         <link rel="stylesheet" type="text/css" href="js/jquery.mobile.icons-1.4.0.css">
         <link rel="stylesheet" type="text/css" href="js/jquery.mobile.structure-1.4.0.css">
         <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" type="text/css" href="css/tolito-1.0.6.css" />
+
         
         <script type="text/javascript" src="phonegap.js"></script>
 		<script type="text/javascript" src="js/jquery-2.0.3.js"></script>
@@ -36,6 +38,7 @@
 		<script type="text/javascript" src="FileTransfer.js"></script>
 		<script type="text/javascript" src="js/index.js"></script>
 		<script type="text/javascript" src="js/y3.js"></script>
+		<script type="text/javascript" src="js/tolito-1.0.6.js"></script>
 
 		<title>Hello World</title>    
     </head>
@@ -98,7 +101,7 @@
                         <li><a href="#homepage" data-icon="arrow-l">Back</a></li>
                         <li><a href="#" data-icon="gear">Options</a></li>
                         <li><a href="#" data-icon="refresh">Sync</a></li>
-                        <li><a href="#" class="y3-exitApp" data-icon="gear">Exit</a></li>
+                        <li><a href="#" class="y3-exitApp" data-icon="power">Exit</a></li>
                     </ul>
                 </div><!-- /navbar -->
             </div><!-- /footer -->
@@ -131,7 +134,8 @@
                 	<ul>
                         <li><a href="#testpage" data-icon="action">Test page</a></li>
                         <li><a href="#" data-icon="gear">Options</a></li>
-                        <li onclick = y3.initialize('homecontent') ><a href="#" data-icon="refresh">Verifica Aggiornamenti</a></li>
+                        <li><a href="#" onClick="y3.initialize('homecontent');" data-icon="refresh">Sync</a></li>
+                        <li><a href="#" class="y3-exitApp" data-icon="power">Exit</a></li>
                     </ul>
                 </div><!-- /navbar -->
             </div><!-- /footer -->
@@ -157,12 +161,41 @@
                 	<ul>
                         <li><a href="#testpage" data-icon="action">Test page</a></li>
                         <li><a href="#" data-icon="gear">Options</a></li>
-                        <li><a href="#" data-icon="refresh">Verifica Aggiornamenti</a></li>
+                        <li><a href="#" onClick="y3.initialize('homecontent');" data-icon="refresh">Sync</a></li>
+                        <li><a href="#" class="y3-exitApp" data-icon="power">Exit</a></li>
                     </ul>
                 </div><!-- /navbar -->
             </div><!-- /footer -->
 
 		</div><!-- /page --> 
+
+
+        <!--  ======================== Download / Update page ============================= !-->
+        <div data-role="page" id="downloading" data-theme="a">
+        	<div data-role="header" data-position="fixed">
+            	<a href="#homepage" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-back">Back</a>
+	            <h1>Download file aggiornati</h1>
+            </div>
+            
+            <div data-role="content" id="downloading_cnt">
+            
+            
+
+            </div><!-- /content -->
+
+            <div data-role="footer" data-position="fixed" data-theme="b">
+            	<div data-role="navbar" data-iconpos="top">
+                	<ul>
+                        <li><a href="#testpage" data-icon="action">Test page</a></li>
+                        <li><a href="#" data-icon="gear">Options</a></li>
+                        <li><a href="#" onClick="y3.initialize('homecontent');" data-icon="refresh">Sync</a></li>
+                        <li><a href="#" class="y3-exitApp" data-icon="power">Exit</a></li>
+                    </ul>
+                </div><!-- /navbar -->
+            </div><!-- /footer -->
+
+		</div><!-- /page --> 
+
 	
         <script type="text/javascript">
         	var g_mainInit = 0;
