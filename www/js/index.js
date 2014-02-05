@@ -369,6 +369,7 @@ var app =
 			}
 
 			console.log("file(s) to download: " + app.toDownloadList.length);
+			y3.syncresult();
 
 			// nella lista toDownloadList ho aggiungo i campi localPtah e localIndex per aggiornare il db locale 
 			// nel momento in cui il file remoto viene downloadato con successo
