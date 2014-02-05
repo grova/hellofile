@@ -165,13 +165,6 @@ $(document).keydown(function(e){
 	}
 });
 
-// metto in y3 i dati veri
-function connectAppY3()
-{
-	y3.grouplist = app.localGroupList;
-	y3.filelist = app.localdb;
-}
-
 
 var loadingStatus = 
 {

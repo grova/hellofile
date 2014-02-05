@@ -7,13 +7,13 @@ var y3 = {
 		this.populatecontainer(containerid);
     },
 	
-	grouplist: null, //lista files
-	filelist: null, //lista files
+	//grouplist: null, //lista files
+	//filelist: null, //lista files
 	
 	taglist: '', //contiene la stringa di tags necessaria a cercare i files quando si clicca su una voce in homepage
 	
 	progressbar: null, //oggetto progressbar da riempire, manipolare e distruggere quando serve
-
+	/*	litolgo perche' metto il db che c'e' dentro app
     getlists: function() {
 		
         this.grouplist = [
@@ -113,6 +113,7 @@ var y3 = {
 		];
 		console.log('Ho popolato una lista di gruppi ed una di files...');
     },
+    */
 	
 	populatecontainer: function(containerid){
 		
@@ -121,34 +122,38 @@ var y3 = {
 		var files, tot_files, groupid = 0;
 		var oldgrouptitle = '';
 		var datacollapsed = "false";
-		if (y3.grouplist.length == 0) {console.log('ERRORE: grouplist è vuoto!');}
+
+		var grouplist = app.localGroupList;
+
+
+		if (grouplist.length == 0) {console.log('ERRORE: grouplist è vuoto!');}
 
 		$("#"+containerid).empty(); // distruggo il contenuto del containerid
 		
 		//collapsible
-		for (i=0;i<y3.grouplist.length;i++)
+		for (i=0;i<grouplist.length;i++)
 		{//collapsible: grouplist
 			
 			
-			if (y3.grouplist[i].grouptitle != oldgrouptitle) //aggiungo nuovo collapsible
+			if (grouplist[i].grouptitle != oldgrouptitle) //aggiungo nuovo collapsible
 			{// è necessario che nel db i gruppi siano ordinati per groutitle
-				groupid = y3.grouplist[i].groupid; //id del collapsible, viene usato per inserirvi i <li>
-				oldgrouptitle = y3.grouplist[i].grouptitle; // riferimento per sapere quando cambia il tipo di raggruppamento (per fare un nuovo collapsible)
+				groupid = grouplist[i].groupid; //id del collapsible, viene usato per inserirvi i <li>
+				oldgrouptitle = grouplist[i].grouptitle; // riferimento per sapere quando cambia il tipo di raggruppamento (per fare un nuovo collapsible)
 				if (i>0) datacollapsed = 'true'//il primo collapsible è sempre aperto di default
 				$("#"+containerid).append("<div data-role='collapsible' data-theme='c' data-collapsed='"+datacollapsed+"' id='collapsible"+groupid+"' class='collapsible_refreshme'>");
 				console.log('ho aggiunto un collabsible');
-				files = y3.countfiles(y3.grouplist[i].grouptags);//contiene i files che presentano TUTTI i tag richiesti da questo gruppo
-				$("#collapsible"+groupid).append("<h2>"+y3.grouplist[i].grouptitle+"</h2>");//titolo del collapsible
-				$("#"+y3.grouplist[i].groupid+"_filecount").append(tot_files);
-				$("#collapsible"+groupid).append("<ul data-role='listview' id='collapsible"+y3.grouplist[i].groupid+"_list'>");//ul
-				$("#collapsible"+groupid+"_list").append("<li><a href='#filelist' tags='"+y3.grouplist[i].grouptags+"' class='filelistlink'><h2>"+y3.grouplist[i].desc+"</h2><p>"+y3.grouplist[i].grouptags+"</p><p class='ui-li-aside'><strong>"+files+"</strong> files</p></a></li>");
+				files = y3.countfiles(grouplist[i].grouptags);//contiene i files che presentano TUTTI i tag richiesti da questo gruppo
+				$("#collapsible"+groupid).append("<h2>"+grouplist[i].grouptitle+"</h2>");//titolo del collapsible
+				$("#"+grouplist[i].groupid+"_filecount").append(tot_files);
+				$("#collapsible"+groupid).append("<ul data-role='listview' id='collapsible"+grouplist[i].groupid+"_list'>");//ul
+				$("#collapsible"+groupid+"_list").append("<li><a href='#filelist' tags='"+grouplist[i].grouptags+"' class='filelistlink'><h2>"+grouplist[i].desc+"</h2><p>"+grouplist[i].grouptags+"</p><p class='ui-li-aside'><strong>"+files+"</strong> files</p></a></li>");
 				//alert($("#li_"+groupid+"_"+i).attr("tags")); //debug
 				console.log('ho aggiunto il primo <li>');
 			}
 			else // aggiungo categorie al collapsible esistente
 			{
-				files = y3.countfiles(y3.grouplist[i].grouptags);//contiene i files che presentano TUTTI i tag richiesti da questo gruppo
-				$("#collapsible"+groupid+"_list").append("<li><a href='#filelist' tags='"+y3.grouplist[i].grouptags+"' class='filelistlink'><h2>"+y3.grouplist[i].desc+"</h2><p>"+y3.grouplist[i].grouptags+"</p><p class='ui-li-aside'><strong>"+files+"</strong> files</p></a></li>");
+				files = y3.countfiles(grouplist[i].grouptags);//contiene i files che presentano TUTTI i tag richiesti da questo gruppo
+				$("#collapsible"+groupid+"_list").append("<li><a href='#filelist' tags='"+grouplist[i].grouptags+"' class='filelistlink'><h2>"+grouplist[i].desc+"</h2><p>"+grouplist[i].grouptags+"</p><p class='ui-li-aside'><strong>"+files+"</strong> files</p></a></li>");
 				console.log('ho aggiunto un altro <li>');				
 			}
 		
@@ -160,11 +165,15 @@ var y3 = {
 		},
 
 
-	populatefilelist: function(containerid,tags){
+	populatefilelist: function(containerid,tags)
+	{
 		
 		$("#"+containerid).empty(); // distruggo il contenuto del containerid
 
-		if (y3.filelist.length == 0) {console.log('ERRORE: filelist è vuoto!');}
+		if (app.localdb.length == 0) 
+		{
+			console.log('ERRORE: filelist è vuoto!');
+		}
 		
 		if (y3.countfiles(tags) < 1)//se non ho files con i tag richiesti, lo scrivo nel log
 		{
@@ -180,12 +189,12 @@ var y3 = {
 		}
 
 		//li - aggiungo i files alla lista
-		for (i=0;i<y3.filelist.length;i++)
+		for (i=0;i<app.localdb.length;i++)
 		{
-			if (y3.havetags(y3.filelist[i].filetags, tags))
+			if (y3.havetags(app.localdb[i].filetags, tags))
 			{
 				// li - aggiungo il file alla lista
-				$("#filelist_ul").append("<li onclick = app.openFile(" + i +",false,false) ><a href='#'><img src='img/acrobat_thumb_80x80.jpg'/><h2>"+y3.filelist[i].desc+"</h2><p>"+y3.filelist[i].filetags+"</p></a></li>");
+				$("#filelist_ul").append("<li onclick = app.openFile(" + i +",false,false) ><a href='#'><img src='img/acrobat_thumb_80x80.jpg'/><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].filetags+"</p></a></li>");
 			}
 		}
 
@@ -198,10 +207,10 @@ var y3 = {
 		var atags = tags.split(',');
 		numberoffiles = 0;
 		
-		for (u=0;u<y3.filelist.length;u++){
+		for (u=0;u<app.localdb.length;u++){
 			includethis = true;
 			for (x=0;x<atags.length;x++){
-				if (y3.filelist[u].filetags.toLowerCase().indexOf(atags[x]) == -1) includethis = false;
+				if (app.localdb[u].filetags.toLowerCase().indexOf(atags[x]) == -1) includethis = false;
 			};
 			if (includethis) numberoffiles++;
 		};
@@ -221,7 +230,7 @@ var y3 = {
 	addlines: function(howmany){
 		for (i=0;i<howmany;i++){
 			newfile = {"fileid":5+i, "revision":1, "desc":"Dinamically added file n "+i, "filePath":"http://www.storci.com/pdf/products/vsfTVmix.pdf", "filetags":"#immagini,#presse"}
-			this.filelist.push(newfile)
+			app.localdb.push(newfile)
 			}
 	},
 	
