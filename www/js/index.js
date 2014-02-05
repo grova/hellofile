@@ -327,7 +327,8 @@ var app =
 
 		// indirizzo del file json
 		//var url = "http://www.storci.com/dbfwver.txt";
-		var url = "https://dl.dropboxusercontent.com/u/48127483/storci/filelist.txt";
+		//var url = "https://dl.dropboxusercontent.com/u/48127483/storci/filelist.txt";
+		var url = "http://www.storci.com/filesync/files.asp?k=nc8hbaYGS7896GBH67VSGC";
 
 		// se ci fossero problemi di crossdomain
 		//$.getJSON(url + "?callback=?", null, function(tweets) {
@@ -381,7 +382,8 @@ var app =
 
 			// carico anche la lista dei gruppi
 			// che sostituisce sempre la precedente
-			var url = "https://dl.dropboxusercontent.com/u/48127483/storci/grouplist.txt";
+			//var url = "https://dl.dropboxusercontent.com/u/48127483/storci/grouplist.txt";
+			var url = "http://www.storci.com/filesync/groups.asp?k=nc8hbaYGS7896GBH67VSGC";
 			console.log("loading "+url);
 			var jqxhr2 = $.getJSON(url , null, 
 				function(data)
@@ -607,7 +609,7 @@ var app =
 	{
 		if (this.toDownloadList==null)
 		{
-			cosnole.log("niente da scaricare");
+			console.log("niente da scaricare");
 			return;
 		}
 		if (i>=this.toDownloadList.length)
