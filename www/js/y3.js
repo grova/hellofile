@@ -250,6 +250,26 @@ var y3 = {
 	},
 	destroyprogressbar: function(){
 		this.progressbar.destroy();
+	},
+	
+	syncresult: function(){
+		var f = 0;
+		if (app.toDownloadList != null) {f = app.toDownloadList.length};
+		
+		if (f > 0) {
+			// scrivo nella pagina filestosync se ho dei files da scaricare
+			$('#filestodownload').html(f);
+			$.mobile.navigate("#filestosync");
+		}
+		else{
+			// nulla da scaricare, mando alla pagina nosyncrequired
+			console.log('non ci sono file da scaricare...');
+		}
+		
+		
 	}
+	
+	
+	
 }
 	
