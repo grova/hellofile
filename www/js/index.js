@@ -219,9 +219,10 @@ var app =
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        app.receivedEvent('deviceready');	
-        app.initLocalDb();	
-        app.mainIntegrityCheck();
+        app.initLocalDb();					// carica il db dal localstorage
+        app.mainIntegrityCheck();			// ne controlla l'itegrita' e inizializza il path della root del filesystem
+        y3.initialize('homecontent');		// inizializza la pagina dell'interfaccia
+        app.receivedEvent('deviceready');
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {				
@@ -596,23 +597,15 @@ var app =
 
 	},
 
+
+	m_fileTransfer: null,	// tiro fuori l'oggetto per poter chiamare abort
+	m_requestAbort: false,
+
 	// scarica il file i-esimo dalla lista todownload
 	// aggiorna la lista todownload e localdb
 	// in caso di successo
-	downloadFile: function(i)
+	downloadFile: function(i,_success,_fail)
 	{
-		if (this.toDownloadList==null)
-		{
-			console.log("niente da scaricare");
-			return;
-		}
-		if (i>=this.toDownloadList.length)
-		{
-			console.log("index out of range in downloadfile");
-			return;
-		}
-
-
 		var remoteRef = this.toDownloadList[i];
 		var remoteFilePath = remoteRef.filePath;
 		// nome file senza path
@@ -621,7 +614,7 @@ var app =
 		var uri = encodeURI(remoteFilePath);
 	    console.log("start download of " + remoteFilePath);
 	    console.log("to " + localPath);	
-	    var fileTransfer = new FileTransfer();
+	    m_fileTransfer = new FileTransfer();
 		
 		//andiamo alla pagina di download....
 		$.mobile.navigate("#downloading");
@@ -630,7 +623,7 @@ var app =
 
 
 	    loadingStatus.m_percent = 0;
-	    fileTransfer.onprogress = function(progressEvent) 
+	    m_fileTransfer.onprogress = function(progressEvent) 
 	    {
 		    if (progressEvent.lengthComputable) 
 		    {
@@ -645,7 +638,7 @@ var app =
 
 		};
 
-	    fileTransfer.download(
+	    m_fileTransfer.download(
 			uri,
 			localPath,
 			function(theFile) 
@@ -673,15 +666,73 @@ var app =
 
 				//distrggo la progressbar
 				y3.destroyprogressbar();
-				
+				_success();
 			},
 			function(error) 
 			{
 			    console.log("download error source " + error.source);
 			    console.log("download error target " + error.target);
 			    console.log("upload error code: " + error.code);
+			    _fail();
 			}
 		);
+	}
+
+	// pubblica
+	requestAbort: function()
+	{
+		m_requestAbort = true;
+		if (m_fileTransfer != null)
+		{
+			m_fileTransfer.abort();
+		}
+	},
+
+	// privata
+	downloadAllFiles: function()
+	{
+		// prima guardo se ho da scaricare
+		if (this.toDownloadList==null)
+		{
+			console.log("niente da scaricare");
+			return;
+		}
+		if (i>=this.toDownloadList.length)
+		{
+			console.log("index out of range in downloadfile");
+			return;
+		}
+		
+		this.downloadFile(0,
+				function()
+				{
+					if (m_requestAbort)
+					{
+						// fine
+						m_requestAbort = false;
+					}
+					else
+					{
+						y3.initialize('homecontent');
+						y3.syncresult();
+						// continuo
+						downloadAllFiles();
+					}
+				},
+				function()
+				{
+					// c'e' stato un errore o un abort
+					m_requestAbort = false;
+				}
+		);
+
+	},
+
+	// pubblica
+	mainDownloadAllFiles: function()
+	{
+		m_requestAbort = false;
+		downloadAllFiles();
 	}
 }
 

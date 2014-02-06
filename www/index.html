@@ -118,15 +118,6 @@
             
             <div data-role="content" id="homecontent">
 
-                <div class="ui-corner-all custom-corners">
-                  <div class="ui-bar ui-bar-a">
-                    <h3>Genera lista contenuti</h3>
-                  </div>
-                  <div class="ui-body ui-body-a">
-                    <p><input type="button" value="Fill it!" data-theme="c" onclick = y3.initialize('homecontent')></p>
-                  </div>
-                </div>				
-
             </div>
 
             <div data-role="footer" data-position="fixed" data-theme="b">
@@ -134,7 +125,7 @@
                 	<ul>
                         <li><a href="#testpage" data-icon="action">Test page</a></li>
                         <li><a href="#" data-icon="gear">Options</a></li>
-                        <li><a href="#" onClick="y3.initialize('homecontent');" data-icon="refresh">Sync</a></li>
+                        <li><a href="#" class="app-loadJson" data-icon="refresh">Sync</a></li>
                         <li><a href="#" class="y3-exitApp" data-icon="power">Exit</a></li>
                     </ul>
                 </div><!-- /navbar -->
@@ -161,7 +152,7 @@
                 	<ul>
                         <li><a href="#testpage" data-icon="action">Test page</a></li>
                         <li><a href="#" data-icon="gear">Options</a></li>
-                        <li><a href="#" onClick="y3.initialize('homecontent');" data-icon="refresh">Sync</a></li>
+                        <li><a href="#" class="app-loadJson" data-icon="refresh">Sync</a></li>
                         <li><a href="#" class="y3-exitApp" data-icon="power">Exit</a></li>
                     </ul>
                 </div><!-- /navbar -->
@@ -189,7 +180,7 @@
                 	<ul>
                         <li><a href="#testpage" data-icon="action">Test page</a></li>
                         <li><a href="#" data-icon="gear">Options</a></li>
-                        <li><a href="#" onClick="y3.initialize('homecontent');" data-icon="refresh">Sync</a></li>
+                        <li><a href="#" class="app-loadJson" data-icon="refresh">Sync</a></li>
                         <li><a href="#" class="y3-exitApp" data-icon="power">Exit</a></li>
                     </ul>
                 </div><!-- /navbar -->
@@ -217,8 +208,8 @@
                 </div>
                 
                 <div class="ui-grid-a">
-                    <div class="ui-block-a"><div class="button-wrap"><button class="ui-btn ui-icon-arrow-d ui-btn-icon-left">Scarica</button></div></div>
-                    <div class="ui-block-b"><div class="button-wrap"><button class="ui-btn ui-icon-delete ui-btn-icon-left">Annulla</button></div></div>
+                    <div class="ui-block-a"><div class="button-wrap"><button onclick="app.mainDownloadAllFiles()"  class="ui-btn ui-icon-arrow-d ui-btn-icon-left">Scarica</button></div></div>
+                    <div class="ui-block-b"><div class="button-wrap"><button onclick="app.requestAbort()"  class="ui-btn ui-icon-delete ui-btn-icon-left">Annulla</button></div></div>
                 </div>                  
 
                 </div>            
@@ -230,7 +221,7 @@
                 	<ul>
                         <li><a href="#testpage" data-icon="action">Test page</a></li>
                         <li><a href="#" data-icon="gear">Options</a></li>
-                        <li><a href="#" onClick="y3.initialize('homecontent');" data-icon="refresh">Sync</a></li>
+                        <li><a href="#" class="app-loadJson" data-icon="refresh">Sync</a></li>
                         <li><a href="#" class="y3-exitApp" data-icon="power">Exit</a></li>
                     </ul>
                 </div><!-- /navbar -->
@@ -250,6 +241,10 @@
 				$(".y3-exitApp").click(function(){
 					app.exitapp();
 				});
+
+                $(".app-loadJson").click(function(){
+                    app.loadJson();
+                });
 				
 				// binda il click sulle voci al link per visualizzare i files
 				$("#homecontent").on('click','.filelistlink', function(){
