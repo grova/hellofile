@@ -681,10 +681,10 @@ var app =
 	// pubblica
 	requestAbort: function()
 	{
-		m_requestAbort = true;
-		if (m_fileTransfer != null)
+		this.m_requestAbort = true;
+		if (this.m_fileTransfer != null)
 		{
-			m_fileTransfer.abort();
+			this.m_fileTransfer.abort();
 		}
 	},
 
@@ -706,23 +706,23 @@ var app =
 		this.downloadFile(0,
 				function()
 				{
-					if (m_requestAbort)
+					if (app.m_requestAbort)
 					{
 						// fine
-						m_requestAbort = false;
+						app.m_requestAbort = false;
 					}
 					else
 					{
 						y3.initialize('homecontent');
 						y3.syncresult();
 						// continuo
-						downloadAllFiles();
+						app.downloadAllFiles();
 					}
 				},
 				function()
 				{
 					// c'e' stato un errore o un abort
-					m_requestAbort = false;
+					app.m_requestAbort = false;
 				}
 		);
 
@@ -731,8 +731,8 @@ var app =
 	// pubblica
 	mainDownloadAllFiles: function()
 	{
-		m_requestAbort = false;
-		downloadAllFiles();
+		this.m_requestAbort = false;
+		this.downloadAllFiles();
 	}
 }
 
