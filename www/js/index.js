@@ -662,6 +662,7 @@ var app =
 			    	app.localdb[remoteRef.localIndex] = remoteRef;
 			    }
 			    app.saveLocalDb();
+			    console.log("splice:"+i);
 			    app.toDownloadList.splice(i);
 
 				//distrggo la progressbar
@@ -713,6 +714,7 @@ var app =
 					}
 					else
 					{
+						console.log("download success. left:"+app.toDownloadList.length);
 						y3.initialize('homecontent');
 						y3.syncresult();
 						// continuo
