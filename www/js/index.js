@@ -694,12 +694,12 @@ var app =
 		// prima guardo se ho da scaricare
 		if (this.toDownloadList==null)
 		{
-			console.log("niente da scaricare");
+			console.log("niente da scaricare (null)");
 			return;
 		}
-		if (i>=this.toDownloadList.length)
+		if (this.toDownloadList.length==0)
 		{
-			console.log("index out of range in downloadfile");
+			console.log("niente da scaricare (0)");
 			return;
 		}
 		
