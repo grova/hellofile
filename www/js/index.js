@@ -676,7 +676,7 @@ var app =
 			    _fail();
 			}
 		);
-	}
+	},
 
 	// pubblica
 	requestAbort: function()
