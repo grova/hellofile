@@ -663,7 +663,7 @@ var app =
 			    }
 			    app.saveLocalDb();
 			    console.log("splice:"+i);
-			    app.toDownloadList.splice(i);
+			    app.toDownloadList.splice(i,1);
 
 				//distrggo la progressbar
 				y3.destroyprogressbar();
