@@ -207,7 +207,7 @@ var y3 = {
 		$("#filterable-input").textinput({clearBtn: true});
 		$("#filelist_ul").listview(); // creo il listview 
 		$("#filelist_ul").filterable({input: '#filterable-input'});
-		$("#listheader").html(y3.listheader); //sistemo il nome della pagina (header)
+		//$("#listheader").html(y3.listheader); //sistemo il nome della pagina (header)
 	},
 
 	countfiles: function(tags){//per  sapere quanti file ci sono in ogni gruppo // i files devono avere TUTTI i tags richiesti, per essere contati
