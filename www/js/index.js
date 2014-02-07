@@ -223,7 +223,9 @@ var app =
         app.mainIntegrityCheck(	// ne controlla l'itegrita' e inizializza il path della root del filesystem
         	function()			// e quando ha finito inizializza l'interfaccia
         	{
+        		console.log("itegrity returned");
         		y3.initialize('homecontent');		// inizializza la pagina dell'interfaccia
+        		console.log("y3init done");
         		app.receivedEvent('deviceready');		
         	}
         );
