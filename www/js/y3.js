@@ -184,7 +184,7 @@ var y3 = {
 		if (y3.countfiles(tags) < 1)//se non ho files con i tag richiesti, lo scrivo nel log
 		{
 			console.log("Nessun file con in tag richiesti ("+tags+")"); 
-			$("#"+containerid).append("<p style='text-align:center; margin-top:6em; margin-bottom:6em;'>Non ci sono files in questo elenco. Tags: "+tags+".</p>");
+			//$("#"+containerid).append("<p style='text-align:center; margin-top:6em; margin-bottom:6em;'>Non ci sono files in questo elenco. Tags: "+tags+".</p>");
 		}
 		else
 		{

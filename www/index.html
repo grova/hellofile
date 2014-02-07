@@ -145,6 +145,7 @@
             <div data-role="content" id="filelistcontent">
 
 				<div class="ui-body"> la lista dei file è vuota</div>
+                
             </div><!-- /content -->
 
             <div data-role="footer" data-position="fixed" data-theme="b">
@@ -317,11 +318,10 @@
 				
 				// binda il click sulle voci al link per visualizzare i files
 				$("#homecontent").on('click','.filelistlink', function(){
-					tags = $( this ).attr("tags")
-					y3.taglist = tags;
+					y3.taglist = $( this ).attr("tags")
 					y3.listheader = $( this ).attr("listheader")
 					//alert( y3.taglist); //debug
-					y3.populatefilelist('filelistcontent',tags);
+					y3.populatefilelist('filelistcontent',y3.taglist);
 					
 				});
 
