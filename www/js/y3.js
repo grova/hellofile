@@ -125,7 +125,6 @@ var y3 = {
 
 		var grouplist = app.localGroupList;
 
-
 		if (grouplist.length == 0) {console.log('ERRORE: grouplist è vuoto!');}
 
 		$("#"+containerid).empty(); // distruggo il contenuto del containerid
