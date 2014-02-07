@@ -653,8 +653,9 @@ var app =
 			{
 			    console.log("download complete: " + theFile.fullPath);
 			    // download completato devo aggiornare il db locale
-			    remoteRef.localPath = localPath; 
-
+			    var onlyname = localPath.substring(localPath.lastIndexOf('/')+1);
+			    remoteRef.localPath = onlyname;
+		
 			    if (remoteRef.localIndex == -1)
 			    {
 			    	// nuovo record
