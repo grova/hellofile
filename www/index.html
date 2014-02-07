@@ -139,7 +139,7 @@
         <div data-role="page" id="filelist" data-theme="a">
         	<div data-role="header" data-position="fixed">
             	<a href="#homepage" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-back">Back</a>
-	            <h1>Cataloghi e Schede Tecniche</h1>
+	            <h1 id="listheader">Cataloghi e Schede Tecniche</h1>
             </div>
             
             <div data-role="content" id="filelistcontent">
@@ -238,6 +238,36 @@
 		</div><!-- /page --> 
 
 
+
+        <!--  ======================== NESSUN FILE DA SCARICARE COMPLETATO ============================= !-->
+        <div data-role="page" id="no_filestosync" data-theme="a">
+        	<div data-role="header" data-position="fixed">
+	            <h1>Info</h1>
+            </div>
+            
+            <div data-role="content" id="downloading_cnt">
+            	<p class="y3-center" style="margin-top:6em;">Nessun file da aggiornare</p>
+            	<div id="progressbarcontainer"></div>
+            	
+                <div class="button-wrap y3-center" style="margin-top:6em;"><button class="ui-btn ui-btn-c ui-btn-icon-left ui-icon-check ui-btn-inline ui-corner-all ">Fine</button></div>
+
+            </div><!-- /content -->
+
+            <div data-role="footer" data-position="fixed" data-theme="b">
+            	<div data-role="navbar" data-iconpos="top">
+                	<ul>
+                        <li><a href="#testpage" data-icon="action">Test page</a></li>
+                        <li><a href="#" data-icon="gear">Options</a></li>
+                        <li><a href="#" onClick="y3.initialize('homecontent');" data-icon="refresh">Sync</a></li>
+                        <li><a href="#" class="y3-exitApp" data-icon="power">Exit</a></li>
+                    </ul>
+                </div><!-- /navbar -->
+            </div><!-- /footer -->
+
+		</div><!-- /page --> 
+
+
+
         <!--  ======================== DOWNLOAD COMPLETATO ============================= !-->
         <div data-role="page" id="downloadcompleted" data-theme="a">
         	<div data-role="header" data-position="fixed">
@@ -266,6 +296,9 @@
 		</div><!-- /page --> 
 
 
+
+
+
 	
         <script type="text/javascript">
         	var g_mainInit = 0;
@@ -284,10 +317,10 @@
 				
 				// binda il click sulle voci al link per visualizzare i files
 				$("#homecontent").on('click','.filelistlink', function(){
-					tags = $( this ).attr("tags")
-					y3.taglist = tags;
+					y3.taglist = $( this ).attr("tags")
+					y3.listheader = $( this ).attr("listheader")
 					//alert( y3.taglist); //debug
-					y3.populatefilelist('filelistcontent',tags);
+					y3.populatefilelist('filelistcontent',y3.taglist);
 					
 				});
 

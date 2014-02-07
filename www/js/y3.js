@@ -13,6 +13,9 @@ var y3 = {
 	taglist: '', //contiene la stringa di tags necessaria a cercare i files quando si clicca su una voce in homepage
 	
 	progressbar: null, //oggetto progressbar da riempire, manipolare e distruggere quando serve
+	listheader: '', //contiene la descrizione da passare alla pagina con la lista dei file (da scrivere nell'header)
+	
+	
 	/*	litolgo perche' metto il db che c'e' dentro app
     getlists: function() {
 		
@@ -149,14 +152,14 @@ var y3 = {
 				$("#collapsible"+groupid).append("<h2>"+grouplist[i].grouptitle+"</h2>");//titolo del collapsible
 				$("#"+grouplist[i].groupid+"_filecount").append(tot_files);
 				$("#collapsible"+groupid).append("<ul data-role='listview' id='collapsible"+grouplist[i].groupid+"_list'>");//ul
-				$("#collapsible"+groupid+"_list").append("<li><a href='#filelist' tags='"+grouplist[i].grouptags+"' class='filelistlink'><h2>"+grouplist[i].desc+"</h2><p>"+grouplist[i].grouptags+"</p><p class='ui-li-aside'><strong>"+files+"</strong> files</p></a></li>");
+				$("#collapsible"+groupid+"_list").append("<li><a href='#filelist' tags='"+grouplist[i].grouptags+"' listheader='"+grouplist[i].grouptitle+"' class='filelistlink'><h2>"+grouplist[i].desc+"</h2><p>"+grouplist[i].notes+"</p><p class='ui-li-aside'><strong>"+files+"</strong> files</p></a></li>");
 				//alert($("#li_"+groupid+"_"+i).attr("tags")); //debug
 				console.log('ho aggiunto il primo <li>');
 			}
 			else // aggiungo categorie al collapsible esistente
 			{
 				files = y3.countfiles(grouplist[i].grouptags);//contiene i files che presentano TUTTI i tag richiesti da questo gruppo
-				$("#collapsible"+groupid+"_list").append("<li><a href='#filelist' tags='"+grouplist[i].grouptags+"' class='filelistlink'><h2>"+grouplist[i].desc+"</h2><p>"+grouplist[i].grouptags+"</p><p class='ui-li-aside'><strong>"+files+"</strong> files</p></a></li>");
+				$("#collapsible"+groupid+"_list").append("<li><a href='#filelist' tags='"+grouplist[i].grouptags+"' listheader='"+grouplist[i].grouptitle+"' class='filelistlink'><h2>"+grouplist[i].desc+"</h2><p>"+grouplist[i].notes+"</p><p class='ui-li-aside'><strong>"+files+"</strong> files</p></a></li>");
 				console.log('ho aggiunto un altro <li>');				
 			}
 		
@@ -181,14 +184,14 @@ var y3 = {
 		if (y3.countfiles(tags) < 1)//se non ho files con i tag richiesti, lo scrivo nel log
 		{
 			console.log("Nessun file con in tag richiesti ("+tags+")"); 
-			//TODO: scriverlo all'utente
+			$("#"+containerid).append("<p style='text-align:center; margin-top:6em; margin-bottom:6em;'>Non ci sono files in questo elenco. Tags: "+tags+".</p>");
 		}
 		else
 		{
 			//creo il search
-			$("#"+containerid).append("<input type='seacrh' id='filterable-input'>");
+			$("#"+containerid).append("<input type='search' id='filterable-input'>");
 			//ul - creo la lista da popolare con i files
-			$("#"+containerid).append("<ul id='filelist_ul' data-inset='true' id='filelist_ul'>");
+			$("#"+containerid).append("<ul id='filelist_ul' data-inset='true'>");
 		}
 
 		//li - aggiungo i files alla lista
@@ -197,13 +200,14 @@ var y3 = {
 			if (y3.havetags(app.localdb[i].filetags, tags))
 			{
 				// li - aggiungo il file alla lista
-				$("#filelist_ul").append("<li onclick = app.openFile(" + i +",false,false) ><a href='#'><img src='img/acrobat_thumb_80x80.jpg'/><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].filetags+"</p></a></li>");
+				$("#filelist_ul").append("<li onclick = app.openFile(" + i +",false,false) ><a href='#'><img src='img/acrobat_thumb_80x80.jpg'/><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].filePath+"</p></a></li>");
 			}
 		}
 
 		$("#filterable-input").textinput({clearBtn: true});
 		$("#filelist_ul").listview(); // creo il listview 
 		$("#filelist_ul").filterable({input: '#filterable-input'});
+		$("#listheader").html(this.listheader); //sistemo il nome della pagina (header)
 	},
 
 	countfiles: function(tags){//per  sapere quanti file ci sono in ogni gruppo // i files devono avere TUTTI i tags richiesti, per essere contati
@@ -256,6 +260,8 @@ var y3 = {
 	},
 	
 	syncresult: function(){
+		//porta l'utente alla pagina #filestosync la quale gli dice se ci sono file da scaricare.
+		//Altrimenti porta l'utente alla pagina #no_filestosync per dirgli che non ci sono aggiornamenti
 		var f = 0;
 		if (app.toDownloadList != null) {f = app.toDownloadList.length};
 		
@@ -265,8 +271,8 @@ var y3 = {
 			$.mobile.navigate("#filestosync");
 		}
 		else{
-			// nulla da scaricare, mando alla pagina nosyncrequired
-			console.log('non ci sono file da scaricare...');
+			// nulla da scaricare, mando alla pagina #no_filestosync
+			$.mobile.navigate("#filestosync");
 		}
 		
 		
