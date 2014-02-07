@@ -220,10 +220,15 @@ var app =
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.initLocalDb();					// carica il db dal localstorage
-        app.mainIntegrityCheck();			// ne controlla l'itegrita' e inizializza il path della root del filesystem
-        y3.initialize('homecontent');		// inizializza la pagina dell'interfaccia
-        app.receivedEvent('deviceready');
+        app.mainIntegrityCheck(	// ne controlla l'itegrita' e inizializza il path della root del filesystem
+        	function()			// e quando ha finito inizializza l'interfaccia
+        	{
+        		y3.initialize('homecontent');		// inizializza la pagina dell'interfaccia
+        		app.receivedEvent('deviceready');		
+        	}
+        );
     },
+
     // Update DOM on a Received Event
     receivedEvent: function(id) {				
 		$("body").pagecontainer("change", "#homepage");
@@ -585,13 +590,14 @@ var app =
 		
 	},
 
-	mainIntegrityCheck: function()
+	mainIntegrityCheck: function(_done)
 	{
 		console.log("integrityCheck...");
 		this.integrityCheck(
 			function()
 			{
 				console.log("integrityCheck done");
+				_done();
 			}
 			);
 
