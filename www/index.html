@@ -318,7 +318,7 @@
 				// binda il click sulle voci al link per visualizzare i files
 				$("#homecontent").on('click','.filelistlink', function(){
 					y3.taglist = $( this ).attr("tags")
-					//y3.listheader = $( this ).attr("listheader")
+					y3.listheader = $( this ).attr("listheader")
 					//alert( y3.taglist); //debug
 					y3.populatefilelist('filelistcontent',y3.taglist);
 					

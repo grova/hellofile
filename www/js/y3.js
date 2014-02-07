@@ -16,10 +16,10 @@ var y3 = {
 	listheader: '', //contiene la descrizione da passare alla pagina con la lista dei file (da scrivere nell'header)
 	
 	
-	/*	per riempire le liste in chrome,ma non funziona più */
+	/*	per riempire le liste in chrome,ma non funziona più 
     filllists: function() {
 		
-        app.localGroupList = [
+        this.grouplist = [
 		// =============================== IMPORTANT ===========================
 		// dal lato server questi gruppi devono arrivare ordinati per grouptitle
 		// =====================================================================
@@ -69,7 +69,7 @@ var y3 = {
 		
 		
 		
-		app.localdb = [
+		this.filelist = [
 			{
 				"fileid":0,
 				"revision":11,
@@ -116,7 +116,7 @@ var y3 = {
 		];
 		console.log('Ho popolato una lista di gruppi ed una di files...');
     },
-    
+    */
 	
 	populatecontainer: function(containerid){
 		
@@ -207,7 +207,8 @@ var y3 = {
 		$("#filterable-input").textinput({clearBtn: true});
 		$("#filelist_ul").listview(); // creo il listview 
 		$("#filelist_ul").filterable({input: '#filterable-input'});
-		//$("#listheader").html(y3.listheader); //sistemo il nome della pagina (header)
+		$("#listheader").html(y3.listheader); //sistemo il nome della pagina (header)
+		$.mobile.navigate('#filelist');
 	},
 
 	countfiles: function(tags){//per  sapere quanti file ci sono in ogni gruppo // i files devono avere TUTTI i tags richiesti, per essere contati
