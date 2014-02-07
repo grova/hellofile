@@ -174,7 +174,7 @@ var y3 = {
 	populatefilelist: function(containerid,tags)
 	{
 		
-		$("#"+containerid).empty(); // distruggo il contenuto del containerid
+		$("#"+containerid).empty(); // distruggo il contenuto del containerid (destinazione)
 
 		if (app.localdb.length == 0) 
 		{
