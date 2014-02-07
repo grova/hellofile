@@ -701,6 +701,7 @@ var app =
 	// privata
 	downloadAllFiles: function()
 	{
+		console.log("download iteration");
 		// prima guardo se ho da scaricare
 		if (this.toDownloadList==null)
 		{
@@ -726,6 +727,7 @@ var app =
 						console.log("download success. left:"+app.toDownloadList.length);
 						y3.initialize('homecontent');
 						y3.syncresult();
+						console.log("view updated");
 						// continuo
 						app.downloadAllFiles();
 					}
