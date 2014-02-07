@@ -504,7 +504,7 @@ var app =
 					// lo tolgo
 					fileEntry.remove();
 
-					console.log(fileentry.fullPath + " NOT found");
+					console.log(fileEntry.fullPath + " NOT found");
 					app.localdb.splice(_i,1);
 					app.fileExistsRecurs(_i,_fileSystem,_done);
 					
