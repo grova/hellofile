@@ -124,6 +124,10 @@ var y3 = {
 		var datacollapsed = "false";
 
 		var grouplist = app.localGroupList;
+		if (grouplist == null)
+		{
+			grouplist = [];
+		}
 
 		if (grouplist.length == 0) {console.log('ERRORE: grouplist è vuoto!');}
 
