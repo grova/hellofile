@@ -642,7 +642,7 @@ var app =
 		      loadingStatus.increment();
 		    }
 		    loadingStatus.log();
-  			y3.progressbar.setValue(Math.trunc(loadingStatus.m_percent*100));
+  			y3.progressbar.setValue(Math.trunc(loadingStatus.m_percent*100)/100);
 
 		};
 
