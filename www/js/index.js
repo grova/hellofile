@@ -172,6 +172,8 @@ var loadingStatus =
 
 	setPercentage: function (x)
 	{
+		x = Math.trunk(x*100);
+		x = x/100;
 		this.m_percent = x;
 	},
 	increment: function()
@@ -642,7 +644,7 @@ var app =
 		      loadingStatus.increment();
 		    }
 		    loadingStatus.log();
-  			y3.progressbar.setValue(Math.trunc(loadingStatus.m_percent*100)/100);
+  			y3.progressbar.setValue(loadingStatus.m_percent);
 
 		};
 
