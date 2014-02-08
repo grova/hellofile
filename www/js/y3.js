@@ -152,14 +152,14 @@ var y3 = {
 				$("#collapsible"+groupid).append("<h2>"+grouplist[i].grouptitle+"</h2>");//titolo del collapsible
 				$("#"+grouplist[i].groupid+"_filecount").append(tot_files);
 				$("#collapsible"+groupid).append("<ul data-role='listview' id='collapsible"+grouplist[i].groupid+"_list'>");//ul
-				$("#collapsible"+groupid+"_list").append("<li><a href='#filelist' tags='"+grouplist[i].grouptags+"' listheader='"+grouplist[i].desc+"' class='filelistlink'><h2>"+grouplist[i].desc+"</h2><p>"+grouplist[i].notes+"</p><p class='ui-li-aside'><strong>"+files+"</strong> files</p></a></li>");
+				$("#collapsible"+groupid+"_list").append("<li><a href='#' tags='"+grouplist[i].grouptags+"' listheader='"+grouplist[i].desc+"' class='filelistlink'><h2>"+grouplist[i].desc+"</h2><p>"+grouplist[i].notes+"</p><p class='ui-li-aside'><strong>"+files+"</strong> files</p></a></li>");
 				//alert($("#li_"+groupid+"_"+i).attr("tags")); //debug
 				console.log('ho aggiunto il primo <li>');
 			}
 			else // aggiungo categorie al collapsible esistente
 			{
 				files = y3.countfiles(grouplist[i].grouptags);//contiene i files che presentano TUTTI i tag richiesti da questo gruppo
-				$("#collapsible"+groupid+"_list").append("<li><a href='#filelist' tags='"+grouplist[i].grouptags+"' listheader='"+grouplist[i].desc+"' class='filelistlink'><h2>"+grouplist[i].desc+"</h2><p>"+grouplist[i].notes+"</p><p class='ui-li-aside'><strong>"+files+"</strong> files</p></a></li>");
+				$("#collapsible"+groupid+"_list").append("<li><a href='#' tags='"+grouplist[i].grouptags+"' listheader='"+grouplist[i].desc+"' class='filelistlink'><h2>"+grouplist[i].desc+"</h2><p>"+grouplist[i].notes+"</p><p class='ui-li-aside'><strong>"+files+"</strong> files</p></a></li>");
 				console.log('ho aggiunto un altro <li>');				
 			}
 		
@@ -173,7 +173,8 @@ var y3 = {
 
 	populatefilelist: function(containerid,tags)
 	{
-		
+		if (y3.listheader != null)	$("#listheader").html(y3.listheader); //sistemo l'header della pagina 
+
 		$("#"+containerid).empty(); // distruggo il contenuto del containerid (destinazione)
 
 		if (app.localdb.length == 0) 
@@ -184,32 +185,34 @@ var y3 = {
 		if (y3.countfiles(tags) < 1)//se non ho files con i tag richiesti, lo scrivo nel log
 		{
 			console.log("Nessun file con in tag richiesti ("+tags+")"); 
-			//$("#"+containerid).append("<p style='text-align:center; margin-top:6em; margin-bottom:6em;'>Non ci sono files in questo elenco. Tags: "+tags+".</p>");
+			$("#"+containerid).append("<p style='text-align:center; margin-top:6em; margin-bottom:6em;'>Non ci sono files in questo elenco. Tags: "+tags+".</p>");
 		}
 		else
 		{
 			//creo il search
-			$("#"+containerid).append("<label for='filterable-input' style='display:none;'>Number of Kids</label>");
+			$("#"+containerid).append("<label for='filterable-input' style='display:none;'>Cerca i files</label>");
 			$("#"+containerid).append("<input type='search' name='search' id='filterable-input'>");
+			//$("#filterable-input").textinput();
+			
 			//ul - creo la lista da popolare con i files
 			$("#"+containerid).append("<ul id='filelist_ul' data-inset='true'>");
-		}
-
-		//li - aggiungo i files alla lista
-		for (i=0;i<app.localdb.length;i++)
-		{
-			if (y3.havetags(app.localdb[i].filetags, tags))
+			
+			//li - aggiungo i files alla lista
+			for (i=0;i<app.localdb.length;i++)
 			{
-				// li - aggiungo il file alla lista
-				$("#filelist_ul").append("<li onclick = app.openFile(" + i +",false,false) ><a href='#'><img src='img/acrobat_thumb_80x80.jpg'/><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].localPath+"</p></a></li>");
+				if (y3.havetags(app.localdb[i].filetags, tags))
+				{
+					// li - aggiungo il file alla lista
+					$("#filelist_ul").append("<li onclick = app.openFile(" + i +",false,false) ><a href='#'><img src='img/acrobat_thumb_80x80.jpg'/><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].localPath+"</p></a></li>");
+				}
 			}
-		}
-
-		$("#listheader").html(y3.listheader); //sistemo il nome della pagina (header)
-		$("#filterable-input").textinput();
+			
 		$("#filelist_ul").listview(); // creo il listview 
 		$("#filelist_ul").filterable({input: '#filterable-input'});
-		//$.mobile.navigate('#filelist');
+		$.mobile.navigate('#filelist');
+			
+		}
+
 	},
 
 	countfiles: function(tags){//per  sapere quanti file ci sono in ogni gruppo // i files devono avere TUTTI i tags richiesti, per essere contati
