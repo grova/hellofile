@@ -16,8 +16,8 @@ var y3 = {
 	listheader: '', //contiene la descrizione da passare alla pagina con la lista dei file (da scrivere nell'header)
 	
 	
-	/*	per riempire le liste in chrome,ma non funziona più 
-    filllists: function() {
+		
+    getlists: function() {
 		
         this.grouplist = [
 		// =============================== IMPORTANT ===========================
@@ -116,7 +116,7 @@ var y3 = {
 		];
 		console.log('Ho popolato una lista di gruppi ed una di files...');
     },
-    */
+    
 	
 	populatecontainer: function(containerid){
 		
@@ -152,14 +152,14 @@ var y3 = {
 				$("#collapsible"+groupid).append("<h2>"+grouplist[i].grouptitle+"</h2>");//titolo del collapsible
 				$("#"+grouplist[i].groupid+"_filecount").append(tot_files);
 				$("#collapsible"+groupid).append("<ul data-role='listview' id='collapsible"+grouplist[i].groupid+"_list'>");//ul
-				$("#collapsible"+groupid+"_list").append("<li><a href='#filelist' tags='"+grouplist[i].grouptags+"' listheader='"+grouplist[i].grouptitle+"' class='filelistlink'><h2>"+grouplist[i].desc+"</h2><p>"+grouplist[i].notes+"</p><p class='ui-li-aside'><strong>"+files+"</strong> files</p></a></li>");
+				$("#collapsible"+groupid+"_list").append("<li><a href='#filelist' tags='"+grouplist[i].grouptags+"' listheader='"+grouplist[i].desc+"' class='filelistlink'><h2>"+grouplist[i].desc+"</h2><p>"+grouplist[i].notes+"</p><p class='ui-li-aside'><strong>"+files+"</strong> files</p></a></li>");
 				//alert($("#li_"+groupid+"_"+i).attr("tags")); //debug
 				console.log('ho aggiunto il primo <li>');
 			}
 			else // aggiungo categorie al collapsible esistente
 			{
 				files = y3.countfiles(grouplist[i].grouptags);//contiene i files che presentano TUTTI i tag richiesti da questo gruppo
-				$("#collapsible"+groupid+"_list").append("<li><a href='#filelist' tags='"+grouplist[i].grouptags+"' listheader='"+grouplist[i].grouptitle+"' class='filelistlink'><h2>"+grouplist[i].desc+"</h2><p>"+grouplist[i].notes+"</p><p class='ui-li-aside'><strong>"+files+"</strong> files</p></a></li>");
+				$("#collapsible"+groupid+"_list").append("<li><a href='#filelist' tags='"+grouplist[i].grouptags+"' listheader='"+grouplist[i].desc+"' class='filelistlink'><h2>"+grouplist[i].desc+"</h2><p>"+grouplist[i].notes+"</p><p class='ui-li-aside'><strong>"+files+"</strong> files</p></a></li>");
 				console.log('ho aggiunto un altro <li>');				
 			}
 		
@@ -200,7 +200,7 @@ var y3 = {
 			if (y3.havetags(app.localdb[i].filetags, tags))
 			{
 				// li - aggiungo il file alla lista
-				$("#filelist_ul").append("<li onclick = app.openFile(" + i +",false,false) ><a href='#'><img src='img/acrobat_thumb_80x80.jpg'/><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].filePath+"</p></a></li>");
+				$("#filelist_ul").append("<li onclick = app.openFile(" + i +",false,false) ><a href='#'><img src='img/acrobat_thumb_80x80.jpg'/><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].localPath+"</p></a></li>");
 			}
 		}
 
@@ -273,10 +273,18 @@ var y3 = {
 		}
 		else{
 			// nulla da scaricare, mando alla pagina #no_filestosync
-			$.mobile.navigate("#filestosync");
+			$.mobile.navigate("#no_filestosync");
 		}
 		
 		
+	},
+	
+	// ================== 4 DEBUG ===============================
+	setDBasVariable: function(){
+		y3.getlists();
+		app.localGroupList = y3.grouplist;
+		app.localdb = y3.filelist;
+		y3.populatecontainer('homecontent');
 	}
 	
 	
