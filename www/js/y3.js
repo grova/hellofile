@@ -189,7 +189,8 @@ var y3 = {
 		else
 		{
 			//creo il search
-			$("#"+containerid).append("<input type='searchx' id='filterable-input'>");
+			$("#"+containerid).append("<label for='filterable-input' style='display:none;'>Number of Kids</label>");
+			$("#"+containerid).append("<input type='search' name='search' id='filterable-input'>");
 			//ul - creo la lista da popolare con i files
 			$("#"+containerid).append("<ul id='filelist_ul' data-inset='true'>");
 		}
@@ -204,11 +205,11 @@ var y3 = {
 			}
 		}
 
-		$("#filterable-input").textinput({clearBtn: true});
+		$("#listheader").html(y3.listheader); //sistemo il nome della pagina (header)
+		$("#filterable-input").textinput();
 		$("#filelist_ul").listview(); // creo il listview 
 		$("#filelist_ul").filterable({input: '#filterable-input'});
-		$("#listheader").html(y3.listheader); //sistemo il nome della pagina (header)
-		$.mobile.navigate('#filelist');
+		//$.mobile.navigate('#filelist');
 	},
 
 	countfiles: function(tags){//per  sapere quanti file ci sono in ogni gruppo // i files devono avere TUTTI i tags richiesti, per essere contati
