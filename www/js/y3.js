@@ -189,7 +189,7 @@ var y3 = {
 		else
 		{
 			//creo il search
-			$("#"+containerid).append("<input type='search' id='filterable-input'>");
+			$("#"+containerid).append("<input type='searchx' id='filterable-input'>");
 			//ul - creo la lista da popolare con i files
 			$("#"+containerid).append("<ul id='filelist_ul' data-inset='true'>");
 		}
