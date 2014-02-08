@@ -192,7 +192,7 @@ var y3 = {
 			//creo il search
 			$("#"+containerid).append("<label for='filterable-input' style='display:none;'>Cerca i files</label>");
 			$("#"+containerid).append("<input type='search' name='search' id='filterable-input'>");
-			$("#filterable-input").textinput();
+			//$("#filterable-input").textinput();
 			
 			//ul - creo la lista da popolare con i files
 			$("#"+containerid).append("<ul id='filelist_ul' data-inset='true'>");
