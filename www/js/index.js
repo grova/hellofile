@@ -172,7 +172,7 @@ var loadingStatus =
 
 	setPercentage: function (x)
 	{
-		x = Math.trunk(x*100);
+		x = Math.floor(x*100);
 		x = x/100;
 		this.m_percent = x;
 	},
