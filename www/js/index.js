@@ -18,13 +18,13 @@
  */
 
 
-function fail(error)
+function fail(error) 
 {
-   console.log(error.code);
+    console.log(error.code);
 }
 
 
-function simulateFS(remoteRef)
+function simulateFS(remoteRef) 
 {
 	var remoteFilePath = remoteRef.filePath;
 	// nome file senza path
@@ -752,7 +752,17 @@ var app =
 	{
 		this.m_requestAbort = false;
 		this.downloadAllFiles();
-	}
+	},
+    
+    alertDismissed: function()
+    {
+        
+    },
+    
+    alertTest: function()
+    {
+        navigator.notification.alert("ceeeeo",this.alertDismissed,"alert","Done");
+    }
 }
 
 
