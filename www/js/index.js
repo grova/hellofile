@@ -693,9 +693,11 @@ var app =
 	// pubblica
 	requestAbort: function()
 	{
+		console.log("abort req");
 		this.m_requestAbort = true;
 		if (this.m_fileTransfer != null)
 		{
+			console.log("blocco un download in corso");
 			this.m_fileTransfer.abort();
 		}
 	},
@@ -722,6 +724,7 @@ var app =
 					if (app.m_requestAbort)
 					{
 						// fine
+						console.log("abort: fine iterazione download");
 						app.m_requestAbort = false;
 					}
 					else
@@ -737,6 +740,7 @@ var app =
 				function()
 				{
 					// c'e' stato un errore o un abort
+					console.log("download error or abort");
 					app.m_requestAbort = false;
 				}
 		);
