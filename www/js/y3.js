@@ -221,6 +221,11 @@ var y3 = {
 	countfiles: function(tags){//per  sapere quanti file ci sono in ogni gruppo // i files devono avere TUTTI i tags richiesti, per essere contati
 		var atags = tags.split(',');
 		numberoffiles = 0;
+
+		if (app.localdb == null)
+		{
+			app.localdb = [];
+		}
 		
 		for (u=0;u<app.localdb.length;u++){
 			includethis = true;
