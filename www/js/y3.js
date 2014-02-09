@@ -176,7 +176,10 @@ var y3 = {
 		if (y3.listheader != null)	$("#listheader").html(y3.listheader); //sistemo l'header della pagina 
 
 		$("#"+containerid).empty(); // distruggo il contenuto del containerid (destinazione)
-
+		if (app.localdb == null)
+		{
+			app.localdb = [];
+		}
 		if (app.localdb.length == 0) 
 		{
 			console.log('ERRORE: filelist è vuoto!');
