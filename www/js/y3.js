@@ -321,6 +321,29 @@ var y3 = {
         $('#totalnumberoffiles').html (t);
     },
     
+    showDownloadResult: function(errcode){
+        
+        switch(errcode)
+        {
+        case 0:
+            title = 'Download completato';
+            message = 'Tutti i file sono soncronizzati.';
+            break;
+        case 1:
+            title = 'Download annullato';
+            message = "Operazione interrotta. Per ripetere l'aggiornamento premi nuovamente sync.";
+            break;
+        case 2:
+            title = 'Errore durante il download';
+            message = "Si è verificato un errore durante lo scaricamento. Riprova in un secondo momento.";
+            break;
+        }
+        
+        
+        t = app.toDownloadList.length;
+        $.mobile.navigate('#downloadresult');
+        
+    },
     
     // ================== 4 DEBUG ===============================
 	setDBasVariable: function(){
