@@ -280,12 +280,12 @@ var y3 = {
 		
 		if (f > 0) {
 			// scrivo nella pagina filestosync se ho dei files da scaricare
-            navigator.notification.confirm('clicca Scarica per scaricare i nuovi files', app.alertDismissed(), f+' Aggiornamenti disponibili', 'Annulla,Scrica')
+            navigator.notification.confirm('clicca Scarica per scaricare i nuovi files', y3.triggerDownload, f+' Aggiornamenti disponibili', 'Annulla,Scrica')
 			
 		}
 		else{
 			// nulla da scaricare, mando alla pagina #no_filestosync
-			navigator.notification.alert('Non ci sono file da aggiornare', app.requestAbort(), 'Nessun aggiornamento', 'Chiudi')
+			navigator.notification.alert('Non ci sono file da aggiornare', y3.triggerDownload, 'Nessun aggiornamento', 'Chiudi')
 		}
 		
 		
@@ -293,7 +293,7 @@ var y3 = {
 
     
     triggerDownload: function(pressedButton){
-        alert(pressedButton);
+        alert('You pressed button ' + pressedButton);
         //if (pressedButton == 'Scarica') alert()//app.downloadAllFiles();
         
     },
