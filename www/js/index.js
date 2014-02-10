@@ -734,7 +734,7 @@ var app =
 					{
 						console.log("download success. left:"+app.toDownloadList.length);
 						y3.initialize('homecontent');
-						y3.syncresult();
+						//y3.syncresult(); chiamata ripetitiva errata
 						console.log("view updated");
 						// continuo
 						app.downloadAllFiles();
