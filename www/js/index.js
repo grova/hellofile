@@ -339,88 +339,87 @@ var app =
         
 		this.toDownloadList = new Array();	// qui ci metto quelli da scaricare
 
-
-		// indirizzo del file json
-		//var url = "http://www.storci.com/dbfwver.txt";
-		//var url = "https://dl.dropboxusercontent.com/u/48127483/storci/filelist.txt";
-		var url = "http://www.storci.com/filesync/files.asp?k=nc8hbaYGS7896GBH67VSGC";
-
-		// se ci fossero problemi di crossdomain
-		//$.getJSON(url + "?callback=?", null, function(tweets) {
+		// scarico prima i gruppi
+		var url = "http://www.storci.com/filesync/groups.asp?k=nc8hbaYGS7896GBH67VSGC";
 		console.log("loading "+url);
-		var jqxhr = $.getJSON(url , null).done(function(data) 
-		{
-			// ho scaricato la lista remota, ora devo fare i confronti per vedere quali scaricare
-			// la lista remota e' <data>
-
-			// scorro la lista remota
-			for (var i=0; i<data.length;i++)
+		var jqxhr2 = $.getJSON(url , null).done
+		( 
+			function(data)
 			{
-				// guardo se ce l'ho
-				// se e' lento si sortera'
-				var found = false;
-				if (app.localdb != null)
+				app.localGroupList = data;
+				localStorage.setItem("prevGroupList",JSON.stringify(app.localGroupList));
+
+				// ora scarico i file
+				var url = "http://www.storci.com/filesync/files.asp?k=nc8hbaYGS7896GBH67VSGC";
+
+				// se ci fossero problemi di crossdomain
+				//$.getJSON(url + "?callback=?", null, function(tweets) {
+				console.log("loading "+url);
+				var jqxhr = $.getJSON(url , null).done(function(data) 
 				{
-					for (var i1 = 0; i1 < app.localdb.length; i1++)
+					// ho scaricato la lista remota, ora devo fare i confronti per vedere quali scaricare
+					// la lista remota e' <data>
+					// scorro la lista remota
+					for (var i=0; i<data.length;i++)
 					{
-						if (data[i].fileid == app.localdb[i1].fileid)
+						// guardo se ce l'ho
+						// se e' lento si sortera'
+						var found = false;
+						if (app.localdb != null)
 						{
-							found = true;
-							// trovato
-							// guardo se e' aggiornato
-							if (data[i].revision > app.localdb[i1].revision)
+							for (var i1 = 0; i1 < app.localdb.length; i1++)
 							{
-								// lo devo scaricare
-								data[i].localPath = app.localdb[i1].localPath;	// cosi' lo sostituisco
-								data[i].localIndex = i1;	// cosi' lo sostituisco
-								// this non e' visibile qui dentro devo usare app
-								app.toDownloadList.push(data[i]);
-								break;	// prossimo
+								if (data[i].fileid == app.localdb[i1].fileid)
+								{
+									found = true;
+									// trovato
+									// guardo se e' aggiornato
+									if (data[i].revision > app.localdb[i1].revision)
+									{
+										// lo devo scaricare
+										data[i].localPath = app.localdb[i1].localPath;	// cosi' lo sostituisco
+										data[i].localIndex = i1;	// cosi' lo sostituisco
+										// this non e' visibile qui dentro devo usare app
+										app.toDownloadList.push(data[i]);
+										break;	// prossimo
+									}
+								}	
 							}
-						}	
+						}
+						if (!found)
+						{
+							// non ce l'ho
+							// da scaricare
+							data[i].localPath = null;	// cosi' lo creo
+							data[i].localIndex = -1;	// cosi' lo creo
+							app.toDownloadList.push(data[i]);
+						}
 					}
-				}
-				if (!found)
-				{
-					// non ce l'ho
-					// da scaricare
-					data[i].localPath = null;	// cosi' lo creo
-					data[i].localIndex = -1;	// cosi' lo creo
-					app.toDownloadList.push(data[i]);
-				}
-			}
 
-			console.log("file(s) to download: " + app.toDownloadList.length);
-			y3.syncresult();
-            y3.hideloading();// nascondo loading in progress..
+					console.log("file(s) to download: " + app.toDownloadList.length);
+					y3.syncresult();
+		            y3.hideloading();// nascondo loading in progress..
 
-			// nella lista toDownloadList ho aggiungo i campi localPtah e localIndex per aggiornare il db locale 
-			// nel momento in cui il file remoto viene downloadato con successo
-
-			// carico anche la lista dei gruppi
-			// che sostituisce sempre la precedente
-			//var url = "https://dl.dropboxusercontent.com/u/48127483/storci/grouplist.txt";
-			var url = "http://www.storci.com/filesync/groups.asp?k=nc8hbaYGS7896GBH67VSGC";
-			console.log("loading "+url);
-			var jqxhr2 = $.getJSON(url , null).done( 
-				function(data)
-				{
-					app.localGroupList = data;
-					localStorage.setItem("prevGroupList",JSON.stringify(app.localGroupList));
+					// nella lista toDownloadList ho aggiungo i campi localPtah e localIndex per aggiornare il db locale 
+					// nel momento in cui il file remoto viene downloadato con successo
 				});
-			jqxhr2.fail(function(jqXHR,textStatus,errorThrown)
-			{
-				y3.hideloading();
-				app.myAlert("error loading group");
-			});	 
-			
-		});
-		jqxhr.fail(function(jqXHR,textStatus,errorThrown)
-			{
-				y3.hideloading();
-				app.myAlert("error loading list ("+textStatus+")");
+
+				jqxhr.fail(function(jqXHR,textStatus,errorThrown)
+				{
+					y3.hideloading();
+					console.log("error loading filelist");
+					y3.showDownloadResult(3);
+				}
+				);
 			}
 		);
+		
+		jqxhr2.fail(function(jqXHR,textStatus,errorThrown)
+		{
+			y3.hideloading();
+			console.log("error loading group");
+			y3.showDownloadResult(3);
+		});	
 	},
 
 	// carica il file i-esimo, usa il filesystemroot riempito da integritycheck
@@ -753,6 +752,7 @@ var app =
 						// fine
 						console.log("abort: fine iterazione download");
 						app.m_requestAbort = false;
+						y3.showDownloadResult(1);
 					}
 					else
 					{

@@ -289,8 +289,8 @@ var y3 = {
             }
             else
             {
-            	alert("sto per scaricare");
-            	y3.triggerDownload(2);
+            	alert("dovrei scaricare, ma ho dei problemi con il filesystem del browser");
+            	//y3.triggerDownload(2);
             }
 
 
