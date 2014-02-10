@@ -173,14 +173,13 @@ var loadingStatus =
 	setPercentage: function (x)
 	{
 		x = Math.floor(x*100);
-		x = x/100;
 		this.m_percent = x;
 	},
 	increment: function()
 	{
-		if (this.m_percent<1)
+		if (this.m_percent<100)
 		{
-			this.m_percent += .01;
+			this.m_percent += 1;
 		}
 	},
 	log: function()
@@ -654,6 +653,7 @@ var app =
 		$.mobile.navigate("#downloading");
 		//creiamo la barra di download
 		y3.createprogressbar('progressbarcontainer');
+		y3.showRemainingFiles();
 
 
 	    loadingStatus.m_percent = 0;
