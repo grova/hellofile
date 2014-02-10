@@ -162,8 +162,8 @@ var y3 = {
 			else // aggiungo categorie al collapsible esistente
 			{
 				files = y3.countfiles(grouplist[i].grouptags);//contiene i files che presentano TUTTI i tag richiesti da questo gruppo
-				$("#collapsible"+groupid+"_list").append("<li><a href='#' tags='"+grouplist[i].grouptags+"' listheader='"+grouplist[i].desc+"' class='filelistlink'><h2>"+grouplist[i].desc+"</h2><p>"+grouplist[i].notes+"</p><p class='ui-li-aside'><strong>"+files+"</strong> files</p></a></li>");
-				console.log('ho aggiunto un altro <li>');				
+				if (files > 0) $("#collapsible"+groupid+"_list").append("<li><a href='#' tags='"+grouplist[i].grouptags+"' listheader='"+grouplist[i].desc+"' class='filelistlink'><h2>"+grouplist[i].desc+"</h2><p>"+grouplist[i].notes+"</p><p class='ui-li-aside'><strong>"+files+"</strong> files</p></a></li>");
+				console.log('ho aggiunto un altro <li>');	
 			}
 		
 		};//collapsible: grouplist
