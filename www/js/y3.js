@@ -132,9 +132,10 @@ var y3 = {
 			grouplist = [];
 		}
 
-		if (grouplist.length == 0) {console.log('ERRORE: grouplist è vuoto!');}
-
-		$("#"+containerid).empty(); // distruggo il contenuto del containerid
+		if (grouplist.length == 0) {
+            console.log('ERRORE: grouplist è vuoto!');
+        }
+        else { $("#"+containerid).empty(); // distruggo il contenuto del containerid }
 		
 		//collapsible
 		for (i=0;i<grouplist.length;i++)
@@ -165,6 +166,7 @@ var y3 = {
 		
 		};//collapsible: grouplist
 		
+        $("#"+containerid).append(t);
 		$("#"+oldgrouptitle+"_filecount").append(tot_files);//se ho un gruppo solo, devo scrivere il totale dei suoi file qui, perchè non faccio un altro giro.
 		$(".collapsible_refreshme").collapsible().trigger('create'); // creo il collapsible (altrimenti non sarebbe impaginato)
 
