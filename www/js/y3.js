@@ -280,7 +280,7 @@ var y3 = {
 		
 		if (f > 0) {
 			// scrivo nella pagina filestosync se ho dei files da scaricare
-            navigator.notification.confirm(f+' files da scaricare', $.mobile.navigate("#filestosync"), 'Aggiornamenti disponibili', 'Annulla,Scrica')
+            navigator.notification.confirm(f+' files da scaricare', $.mobile.navigate("#downloading"), 'Aggiornamenti disponibili', 'Annulla,Scrica')
 			
 		}
 		else{
