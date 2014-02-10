@@ -155,14 +155,14 @@ var y3 = {
 				$("#"+grouplist[i].groupid+"_filecount").append(tot_files);
                 //mostro il gruppo solo se contiene files
 				$("#collapsible"+groupid).append("<ul data-role='listview' id='collapsible"+grouplist[i].groupid+"_list'>");//ul
-                if (files > 0) $("#collapsible"+groupid+"_list").append("<li><a href='#' tags='"+grouplist[i].grouptags+"' listheader='"+grouplist[i].desc+"' class='filelistlink'><h2>"+grouplist[i].desc+"</h2><p>"+grouplist[i].notes+"</p><p class='ui-li-aside'><strong>"+files+"</strong> files</p></a></li>");
+                if (files > 0) $("#collapsible"+groupid+"_list").append("<li><a href='#' tags='"+grouplist[i].grouptags+"' listheader='"+grouplist[i].desc+"' class='filelistlink' data-transition='slide'><h2>"+grouplist[i].desc+"</h2><p>"+grouplist[i].notes+"</p><p class='ui-li-aside'><strong>"+files+"</strong> files</p></a></li>");
 				//alert($("#li_"+groupid+"_"+i).attr("tags")); //debug
 				console.log('ho aggiunto il primo <li>');
 			}
 			else // aggiungo categorie al collapsible esistente
 			{
 				files = y3.countfiles(grouplist[i].grouptags);//contiene i files che presentano TUTTI i tag richiesti da questo gruppo
-				if (files > 0) $("#collapsible"+groupid+"_list").append("<li><a href='#' tags='"+grouplist[i].grouptags+"' listheader='"+grouplist[i].desc+"' class='filelistlink'><h2>"+grouplist[i].desc+"</h2><p>"+grouplist[i].notes+"</p><p class='ui-li-aside'><strong>"+files+"</strong> files</p></a></li>");
+				if (files > 0) $("#collapsible"+groupid+"_list").append("<li><a href='#' tags='"+grouplist[i].grouptags+"' listheader='"+grouplist[i].desc+"' class='filelistlink' data-transition='slide'><h2>"+grouplist[i].desc+"</h2><p>"+grouplist[i].notes+"</p><p class='ui-li-aside'><strong>"+files+"</strong> files</p></a></li>");
 				console.log('ho aggiunto un altro <li>');	
 			}
 		
