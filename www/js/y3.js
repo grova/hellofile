@@ -280,7 +280,7 @@ var y3 = {
 		
 		if (f > 0) {
 			// scrivo nella pagina filestosync se ho dei files da scaricare
-            navigator.notification.confirm('clicca Scarica per scaricare i nuovi files', app.mainDownloadAllFiles(), f+' Aggiornamenti disponibili', 'Annulla,Scrica')
+            navigator.notification.confirm('clicca Scarica per scaricare i nuovi files', app.alertDismissed(), f+' Aggiornamenti disponibili', 'Annulla,Scrica')
 			
 		}
 		else{
