@@ -747,6 +747,11 @@ var app =
 		this.downloadFile(0,
 				function()
 				{
+					console.log("download success. left:"+app.toDownloadList.length);
+					y3.initialize('homecontent');
+					console.log("view updated");
+					y3.showRemainingFiles();
+
 					if (app.m_requestAbort)
 					{
 						// fine
@@ -756,11 +761,6 @@ var app =
 					}
 					else
 					{
-						console.log("download success. left:"+app.toDownloadList.length);
-						y3.initialize('homecontent');
-						y3.showRemainingFiles();
-						//y3.syncresult(); chiamata ripetitiva errata
-						console.log("view updated");
 						// continuo
 						app.downloadAllFiles();
 					}
