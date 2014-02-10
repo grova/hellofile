@@ -280,12 +280,12 @@ var y3 = {
 		
 		if (f > 0) {
 			// scrivo nella pagina filestosync se ho dei files da scaricare
-			$('#filestodownload').html(f);
-			$.mobile.navigate("#filestosync");
+            navigator.notification.confirm(f+' files da scaricare', $.mobile.navigate("#filestosync"), 'Aggiornamenti disponibili', 'Annulla,Scrica')
+			
 		}
 		else{
 			// nulla da scaricare, mando alla pagina #no_filestosync
-			$.mobile.navigate("#no_filestosync");
+			navigator.notification.alert('Non ci sono file da aggiornare', this.alertDismissed, 'Nessun aggiornamento', 'Chiudi')
 		}
 		
 		
