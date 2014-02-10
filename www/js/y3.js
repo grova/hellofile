@@ -316,7 +316,10 @@ var y3 = {
     },
     
     
-    
+    showRemainingFiles: function(){
+        t = app.toDownloadList.length;
+        $('#totalnumberoffiles').html (t);
+    },
     
     
     // ================== 4 DEBUG ===============================
