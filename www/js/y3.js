@@ -339,8 +339,8 @@ var y3 = {
             break;
         }
         
-        
-        t = app.toDownloadList.length;
+        $('#Downloadresult_title').html(title);
+        $('#Downloadresult_message').html(message);
         $.mobile.navigate('#downloadresult');
         
     },
