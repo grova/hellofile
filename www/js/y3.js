@@ -282,12 +282,30 @@ var y3 = {
 		
 		if (f > 0) {
 			// scrivo nella pagina filestosync se ho dei files da scaricare
-            navigator.notification.confirm('clicca Scarica per scaricare i nuovi files', y3.triggerDownload, f+' Aggiornamenti disponibili', 'Annulla,Scrica')
+			if (navigator.notification != undefined)
+			{
+            	navigator.notification.confirm('clicca Scarica per scaricare i nuovi files', y3.triggerDownload, f+' Aggiornamenti disponibili', 'Annulla,Scarica');
+            }
+            else
+            {
+            	alert("sto per scaricare");
+            	y3.triggerDownload(2);
+            }
+
+
 			
 		}
-		else{
+		else
+		{
 			// nulla da scaricare, mando alla pagina #no_filestosync
-			navigator.notification.alert('Non ci sono file da aggiornare', y3.triggerDownload, 'Nessun aggiornamento', 'Chiudi')
+			if (navigator.notification != undefined)
+			{
+				navigator.notification.alert('Non ci sono file da aggiornare', y3.triggerDownload, 'Nessun aggiornamento', 'Chiudi');	
+			}
+			else
+			{
+				alert("non ci sono file da scaricare");
+			}
 		}
 		
 		

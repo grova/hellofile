@@ -700,7 +700,6 @@ var app =
 			    app.saveLocalDb();
 			    console.log("splice:"+i);
 			    app.toDownloadList.splice(i,1);
-
 				//distrggo la progressbar
 				y3.destroyprogressbar();
 				_success();
@@ -728,6 +727,7 @@ var app =
 	},
 
 	// privata
+	// 0 ok, 1 abort. 2 errore
 	downloadAllFiles: function()
 	{
 		console.log("download iteration");
@@ -735,11 +735,13 @@ var app =
 		if (this.toDownloadList==null)
 		{
 			console.log("niente da scaricare (null)");
+			y3.showDownloadResult(0);
 			return;
 		}
 		if (this.toDownloadList.length==0)
 		{
 			console.log("niente da scaricare (0)");
+			y3.showDownloadResult(0);
 			return;
 		}
 		
@@ -756,6 +758,7 @@ var app =
 					{
 						console.log("download success. left:"+app.toDownloadList.length);
 						y3.initialize('homecontent');
+						y3.showRemainingFiles();
 						//y3.syncresult(); chiamata ripetitiva errata
 						console.log("view updated");
 						// continuo
@@ -766,7 +769,20 @@ var app =
 				{
 					// c'e' stato un errore o un abort
 					console.log("download error or abort");
+					var abort = app.m_requestAbort;
 					app.m_requestAbort = false;
+					if (abort)
+					{
+						y3.showDownloadResult(1);
+					}
+					else
+					{
+						y3.showDownloadResult(2);
+					}
+
+
+
+					
 				}
 		);
 
