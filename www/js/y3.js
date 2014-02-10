@@ -173,9 +173,11 @@ var y3 = {
 
 	populatefilelist: function(containerid,tags)
 	{
-		if (y3.listheader != null)	$("#listheader").html(y3.listheader); //sistemo l'header della pagina 
-
-		$("#"+containerid).empty(); // distruggo il contenuto del containerid (destinazione)
+		y3.showloading();
+        
+        if (y3.listheader != null)	$("#listheader").html(y3.listheader); //sistemo l'header della pagina 
+        var t = ""; //contiene tutte le <li> da aggiungere alla lista, per fare un append unico
+		$("#filelist_ul").empty(); // distruggo il contenuto della lista
 		if (app.localdb == null)
 		{
 			app.localdb = [];
@@ -188,17 +190,14 @@ var y3 = {
 		if (y3.countfiles(tags) < 1)//se non ho files con i tag richiesti, lo scrivo nel log
 		{
 			console.log("Nessun file con in tag richiesti ("+tags+")"); 
-			$("#"+containerid).append("<p style='text-align:center; margin-top:6em; margin-bottom:6em;'>Non ci sono files in questo elenco. Tags: "+tags+".</p>");
+			t= "<div class='ui-body ui-body-a ui-corner-all y3-center' style='margin-top:4em;'>"+
+               "<h3>Avviso</h3>"+
+               "<p >Questa lista non contiene alcun file. E' possibile che sia necessario sincronizzare l'applicazione. Premere il tasto sync</p>"+
+               "</div>"
+            $("#"+containerid).append(t);
 		}
 		else
 		{
-			//creo il search
-			$("#"+containerid).append("<label for='filterable-input' style='display:none;'>Cerca i files</label>");
-			$("#"+containerid).append("<input type='search' name='search' id='filterable-input'>");
-			//$("#filterable-input").textinput();
-			
-			//ul - creo la lista da popolare con i files
-			$("#"+containerid).append("<ul id='filelist_ul' data-inset='true'>");
 			
 			//li - aggiungo i files alla lista
 			for (i=0;i<app.localdb.length;i++)
@@ -206,16 +205,17 @@ var y3 = {
 				if (y3.havetags(app.localdb[i].filetags, tags))
 				{
 					// li - aggiungo il file alla lista
-					$("#filelist_ul").append("<li onclick = app.openFile(" + i +",false,false) ><a href='#'><img src='img/acrobat_thumb_80x80.jpg'/><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].localPath+"</p></a></li>");
+					t = t+("<li onclick = app.openFile(" + i +",false,false) ><a href='#'><img src='img/acrobat_thumb_80x80.jpg'/><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].localPath+"</p></a></li>");
 				}
 			}
 			
-		$("#filelist_ul").listview(); // creo il listview 
-		$("#filelist_ul").filterable({input: '#filterable-input'});
+		$("#filelist_ul").append(t);
+        $("#filelist_ul").listview("refresh");
+		//$("#filelist_ul").filterable("refresh");
 		$.mobile.navigate('#filelist');
 			
 		}
-
+        y3.hideloading();
 	},
 
 	countfiles: function(tags){//per  sapere quanti file ci sono in ogni gruppo // i files devono avere TUTTI i tags richiesti, per essere contati

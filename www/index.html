@@ -121,6 +121,11 @@
             
             <div data-role="content" id="homecontent">
 
+                <div class="ui-body ui-body-a ui-corner-all y3-center" style="margin-top:4em;">
+                    <h3>Nessun file presente</h3>
+                    <p>Per iniziare premi il tasto sync qui sotto.</p>
+                </div>
+                
             </div>
 
             <div data-role="footer" data-position="fixed" data-theme="b">
@@ -147,10 +152,14 @@
             
             <div data-role="content" id="filelistcontent">
                 
-                <div class="ui-body ui-body-a ui-corner-all y3-center" style="margin-top:4em;">
-                    <h3>Avviso</h3>
-                    <p >Questa lista non contiene alcun file. E' possibile che sia necessario sincronizzare l'applicazione. Premere il tasto sync</p>
-                </div>
+                <label for='filterable-input' style='display:none;'>Cerca i files</label>
+                <input type='search' name='search' id='filelist-filter-input'>
+                
+                <ul id='filelist_ul' data-role="listview" data-inset='true' data-filter="true" data-input="#filelist-filter-input">
+                    
+                </ul>
+                
+
 				
                 
             </div><!-- /content -->
@@ -325,6 +334,8 @@
                     app.loadJson();
                 });
 				
+                $("#filelist_ul").listview(); //inizializzo la listview dei file per poterla poi aggiornare più agevolmente
+                
 				// binda il click sulle voci al link per visualizzare i files
 				$("#homecontent").on('click','.filelistlink', function(){
 					y3.taglist = $( this ).attr("tags")
