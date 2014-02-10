@@ -752,6 +752,7 @@ var app =
 						// fine
 						console.log("abort: fine iterazione download");
 						app.m_requestAbort = false;
+						y3.showDownloadResult(1);
 					}
 					else
 					{
