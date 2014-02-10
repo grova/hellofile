@@ -280,12 +280,12 @@ var y3 = {
 		
 		if (f > 0) {
 			// scrivo nella pagina filestosync se ho dei files da scaricare
-            navigator.notification.confirm(f+' files da scaricare', $.mobile.navigate("#downloading"), 'Aggiornamenti disponibili', 'Annulla,Scrica')
+            navigator.notification.confirm('clicca Scarica per scaricare i nuovi files', app.mainDownloadAllFiles(), f+' Aggiornamenti disponibili', 'Annulla,Scrica')
 			
 		}
 		else{
 			// nulla da scaricare, mando alla pagina #no_filestosync
-			navigator.notification.alert('Non ci sono file da aggiornare', this.alertDismissed, 'Nessun aggiornamento', 'Chiudi')
+			navigator.notification.alert('Non ci sono file da aggiornare', app.requestAbort(), 'Nessun aggiornamento', 'Chiudi')
 		}
 		
 		
