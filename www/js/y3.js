@@ -154,7 +154,7 @@ var y3 = {
 				$("#collapsible"+groupid).append("<h2>"+grouplist[i].grouptitle+"</h2>");//titolo del collapsible
 				$("#"+grouplist[i].groupid+"_filecount").append(tot_files);
 				$("#collapsible"+groupid).append("<ul data-role='listview' id='collapsible"+grouplist[i].groupid+"_list'>");//ul
-				$("#collapsible"+groupid+"_list").append("<li><a href='#' tags='"+grouplist[i].grouptags+"' listheader='"+grouplist[i].desc+"' class='filelistlink'><h2>"+grouplist[i].desc+"</h2><p>"+grouplist[i].notes+"</p><p class='ui-li-aside'><strong>"+files+"</strong> files</p></a></li>");
+                if (files > 0) $("#collapsible"+groupid+"_list").append("<li><a href='#' tags='"+grouplist[i].grouptags+"' listheader='"+grouplist[i].desc+"' class='filelistlink'><h2>"+grouplist[i].desc+"</h2><p>"+grouplist[i].notes+"</p><p class='ui-li-aside'><strong>"+files+"</strong> files</p></a></li>");
 				//alert($("#li_"+groupid+"_"+i).attr("tags")); //debug
 				console.log('ho aggiunto il primo <li>');
 			}
@@ -340,7 +340,7 @@ var y3 = {
     },
     
     showDownloadResult: function(errcode){
-        
+        //chiamata alla fine del download con i codici degli errori 
         switch(errcode)
         {
         case 0:
@@ -352,8 +352,12 @@ var y3 = {
             message = "Operazione interrotta. Per ripetere l'aggiornamento premi nuovamente sync.";
             break;
         case 2:
-            title = 'Errore durante il download';
+            title = 'Errore 002 durante il download';
             message = "Si è verificato un errore durante lo scaricamento. Riprova in un secondo momento.";
+            break;
+        case 3:
+            title = 'Errore 003';
+            message = "Si è verificato un errore durante lo scaricamento dei Gruppi. Riprova in un secondo momento.";
             break;
         }
         
