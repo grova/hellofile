@@ -294,7 +294,7 @@ var y3 = {
     
     triggerDownload: function(pressedButton){
         if (pressedButton == 2) app.downloadAllFiles();
-        else {
+        else { //con 1 ("Annulla del confirm) o 0 (tasto dell'alert) non faccio nulla
         }
         
     },
