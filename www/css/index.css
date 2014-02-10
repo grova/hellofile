@@ -16,14 +16,13 @@
     background-attachment:fixed;
 }
 
-.y3-splash{
-	padding-top:5em;
+.y3-load{
 	width:50%;
-	margin:auto;
+    height: 50%;
 	text-align:center;
 }
 
-.y3-splash img{ /*make logo image auto resizable*/
+.y3-load img{ /*make logo image auto resizable*/
     max-width: 100%;
     height: auto;
 	}
@@ -62,3 +61,9 @@
 	}
 .y3-center{text-align:center;}
 .y3-marOriz{margin-left:1em; margin-right:1em;}
+
+.y3-Absolute-Center {
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
