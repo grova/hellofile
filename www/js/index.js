@@ -322,6 +322,8 @@ var app =
     // e crea la lista dei file da scaricare, quelli non aggiornati
     loadJson: function()
     {
+        y3.showloading(); //mostro loading in progress...
+        
 		this.toDownloadList = new Array();	// qui ci metto quelli da scaricare
 
 
@@ -377,6 +379,7 @@ var app =
 
 			console.log("file(s) to download: " + app.toDownloadList.length);
 			y3.syncresult();
+            y3.hideloading();// nascondo loading in progress..
 
 			// nella lista toDownloadList ho aggiungo i campi localPtah e localIndex per aggiornare il db locale 
 			// nel momento in cui il file remoto viene downloadato con successo

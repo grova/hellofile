@@ -291,15 +291,32 @@ var y3 = {
 		
 	},
 	
-	// ================== 4 DEBUG ===============================
+	showloading: function(){
+        $.mobile.loading( "show", {
+            text: 'Loading...',
+            textVisible: 'true',
+            theme: 'a',
+            textonly: false,
+            html: ''
+    });
+    },
+
+    hideloading: function(){
+        $.mobile.loading( "hide");
+    },
+    
+    
+    
+    
+    
+    // ================== 4 DEBUG ===============================
 	setDBasVariable: function(){
 		y3.getlists();
 		app.localGroupList = y3.grouplist;
 		app.localdb = y3.filelist;
 		y3.populatecontainer('homecontent');
-	}
-	
-	
+	},
+
 	
 }
 	
