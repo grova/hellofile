@@ -262,7 +262,7 @@ var y3 = {
                     .setOuterTheme('b')
                     .setInnerTheme('e')
                     .isMini(true)
-                    .setMax(1)
+                    .setMax(100)
                     .setStartFrom(0)
                     .setInterval(100)
                     .showCounter(true)
