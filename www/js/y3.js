@@ -325,7 +325,7 @@ var y3 = {
 		app.localGroupList = y3.grouplist;
 		app.localdb = y3.filelist;
 		y3.populatecontainer('homecontent');
-	},
+	}
 
 	
 }
