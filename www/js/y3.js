@@ -293,8 +293,9 @@ var y3 = {
 
     
     triggerDownload: function(pressedButton){
-        alert('You pressed button ' + pressedButton);
-        //if (pressedButton == 'Scarica') alert()//app.downloadAllFiles();
+        if (pressedButton == 2) app.downloadAllFiles();
+        else {
+        }
         
     },
     
