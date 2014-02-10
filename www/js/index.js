@@ -317,6 +317,19 @@ var app =
 			console.log(JSON.stringify(this.localGroupList));
     	}
     },
+
+    myAlert: function(msg)
+    {
+    	if (navigator.notification != undefined)
+    	{
+    		navigator.notification.alert(msg,null,"error");
+    	}
+    	else
+    	{
+    		alert(msg);
+    	}
+
+    },
     
     // carico i file json dal server (cablato)
     // e crea la lista dei file da scaricare, quelli non aggiornati
@@ -335,7 +348,7 @@ var app =
 		// se ci fossero problemi di crossdomain
 		//$.getJSON(url + "?callback=?", null, function(tweets) {
 		console.log("loading "+url);
-		var jqxhr = $.getJSON(url , null, function(data) 
+		var jqxhr = $.getJSON(url , null).done(function(data) 
 		{
 			// ho scaricato la lista remota, ora devo fare i confronti per vedere quali scaricare
 			// la lista remota e' <data>
@@ -389,16 +402,25 @@ var app =
 			//var url = "https://dl.dropboxusercontent.com/u/48127483/storci/grouplist.txt";
 			var url = "http://www.storci.com/filesync/groups.asp?k=nc8hbaYGS7896GBH67VSGC";
 			console.log("loading "+url);
-			var jqxhr2 = $.getJSON(url , null, 
+			var jqxhr2 = $.getJSON(url , null).done( 
 				function(data)
 				{
 					app.localGroupList = data;
 					localStorage.setItem("prevGroupList",JSON.stringify(app.localGroupList));
 				});
-			jqxhr2.error(function(){console.log("error loading group")});	 
+			jqxhr2.fail(function(jqXHR,textStatus,errorThrown)
+			{
+				y3.hideloading();
+				app.myAlert("error loading group");
+			});	 
 			
 		});
-		jqxhr.error(function(){console.log("error loading list")});
+		jqxhr.fail(function(jqXHR,textStatus,errorThrown)
+			{
+				y3.hideloading();
+				app.myAlert("error loading list ("+textStatus+")");
+			}
+		);
 	},
 
 	// carica il file i-esimo, usa il filesystemroot riempito da integritycheck
