@@ -290,7 +290,14 @@ var y3 = {
 		
 		
 	},
-	
+
+    
+    triggerDownload: function(pressedButton){
+        alert(pressedButton);
+        //if (pressedButton == 'Scarica') alert()//app.downloadAllFiles();
+        
+    },
+    
 	showloading: function(){
         $.mobile.loading( "show", {
             text: 'Loading...',
