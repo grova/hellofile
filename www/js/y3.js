@@ -132,9 +132,10 @@ var y3 = {
 			grouplist = [];
 		}
 
-		if (grouplist.length == 0) {console.log('ERRORE: grouplist è vuoto!');}
-
-		$("#"+containerid).empty(); // distruggo il contenuto del containerid
+		if (grouplist.length == 0) {
+            console.log('ERRORE: grouplist è vuoto!');
+        }
+        else { $("#"+containerid).empty(); // distruggo il contenuto del containerid }
 		
 		//collapsible
 		for (i=0;i<grouplist.length;i++)
