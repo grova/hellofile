@@ -565,6 +565,7 @@ var app =
 	},
 
 	useChrome: false,	// per debuggare il filesystem su chrome
+	m_fileSystem: null,
 
 	// controllo che i file indirizzati dal db siano presenti (in locale)
 	// e ne aggiorno il path locale
@@ -600,6 +601,7 @@ var app =
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
 			function onFileSystemSuccess(fileSystem) 
 			{
+				app.m_fileSystem = fileSystem;
 				app.fileSystemRoot = fileSystem.root.fullPath;
 				console.log("fs ok per integrityCheck");
 				var i = 0;
@@ -803,6 +805,36 @@ var app =
     alertTest: function()
     {
         navigator.notification.alert("ceeeeo",this.alertDismissed,"alert","Done");
+    },
+
+    deleteAllFiles: function()
+    {
+    	if (this.m_fileSystem != null)
+    	{
+    		var win = function()
+    		{
+    			console.log("delete ok");
+    		}
+    		var loose = function()
+    		{
+    			console.log("delete fail");
+    		}
+    		this.m_fileSystem.root.createReader().readEntries(
+    			function(entry)
+    			{
+    				var i;
+    				var last = entry.length-1;
+    				for (i=last;i>=0;i--)
+    				{
+    					entry[i].remove(
+    						win,loose);
+    				}
+    			},
+    			function(error)
+    			{
+    				console.log("readEntries fail" + error.code);
+    			});
+    	}
     }
 }
 
