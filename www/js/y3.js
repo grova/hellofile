@@ -216,7 +216,7 @@ var y3 = {
 		$("#filelist_ul").append(t);
         $("#filelist_ul").listview("refresh");
 		//$("#filelist_ul").filterable("refresh");
-		$.mobile.navigate('#filelist');
+		
 			
 		}
         y3.hideloading();
