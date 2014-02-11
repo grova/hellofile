@@ -837,6 +837,18 @@ var app =
     				console.log("readEntries fail" + error.code);
     			});
     	}
+    },
+
+    playVideoTest: function(i)
+    {
+    	if (this.localdb != null)
+		{
+			if (this.localdb.length>i)
+			{
+				var filepath = this.fileSystemRoot + "/" + this.localdb[i].localPath;
+				$("#videotest").attr("src",filePath);
+			}
+		}
     }
 }
 
