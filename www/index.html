@@ -33,6 +33,11 @@
         
         <script type="text/javascript" src="phonegap.js"></script>
 		<script type="text/javascript" src="js/jquery-2.0.3.js"></script>
+        <script type="text/javascript">
+            $(document).bind("mobileinit", function(){
+                $.mobile.defaultPageTransition = 'slide';
+            });
+        </script>
 		<script type="text/javascript" src="js/jquery.mobile-1.4.0.js"></script>
     	
 		<script type="text/javascript" src="FileTransfer.js"></script>
