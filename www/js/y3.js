@@ -223,7 +223,7 @@ var y3 = {
 	},
 
     
-    choseThumb: function(etcension){
+    choseThumb: function(extension){
         switch(extension)
         {
             case 'pdf':
