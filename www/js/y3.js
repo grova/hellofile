@@ -214,7 +214,7 @@ var y3 = {
 			}
 			
 		$("#filelist_ul").append(t);
-        $("#filelist_ul").listview("refresh");
+        $("#filelist_ul").listview("refresh").mobile.navigate('#filelist');
 		//$("#filelist_ul").filterable("refresh");
 		
 			
