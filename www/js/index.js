@@ -438,11 +438,11 @@ var app =
 				var ref;
 				if (location == true)
 				{
-					ref = window.open(filepath,'_blank','location=yes');
+					ref = window.open(filepath,'_blank','location=yes,EnableViewPortScale=yes');
 				}
 				else
 				{
-					ref = window.open(filepath,'_blank','location=no');
+					ref = window.open(filepath,'_blank','location=no,EnableViewPortScale=yes');
 				}
 				
 				ref.addEventListener('loaderror',
