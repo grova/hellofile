@@ -565,7 +565,7 @@ var app =
 	},
 
 	useChrome: false,	// per debuggare il filesystem su chrome
-	m_fileSystem: null;
+	m_fileSystem: null,
 
 	// controllo che i file indirizzati dal db siano presenti (in locale)
 	// e ne aggiorno il path locale
