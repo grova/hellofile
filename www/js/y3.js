@@ -190,7 +190,7 @@ var y3 = {
 			console.log('ERRORE: filelist è vuoto!');
 		}
 		
-		if (y3.countfiles(tags) < 1)//se non ho files con i tag richiesti, lo scrivo nel log
+		if (y3.countfiles(tags) < 1)//se non ho files con i tag richiesti, lo scrivo nel log (non dovrebbe mai succedere, perchè se non ci sono file, non disegno il gruppo.
 		{
 			console.log("Nessun file con in tag richiesti ("+tags+")"); 
 			t= "<div class='ui-body ui-body-a ui-corner-all y3-center' style='margin-top:4em;'>"+
@@ -208,7 +208,8 @@ var y3 = {
 				if (y3.havetags(app.localdb[i].filetags, tags))
 				{
 					// li - aggiungo il file alla lista
-					t = t+("<li onclick = app.openFile(" + i +",false,false) ><a href='#'><img src='img/acrobat_thumb_80x80.jpg'/><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].localPath+"</p></a></li>");
+                    ext = app.getFileExtension(app.localdb[i].localPath);
+					t = t+("<li onclick = app.openFile(" + i +",false,false) ><a href='#'><img src='img/"+y3.choseThumb(ext)+"'/><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].localPath+"</p></a></li>");
 				}
 			}
 			
@@ -221,6 +222,54 @@ var y3 = {
         y3.hideloading();
 	},
 
+    
+    choseThumb: function(etcension){
+        switch(extension)
+        {
+            case 'pdf':
+                return('acrobat_thumb_80x80.jpg');
+                break;
+            case 'xls':
+                return('excel_thumb_80x80.jpg');
+                break;
+            case 'xlsx':
+                return('excel_thumb_80x80.jpg');
+                break;
+            case 'gif':
+                return('img_thumb_80x80.jpg');
+                break;
+            case 'jpg':
+                return('img_thumb_80x80.jpg');
+                break;
+            case 'png':
+                return('img_thumb_80x80.jpg');
+                break;
+            case 'tif':
+                return('img_thumb_80x80.jpg');
+                break;
+            case 'avi':
+                return('video_thumb_80x80.jpg');
+                break;
+            case 'mp4':
+                return('video_thumb_80x80.jpg');
+                break;
+            case 'mov':
+                return('video_thumb_80x80.jpg');
+                break;
+            case 'txt':
+                return('doc_thumb_80x80.jpg');
+                break;
+            case 'doc':
+                return('doc_thumb_80x80.jpg');
+                break;
+            case 'rtf':
+                return('doc_thumb_80x80.jpg');
+                break;
+
+        }
+            
+    },
+    
 	countfiles: function(tags){//per  sapere quanti file ci sono in ogni gruppo // i files devono avere TUTTI i tags richiesti, per essere contati
 		var atags = tags.split(',');
 		numberoffiles = 0;
