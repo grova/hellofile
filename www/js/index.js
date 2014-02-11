@@ -347,6 +347,8 @@ var app =
 			{
 				app.localGroupList = data;
 				localStorage.setItem("prevGroupList",JSON.stringify(app.localGroupList));
+				y3.initialize('homecontent');	
+
 
 				// ora scarico i file
 				var url = "http://www.storci.com/filesync/files.asp?k=nc8hbaYGS7896GBH67VSGC";
