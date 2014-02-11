@@ -264,7 +264,7 @@ var y3 = {
                     .isMini(true)
                     .setMax(100)
                     .setStartFrom(0)
-                    .setInterval(100)
+                    .setInterval(10000)
                     .showCounter(true)
                     //.logOptions()
                     .build()
