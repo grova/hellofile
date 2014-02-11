@@ -845,7 +845,7 @@ var app =
 		{
 			if (this.localdb.length>i)
 			{
-				var filepath = this.fileSystemRoot + "/" + this.localdb[i].localPath;
+				var filePath = this.fileSystemRoot + "/" + this.localdb[i].localPath;
 				$("#videotest").attr("src",filePath);
 			}
 		}
