@@ -1,3 +1,6 @@
+body{background-color: #FFFFFF;}
+
+
 .y3-gradient-bg{
     -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
