@@ -224,7 +224,7 @@ var y3 = {
 
     
     choseThumb: function(extension){
-        switch(extension)
+        switch(extension.toLowerCase())
         {
             case 'pdf':
                 return('acrobat_thumb_80x80.jpg');
