@@ -2,7 +2,7 @@
 
 var y3 = {
     // Application Constructor
-    initialize: function(containerid) {
+    initialize: function (containerid) {
         //this.getlists(); non lo chiamo perche' lo chiamo a mano dal debugger, cosi' posso cambiare
 		this.populatecontainer(containerid);
     },
@@ -16,16 +16,10 @@ var y3 = {
 	listheader: '', //contiene la descrizione da passare alla pagina con la lista dei file (da scrivere nell'header)
 	
 
-    icons : [
-    "acrobat_thumb_80x80.jpg",
-    "excel_thumb_80x80.jpg",
-    "doc_thumb_80x80.jpg",
-    "img_thumb_80x80.jpg"
-    "video_thumb_80x80.jpg"
-    ],
+    icons: ["acrobat_thumb_80x80.jpg", "excel_thumb_80x80.jpg", "doc_thumb_80x80.jpg", "img_thumb_80x80.jpg", "video_thumb_80x80.jpg"],
 	
 		
-    getlists: function() {
+    getlists: function () {
 		
         this.grouplist = [
 		// =============================== IMPORTANT ===========================
@@ -427,14 +421,14 @@ var y3 = {
     },
     
     preloadImages: function(imglist) {
-        if (!imglist.list) {
-            imglist.list = [];
+        if (!y3.preloadImages.list) {
+            y3.preloadImages.list = [];
         }
         
         for (var i = 0; i < imglist.length; i++) {
             var img = new Image();
             img.src = imglist[i];
-            imglist.list.push(img);
+            y3.preloadImages.list.push(img);
         }
     },
         
