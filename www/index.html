@@ -330,7 +330,7 @@
                 
                 
                 $(".goToHomepage").click(function(){
-                    $.mobile.changePage("#homepage", "slide", !forward, true);
+                    $.mobile.changePage("#homepage", { transition: 'slide', reverse: true });
                 });
                 
 				$(".y3-exitApp").click(function(){
