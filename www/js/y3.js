@@ -15,6 +15,14 @@ var y3 = {
 	progressbar: null, //oggetto progressbar da riempire, manipolare e distruggere quando serve
 	listheader: '', //contiene la descrizione da passare alla pagina con la lista dei file (da scrivere nell'header)
 	
+
+    icons : [
+    "acrobat_thumb_80x80.jpg",
+    "excel_thumb_80x80.jpg",
+    "doc_thumb_80x80.jpg",
+    "img_thumb_80x80.jpg"
+    "video_thumb_80x80.jpg"
+    ],
 	
 		
     getlists: function() {
@@ -418,6 +426,19 @@ var y3 = {
         
     },
     
+    preloadImages: function(imglist) {
+        if (!imglist.list) {
+            imglist.list = [];
+        }
+        
+        for (var i = 0; i < imglist.length; i++) {
+            var img = new Image();
+            img.src = imglist[i];
+            imglist.list.push(img);
+        }
+    },
+        
+
     // ================== 4 DEBUG ===============================
 	setDBasVariable: function(){
 		y3.getlists();
