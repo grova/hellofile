@@ -427,7 +427,7 @@ var y3 = {
         
         for (var i = 0; i < imglist.length; i++) {
             var img = new Image();
-            img.src = "/img/"+imglist[i];
+            img.src = "img/"+imglist[i];
             y3.preloadImages.list.push(img);
         }
     },
