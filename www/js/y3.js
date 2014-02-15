@@ -341,8 +341,8 @@ var y3 = {
             }
             else
             {
-            	alert("dovrei scaricare, ma ho dei problemi con il filesystem del browser");
-            	//y3.triggerDownload(2);
+            	alert("navigator.notification non e' definito, ma scarico lo stesso");
+            	y3.triggerDownload(2);
             }
 
 
@@ -398,7 +398,7 @@ var y3 = {
         {
         case 0:
             title = 'Download completato';
-            message = 'Tutti i file sono soncronizzati.';
+            message = 'Tutti i file sono sincronizzati.';
             break;
         case 1:
             title = 'Download annullato';
