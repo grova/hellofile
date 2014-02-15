@@ -423,8 +423,56 @@ var app =
 		});	
 	},
 
-	// carica il file i-esimo, usa il filesystemroot riempito da integritycheck
 	openFile: function(i,location,useIBooks)
+	{
+		if (this.localdb != null)
+		{
+			if (this.localdb.length>i)
+			{
+				var filepath = this.fileSystemRoot + "/" + this.localdb[i].localPath;
+
+				if ((window.plugins != undefined) && (window.plugins.documentInteraction != undefined))
+				{
+					window.plugins.documentInteraction.previewDocument(filepath);	
+				}
+				else
+				{
+					if (useIBooks)
+					{
+						filepath = "itms-books:/"+filepath;
+					}
+					console.log("provo ad aprire:" + filepath);
+					var ref;
+					if (location == true)
+					{
+						ref = window.open(filepath,'_blank','location=yes,EnableViewPortScale=yes');
+					}
+					else
+					{
+						ref = window.open(filepath,'_blank','location=no,EnableViewPortScale=yes');
+					}
+					
+					ref.addEventListener('loaderror',
+						function(event)
+						{
+							console.log("error loading:" + filepath + ": "+event.message);
+						}
+
+						);
+					ref.addEventListener('loadstart',
+						function(event)
+						{
+							console.log("start:"+event.url)
+						}
+
+						);
+
+				}
+			}
+		}
+	},
+	// carica il file i-esimo, usa il filesystemroot riempito da integritycheck
+	openFile_old: function(i,location,useIBooks)
 	{
 		if (this.localdb != null)
 		{
