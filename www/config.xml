@@ -76,7 +76,9 @@
     <gap:plugin name="org.apache.cordova.device" />
     <gap:plugin name="org.apache.cordova.dialogs" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
+    <!--
     <gap:plugin name="it.y3web.cordova.documentinteraction" />
+-->
     
     
     <access origin="*" />
