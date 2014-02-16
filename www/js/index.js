@@ -903,7 +903,7 @@ var app =
 
     registerToPush: function()
     {
-    	var pushNotification = pushNotification = window.plugins.pushNotification;
+    	var pushNotification = window.plugins.pushNotification;
     	if (pushNotification == undefined)
     	{
     		this.myAlert("pushnotification not available");
@@ -942,7 +942,7 @@ var app =
 
     unregisterToPush: function()
     {
-    	var pushNotification = pushNotification = window.plugins.pushNotification;
+    	var pushNotification = window.plugins.pushNotification;
     	if (pushNotification == undefined)
     	{
     		this.myAlert("pushnotification not available");
