@@ -221,6 +221,7 @@ var app =
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.initLocalDb();					// carica il db dal localstorage
+        app.registerToPush();		// mi registro al push
         app.mainIntegrityCheck(	// ne controlla l'itegrita' e inizializza il path della root del filesystem
         	function()			// e quando ha finito inizializza l'interfaccia
         	{
@@ -925,14 +926,27 @@ var app =
 		        function(token)
 		        {
 		        	console.log("reg ok");
-		        	app.myAlert("device token = " + token);
+		        	//app.myAlert("device token = " + token);
 		        	app.m_pushToken = token;
+		        	// devo mandare il token al server
+		        	var req = $.ajax(
+		        	{
+		        		url: "www.storci.com/filesync?regqualcosa"+token+device.id;
+		        	});
+		        	req.done(function(msg)
+		        	{
+		        		console.log(msg;)
+		        	});
+		        	req.fail(function(jqXHR,textStatus)
+		        	{
+		        		console.log("req failed: " + textStatus);
+		        	});
+
 		        },
 		        function(error)
 		        {
-		        	console.log("reg error");
-		        	app.myAlert("device token = " + error);
-
+		        	console.log("push reg error");
+		        	app.myAlert("push reg error = " + error);
 		        },
 		        {
 		            "badge":"true",
