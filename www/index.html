@@ -46,6 +46,7 @@
 		<script type="text/javascript" src="js/tolito-1.0.6.js"></script>
         
         <script type="application/javascript" src="js/fastclick.js"></script> 
+        <script type="text/javascript" src="PushNotification.js"></script>
         
 
 		<title>Hello World</title>    
@@ -97,11 +98,11 @@
 
 
                 <fieldset class="ui-grid-a">
-                    <div class="ui-block-a"><p class="y3-testpage-description">Scarica il json dal server</p><input type="button" value="Load Json" data-theme="c" onclick = app.loadJson()></div>
+                    <div class="ui-block-a"><p class="y3-testpage-description">registrati al push</p><input type="button" value="push on" data-theme="c" onclick = app.registerToPush()></div>
+
+                    <div class="ui-block-a"><p class="y3-testpage-description">unregister to push</p><input type="button" value="push off" data-theme="c" onclick = app.unregisterToPush()></div>
 
                     <div class="ui-block-b"><p class="y3-testpage-description">Scarica un file pdf dal server e lo salva in locale (chrome).</p><input type="button" value="Download file chrome" data-theme="c" onclick = downloadFileChrome(app.toDownloadList[0])></div>
-
-                    <div class="ui-block-a"><p class="y3-testpage-description">scarico il primo file da aggiornare (mobile)</p><input type="button" value="download mobile" data-theme="c" onclick = app.downloadFile(0)></div>
 
                     <div class="ui-block-b"><p class="y3-testpage-description">apre con ibooks</p><input type="button" value="ibook open" data-theme="c" onclick = app.openFile(0,true,true)></div>
 
