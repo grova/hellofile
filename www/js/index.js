@@ -920,14 +920,17 @@ var app =
 		}
 		else
 		{
+			console.log("about to register");
 		    pushNotification.register(
 		        function(token)
 		        {
+		        	console.log("reg ok");
 		        	app.myAlert("device token = " + token);
 		        	app.m_pushToken = token;
 		        },
 		        function(error)
 		        {
+		        	console.log("reg error");
 		        	app.myAlert("device token = " + error);
 
 		        },
@@ -937,6 +940,8 @@ var app =
 		            "alert":"true",
 		            "ecb":"onNotificationAPN"
 		        });
+
+		    console.log("reg done");
 		}
     },
 
