@@ -899,6 +899,8 @@ var app =
 		}
     },
 
+    m_pushToken,
+
     registerToPush: function()
     {
     	var pushNotification = pushNotification = window.plugins.pushNotification;
@@ -922,6 +924,7 @@ var app =
 		        function(token)
 		        {
 		        	app.myAlert("device token = " + token);
+		        	app.m_pushToken = token;
 		        },
 		        function(error)
 		        {
