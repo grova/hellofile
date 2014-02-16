@@ -337,7 +337,7 @@ var y3 = {
 			// scrivo nella pagina filestosync se ho dei files da scaricare
 			if (navigator.notification != undefined)
 			{
-            	navigator.notification.confirm('clicca Scarica per scaricare i nuovi files', y3.triggerDownload, f+' Aggiornamenti disponibili', 'Annulla,Scarica');
+            	navigator.notification.confirm('clicca Scarica per scaricare i nuovi files', y3.triggerDownload, f+' Aggiornamenti disponibili', ['Annulla','Scarica']);
             }
             else
             {
