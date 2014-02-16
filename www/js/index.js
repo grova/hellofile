@@ -899,7 +899,7 @@ var app =
 		}
     },
 
-    m_pushToken,
+    m_pushToken: null,
 
     registerToPush: function()
     {
