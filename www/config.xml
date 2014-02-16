@@ -3,7 +3,7 @@
 
     <preference name="phonegap-version" value="3.1.0" />
     
-    <name>HelloFile</name>
+    <name>BSyncPush</name>
     <description>
         Hello World sample application that responds to the deviceready event.
     </description>
