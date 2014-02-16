@@ -901,6 +901,12 @@ var app =
 
     registerToPush: function()
     {
+    	var pushNotification = pushNotification = window.plugins.pushNotification;
+    	if (pushNotification == undefined)
+    	{
+    		this.myAlert("pushnotification not available");
+    		return;
+    	}
     	if ( device.platform == 'android' || device.platform == 'Android' )
 		{
 		    pushNotification.register(
@@ -933,6 +939,12 @@ var app =
 
     unregisterToPush: function()
     {
+    	var pushNotification = pushNotification = window.plugins.pushNotification;
+    	if (pushNotification == undefined)
+    	{
+    		this.myAlert("pushnotification not available");
+    		return;
+    	}
     	pushNotification.unregister(successHandler, errorHandler);
     }
 }
