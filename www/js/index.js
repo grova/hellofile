@@ -18,143 +18,7 @@
  */
 
 
-function fail(error) 
-{
-    console.log(error.code);
-}
 
-
-function simulateFS(remoteRef) 
-{
-	var remoteFilePath = remoteRef.filePath;
-	// nome file senza path
-	var filename = remoteFilePath.substring(remoteFilePath.lastIndexOf('/')+1);
-
-	var localPath = remoteRef.localPath;
-	console.log("simulate fs");
-
-	if (localPath == null)
-	{
-		console.log("nuovo file mi devo cercare il path da solo")
-		// nuovo file mi devo cercare il path da solo
-		localPath = "fake://";
-	}
-
-    var uri = encodeURI(remoteFilePath);
-    console.log("start download of " + remoteFilePath);
-    console.log("to " + localPath + filename);	
-
-    //console.log("download complete: " + theFile.fullPath);
-    remoteRef.localPath = localPath + filename;
-    // download completato devo aggiornare il db locale
-
-    if (remoteRef.localIndex == -1)
-    {
-    	// nuovo record
-    	if (app.localdb == null)
-    	{
-    		app.localdb = new Array();
-    	}
-    	app.localdb.push(remoteRef);
-
-    }
-    else
-    {
-    	app.localdb[remoteRef.localIndex] = remoteRef;
-    }
-    app.saveLocalDb();
-}
-
-
-function downloadFileChrome(remoteRef)
-{
-	var remoteFilePath = remoteRef.filePath;
-	// nome file senza path
-	var filename = remoteFilePath.substring(remoteFilePath.lastIndexOf('/')+1);
-
-	window.webkitRequestFileSystem(window.PERSISTENT, 0, 
-		function onFileSystemSuccess(fileSystem) 
-		{
-			var localPath = remoteRef.localPath;
-			console.log("GOT fs");
-
-			
-
-			if (localPath == null)
-			{
-				// nuovo file mi devo cercare il path da solo
-				fileSystem.root.getFile(
-					"dummy.html", {create: true, exclusive: false}, 
-					function gotFileEntry(fileEntry) 
-					{
-			    		localPath = fileEntry.fullPath.replace("dummy.html","");
-			    		fileEntry.remove();
-					},
-					fail);
-			}
-
-		    //var uri = encodeURI("http://www.storci.com/pdf/products/vsfTVmix.pdf");
-		    var uri = encodeURI(remoteFilePath);
-		    console.log("start download");	
-		    var fileTransfer = new FileTransfer();
-		    fileTransfer.download(
-				uri,
-				localPath + filename,
-				function(theFile) {
-				    console.log("download complete: " + theFile.fullPath);
-				    // download completato devo aggiornare il db locale
-
-
-
-				},
-				function(error) {
-				    console.log("download error source " + error.source);
-				    console.log("download error target " + error.target);
-				    console.log("upload error code: " + error.code);
-					}
-			);
-		}, 
-		simulateFS(remoteRef)
-		);
-} 
-
-
-function fileSystemTest()
-{
-	window.resolveLocalFileSystemURI("file:///example.txt",
-		function onSuccess(fileEntry)
-		{
-			console.log(fileEntry.name);
-		},
-		function fail(error)
-		{
-			console.log(error.code);
-		});
-}
-
-
-
-function pgDownload()
-{
-	var filePath = "file:///mnt/sdcard/theFile.pdf";
-	var fileTransfer = new FileTransfer();
-	console.log("filetransfer "+fileTransfer);
-	var uri = encodeURI("http://www.storci.com/pdf/products/vsfTVmix.pdf");
-
-	fileTransfer.download(
-	    uri,
-	    filePath,
-	    function(entry) {
-		console.log("download complete: " + entry.fullPath);
-	    },
-	    function(error) {
-		console.log("download error source " + error.source);
-		console.log("download error target " + error.target);
-		console.log("upload error code" + error.code);
-	    },
-	    true
-	);
-} 
 
  
  //per uscire dalla loading page nel browser, premere ESC
@@ -331,33 +195,7 @@ var app =
 
     },
 
-    loadJsonNew: function()
-    {
-    	var url = "http://www.storci.com/filesync/files.asp";
-
-    	//$.post( url, { deviceID: device.uuid, lang: "IT" }).done(function(data)
-    	$.post( url, { deviceID: "sticazzi", lang: "IT" }).done(function(data)
-	    	{
-	    		var response;
-	    		try
-				{
-					console.log(data);
-					response = $.parseJSON(data);
-				}
-				catch(err)
-				{
-					console.log("error parsing list");
-				}
-				console.log(response);	
-	    	}
-    		).fail(function(error)
-    		{
-    			alert("post fail:" + error);
-    		}
-    		);
-    },
-
-    
+        
     // carico i file json dal server (cablato)
     // e crea la lista dei file da scaricare, quelli non aggiornati
     loadJson: function()
@@ -367,81 +205,118 @@ var app =
 		this.toDownloadList = new Array();	// qui ci metto quelli da scaricare
 
 		// scarico prima i gruppi
-		var url = "http://www.storci.com/filesync/groups.asp?k=nc8hbaYGS7896GBH67VSGC";
+		var url = "http://www.storci.com/filesync/groups.asp";
 		console.log("loading "+url);
-		var jqxhr2 = $.getJSON(url , null).done
+
+		//var deviceid = "5617AA9A-6292-4580-AA11-EF708E287BB3";
+		var deviceid = device.uuid;
+		
+
+		var jqxhr2 = $.post(url , { deviceID: deviceid , lang: "IT" } ).done
 		( 
-			function(data)
+			function(data1)
 			{
-				app.localGroupList = data;
-				localStorage.setItem("prevGroupList",JSON.stringify(app.localGroupList));
-				y3.initialize('homecontent');	
+				var response;
+			    try
+			    {
+			        response = $.parseJSON(data1);
+			    }
+			    catch(err)
+			    {
+			        console.log("error parsing list");
+			        response.code = -1;
+			    }
 
+			    // controllo se la risposta e' corretta
+			    if (response.responseCode >= 100 && response.responseCode < 200)
+			    {
+			    	// OK
+				    var data = response.list;
 
-				// ora scarico i file
-				//var url = "http://www.storci.com/filesync/files.asp?k=nc8hbaYGS7896GBH67VSGC";
-				var url = "http://www.storci.com/filesync/files.asp";
+					app.localGroupList = data;
+					localStorage.setItem("prevGroupList",JSON.stringify(app.localGroupList));
+					y3.initialize('homecontent');	
 
-				// se ci fossero problemi di crossdomain
-				//$.getJSON(url + "?callback=?", null, function(tweets) {
-				console.log("loading "+url);
-				var jqxhr = $.post(url , { deviceID: "sticazzi", lang: "IT" } ).done(function(data1) 
-				{
-					// ho scaricato la lista remota, ora devo fare i confronti per vedere quali scaricare
-					// la lista remota e' <data>
-					var data = data.list;
-					// scorro la lista remota
-					for (var i=0; i<data.length;i++)
+					// ora scarico i file
+					//var url = "http://www.storci.com/filesync/files.asp?k=nc8hbaYGS7896GBH67VSGC";
+					var url = "http://www.storci.com/filesync/files.asp";
+					//var deviceid = "5617AA9A-6292-4580-AA11-EF708E287BB3";
+					var deviceid = device.uuid;
+					// se ci fossero problemi di crossdomain
+					//$.getJSON(url + "?callback=?", null, function(tweets) {
+					console.log("loading "+url);
+					var jqxhr = $.post(url , { deviceID: deviceid , lang: "IT" } ).done(function(data1) 
 					{
-						// guardo se ce l'ho
-						// se e' lento si sortera'
-						var found = false;
-						if (app.localdb != null)
+						var response;
+					    try
+					    {
+					        response = $.parseJSON(data1);
+					    }
+					    catch(err)
+					    {
+					        console.log("error parsing list");
+					        response.list = [];
+					    }
+						// ho scaricato la lista remota, ora devo fare i confronti per vedere quali scaricare
+						// la lista remota e' <data>
+						var data = response.list;
+						// scorro la lista remota
+						for (var i=0; i<data.length;i++)
 						{
-							for (var i1 = 0; i1 < app.localdb.length; i1++)
+							// guardo se ce l'ho
+							// se e' lento si sortera'
+							var found = false;
+							if (app.localdb != null)
 							{
-								if (data[i].fileid == app.localdb[i1].fileid)
+								for (var i1 = 0; i1 < app.localdb.length; i1++)
 								{
-									found = true;
-									// trovato
-									// guardo se e' aggiornato
-									if (data[i].revision > app.localdb[i1].revision)
+									if (data[i].fileid == app.localdb[i1].fileid)
 									{
-										// lo devo scaricare
-										data[i].localPath = app.localdb[i1].localPath;	// cosi' lo sostituisco
-										data[i].localIndex = i1;	// cosi' lo sostituisco
-										// this non e' visibile qui dentro devo usare app
-										app.toDownloadList.push(data[i]);
-										break;	// prossimo
-									}
-								}	
+										found = true;
+										// trovato
+										// guardo se e' aggiornato
+										if (data[i].revision > app.localdb[i1].revision)
+										{
+											// lo devo scaricare
+											data[i].localPath = app.localdb[i1].localPath;	// cosi' lo sostituisco
+											data[i].localIndex = i1;	// cosi' lo sostituisco
+											// this non e' visibile qui dentro devo usare app
+											app.toDownloadList.push(data[i]);
+											break;	// prossimo
+										}
+									}	
+								}
+							}
+							if (!found)
+							{
+								// non ce l'ho
+								// da scaricare
+								data[i].localPath = null;	// cosi' lo creo
+								data[i].localIndex = -1;	// cosi' lo creo
+								app.toDownloadList.push(data[i]);
 							}
 						}
-						if (!found)
-						{
-							// non ce l'ho
-							// da scaricare
-							data[i].localPath = null;	// cosi' lo creo
-							data[i].localIndex = -1;	// cosi' lo creo
-							app.toDownloadList.push(data[i]);
-						}
+
+						console.log("file(s) to download: " + app.toDownloadList.length);
+						y3.syncresult();
+			            y3.hideloading();// nascondo loading in progress..
+
+						// nella lista toDownloadList ho aggiungo i campi localPtah e localIndex per aggiornare il db locale 
+						// nel momento in cui il file remoto viene downloadato con successo
+					});
+					jqxhr.fail(function(jqXHR,textStatus,errorThrown)
+					{
+						y3.hideloading();
+						console.log("error loading filelist");
+						y3.showDownloadResult(3);
 					}
-
-					console.log("file(s) to download: " + app.toDownloadList.length);
-					y3.syncresult();
-		            y3.hideloading();// nascondo loading in progress..
-
-					// nella lista toDownloadList ho aggiungo i campi localPtah e localIndex per aggiornare il db locale 
-					// nel momento in cui il file remoto viene downloadato con successo
-				});
-
-				jqxhr.fail(function(jqXHR,textStatus,errorThrown)
-				{
-					y3.hideloading();
-					console.log("error loading filelist");
-					y3.showDownloadResult(3);
+					);
 				}
-				);
+				else
+				{
+					// non sono autorizzato a scaricare la lista dei gruppi
+					console.log("non sono autorizzato:"+response.responseDesc);
+				}
 			}
 		);
 		
@@ -452,7 +327,7 @@ var app =
 			y3.showDownloadResult(3);
 		});	
 	},
-
+	// carica il file i-esimo, usa il filesystemroot riempito da integritycheck
 	openFile: function(i,location,useIBooks)
 	{
 		if (this.localdb != null)
@@ -501,49 +376,7 @@ var app =
 			}
 		}
 	},
-	// carica il file i-esimo, usa il filesystemroot riempito da integritycheck
-	openFile_old: function(i,location,useIBooks)
-	{
-		if (this.localdb != null)
-		{
-			if (this.localdb.length>i)
-			{
-				var filepath = this.fileSystemRoot + "/" + this.localdb[i].localPath;
-
-				if (useIBooks)
-				{
-					filepath = "itms-books:/"+filepath;
-				}
-				console.log("provo ad aprire:" + filepath);
-				var ref;
-				if (location == true)
-				{
-					ref = window.open(filepath,'_blank','location=yes,EnableViewPortScale=yes');
-				}
-				else
-				{
-					ref = window.open(filepath,'_blank','location=no,EnableViewPortScale=yes');
-				}
-				
-				ref.addEventListener('loaderror',
-					function(event)
-					{
-						console.log("error loading:" + filepath + ": "+event.message);
-					}
-
-					);
-				ref.addEventListener('loadstart',
-					function(event)
-					{
-						console.log("start:"+event.url)
-					}
-
-					);
-
-			}
-		}
-	},
-	
+		
 
 	getFileExtension: function(path)
 	{
@@ -861,10 +694,6 @@ var app =
 					{
 						y3.showDownloadResult(2);
 					}
-
-
-
-					
 				}
 		);
 

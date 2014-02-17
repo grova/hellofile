@@ -341,8 +341,14 @@ var y3 = {
             }
             else
             {
-            	alert("navigator.notification non e' definito, ma scarico lo stesso");
-            	y3.triggerDownload(2);
+            	if (confirm("navigator.notification non e' definito. scarichi lo stesso?")) 
+            	{
+				    y3.triggerDownload(2);
+				} 
+				else 
+				{
+				    // Do nothing!
+				}
             }
 
 
