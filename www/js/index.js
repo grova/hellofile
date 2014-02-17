@@ -337,16 +337,24 @@ var app =
 				var filepath = this.fileSystemRoot + "/" + this.localdb[i].localPath;
 
 
-
+					
 				if ( device.platform == 'android' || device.platform == 'Android' )
 				{
-					window.plugins.webintent.startActivity({
-    					action: window.plugins.webintent.ACTION_VIEW,
-    					url: filepath }, 
-    					function() {}, 
-    					function() {alert('Failed to open URL via Android Intent')};
-					);
+					window.plugins.webintent.startActivity(
+						{
+							action: window.plugins.webintent.ACTION_VIEW,
+							url: filePath
+						},
+						function()
+						{
 
+						},
+						function() 
+						{
+							// body...
+							alert('Failed to open URL via Android Intent');
+						}
+						);
 				}
 				else
 				{
