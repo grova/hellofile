@@ -330,6 +330,33 @@ var app =
     	}
 
     },
+
+    loadJsonNew: function()
+    {
+    	var url = "http://www.storci.com/filesync/files.asp";
+
+    	//$.post( url, { deviceID: device.uuid, lang: "IT" }).done(function(data)
+    	$.post( url, { deviceID: "sticazzi", lang: "IT" }).done(function(data)
+	    	{
+	    		var response;
+	    		try
+				{
+					console.log(data);
+					response = $.parseJSON(data);
+				}
+				catch(err)
+				{
+					console.log("error parsing list");
+				}
+				console.log(response);	
+	    	}
+    		).fail(function(error)
+    		{
+    			alert("post fail:" + error);
+    		}
+    		);
+    },
+
     
     // carico i file json dal server (cablato)
     // e crea la lista dei file da scaricare, quelli non aggiornati
@@ -352,15 +379,17 @@ var app =
 
 
 				// ora scarico i file
-				var url = "http://www.storci.com/filesync/files.asp?k=nc8hbaYGS7896GBH67VSGC";
+				//var url = "http://www.storci.com/filesync/files.asp?k=nc8hbaYGS7896GBH67VSGC";
+				var url = "http://www.storci.com/filesync/files.asp";
 
 				// se ci fossero problemi di crossdomain
 				//$.getJSON(url + "?callback=?", null, function(tweets) {
 				console.log("loading "+url);
-				var jqxhr = $.getJSON(url , null).done(function(data) 
+				var jqxhr = $.post(url , { deviceID: "sticazzi", lang: "IT" } ).done(function(data1) 
 				{
 					// ho scaricato la lista remota, ora devo fare i confronti per vedere quali scaricare
 					// la lista remota e' <data>
+					var data = data.list;
 					// scorro la lista remota
 					for (var i=0; i<data.length;i++)
 					{
@@ -929,6 +958,8 @@ var app =
 		        	//app.myAlert("device token = " + token);
 		        	app.m_pushToken = token;
 		        	// devo mandare il token al server
+		        	// lo faro'
+		        	/*
 		        	var req = $.ajax(
 		        	{
 		        		url: "www.storci.com/filesync?regqualcosa"+token+device.id;
@@ -941,6 +972,7 @@ var app =
 		        	{
 		        		console.log("req failed: " + textStatus);
 		        	});
+					*/
 
 		        },
 		        function(error)
