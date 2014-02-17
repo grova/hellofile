@@ -77,6 +77,7 @@
     <gap:plugin name="org.apache.cordova.dialogs" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="com.phonegap.plugins.pushplugin" />
+    <gap:plugin name="com.borismus.webintent.WebIntent" />
     <!--
     <gap:plugin name="it.y3web.cordova.documentinteraction" />
 -->

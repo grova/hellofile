@@ -209,7 +209,7 @@ var app =
 		console.log("loading "+url);
 
 		//var deviceid = "5617AA9A-6292-4580-AA11-EF708E287BB3";
-		var deviceid = device.uuid;
+		var deviceid = "yo";
 		
 
 		var jqxhr2 = $.post(url , { deviceID: deviceid , lang: "IT" } ).done
@@ -241,7 +241,7 @@ var app =
 					//var url = "http://www.storci.com/filesync/files.asp?k=nc8hbaYGS7896GBH67VSGC";
 					var url = "http://www.storci.com/filesync/files.asp";
 					//var deviceid = "5617AA9A-6292-4580-AA11-EF708E287BB3";
-					var deviceid = device.uuid;
+					var deviceid = "yo";
 					// se ci fossero problemi di crossdomain
 					//$.getJSON(url + "?callback=?", null, function(tweets) {
 					console.log("loading "+url);
@@ -336,42 +336,58 @@ var app =
 			{
 				var filepath = this.fileSystemRoot + "/" + this.localdb[i].localPath;
 
-				if ((window.plugins != undefined) && (window.plugins.documentInteraction != undefined))
+
+
+				if ( device.platform == 'android' || device.platform == 'Android' )
 				{
-					window.plugins.documentInteraction.previewDocument(filepath);	
+					window.plugins.webintent.startActivity({
+    					action: window.plugins.webintent.ACTION_VIEW,
+    					url: filepath }, 
+    					function() {}, 
+    					function() {alert('Failed to open URL via Android Intent')};
+					);
+
 				}
 				else
 				{
-					if (useIBooks)
+
+					if ((window.plugins != undefined) && (window.plugins.documentInteraction != undefined))
 					{
-						filepath = "itms-books:/"+filepath;
-					}
-					console.log("provo ad aprire:" + filepath);
-					var ref;
-					if (location == true)
-					{
-						ref = window.open(filepath,'_blank','location=yes,EnableViewPortScale=yes');
+						window.plugins.documentInteraction.previewDocument(filepath);	
 					}
 					else
 					{
-						ref = window.open(filepath,'_blank','location=no,EnableViewPortScale=yes');
+						if (useIBooks)
+						{
+							filepath = "itms-books:/"+filepath;
+						}
+						console.log("provo ad aprire:" + filepath);
+						var ref;
+						if (location == true)
+						{
+							ref = window.open(filepath,'_blank','location=yes,EnableViewPortScale=yes');
+						}
+						else
+						{
+							ref = window.open(filepath,'_blank','location=no,EnableViewPortScale=yes');
+						}
+						
+						ref.addEventListener('loaderror',
+							function(event)
+							{
+								console.log("error loading:" + filepath + ": "+event.message);
+							}
+
+							);
+						ref.addEventListener('loadstart',
+							function(event)
+							{
+								console.log("start:"+event.url)
+							}
+
+							);
+
 					}
-					
-					ref.addEventListener('loaderror',
-						function(event)
-						{
-							console.log("error loading:" + filepath + ": "+event.message);
-						}
-
-						);
-					ref.addEventListener('loadstart',
-						function(event)
-						{
-							console.log("start:"+event.url)
-						}
-
-						);
-
 				}
 			}
 		}
