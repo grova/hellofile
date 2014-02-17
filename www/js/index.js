@@ -794,12 +794,15 @@ var app =
     	}
     	if ( device.platform == 'android' || device.platform == 'Android' )
 		{
+			// per ora no
+			/*
 		    pushNotification.register(
 		        successHandler,
 		        errorHandler, {
 		            "senderID":"replace_with_sender_id",
 		            "ecb":"onNotificationGCM"
 		        });
+		     */
 		}
 		else
 		{
