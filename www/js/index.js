@@ -55,6 +55,12 @@ var loadingStatus =
  
 var app = 
 {
+    m_appData:
+    {
+        version: "1.0.0",
+        name: "BSyncPush"
+    },
+    
     // Application Constructor
     initialize: function() {
         this.bindEvents();
@@ -84,7 +90,8 @@ var app =
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        app.initLocalDb();					// carica il db dal localstorage
+        app.initLocalDb();					// check local storage e carica il db dal localstorage
+        app.initVersion();  // serve il local storage 
         app.registerToPush();		// mi registro al push
         app.mainIntegrityCheck(	// ne controlla l'itegrita' e inizializza il path della root del filesystem
         	function()			// e quando ha finito inizializza l'interfaccia
@@ -92,6 +99,37 @@ var app =
         			
         	}
         );
+    },
+    
+    newInstall : false,
+    
+    // guardo se e' la prima installazione
+    // e creo la cartella per il filesystem, se sono in android
+    initVersion: function()
+    {
+        if (this.isLocalStorageSupported)
+        {
+            var appDatas = localStorage.getItem("appdata");
+            if (appDatas == null)
+            {
+                // era la prima volta
+                console.log("prima installazione");
+                this.newInstall = true;
+            }
+            else
+            {
+                // era un aggiornamento
+                var prevAppData = $.parseJSON(appDatas);
+                if (prevAppData.version != this.m_appData.version)
+                {
+                    console.log("aggiornamento app");
+                }
+            }
+            appData = JSON.stringify(this.m_appData);
+            
+            localstorage.setItem("appdata",appData);
+            
+        }
     },
 
     // Update DOM on a Received Event
@@ -114,19 +152,12 @@ var app =
     localGroupList: null,	// db locale, lista dei gruppi
     localdb: null,	// db locale (object)
 
-    isLocalStorageSupported: function()
-    {
-    	if (typeof(localStorage) == "undefined" )
-    	{
-    		return false;
-    	}
-    	return true;
-    },
+    isLocalStorageSupported: false, // valore di default
 
     // inizializzo il db, lo carico da localstorage
     initLocalDb: function () 
     {
-    	if (!this.isLocalStorageSupported())
+        if (typeof(localStorage) == "undefined" )
 		{
 			console.log("Your browser does not support HTML5 localStorage. Try upgrading.");
 		}
@@ -532,20 +563,30 @@ var app =
 			);
 			return;
 		}
-		
-
 
 		// mi serve il filesystem
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
 			function onFileSystemSuccess(fileSystem) 
 			{
 				app.m_fileSystem = fileSystem;
-				app.fileSystemRoot = fileSystem.root.fullPath;
-				console.log("fs ok per integrityCheck");
-				var i = 0;
-				console.log("this vale:"+this);
-				app.fileExistsRecurs(i,fileSystem,done);
-			},
+                
+                // creo la cartella per me
+                fileSystem.getDirectory("bsyncpush",{create: true, exclusive: false},
+                        function(dirEntry)
+                        {
+                            app.fileSystemRoot = dirEntry.fullPath;
+				            console.log("fs ok per integrityCheck");
+				            var i = 0;
+				            console.log("this vale:"+this);
+				            app.fileExistsRecurs(i,fileSystem,done);
+                        },
+                        function()
+                        {
+                            console.log("getdir error");
+                        }
+                                       );
+                
+            },
 			function onFileSystemError(error)
 			{
 				console.log("filesystem error");
@@ -560,9 +601,8 @@ var app =
 		this.integrityCheck(
 			function()
 			{
-				console.log("integrityCheck done");
-				console.log("itegrity returned");
-        		y3.initialize('homecontent');		// inizializza la pagina dell'interfaccia
+                console.log("integrityCheck done");
+				y3.initialize('homecontent');		// inizializza la pagina dell'interfaccia
         		console.log("y3init done");
         		app.receivedEvent('deviceready');	
 			}
@@ -768,6 +808,64 @@ var app =
     			{
     				console.log("readEntries fail" + error.code);
     			});
+    	}
+    },
+
+    isFileInDb: function(name)
+    {
+    	var i;
+    	for (i=0;i<this.localdb.length;i++)
+    	{
+    		if (this.localdb[i].localPath == name)
+            {
+                return true;
+            }
+    	}
+        return false;
+    },
+
+    // cancello i file che non ho piu' nella lista
+    deleteUnsynchedFiles: function()
+    {
+    	if (this.m_fileSystem != null)
+    	{
+    		var win = function()
+    		{
+    			console.log("delete ok");
+    		}
+    		var loose = function()
+    		{
+    			console.log("delete fail");
+    		}
+    		//this.m_fileSystem.root.createReader().readEntries(
+            this.m_fileSystem.root.getDirectory("bsyncpush",{create: true, exclusive: false},
+                function(dirEntry)
+                {
+                    dirEntry.createReader().readEntries(
+                        function(entry)
+                        {
+                            var i;
+                            var last = entry.length-1;
+                            for (i=last;i>=0;i--)
+                            {
+                                // guardo se questo file c'e' nel mio db locale
+                                var filename = entry[i].name;	// nome senza path
+                                if (!app.isFileInDb(filename))
+                                {
+                                    console.log(name + " about to be deleted");
+                                    entry[i].remove(win,loose);
+                                }
+                            }
+                        },
+                        function(error)
+                        {
+                            console.log("readEntries fail" + error.code);
+                        });
+                },
+                function()
+                {
+                    console.log("getdir error");
+                });
     	}
     },
 
