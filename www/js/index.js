@@ -301,8 +301,10 @@ var app =
 							{
 								for (var i1 = 0; i1 < app.localdb.length; i1++)
 								{
+                                    app.localdb[i1].isOnServer = false;
 									if (data[i].fileid == app.localdb[i1].fileid)
 									{
+                                        app.localdb[i1].isOnServer = true;
 										found = true;
 										// trovato
 										// guardo se e' aggiornato
@@ -327,6 +329,10 @@ var app =
 								app.toDownloadList.push(data[i]);
 							}
 						}
+                        
+                        // ora controllo se ho dei file io, che in remoto non ci sono
+                        app.deleteUnusedFiles();    // prima di scaricare
+                        
 
 						console.log("file(s) to download: " + app.toDownloadList.length);
 						y3.syncresult();
@@ -781,7 +787,7 @@ var app =
         navigator.notification.alert("ceeeeo",this.alertDismissed,"alert","Done");
     },
 
-    deleteAllFiles: function()
+    deleteUnusedFiles: function()
     {
     	if (this.m_fileSystem != null)
     	{
@@ -793,21 +799,34 @@ var app =
     		{
     			console.log("delete fail");
     		}
-    		this.m_fileSystem.root.createReader().readEntries(
-    			function(entry)
-    			{
-    				var i;
-    				var last = entry.length-1;
-    				for (i=last;i>=0;i--)
-    				{
-    					entry[i].remove(
-    						win,loose);
-    				}
-    			},
-    			function(error)
-    			{
-    				console.log("readEntries fail" + error.code);
-    			});
+            
+            // scorro il db
+            var i;
+            for (i=0;i<this.localdb.length;i++)
+            {
+                if (this.localdb[i].isOnServer)
+                {
+                    continue;
+                }
+                // da cancellare
+                this.m_fileSystem.root.getFile("bsyncpush/"+this.localdb[i].localPath,{create: false, exclusive: false},
+                    function(entry)
+                    {
+                        console.log(name + " about to be deleted");
+                        entry.remove(
+                            function()
+                            {
+                                console.log("deleted");
+                                app.localdb.splice(i,1);
+                                i--;
+                            },
+                            loose);
+                    },
+                    function(error)
+                    {
+                       console.log("error getting file to delete");
+                    });
+            }   // next file
     	}
     },
 
