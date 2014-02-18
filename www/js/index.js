@@ -382,6 +382,8 @@ var app =
 				if ( device.platform == 'android' || device.platform == 'Android' )
 				{
 					console.log("startactivity on:" + filepath);
+                    cordova.plugins.FileOpener(filepath);
+                    /*
 					window.plugins.webintent.startActivity(
 						{
 							action: window.plugins.webintent.ACTION_VIEW,
@@ -397,6 +399,7 @@ var app =
 							alert('Failed to open URL via Android Intent');
 						}
 						);
+                    */
 				}
 				else
 				{
