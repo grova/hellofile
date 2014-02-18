@@ -127,7 +127,7 @@ var app =
             }
             appData = JSON.stringify(this.m_appData);
             
-            localstorage.setItem("appdata",appData);
+            localStorage.setItem("appdata",appData);
             
         }
     },
