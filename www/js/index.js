@@ -340,6 +340,7 @@ var app =
 					
 				if ( device.platform == 'android' || device.platform == 'Android' )
 				{
+					console.log("startactivity on:" + filePath);
 					window.plugins.webintent.startActivity(
 						{
 							action: window.plugins.webintent.ACTION_VIEW,
@@ -347,7 +348,7 @@ var app =
 						},
 						function()
 						{
-
+							console.log("activity ok");
 						},
 						function() 
 						{
