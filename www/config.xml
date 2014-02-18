@@ -77,7 +77,8 @@
     <gap:plugin name="org.apache.cordova.dialogs" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="com.phonegap.plugins.pushplugin" />
-    <gap:plugin name="net.tunts.webintent" />
+    <!--<gap:plugin name="net.tunts.webintent" />-->
+    <gap:plugin name="io.github.pwlin.cordova.plugins.fileopener" />
     <!--
     <gap:plugin name="it.y3web.cordova.documentinteraction" />
 -->

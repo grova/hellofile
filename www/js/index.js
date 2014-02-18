@@ -170,7 +170,7 @@ var app =
 			this.currentGroupList = localStorage.getItem("prevGroupList");
 			if (this.currentGroupList != null)
 			{
-				console.log(this.currentGroupList);
+				//console.log(this.currentGroupList);
 				try
 				{
 					this.localGroupList = $.parseJSON(this.currentGroupList);
@@ -185,7 +185,7 @@ var app =
 			this.currentList = localStorage.getItem("prevDocList");
 			if (this.currentList != null)
 			{
-				console.log(this.currentList);
+				//console.log(this.currentList);
 				try
 				{
 					this.localdb = $.parseJSON(this.currentList);
@@ -208,8 +208,8 @@ var app =
     		localStorage.setItem("prevGroupList",JSON.stringify(this.localGroupList));
 
 			
-			console.log(JSON.stringify(this.localdb));
-			console.log(JSON.stringify(this.localGroupList));
+			//console.log(JSON.stringify(this.localdb));
+			//console.log(JSON.stringify(this.localGroupList));
     	}
     },
 
@@ -647,7 +647,7 @@ var app =
 		    {
 		      loadingStatus.increment();
 		    }
-		    loadingStatus.log();
+		    //loadingStatus.log();
   			y3.progressbar.setValue(loadingStatus.m_percent);
 
 		};
