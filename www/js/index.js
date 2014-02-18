@@ -291,6 +291,11 @@ var app =
 						// ho scaricato la lista remota, ora devo fare i confronti per vedere quali scaricare
 						// la lista remota e' <data>
 						var data = response.list;
+                        
+                        for (var i1 = 0; i1 < app.localdb.length; i1++)
+                        {
+                            app.localdb[i1].isOnServer = false;
+                        }
 						// scorro la lista remota
 						for (var i=0; i<data.length;i++)
 						{
@@ -301,7 +306,6 @@ var app =
 							{
 								for (var i1 = 0; i1 < app.localdb.length; i1++)
 								{
-                                    app.localdb[i1].isOnServer = false;
 									if (data[i].fileid == app.localdb[i1].fileid)
 									{
                                         app.localdb[i1].isOnServer = true;
