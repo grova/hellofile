@@ -164,7 +164,7 @@ var app =
 		else
 		{
 			console.log("localstorage OK");
-			isLocalStorageSupported = true;
+			this.isLocalStorageSupported = true;
 			
 			// grouplist
 			this.currentGroupList = localStorage.getItem("prevGroupList");
@@ -202,7 +202,7 @@ var app =
     // salvo il db corrente su localstorage
     saveLocalDb: function()
     {
-    	if (this.isLocalStorageSupported())
+    	if (this.isLocalStorageSupported)
     	{
     		localStorage.setItem("prevDocList",JSON.stringify(this.localdb));
     		localStorage.setItem("prevGroupList",JSON.stringify(this.localGroupList));
@@ -571,7 +571,7 @@ var app =
 				app.m_fileSystem = fileSystem;
                 
                 // creo la cartella per me
-                fileSystem.getDirectory("bsyncpush",{create: true, exclusive: false},
+                fileSystem.root.getDirectory("bsyncpush",{create: true, exclusive: false},
                         function(dirEntry)
                         {
                             app.fileSystemRoot = dirEntry.fullPath;
