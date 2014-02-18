@@ -491,7 +491,7 @@ var app =
 
 				
 			_fileSystem.root.getFile(
-				filename, {create: true, exclusive: true}, 
+				"bsyncpush/"+filename, {create: true, exclusive: true}, 
 				function gotFileEntry(fileEntry) 
 				{
 					// lo riesco a creare in esclusiva, non c'era
