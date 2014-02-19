@@ -422,6 +422,7 @@ var app =
                     // e poi mi serve il mime
                     var mime = this.getMIME(filepath);
 					console.log("startactivity on:" + filepath);
+                    console.log("MIME:" + mime);
                     cordova.plugins.fileOpener.open(filepath,mime);
                     /*
 					window.plugins.webintent.startActivity(
