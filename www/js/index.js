@@ -399,7 +399,7 @@ var app =
         }
         if (ext == "xlsx")
         {
-            return "application/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            return "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
         }
         return "";
     },
@@ -418,7 +418,7 @@ var app =
 				if ( device.platform == 'android' || device.platform == 'Android' )
 				{
                     // devo togliere il file:
-                    filepath = filepath.substring(5);
+                    filepath = filepath.substring(7);
                     // e poi mi serve il mime
                     var mime = this.getMIME(filepath);
 					console.log("startactivity on:" + filepath);
