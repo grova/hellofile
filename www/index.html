@@ -63,7 +63,7 @@
         
         <!--  ======================== HOME PAGE ============================= !-->
         <div data-role="page" id="homepage" data-theme="a"  class="y3-pageBG">
-        	<div data-role="header" data-position="fixed" style="text-align:center;">
+        	<div data-role="header" data-position="fixed" data-theme="c" style="text-align:center;">
             	<img src="img/splash_logo.png" style="width:30%; height:auto;">
             </div>
             
@@ -179,7 +179,7 @@
 
         <!--  ======================== DOWNLOAD / UPDATE PAGE ============================= !-->
         <div data-role="page" id="downloading" data-theme="a" class="y3-pageBG">
-        	<div data-role="header" data-position="fixed"  style="text-align:center;">
+        	<div data-role="header" data-position="fixed" data-theme="c" style="text-align:center;">
             	<img src="img/splash_logo.png" style="width:30%; height:auto;">
             </div>
             
@@ -279,7 +279,7 @@
         <!--  ======================== PAGINA REGISTRAZIONE ============================= !-->
         <div data-role="page" id="registration" data-theme="a" class="y3-pageBG">
             
-        	<div data-role="header" data-position="fixed"  style="text-align:center;">
+        	<div data-role="header" data-position="fixed" data-theme="c" style="text-align:center;">
             	<img src="img/splash_logo.png" style="width:30%; height:auto;">
             </div>
 
@@ -294,23 +294,25 @@
     
                         <div class="ui-field-contain" style="margin-top:3em;">
                             <label for="nomeCognome">Nome e Cognome:</label>
-                            <input name="nomeCognome" id="nomeCognome" placeholder="Nome e Cognome" value="" type="text">
+                            <input name="nomeCognome" id="nomeCognome" placeholder="Nome e Cognome" value="" type="text" maxlength="100">
                         </div>                  	
     
                         <div class="ui-field-contain">
                             <label for="email">indirizzo email:</label>
-                            <input name="email" id="email" placeholder="email" value="" type="text">
+                            <input name="email" id="email" placeholder="email" value="" type="text" maxlength="100">
                         </div>                  	
     
                         <div class="ui-field-contain">
                             <label for="tel">Telefono:</label>
-                            <input name="tel" id="tel" placeholder="mobile phone" value="" type="text">
+                            <input name="tel" id="tel" placeholder="mobile phone" value="" type="text" maxlength="50">
                         </div>                  	
 
                       <div class="ui-grid-a" style="margin-top:3em;">
                         <div class="ui-block-a">
                             <div class="button-wrap y3-marOriz">
-                                <button onClick="app.mainDownloadAllFiles()" class="ui-btn ui-icon-arrow-d ui-btn-icon-left ui-corner-all ui-btn-c">Invia Richiesta</button>
+                            	<input type="hidden" name="deviceID" id="reg_deviceID" value="">
+                                <input type="hidden" name="deviceName" id="reg_deviceName" value="">
+                                <button onClick="" class="ui-btn ui-icon-arrow-d ui-btn-icon-left ui-corner-all ui-btn-c">Invia Richiesta</button>
                             </div>
                         </div>
                         <div class="ui-block-b">
