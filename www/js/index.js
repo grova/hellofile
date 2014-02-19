@@ -399,7 +399,7 @@ var app =
         }
         if (ext == "xlsx")
         {
-            return "application/excel";
+            return "application/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
         }
         return "";
     },
