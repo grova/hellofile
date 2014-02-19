@@ -864,7 +864,7 @@ var app =
                         entry.remove(
                             function()
                             {
-                                console.log("deleted");
+                                console.log("deleted file:"+i);
                                 app.localdb.splice(i,1);
                                 i--;
                             },
@@ -961,14 +961,12 @@ var app =
     	if ( device.platform == 'android' || device.platform == 'Android' )
 		{
 			// per ora no
-			/*
 		    pushNotification.register(
 		        successHandler,
 		        errorHandler, {
-		            "senderID":"replace_with_sender_id",
+		            "senderID":"641296272279",
 		            "ecb":"onNotificationGCM"
 		        });
-		     */
 		}
 		else
 		{
@@ -980,6 +978,7 @@ var app =
 		        	//app.myAlert("device token = " + token);
 		        	app.m_pushToken = token;
 		        	// devo mandare il token al server
+                    // e distinguere il caso ios android
 		        	// lo faro'
 		        	/*
 		        	var req = $.ajax(
@@ -1049,14 +1048,13 @@ function onNotificationAPN (event)
 // Android
 function onNotificationGCM(e) 
 {
-    $("#app-status-ul").append('<li>EVENT -> RECEIVED:' + e.event + '</li>');
+    console.log("gcm event:"+e.event);
 
     switch( e.event )
     {
     case 'registered':
         if ( e.regid.length > 0 )
         {
-            $("#app-status-ul").append('<li>REGISTERED -> REGID:' + e.regid + "</li>");
             // Your GCM push server needs to know the regID before it can push to this device
             // here is where you might want to send it the regID for later use.
             console.log("regID = " + e.regid);
@@ -1068,34 +1066,41 @@ function onNotificationGCM(e)
         // you might want to play a sound to get the user's attention, throw up a dialog, etc.
         if ( e.foreground )
         {
-            $("#app-status-ul").append('<li>--INLINE NOTIFICATION--' + '</li>');
-
+            console.log("inline notification");
             // if the notification contains a soundname, play it.
-            var my_media = new Media("/android_asset/www/"+e.soundname);
-            my_media.play();
+            try
+            {
+                var my_media = new Media("/android_asset/www/"+e.soundname);
+                my_media.play();
+            }
+            catch(ex)
+            {
+                console.log("cannot play media:"+ex.message);   
+            }
         }
         else
         {  // otherwise we were launched because the user touched a notification in the notification tray.
             if ( e.coldstart )
             {
-                $("#app-status-ul").append('<li>--COLDSTART NOTIFICATION--' + '</li>');
+                console.log("coldstart");
             }
             else
             {
-                $("#app-status-ul").append('<li>--BACKGROUND NOTIFICATION--' + '</li>');
+                consloe.log("background");
             }
         }
-
-        $("#app-status-ul").append('<li>MESSAGE -> MSG: ' + e.payload.message + '</li>');
-        $("#app-status-ul").append('<li>MESSAGE -> MSGCNT: ' + e.payload.msgcnt + '</li>');
+        
+        console.log("msg:"+e.payload.message);
+        console.log("msgcnt:"+ e.payload.msgcnt);
+        
     break;
 
     case 'error':
-        $("#app-status-ul").append('<li>ERROR -> MSG:' + e.msg + '</li>');
+        console.log("ERROR -> MSG:" + e.msg);
     break;
 
     default:
-        $("#app-status-ul").append('<li>EVENT -> Unknown, an event was received and we do not know what it is</li>');
+        console.log("EVENT -> Unknown, an event was received and we do not know what it is");
     break;
   }
 }
