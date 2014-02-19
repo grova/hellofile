@@ -335,13 +335,15 @@ var app =
 						}
                         
                         // ora controllo se ho dei file io, che in remoto non ci sono
-                        app.deleteUnusedFiles();    // prima di scaricare
-                        
-
-						console.log("file(s) to download: " + app.toDownloadList.length);
-						y3.syncresult();
-			            y3.hideloading();// nascondo loading in progress..
-
+                        app.deleteUnusedFiles(0,
+                            function()
+                              {
+                                  console.log("file(s) to download: " + app.toDownloadList.length);
+                                  y3.initialize('homecontent');
+                                  y3.hideloading();// nascondo loading in progress..
+						          y3.syncresult();
+                              }
+                                             ); 
 						// nella lista toDownloadList ho aggiungo i campi localPtah e localIndex per aggiornare il db locale 
 						// nel momento in cui il file remoto viene downloadato con successo
 					});
@@ -835,47 +837,48 @@ var app =
         navigator.notification.alert("ceeeeo",this.alertDismissed,"alert","Done");
     },
 
-    deleteUnusedFiles: function()
+    deleteUnusedFiles: function(_i,_done)
     {
-    	if (this.m_fileSystem != null)
-    	{
-    		var win = function()
-    		{
-    			console.log("delete ok");
-    		}
-    		var loose = function()
-    		{
-    			console.log("delete fail");
-    		}
-            
-            // scorro il db
-            var i;
-            for (i=0;i<this.localdb.length;i++)
+        if (_i<this.localdb.length)
+        {
+            if (!this.localdb[_i].isOnServer)
             {
-                if (this.localdb[i].isOnServer)
-                {
-                    continue;
-                }
                 // da cancellare
-                this.m_fileSystem.root.getFile("bsyncpush/"+this.localdb[i].localPath,{create: false, exclusive: false},
+                this.m_fileSystem.root.getFile("bsyncpush/"+this.localdb[_i].localPath,{create: false, exclusive: false},
                     function(entry)
                     {
                         console.log(name + " about to be deleted");
                         entry.remove(
-                            function()
+                            function(file)
                             {
-                                console.log("deleted file:"+i);
-                                app.localdb.splice(i,1);
-                                i--;
+                                console.log("deleted file:"+file);
+                                app.localdb.splice(_i,1);
+                                _i--;
+                                app.deleteUnusedFiles(_i,_done);
                             },
-                            loose);
+                            function(error)
+                            {
+                                consolo.log("error deleting file:"+error.code);
+                                app.deleteUnusedFiles(_i+1,_done);
+                            }
+                            );
                     },
                     function(error)
                     {
-                       console.log("error getting file to delete");
+                        console.log("error getting file to delete:"+error.code);
+                        app.deleteUnusedFiles(_i+1,_done);
                     });
-            }   // next file
+            }
+            else
+            {
+                app.deleteUnusedFiles(_i+1,_done);
+            }
     	}
+        else
+        {
+            console.log("fine ricorsione deleteunused");
+            _done();
+        }
     },
 
     isFileInDb: function(name)
