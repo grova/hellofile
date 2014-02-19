@@ -368,6 +368,42 @@ var app =
 			y3.showDownloadResult(3);
 		});	
 	},
+    
+    getMIME: function(name)
+    {
+        var ext = this.getFileExtension(name).toLowerCase();
+        
+        if (ext == "jpg")
+        {
+            return "image/jpeg";
+        }
+        if (ext == "pdf")
+        {
+            return "application/pdf";
+        }
+        if (ext == "xls")
+        {
+            return "application/excel";
+        }
+        if (ext == "mov")
+        {
+            return "video/quicktime";
+        }
+        if (ext == "mpa")
+        {
+            return "audio/mpeg";
+        }
+        if (ext == "mp4")
+        {
+            return "video/mpeg";
+        }
+        if (ext == "xlsx")
+        {
+            return "application/excel";
+        }
+        return "";
+    },
+    
 	// carica il file i-esimo, usa il filesystemroot riempito da integritycheck
 	openFile: function(i,location,useIBooks)
 	{
@@ -381,8 +417,12 @@ var app =
 					
 				if ( device.platform == 'android' || device.platform == 'Android' )
 				{
+                    // devo togliere il file:
+                    filepath = filepath.substring(5);
+                    // e poi mi serve il mime
+                    var mime = this.getMIME(filepath);
 					console.log("startactivity on:" + filepath);
-                    cordova.plugins.FileOpener(filepath);
+                    cordova.plugins.fileOpener.open(filepath,mime);
                     /*
 					window.plugins.webintent.startActivity(
 						{
