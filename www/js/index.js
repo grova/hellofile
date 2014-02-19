@@ -864,7 +864,7 @@ var app =
                         entry.remove(
                             function()
                             {
-                                console.log("deleted");
+                                console.log("deleted file:"+i);
                                 app.localdb.splice(i,1);
                                 i--;
                             },
