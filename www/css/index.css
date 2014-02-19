@@ -1,20 +1,25 @@
 body{background-color: #FFFFFF;}
 
+.y3-pageBG{
+	background-image:url(../img/pageBG.jpg);
+	background-size:200% auto;
+	}
+
 
 .y3-gradient-bg{
     -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
     -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-    background-color:#F0F0F0;
-    background-image:linear-gradient(top, #B9B9B9 0%, #F0F0F0 51%);
-    background-image:-webkit-linear-gradient(top, #B9B9B9 0%, #F0F0F0 51%);
-    background-image:-ms-linear-gradient(top, #B9B9B9 0%, #F0F0F0 51%);
+    background-color:#FAFAFA;
+    background-image:linear-gradient(top, #C2C2C5 0%, #F0F0F0 60%);
+    background-image:-webkit-linear-gradient(top, #C2C2C5 0%, #F0F0F0 60%);
+    background-image:-ms-linear-gradient(top, #C2C2C5 0%, #F0F0F0 60%);
     background-image:-webkit-gradient(
         linear,
         left top,
         left bottom,
-        color-stop(0, #B9B9B9),
-        color-stop(0.51, #F0F0F0)
+        color-stop(0, #C2C2C5),
+        color-stop(0.60, #F0F0F0)
     );
     background-attachment:fixed;
 }

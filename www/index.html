@@ -50,7 +50,7 @@
         <script type="text/javascript" src="webintent.js"></script>
                 
 
-		<title>Hello World</title>    
+		<title>Storci Sync</title>    
     </head>
 
     <!--
@@ -62,8 +62,8 @@
     	
         
         <!--  ======================== HOME PAGE ============================= !-->
-        <div data-role="page" id="homepage" data-theme="a">
-        	<div data-role="header" data-position="fixed" style="text-align:center; padding-top:2%;">
+        <div data-role="page" id="homepage" data-theme="a"  class="y3-pageBG">
+        	<div data-role="header" data-position="fixed" style="text-align:center;">
             	<img src="img/splash_logo.png" style="width:30%; height:auto;">
             </div>
             
@@ -93,11 +93,13 @@
 
 
         <!--  ======================== TESTING PAGE ============================= !-->
-        <div data-role="page" id="testpage" data-theme="a">
-        	<div data-role="header" data-position="fixed"><h1>Testing Page</h1></div>
+        <div data-role="page" id="testpage" data-theme="a" class="y3-pageBG">
+        	<div data-role="header" data-position="fixed"  style="text-align:center; background:#F0F0F0;">
+            	<img src="img/splash_logo.png" style="width:30%; height:auto;">
+            </div>
             <div data-role="content">
 
-
+				<div class="ui-body ui-body-a ui-corner-all" >
                 <fieldset class="ui-grid-a">
                     <div class="ui-block-a"><p class="y3-testpage-description">registrati al push</p><input type="button" value="push on" data-theme="c" onclick = app.registerToPush()></div>
 
@@ -109,17 +111,17 @@
 
                     <div class="ui-block-a"><p class="y3-testpage-description">cancella tutti i files</p><input type="button" value="delete all" data-theme="c" onclick = app.deleteAllFiles()></div>
 
-                    <div class="ui-block-b"><p class="y3-testpage-description">provo un alert</p><input type="button" value="provo un alert" data-theme="c" onclick="app.alertTest()"></div>
+                    <div class="ui-block-b"><p class="y3-testpage-description">provo un alert</p><input type="button" value="provo un alert" data-theme="c" onClick="app.alertTest()"></div>
 
                     <div class="ui-block-a"><p class="y3-testpage-description">Imposta i DB come variabili per debug interfaccia in chrome</p><input type="button" value="y3 DB" data-theme="c" onclick = y3.setDBasVariable()></div>
+                    <div class="ui-block-b">
+                        <video controls>
+                          <source id="videotest" src="" type="video/quicktime">
+                           Your browser does not support the video tag.
+                        </video>                     
+                    </div>
                 </fieldset>            
-                <div>
-                    <video controls>
-                      <source id="videotest" src="" type="video/quicktime">
-                       Your browser does not support the video tag.
-                    </video>                     
-                </div>
-
+				</div>
             </div>
 
             <div data-role="footer" data-position="fixed" data-theme="b">
@@ -141,7 +143,7 @@
 
 
         <!--  ======================== FILE LIST ============================= !-->
-        <div data-role="page" id="filelist" data-theme="a">
+        <div data-role="page" id="filelist" data-theme="a" class="y3-pageBG">
         	<div data-role="header" data-position="fixed">
             	<a href="#homepage" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-back">Back</a>
 	            <h1 id="listheader">Cataloghi e Schede Tecniche</h1>
@@ -176,17 +178,21 @@
 
 
         <!--  ======================== DOWNLOAD / UPDATE PAGE ============================= !-->
-        <div data-role="page" id="downloading" data-theme="a">
-        	<div data-role="header" data-position="fixed">
-	            <h1>Download aggiornamenti</h1>
+        <div data-role="page" id="downloading" data-theme="a" class="y3-pageBG">
+        	<div data-role="header" data-position="fixed"  style="text-align:center;">
+            	<img src="img/splash_logo.png" style="width:30%; height:auto;">
             </div>
             
             <div data-role="content" id="downloading_cnt">
-            	<p class="y3-center" style="margin-top:6em;">Files rimanenti <span id="totalnumberoffiles"></span></p>
-            	<div id="progressbarcontainer"></div>
+            
+            	<div class="ui-body ui-body-a ui-corner-all y3-center">
+                	<h3></h3>
+	            	<p class="y3-center" style="margin-top:6em;">Files rimanenti <span id="totalnumberoffiles"></span></p>
+	            	<div id="progressbarcontainer"></div>
             	
-                <div class="button-wrap y3-center" style="margin-top:6em;"><button class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-left ui-corner-all ui-btn-b " onclick="app.requestAbort()">Annulla</button></div>
-
+	                <div class="button-wrap y3-center" style="margin-top:6em;"><button class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-left ui-corner-all ui-btn-b " onClick="app.requestAbort()">Annulla</button></div>
+				</div>
+                
             </div><!-- /content -->
 
             <div data-role="footer" data-position="fixed" data-theme="b">
@@ -204,68 +210,25 @@
 
 
 
-        <!--  ======================== FILES TO SYNC PAGE ============================= !-->
-        <div data-role="page" id="filestosync" data-theme="a">
-        	<div data-role="header" data-position="fixed">
-	            <h1>Aggiornamenti</h1>
-            </div>
-            
-            <div data-role="content" id="filestosync-cnt">
-            
-                <div class="ui-corner-all">
-
-
-                    <p class="y3-center" style="padding-top:6em; padding-bottom:6em; font-size:large;"><span id="filestodownload"></span> files da scaricare<br>
-                    <cite style="font-size:small;">possono essere file nuovi o aggiornamenti di file esistenti</cite></p>
-                    
-
-                
-
-                  <div class="ui-grid-a">
-                    <div class="ui-block-a">
-                    	<div class="button-wrap y3-marOriz">
-                    		<button onClick="app.mainDownloadAllFiles()" class="ui-btn ui-icon-arrow-d ui-btn-icon-left ui-corner-all ui-btn-c">Scarica</button>
-                    	</div>
-                    </div>
-                    <div class="ui-block-b">
-                    	<div class="button-wrap y3-marOriz">
-                        	<button onClick="app.requestAbort()" class="ui-btn ui-icon-delete ui-btn-icon-left ui-corner-all ui-btn-b">Annulla</button>
-                        </div>
-                    </div>
-                  </div>                  
-
-                </div>            
-
-            </div><!-- /content -->
-
-            <div data-role="footer" data-position="fixed" data-theme="b">
-            	<div data-role="navbar" data-iconpos="top">
-                	<ul>
-                        <li><button class="ui-btn ui-icon-back ui-btn-icon-top goToHomepage">Back</button></li>
-                        <li><button class="ui-btn ui-icon-gear ui-btn-icon-top">Options</button></li>
-                        <li><button class="ui-btn ui-icon-refresh ui-btn-icon-top app-loadJson">sync</button></li>
-                        <li><button class="ui-btn ui-icon-power ui-btn-icon-top y3-exitApp">Exit</button></li>
-                    </ul>
-                </div><!-- /navbar -->
-            </div><!-- /footer -->
-
-		</div><!-- /page --> 
-
-
-
         <!--  ======================== RISULTATO DOWNLOAD ============================= !-->
-        <div data-role="page" id="downloadresult" data-theme="a">
-        	<div data-role="header" data-position="fixed">
-	            <h1>Risultato Aggiornamento</h1>
+        <div data-role="page" id="downloadresult" data-theme="a" class="y3-pageBG">
+
+        	<div data-role="header" data-position="fixed"  style="text-align:center; padding-top:0; background:none; border:none;">
+            	<img src="img/splash_logo.png" style="width:30%; height:auto;">
             </div>
+
             
             <div data-role="content" id="downloading_cnt">
                 <div class="ui-body ui-body-a ui-corner-all y3-center" style="margin-top:4em;">
                     <h3 id="Downloadresult_title">... in attesa di un titolo ...</h3>
+
                     <p id="Downloadresult_message">... in attesa di un testo ...</p>
+                    <div class="button-wrap y3-center" style="margin-top:2em;">
+                        <a href="#homepage" class="ui-btn ui-btn-c ui-btn-icon-left ui-icon-check ui-btn-inline ui-corner-all ">Ok</a>
+                    </div>
                 </div>
             	
-                <div class="button-wrap y3-center" style="margin-top:6em;"><a href="#homepage" class="ui-btn ui-btn-c ui-btn-icon-left ui-icon-check ui-btn-inline ui-corner-all ">Ok</a></div>
+                
 
             </div><!-- /content -->
 
@@ -285,7 +248,7 @@
 
 
         <!--  ======================== DOWNLOAD COMPLETATO ============================= !-->
-        <div data-role="page" id="downloadcompleted" data-theme="a">
+        <div data-role="page" id="downloadcompleted" data-theme="a" class="y3-pageBG">
         	<div data-role="header" data-position="fixed">
 	            <h1>Info</h1>
             </div>
@@ -312,6 +275,70 @@
 		</div><!-- /page --> 
 
 
+
+        <!--  ======================== PAGINA REGISTRAZIONE ============================= !-->
+        <div data-role="page" id="registration" data-theme="a" class="y3-pageBG">
+            
+        	<div data-role="header" data-position="fixed"  style="text-align:center;">
+            	<img src="img/splash_logo.png" style="width:30%; height:auto;">
+            </div>
+
+
+            <div data-role="content" id="registration_cnt">
+                
+                <div class="ui-body ui-body-a ui-corner-all" style="margin-top:4em;">
+                  <h3 class="y3-center">Attivazione dispositivo</h3>
+                  <p>Per poter scaricare i documenti aziendali è necessaria l'attivazione di questo dispositivo da parte di Storci S.p.a. Per richiedere tale attivazione compilare tutti i campi presenti di seguito ed inviare la richiesta.</p>
+
+                      <form action="" id="registrationForm" method="post">
+    
+                        <div class="ui-field-contain" style="margin-top:3em;">
+                            <label for="nomeCognome">Nome e Cognome:</label>
+                            <input name="nomeCognome" id="nomeCognome" placeholder="Nome e Cognome" value="" type="text">
+                        </div>                  	
+    
+                        <div class="ui-field-contain">
+                            <label for="email">indirizzo email:</label>
+                            <input name="email" id="email" placeholder="email" value="" type="text">
+                        </div>                  	
+    
+                        <div class="ui-field-contain">
+                            <label for="tel">Telefono:</label>
+                            <input name="tel" id="tel" placeholder="mobile phone" value="" type="text">
+                        </div>                  	
+
+                      <div class="ui-grid-a" style="margin-top:3em;">
+                        <div class="ui-block-a">
+                            <div class="button-wrap y3-marOriz">
+                                <button onClick="app.mainDownloadAllFiles()" class="ui-btn ui-icon-arrow-d ui-btn-icon-left ui-corner-all ui-btn-c">Invia Richiesta</button>
+                            </div>
+                        </div>
+                        <div class="ui-block-b">
+                            <div class="button-wrap y3-marOriz">
+                                <button onClick="$.mobile.changePage("#homepage", { transition: 'slide', reverse: true });" class="ui-btn ui-icon-delete ui-btn-icon-left ui-corner-all ui-btn-b">Annulla</button>
+                            </div>
+                        </div>
+                      </div>                  
+
+                      </form>
+                </div>
+                            	
+                
+
+            </div><!-- /content -->
+
+            <div data-role="footer" data-position="fixed" data-theme="b">
+            	<div data-role="navbar" data-iconpos="top">
+                	<ul>
+                        <li><button class="ui-btn ui-icon-back ui-btn-icon-top goToHomepage">Back</button></li>
+                        <li><button class="ui-btn ui-icon-gear ui-btn-icon-top">Options</button></li>
+                        <li><button class="ui-btn ui-icon-refresh ui-btn-icon-top app-loadJson">sync</button></li>
+                        <li><button class="ui-btn ui-icon-power ui-btn-icon-top y3-exitApp">Exit</button></li>
+                    </ul>
+                </div><!-- /navbar -->
+            </div><!-- /footer -->
+
+		</div><!-- /page --> 
 
 
 	
