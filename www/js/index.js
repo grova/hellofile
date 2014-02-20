@@ -1062,7 +1062,7 @@ var app =
                                                  function()
                                                  {
                                                      // torno alla home
-                                                     $.mobile.changePage("#home", { transition: 'slide', reverse: true });
+                                                     $.mobile.changePage("#homepage", { transition: 'slide', reverse: true });
                                                  }
                                                  ,'Registrazione', 'Chiudi');	
                 }
