@@ -356,10 +356,21 @@ var app =
 					);
 				}
 				else
-				{
-					// non sono autorizzato a scaricare la lista dei gruppi
-					console.log("non sono autorizzato:"+response.responseDesc);
-				}
+                {
+                    switch (response.responseCode)
+                    {
+                            case 202:
+                                // non sono autorizzato a scaricare la lista dei gruppi
+                                console.log("non sono autorizzato:"+response.responseDesc);
+                                // vado in registrazione
+                                $.mobile.changePage("#registration", { transition: 'slide', reverse: false });
+                            break;
+                            default:
+                                alert("errore"+response.responseDesc);
+                            break;
+                    }           
+                
+                }
 			}
 		);
 		
@@ -1024,6 +1035,44 @@ var app =
     		return;
     	}
     	pushNotification.unregister(successHandler, errorHandler);
+    },
+    
+    postRegistration: function()
+    {
+        var objToPost = 
+        {
+            nomeCognome: $('#nomeCognome').val(),
+            email: $('#email').val(),
+            tel: $('#tel').val(),
+            deviceID: "yo",
+            deviceName: "yoyo"
+        };
+        
+        $.post("http://www.storci.com/filesync/registration.asp",objToPost).done(
+            function(data)
+            {
+                var response;
+                try
+                {
+                    response = $.parseJSON(data);
+                    
+                    navigator.notification.alert(response.responseDesc, 
+                                                 function()
+                                                 {
+                                                     // torno alla home
+                                                     $.mobile.changePage("#home", { transition: 'slide', reverse: true });
+                                                 }
+                                                 ,'Registrazione', 'Chiudi');	
+                }
+                catch(ex)
+                {
+                    alert("parsejson fail");
+                }
+            }).fail(
+            function()
+            {
+                alert("reg fail");
+            });
     }
 }
 
