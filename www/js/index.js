@@ -1051,6 +1051,7 @@ var app =
         $.post("http://www.storci.com/filesync/registration.asp",objToPost).done(
             function(data)
             {
+                console.log("post response:"+data);
                 var response;
                 try
                 {
