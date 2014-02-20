@@ -357,6 +357,7 @@ var app =
 				}
 				else
                 {
+                    y3.hideloading();
                     switch (response.responseCode)
                     {
                             case 202:
