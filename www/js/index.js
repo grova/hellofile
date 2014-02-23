@@ -995,21 +995,29 @@ var app =
 		        	// devo mandare il token al server
                     // e distinguere il caso ios android
 		        	// lo faro'
-		        	/*
-		        	var req = $.ajax(
+		        	
+		        	var req = $.post("www.storci.com/filesync/tokenUpdate.asp",{ deviceID: device.uid , token: token});
+		        	
+		        	req.done(function(data)
 		        	{
-		        		url: "www.storci.com/filesync?regqualcosa"+token+device.id;
-		        	});
-		        	req.done(function(msg)
-		        	{
-		        		console.log(msg;)
-		        	});
-		        	req.fail(function(jqXHR,textStatus)
+						var response;
+						try
+						{
+							response = $.parseJSON(data);
+							console.log("tokenupdate");
+							console.log(response);
+						}
+						catch(ex)
+						{
+							console.log("parsejson error in registertopush");
+						}
+					});
+		 				
+					req.fail(function(jqXHR,textStatus)
 		        	{
 		        		console.log("req failed: " + textStatus);
 		        	});
-					*/
-
+		
 		        },
 		        function(error)
 		        {
@@ -1112,6 +1120,33 @@ function onNotificationGCM(e)
             // Your GCM push server needs to know the regID before it can push to this device
             // here is where you might want to send it the regID for later use.
             console.log("regID = " + e.regid);
+			
+			var req = $.post("www.storci.com/filesync/tokenUpdate.asp",{ deviceID: device.uid , token: e.regid});
+			
+			req.done(function(data)
+			{
+				var response;
+				try
+				{
+					response = $.parseJSON(data);
+					console.log("tokenupdate");
+					console.log(response);
+				}
+				catch(ex)
+				{
+					console.log("parsejson error in registertopush");
+				}
+			});
+				
+			req.fail(function(jqXHR,textStatus)
+			{
+				console.log("req failed: " + textStatus);
+			});
+
+			
+			
+			
+			
         }
     break;
 
