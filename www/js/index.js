@@ -996,7 +996,7 @@ var app =
                     // e distinguere il caso ios android
 		        	// lo faro'
 		        	
-		        	var req = $.post("www.storci.com/filesync/tokenUpdate.asp",{ deviceID: device.uid , token: token});
+		        	var req = $.post("www.storci.com/filesync/tokenUpdate.asp",{ deviceID: device.uuid , token: token});
 		        	
 		        	req.done(function(data)
 		        	{
@@ -1053,8 +1053,8 @@ var app =
             nomeCognome: $('#nomeCognome').val(),
             email: $('#email').val(),
             tel: $('#tel').val(),
-            deviceID: "yo",
-            deviceName: "yoyo"
+            deviceID: device.uuid,
+            deviceName: device.model
         };
         
         $.post("http://www.storci.com/filesync/registration.asp",objToPost).done(
