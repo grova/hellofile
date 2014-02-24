@@ -310,6 +310,9 @@ var app =
 									{
                                         app.localdb[i1].isOnServer = true;
 										found = true;
+                                        // aggiorno i tag in ogni caso
+                                        app.localdb[i1].filetags = data[i].filetags;
+                                        
 										// trovato
 										// guardo se e' aggiornato
 										if (data[i].revision > app.localdb[i1].revision)
