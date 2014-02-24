@@ -999,7 +999,7 @@ var app =
                     // e distinguere il caso ios android
 		        	// lo faro'
 		        	
-		        	var req = $.post("www.storci.com/filesync/tokenUpdate.asp",{ deviceID: device.uuid , token: token});
+		        	var req = $.post("http://www.storci.com/filesync/tokenUpdate.asp",{ deviceID: device.uuid , token: token});
 		        	
 		        	req.done(function(data)
 		        	{
