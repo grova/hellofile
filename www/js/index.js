@@ -240,7 +240,7 @@ var app =
 		console.log("loading "+url);
 
 		//var deviceid = "5617AA9A-6292-4580-AA11-EF708E287BB3";
-		var deviceid = "yo";
+		var deviceid = device.uuid;
 		
 
 		var jqxhr2 = $.post(url , { deviceID: deviceid , lang: "IT" } ).done
@@ -1009,6 +1009,18 @@ var app =
 							response = $.parseJSON(data);
 							console.log("tokenupdate");
 							console.log(response);
+                            
+                            switch (response.responseCode)
+                            {
+                                    case 202:
+                                        // non sono autorizzato a scaricare la lista dei gruppi
+                                        console.log("non sono autorizzato:"+response.responseDesc);
+                                        // vado in registrazione
+                                        $.mobile.changePage("#registration", { transition: 'slide', reverse: false });
+                                    break;
+                            }    
+                            
+                            
 						}
 						catch(ex)
 						{
