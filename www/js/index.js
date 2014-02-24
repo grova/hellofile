@@ -92,13 +92,10 @@ var app =
     onDeviceReady: function() {
         app.initLocalDb();					// check local storage e carica il db dal localstorage
         app.initVersion();  // serve il local storage 
-        app.registerToPush();		// mi registro al push
-        app.mainIntegrityCheck(	// ne controlla l'itegrita' e inizializza il path della root del filesystem
-        	function()			// e quando ha finito inizializza l'interfaccia
-        	{
-        			
-        	}
-        );
+        
+        
+        //app.registerToPush();		// mi registro al push, lo faccio ala fine di integritycheck
+        app.mainIntegrityCheck();	// ne controlla l'itegrita' e inizializza il path della root del filesystem
     },
     
     newInstall : false,
@@ -676,6 +673,7 @@ var app =
 				y3.initialize('homecontent');		// inizializza la pagina dell'interfaccia
         		console.log("y3init done");
         		app.receivedEvent('deviceready');	
+                app.registerToPush();
 			}
 			);
 
