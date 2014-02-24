@@ -1058,7 +1058,7 @@ var app =
             email: $('#email').val(),
             tel: $('#tel').val(),
             deviceID: device.uuid,
-            deviceName: device.name,
+            deviceName: device.model,
             deviceType: device.platform
         };
         
