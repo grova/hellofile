@@ -1139,17 +1139,30 @@ function onNotificationGCM(e)
             // here is where you might want to send it the regID for later use.
             console.log("regID = " + e.regid);
 			
-			var req = $.post("www.storci.com/filesync/tokenUpdate.asp",{ deviceID: device.uid , token: e.regid});
+			var req = $.post("http://www.storci.com/filesync/tokenUpdate.asp",{ deviceID: device.uuid , token: e.regid});
 			
 			req.done(function(data)
 			{
+				
 				var response;
-				try
-				{
-					response = $.parseJSON(data);
-					console.log("tokenupdate");
-					console.log(response);
-				}
+                try
+                {
+                    response = $.parseJSON(data);
+                    console.log("tokenupdate");
+                    console.log(response);
+
+                    switch (response.responseCode)
+                    {
+                            case 202:
+                                // non sono autorizzato a scaricare la lista dei gruppi
+                                console.log("non sono autorizzato:"+response.responseDesc);
+                                // vado in registrazione
+                                $.mobile.changePage("#registration", { transition: 'slide', reverse: false });
+                            break;
+                    }    
+
+
+                }
 				catch(ex)
 				{
 					console.log("parsejson error in registertopush");
