@@ -1049,6 +1049,7 @@ var app =
     	pushNotification.unregister(successHandler, errorHandler);
     },
     
+    // mi registro al sito
     postRegistration: function()
     {
         var objToPost = 
@@ -1057,7 +1058,8 @@ var app =
             email: $('#email').val(),
             tel: $('#tel').val(),
             deviceID: device.uuid,
-            deviceName: device.model
+            deviceName: device.name,
+            deviceType: device.platform
         };
         
         $.post("http://www.storci.com/filesync/registration.asp",objToPost).done(
