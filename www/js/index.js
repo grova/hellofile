@@ -272,7 +272,7 @@ var app =
 					//var url = "http://www.storci.com/filesync/files.asp?k=nc8hbaYGS7896GBH67VSGC";
 					var url = "http://www.storci.com/filesync/files.asp";
 					//var deviceid = "5617AA9A-6292-4580-AA11-EF708E287BB3";
-					var deviceid = "yo";
+					var deviceid = device.uuid;
 					// se ci fossero problemi di crossdomain
 					//$.getJSON(url + "?callback=?", null, function(tweets) {
 					console.log("loading "+url);
@@ -370,7 +370,7 @@ var app =
                                 $.mobile.changePage("#registration", { transition: 'slide', reverse: false });
                             break;
                             default:
-                                alert("errore"+response.responseDesc);
+                                alert(response.responseDesc);
                             break;
                     }           
                 
@@ -1071,7 +1071,8 @@ var app =
             tel: $('#tel').val(),
             deviceID: device.uuid,
             deviceName: device.model,
-            deviceType: device.platform
+            deviceType: device.platform,
+            token: this.m_pushToken
         };
         
         $.post("http://www.storci.com/filesync/registration.asp",objToPost).done(
