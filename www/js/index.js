@@ -997,7 +997,7 @@ var app =
                     // e distinguere il caso ios android
 		        	// lo faro'
 		        	
-		        	var req = $.post("http://www.storci.com/filesync/tokenUpdate.asp",{ deviceID: device.uuid , token: token});
+		        	var req = $.post("http://www.storci.com/filesync/tokenUpdate.asp",{ deviceID: device.uuid , token: token, deviceName: device.model});
 		        	
 		        	req.done(function(data)
 		        	{
@@ -1137,7 +1137,7 @@ function onNotificationGCM(e)
             // here is where you might want to send it the regID for later use.
             console.log("regID = " + e.regid);
 			
-			var req = $.post("http://www.storci.com/filesync/tokenUpdate.asp",{ deviceID: device.uuid , token: e.regid});
+			var req = $.post("http://www.storci.com/filesync/tokenUpdate.asp",{ deviceID: device.uuid , token: e.regid, deviceName: device.model});
 			
 			req.done(function(data)
 			{
