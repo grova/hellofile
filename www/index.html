@@ -145,7 +145,6 @@
         <!--  ======================== FILE LIST ============================= !-->
         <div data-role="page" id="filelist" data-theme="a" class="y3-pageBG">
         	<div data-role="header" data-position="fixed">
-            	<a href="#homepage" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-back">Back</a>
 	            <h1 id="listheader">Cataloghi e Schede Tecniche</h1>
             </div>
             
@@ -332,6 +331,34 @@
                 	<ul>
                         <li><button class="ui-btn ui-icon-back ui-btn-icon-top goToHomepage">Back</button></li>
                         <li><button class="ui-btn ui-icon-gear ui-btn-icon-top">Options</button></li>
+                        <li><button class="ui-btn ui-icon-refresh ui-btn-icon-top app-loadJson">sync</button></li>
+                        <li><button class="ui-btn ui-icon-power ui-btn-icon-top y3-exitApp">Exit</button></li>
+                    </ul>
+                </div><!-- /navbar -->
+            </div><!-- /footer -->
+
+		</div><!-- /page --> 
+
+
+        <!--  ======================== OPTIONS PAGE ============================= !-->
+        <div data-role="page" id="options" data-theme="a" class="y3-pageBG">
+        	<div data-role="header" data-position="fixed">
+	            <h1>Options</h1>
+            </div>
+            
+            <div data-role="content" id="options_cnt">
+            	<p class="y3-center" style="margin-top:6em;">Options</p>
+            	
+                <div class="button-wrap y3-center" style="margin-top:6em;">
+                	<button onClick="$.mobile.changePage("#homepage", { transition: 'slide', reverse: true });" class="ui-btn ui-icon-delete ui-btn-icon-left ui-corner-all ui-btn-b">Chiudi</button
+                </div>
+
+            </div><!-- /content -->
+
+            <div data-role="footer" data-position="fixed" data-theme="b">
+            	<div data-role="navbar" data-iconpos="top">
+                	<ul>
+                        <li><button class="ui-btn ui-icon-back ui-btn-icon-top goToHomepage">Back</button></li>
                         <li><button class="ui-btn ui-icon-refresh ui-btn-icon-top app-loadJson">sync</button></li>
                         <li><button class="ui-btn ui-icon-power ui-btn-icon-top y3-exitApp">Exit</button></li>
                     </ul>
