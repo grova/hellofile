@@ -80,7 +80,7 @@
             	<div data-role="navbar" data-iconpos="top">
                 	<ul>
                         <li><button class="ui-btn ui-icon-alert ui-btn-icon-top goToTestPage">Test Page</button></li>
-                        <li><button class="ui-btn ui-icon-gear ui-btn-icon-top">Options</button></li>
+                        <li><button class="ui-btn ui-icon-gear ui-btn-icon-top goToOptions">Options</button></li>
                         <li><button class="ui-btn ui-icon-refresh ui-btn-icon-top app-loadJson">sync</button></li>
                         <li><button class="ui-btn ui-icon-power ui-btn-icon-top y3-exitApp">Exit</button></li>
                     </ul>
@@ -128,7 +128,7 @@
             	<div data-role="navbar" data-iconpos="top">
                 	<ul>
                         <li><button class="ui-btn ui-icon-back ui-btn-icon-top goToHomepage">Back</button></li>
-                        <li><button class="ui-btn ui-icon-gear ui-btn-icon-top">Options</button></li>
+                        <li><button class="ui-btn ui-icon-gear ui-btn-icon-top goToOptions">Options</button></li>
                         <li><button class="ui-btn ui-icon-refresh ui-btn-icon-top app-loadJson">sync</button></li>
                         <li><button class="ui-btn ui-icon-power ui-btn-icon-top y3-exitApp">Exit</button></li>
                     </ul>
@@ -166,7 +166,7 @@
             	<div data-role="navbar" data-iconpos="top">
                 	<ul>
                         <li><button class="ui-btn ui-icon-back ui-btn-icon-top goToHomepage">Back</button></li>
-                        <li><button class="ui-btn ui-icon-gear ui-btn-icon-top">Options</button></li>
+                        <li><button class="ui-btn ui-icon-gear ui-btn-icon-top goToOptions">Options</button></li>
                         <li><button class="ui-btn ui-icon-refresh ui-btn-icon-top app-loadJson">sync</button></li>
                         <li><button class="ui-btn ui-icon-power ui-btn-icon-top y3-exitApp">Exit</button></li>
                     </ul>
@@ -198,7 +198,7 @@
             	<div data-role="navbar" data-iconpos="top">
                 	<ul>
                         <li><button class="ui-btn ui-icon-back ui-btn-icon-top goToHomepage" data-transition="slide" data-direction="reverse">Back</button></li>
-                        <li><button class="ui-btn ui-icon-gear ui-btn-icon-top">Options</button></li>
+                        <li><button class="ui-btn ui-icon-gear ui-btn-icon-top goToOptions">Options</button></li>
                         <li><button class="ui-btn ui-icon-refresh ui-btn-icon-top app-loadJson">sync</button></li>
                         <li><button class="ui-btn ui-icon-power ui-btn-icon-top y3-exitApp">Exit</button></li>
                     </ul>
@@ -235,7 +235,7 @@
             	<div data-role="navbar" data-iconpos="top">
                 	<ul>
                         <li><button class="ui-btn ui-icon-back ui-btn-icon-top goToHomepage">Back</button></li>
-                        <li><button class="ui-btn ui-icon-gear ui-btn-icon-top">Options</button></li>
+                        <li><button class="ui-btn ui-icon-gear ui-btn-icon-top goToOptions">Options</button></li>
                         <li><button class="ui-btn ui-icon-refresh ui-btn-icon-top app-loadJson">sync</button></li>
                         <li><button class="ui-btn ui-icon-power ui-btn-icon-top y3-exitApp">Exit</button></li>
                     </ul>
@@ -264,7 +264,7 @@
             	<div data-role="navbar" data-iconpos="top">
                 	<ul>
                         <li><button class="ui-btn ui-icon-back ui-btn-icon-top goToHomepage">Back</button></li>
-                        <li><button class="ui-btn ui-icon-gear ui-btn-icon-top">Options</button></li>
+                        <li><button class="ui-btn ui-icon-gear ui-btn-icon-top goToOptions">Options</button></li>
                         <li><button class="ui-btn ui-icon-refresh ui-btn-icon-top app-loadJson">sync</button></li>
                         <li><button class="ui-btn ui-icon-power ui-btn-icon-top y3-exitApp">Exit</button></li>
                     </ul>
@@ -330,7 +330,7 @@
             	<div data-role="navbar" data-iconpos="top">
                 	<ul>
                         <li><button class="ui-btn ui-icon-back ui-btn-icon-top goToHomepage">Back</button></li>
-                        <li><button class="ui-btn ui-icon-gear ui-btn-icon-top">Options</button></li>
+                        <li><button class="ui-btn ui-icon-gear ui-btn-icon-top goToOptions">Options</button></li>
                         <li><button class="ui-btn ui-icon-refresh ui-btn-icon-top app-loadJson">sync</button></li>
                         <li><button class="ui-btn ui-icon-power ui-btn-icon-top y3-exitApp">Exit</button></li>
                     </ul>
@@ -350,7 +350,7 @@
             	<p class="y3-center" style="margin-top:6em;">Options</p>
             	
                 <div class="button-wrap y3-center" style="margin-top:6em;">
-                	<button onClick="$.mobile.changePage("#homepage", { transition: 'slide', reverse: true });" class="ui-btn ui-icon-delete ui-btn-icon-left ui-corner-all ui-btn-b">Chiudi</button
+                	<button class="ui-btn ui-icon-delete ui-btn-icon-left ui-corner-all ui-btn-b goToHomepage">Chiudi</button>
                 </div>
 
             </div><!-- /content -->
@@ -388,7 +388,11 @@
                 $(".goToHomepage").click(function(){
                     $.mobile.changePage("#homepage", { transition: 'slide', reverse: true });
                 });
-                
+
+                $(".goToOptions").click(function(){
+                    $.mobile.changePage("#options", { transition: 'slide', reverse: true });
+                });
+
 				$(".y3-exitApp").click(function(){
 					app.exitapp();
 				});
