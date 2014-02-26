@@ -1204,8 +1204,17 @@ function onNotificationGCM(e)
             }
             else
             {
-                consloe.log("background");
+                console.log("background");
             }
+        }
+         
+        if (navigator.notification != undefined)
+        {
+            navigator.notification.alert(e.payload.message,null);
+        }
+        else
+        {
+            alert(e.payload.message);
         }
         
         console.log("msg:"+e.payload.message);
