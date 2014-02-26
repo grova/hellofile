@@ -1234,7 +1234,7 @@ function onNotificationGCM(e)
 
 function successHandler (result) {
     console.log('result = ' + result);
-    alert("pushreg ok");
+    //alert("pushreg ok");
 }
 
 function errorHandler (error) {
