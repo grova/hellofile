@@ -309,6 +309,9 @@ var app =
 										found = true;
                                         // aggiorno i tag in ogni caso
                                         app.localdb[i1].filetags = data[i].filetags;
+										// e anche la descrizione
+										app.localdb[i1].desc = data[i].desc;
+										
                                         
 										// trovato
 										// guardo se e' aggiornato
