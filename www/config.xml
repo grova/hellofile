@@ -80,9 +80,7 @@
     <!--<gap:plugin name="net.tunts.webintent" />-->
     <gap:plugin name="io.github.pwlin.cordova.plugins.fileopener" />
     <gap:plugin name="org.apache.cordova.media" />
-    <!--
     <gap:plugin name="it.y3web.cordova.documentinteraction" />
--->
     
     
     <access origin="*" />
