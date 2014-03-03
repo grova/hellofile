@@ -445,7 +445,19 @@ var y3 = {
 		app.localGroupList = y3.grouplist;
 		app.localdb = y3.filelist;
 		y3.populatecontainer('homecontent');
-	}
+	},
+    
+    chooseBackButtons: function(){
+        //da lanciare durante init. Disegna il back in alto solo per iOS
+        if (device.platform == 'iOS'){
+            $('.lowerBackButton').hide(); //hide lower back buttons
+        };
+        
+        if (device.platform == 'Android'){
+            $('.upperBackButton').hide(); //hide lower back buttons
+        };
+
+    }
 
 	
 }
