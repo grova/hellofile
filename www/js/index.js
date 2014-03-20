@@ -537,36 +537,14 @@ var app =
 			_done();
 		}
 		else
+		if (this.localdb[_i]!=null)
 		{
 			var filename = this.localdb[_i].localPath;
 			// tolgo il path se c'era
 			filename = filename.substring(filename.lastIndexOf('/')+1);
 			console.log("fileexists check: "+filename);
 			this.localdb[_i].localPath = filename;
-			
 
-			/*
-			_fileSystem.root.getFile(
-				filename, {create: false}, 
-				function gotFileEntry(fileEntry) 
-				{
-					// c'e' tutto ok
-					console.log(fileentry.fullPath + " found");
-					// e gia' che ci sono mi salvo il localpath
-					app.localdb[_i].localPath = fileEntry.fullPath;
-					app.fileExistsRecurs(_i+1,_fileSystem,_done);
-				},
-				function error(error)
-				{
-					console.log(filename+" NOT found ("+error.code+")");
-					// non valido lo tolgo
-					app.localdb.splice(_i,1);
-					app.fileExistsRecurs(_i,_fileSystem,_done);
-				}
-			);
-			*/
-
-				
 			_fileSystem.root.getFile(
 				"bsyncpush/"+filename, {create: true, exclusive: true}, 
 				function gotFileEntry(fileEntry) 
@@ -587,6 +565,14 @@ var app =
 					
 				}
 			);
+		}
+		else
+		{
+			// il record e' null
+			this.localdb.splice(_i,1);
+			app.fileExistsRecurs(_i,_fileSystem,_done);
+
+		}
 
 			/*
 			$.ajax({
@@ -604,10 +590,7 @@ var app =
 				}
 				});
 			*/
-
-
-
-		}
+		
 	},
 
 	useChrome: false,	// per debuggare il filesystem su chrome
@@ -680,25 +663,7 @@ var app =
 			{
                 console.log("integrityCheck done");
 
-                // controllo se ci sono dei record a null
-                var count = app.localdb.length;
-                var i = 0;
-                for (i=0;i<count;i++)
-                {
-                	if (app.localdb[i]==null)
-                	{
-                		app.localdb.splice(i,1);
-                		count--;
-                		i--;
-                		console.log("null db el spliced");
-                	}
-                }
-
-                console.log(app.localdb);
-
-
-
-				y3.initialize('homecontent');		// inizializza la pagina dell'interfaccia
+            	y3.initialize('homecontent');		// inizializza la pagina dell'interfaccia
         		console.log("y3init done");
         		app.receivedEvent('deviceready');	
                 app.registerToPush();
