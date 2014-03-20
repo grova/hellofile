@@ -420,6 +420,10 @@ var app =
         {
             return "video/mpeg";
         }
+        if (ext == "mpg")
+        {
+            return "video/mpeg";
+        }
         if (ext == "xlsx")
         {
             return "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
