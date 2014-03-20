@@ -474,7 +474,10 @@ var app =
 
 					if ((window.plugins != undefined) && (window.plugins.documentInteraction != undefined))
 					{
-						window.plugins.documentInteraction.previewDocument(filepath);	
+						
+                    	// e poi mi serve il mime
+                    	var mime = this.getMIME(filepath);
+						window.plugins.documentInteraction.previewDocument(filepath,mime);	
 					}
 					else
 					{
