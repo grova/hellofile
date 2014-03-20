@@ -679,6 +679,25 @@ var app =
 			function()
 			{
                 console.log("integrityCheck done");
+
+                // controllo se ci sono dei record a null
+                var count = app.localdb.length;
+                var i = 0;
+                for (i=0;i<count;i++)
+                {
+                	if (app.localdb[i]==null)
+                	{
+                		app.localdb.splice(i,1);
+                		count--;
+                		i--;
+                		console.log("null db el spliced");
+                	}
+                }
+
+                console.log(app.localdb);
+
+
+
 				y3.initialize('homecontent');		// inizializza la pagina dell'interfaccia
         		console.log("y3init done");
         		app.receivedEvent('deviceready');	
