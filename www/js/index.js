@@ -477,7 +477,10 @@ var app =
 						
                     	// e poi mi serve il mime
                     	var mime = this.getMIME(filepath);
-						window.plugins.documentInteraction.previewDocument(filepath,mime);	
+                    	console.log("startactivity on:" + filepath);
+                    	console.log("MIME:" + mime);
+						//window.plugins.documentInteraction.previewDocument(filepath,mime);
+						window.plugins.documentInteraction.previewDocument(filepath);	
 					}
 					else
 					{
