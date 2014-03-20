@@ -238,6 +238,7 @@ var app =
 
 		//var deviceid = "5617AA9A-6292-4580-AA11-EF708E287BB3";
 		var deviceid = device.uuid;
+		//var deviceid = "147DDF63-11E1-4E78-AB61-7A761CCDED5F";
 		
 
 		var jqxhr2 = $.post(url , { deviceID: deviceid , lang: "IT" } ).done
@@ -255,6 +256,8 @@ var app =
 			        response.code = -1;
 			    }
 
+			    console.log("response code"+response.responseCode);
+
 			    // controllo se la risposta e' corretta
 			    if (response.responseCode >= 100 && response.responseCode < 200)
 			    {
@@ -268,8 +271,11 @@ var app =
 					// ora scarico i file
 					//var url = "http://www.storci.com/filesync/files.asp?k=nc8hbaYGS7896GBH67VSGC";
 					var url = "http://www.storci.com/filesync/files.asp";
-					//var deviceid = "5617AA9A-6292-4580-AA11-EF708E287BB3";
+					
+
 					var deviceid = device.uuid;
+					//var deviceid = "147DDF63-11E1-4E78-AB61-7A761CCDED5F";
+
 					// se ci fossero problemi di crossdomain
 					//$.getJSON(url + "?callback=?", null, function(tweets) {
 					console.log("loading "+url);
