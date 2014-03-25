@@ -255,7 +255,11 @@ var y3 = {
                 break;
             case 'mp4':
                 return('video_thumb_80x80.jpg');
+            case 'mpg':
+                return('video_thumb_80x80.jpg');
                 break;
+            case 'mp3':
+                return('video_thumb_80x80.jpg');
             case 'mov':
                 return('video_thumb_80x80.jpg');
                 break;
@@ -268,7 +272,16 @@ var y3 = {
             case 'rtf':
                 return('doc_thumb_80x80.jpg');
                 break;
-
+            case 'ppt':
+                return('present_thumb_80x80.jpg');
+                break;
+            case 'pptx':
+                return('present_thumb_80x80.jpg');
+                break;
+            default:
+                return('unknown_thumb_80x80.jpg');
+                break;
+                
         }
             
     },
