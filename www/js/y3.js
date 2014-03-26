@@ -324,9 +324,9 @@ var y3 = {
 	
 	createprogressbar: function(target){
 		this.progressbar = TolitoProgressBar(target)
-                    .setOuterTheme('b')
-                    .setInnerTheme('e')
-                    .isMini(false)
+                    .setOuterTheme('a')
+                    .setInnerTheme('a')
+                    .isMini(true)
                     .setMax(100)
                     .setStartFrom(0)
                     .setInterval(10000)
@@ -339,6 +339,11 @@ var y3 = {
 	destroyprogressbar: function(){
 		this.progressbar.destroy();
 	},
+    
+    testBar: function(){
+        this.createprogressbar('progressbarcontainer');
+        this.progressbar.setValue(80);
+    },
 	
 	syncresult: function(){
 		//porta l'utente alla pagina #filestosync la quale gli dice se ci sono file da scaricare.
