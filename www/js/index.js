@@ -876,7 +876,7 @@ var app =
 			                            {
 			                                console.log("deleted file:"+file);
 			                                app.localdb.splice(_i,1);
-			                                $('#fileElement"+i+"').remove();
+			                                $("#fileElement"+_i).remove();
 			                                y3.hideloading();
 			                            },
 			                            function(error)
