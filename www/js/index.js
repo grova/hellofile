@@ -862,12 +862,12 @@ var app =
              	if (buttonIndex == 1)
              	{
 	             	y3.showloading(); //mostro loading in progress...
-	             	console.log("qui");
-			    	if (_i<this.localdb.length)
+	             	
+			    	if (_i<app.localdb.length)
 			    	{
-			    		var name = "bsyncpush/"+this.localdb[_i].localPath;
+			    		var name = "bsyncpush/"+app.localdb[_i].localPath;
 			    		console.log("prepare del:"+name);
-			    		this.m_fileSystem.root.getFile(name,{create: false, exclusive: false},
+			    		app.m_fileSystem.root.getFile(name,{create: false, exclusive: false},
 			                    function(entry)
 			                    {
 			                        console.log(name + " about to be deleted");
