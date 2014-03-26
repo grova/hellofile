@@ -858,7 +858,7 @@ var app =
     	navigator.notification.confirm("are you sure?", 
              function(buttonIndex)
              {
-             	if (buttonIndex == 0)
+             	if (buttonIndex == 1)
              	{
 	             	y3.showloading(); //mostro loading in progress...
 			    	if (_i<this.localdb.length)
