@@ -853,6 +853,42 @@ var app =
         navigator.notification.alert("ceeeeo",this.alertDismissed,"alert","Done");
     },
 
+    deleteFile: function(_i,_done,_error)
+    {
+    	if (_i<this.localdb.length)
+    	{
+    		this.m_fileSystem.root.getFile("bsyncpush/"+this.localdb[_i].localPath,{create: false, exclusive: false},
+                    function(entry)
+                    {
+                        console.log(name + " about to be deleted");
+                        entry.remove(
+                            function(file)
+                            {
+                                console.log("deleted file:"+file);
+                                app.localdb.splice(_i,1);
+                                _done();
+                            },
+                            function(error)
+                            {
+                                consolo.log("error deleting file:"+error.code);
+                                _error("error deleting file");
+                            }
+                            );
+                    },
+                    function(error)
+                    {
+                        console.log("error getting file to delete:"+error.code);
+                        _error("error getting file to delete");
+                    });
+
+    	}
+    	else
+    	{
+    		_error("file not found");
+    	}
+
+    },
+
     deleteUnusedFiles: function(_i,_done)
     {
         if (_i<this.localdb.length)
