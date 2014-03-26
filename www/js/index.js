@@ -862,6 +862,7 @@ var app =
              	if (buttonIndex == 1)
              	{
 	             	y3.showloading(); //mostro loading in progress...
+	             	console.log("qui");
 			    	if (_i<this.localdb.length)
 			    	{
 			    		var name = "bsyncpush/"+this.localdb[_i].localPath;
