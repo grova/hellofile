@@ -180,12 +180,6 @@
 .ui-tolito-progressbar-active-e
 {
     background: url("../img/pbar-ani.gif"); /*background: #F7C942;*/
-    background-image: linear-gradient( #FCEDA7, #FBEF7E);
-    background-image: -moz-linear-gradient( #FCEDA7, #FBEF7E);
-    background-image: -ms-linear-gradient( #FCEDA7, #FBEF7E);
-    background-image: -o-linear-gradient( #FCEDA7, #FBEF7E);
-    background-image: -webkit-gradient(linear, left top, left bottom, from( #FCEDA7), to( #FBEF7E));
-    background-image: -webkit-linear-gradient( #FCEDA7, #FBEF7E);
     color: #fff;
     font-weight: bold;
     text-decoration: none;
