@@ -858,6 +858,7 @@ var app =
     	navigator.notification.confirm("are you sure?", 
              function(buttonIndex)
              {
+             	console.log("confirm"+buttonIndex);
              	if (buttonIndex == 1)
              	{
 	             	y3.showloading(); //mostro loading in progress...
