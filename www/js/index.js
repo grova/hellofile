@@ -853,7 +853,19 @@ var app =
         navigator.notification.alert("ceeeeo",this.alertDismissed,"alert","Done");
     },
 
-    deleteFile: function(_i)
+    fileIdToIndex: function(fileid)
+    {
+    	for (var i=0;i<this.localdb.length;i++)
+    	{
+    		if (this.localdb[i].fileid == fileid)
+    		{
+    			return i;
+    		}	
+    	}
+    	return i;
+    },
+
+    deleteFile: function(_fileid,_i)
     {
     	navigator.notification.confirm("are you sure?", 
              function(buttonIndex)
@@ -862,10 +874,14 @@ var app =
              	if (buttonIndex == 1)
              	{
 	             	y3.showloading(); //mostro loading in progress...
+
+	             	// cerco l'indice dato il fileid
+	             	var index = app.fileIdToIndex(_fileid);
+
 	             	
-			    	if (_i<app.localdb.length)
+			    	if (index<app.localdb.length)
 			    	{
-			    		var name = "bsyncpush/"+app.localdb[_i].localPath;
+			    		var name = "bsyncpush/"+app.localdb[index].localPath;
 			    		console.log("prepare del:"+name);
 			    		app.m_fileSystem.root.getFile(name,{create: false, exclusive: false},
 			                    function(entry)
@@ -875,7 +891,7 @@ var app =
 			                            function(file)
 			                            {
 			                                console.log("deleted file:"+file);
-			                                app.localdb.splice(_i,1);
+			                                app.localdb.splice(index,1);
 			                                $("#fileElement"+_i).remove();
 			                                y3.hideloading();
 			                            },
