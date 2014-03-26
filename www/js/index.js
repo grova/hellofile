@@ -856,44 +856,49 @@ var app =
     deleteFile: function(_i)
     {
     	navigator.notification.confirm("are you sure?", 
-             function()
+             function(buttonIndex)
              {
-             	y3.showloading(); //mostro loading in progress...
-		    	if (_i<this.localdb.length)
-		    	{
-		    		this.m_fileSystem.root.getFile("bsyncpush/"+this.localdb[_i].localPath,{create: false, exclusive: false},
-		                    function(entry)
-		                    {
-		                        console.log(name + " about to be deleted");
-		                        entry.remove(
-		                            function(file)
-		                            {
-		                                console.log("deleted file:"+file);
-		                                app.localdb.splice(_i,1);
-		                                $('#fileElement"+i+"').remove();
-		                                y3.hideloading();
-		                            },
-		                            function(error)
-		                            {
-		                            	y3.hideloading();
-		                                consolo.log("error deleting file:"+error.code);
-		                                alert("error deleting file");
+             	if (buttonIndex == 0)
+             	{
+	             	y3.showloading(); //mostro loading in progress...
+			    	if (_i<this.localdb.length)
+			    	{
+			    		var name = "bsyncpush/"+this.localdb[_i].localPath;
+			    		console.log("prepare del:"+name);
+			    		this.m_fileSystem.root.getFile(name,{create: false, exclusive: false},
+			                    function(entry)
+			                    {
+			                        console.log(name + " about to be deleted");
+			                        entry.remove(
+			                            function(file)
+			                            {
+			                                console.log("deleted file:"+file);
+			                                app.localdb.splice(_i,1);
+			                                $('#fileElement"+i+"').remove();
+			                                y3.hideloading();
+			                            },
+			                            function(error)
+			                            {
+			                            	y3.hideloading();
+			                                consolo.log("error deleting file:"+error.code);
+			                                alert("error deleting file");
 
-		                            }
-		                            );
-		                    },
-		                    function(error)
-		                    {
-		                    	y3.hideloading();
-		                        console.log("error getting file to delete:"+error.code);
-		                        alert("error getting file to delete");
-		                    });
+			                            }
+			                            );
+			                    },
+			                    function(error)
+			                    {
+			                    	y3.hideloading();
+			                        console.log("error getting file to delete:"+error.code);
+			                        alert("error getting file to delete");
+			                    });
 
-		    	}
-		    	else
-		    	{
-		    		alert("file not found");
-		    	}
+			    	}
+			    	else
+			    	{
+			    		alert("file not found");
+			    	}
+			    }
              }
              ,'delete file', ['ok','cancel']);	
     },
@@ -905,7 +910,8 @@ var app =
             if (!this.localdb[_i].isOnServer)
             {
                 // da cancellare
-                this.m_fileSystem.root.getFile("bsyncpush/"+this.localdb[_i].localPath,{create: false, exclusive: false},
+                var name = "bsyncpush/"+this.localdb[_i].localPath;
+                this.m_fileSystem.root.getFile(name,{create: false, exclusive: false},
                     function(entry)
                     {
                         console.log(name + " about to be deleted");
