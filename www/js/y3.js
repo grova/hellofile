@@ -211,14 +211,14 @@ var y3 = {
 				{
 					// li - aggiungo il file alla lista
                     ext = app.getFileExtension(app.localdb[i].localPath);
-					t = t+("<li onclick = app.openFile(" + i +",false,false) ><a href='#'><img src='img/"+y3.choseThumb(ext)+"'/><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].localPath+"</p></a></li>");
+					t = t+("<li onclick = app.openFile(" + i +",false,false) ><a href='#'><img src='img/"+y3.choseThumb(ext)+"'/><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].localPath+"</p></a><a href='#' onclick=app.deleteFile(" + i + ")></a></li>");
 				}
 			}
 			
 		$("#filelist_ul").append(t);
         $("#filelist_ul").listview("refresh");
         $.mobile.navigate('#filelist');
-		//$("#filelist_ul").filterable("refresh");
+		
 		
 			
 		}
