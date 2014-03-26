@@ -179,7 +179,7 @@
 }
 .ui-tolito-progressbar-active-e
 {
-    background: #F7C942;
+    background: url("../img/pbar-ani.gif"); /*background: #F7C942;*/
     background-image: linear-gradient( #FCEDA7, #FBEF7E);
     background-image: -moz-linear-gradient( #FCEDA7, #FBEF7E);
     background-image: -ms-linear-gradient( #FCEDA7, #FBEF7E);

@@ -326,7 +326,7 @@ var y3 = {
 		this.progressbar = TolitoProgressBar(target)
                     .setOuterTheme('b')
                     .setInnerTheme('e')
-                    .isMini(true)
+                    .isMini(false)
                     .setMax(100)
                     .setStartFrom(0)
                     .setInterval(10000)
@@ -354,7 +354,7 @@ var y3 = {
             }
             else
             {
-            	if (confirm("navigator.notification non e' definito. scarichi lo stesso?")) 
+            	if (confirm("navigator.notification non e' definito. scarichi lo stesso?"))
             	{
 				    y3.triggerDownload(2);
 				} 
