@@ -867,7 +867,7 @@ var app =
 
     deleteFile: function(_fileid,_i)
     {
-    	navigator.notification.confirm("are you sure?", 
+    	navigator.notification.confirm("sei sicuro?", 
              function(buttonIndex)
              {
              	console.log("confirm"+buttonIndex);
@@ -893,6 +893,7 @@ var app =
 			                                console.log("deleted file:"+file);
 			                                app.localdb.splice(index,1);
 			                                $("#fileElement"+_i).remove();
+			                                y3.initialize("homecontent");
 			                                y3.hideloading();
 			                            },
 			                            function(error)
@@ -918,7 +919,7 @@ var app =
 			    	}
 			    }
              }
-             ,'delete file', ['ok','cancel']);	
+             ,'cancella file', ['ok','annulla']);	
     },
 
     deleteUnusedFiles: function(_i,_done)
