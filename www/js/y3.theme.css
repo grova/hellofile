@@ -551,7 +551,7 @@ html head + body .ui-body-b.ui-focus {
 html .ui-bar-c .ui-bar-inherit,
 html .ui-body-c .ui-bar-inherit,
 html body .ui-group-theme-c .ui-bar-inherit {
-	background: #f9f9f9 /*{c-bar-background-color}*/;
+	background: #fafafa /*{c-bar-background-color}*/;
 	border-color: #dddddd /*{c-bar-border}*/;
 	color: #333333 /*{c-bar-color}*/;
 	text-shadow: 0 /*{c-bar-shadow-x}*/ 1px /*{c-bar-shadow-y}*/ 0 /*{c-bar-shadow-radius}*/ #eeeeee /*{c-bar-shadow-color}*/;
