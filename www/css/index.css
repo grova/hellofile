@@ -6,6 +6,10 @@ body{background-color: #FFFFFF;}
 	}
 
 */
+
+.backButtonContainer {float:left; padding:0.6em; margin-left:1em;}
+
+
 .y3-pageBG{}
 .y3-pageBG1{
     -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
