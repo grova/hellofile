@@ -639,6 +639,8 @@ var app =
 			function onFileSystemSuccess(fileSystem) 
 			{
 				app.m_fileSystem = fileSystem;
+				console.log("fs name:"+fileSystem.name);
+				console.log("fs root:"+fileSystem.root);
                 
                 // creo la cartella per me
                 fileSystem.root.getDirectory("bsyncpush",{create: true, exclusive: false},
@@ -647,7 +649,8 @@ var app =
                             app.fileSystemRoot = dirEntry.fullPath;
 				            console.log("fs ok per integrityCheck");
 				            var i = 0;
-				            console.log("this vale:"+this);
+				            console.log("name: "+dirEntry.name);
+				            console.log("path: "+dirEntry.fullPath);
 				            app.fileExistsRecurs(i,fileSystem,done);
                         },
                         function()
@@ -1008,7 +1011,7 @@ var app =
                                 var filename = entry[i].name;	// nome senza path
                                 if (!app.isFileInDb(filename))
                                 {
-                                    console.log(name + " about to be deleted");
+                                    console.log(name + " about to be deleted ("+entry[i].fullPath+")");
                                     entry[i].remove(win,loose);
                                 }
                             }
@@ -1023,6 +1026,35 @@ var app =
                     console.log("getdir error");
                 });
     	}
+    },
+
+    logFiles: function()
+    {
+    	this.m_fileSystem.root.getDirectory("bsyncpush",{create: true, exclusive: false},
+                function(dirEntry)
+                {
+                	console.log("create reader");
+                    dirEntry.createReader().readEntries(
+                        function(entry)
+                        {
+                            var i;
+                            var last = entry.length-1;
+                            for (i=last;i>=0;i--)
+                            {
+                            	var filename = entry[i].name;
+                            	console.log(filename + " - "+entry[i].fullPath);
+                            }
+                        },
+                        function(error)
+                        {
+                            console.log("readEntries fail" + error.code);
+                        });
+                },
+                function()
+                {
+                    console.log("getdir error");
+                });
+
     },
 
     playVideoTest: function(i)
