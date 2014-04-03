@@ -1,10 +1,422 @@
-<!doctype html>
+<!DOCTYPE html> 
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+--> 
 <html>
-  <head>
-   <title>tittle</title>
-   <script>
-     window.location='./main.html';
-   </script>
-  <body>
-  </body>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+		
+        <link rel="stylesheet" type="text/css" href="js/y3.theme.css">
+        <link rel="stylesheet" type="text/css" href="js/jquery.mobile.icons-1.4.0.css">
+        <link rel="stylesheet" type="text/css" href="js/jquery.mobile.structure-1.4.0.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" type="text/css" href="css/tolito-1.0.6.css" />
+
+        
+        <script type="text/javascript" src="phonegap.js"></script>
+		<script type="text/javascript" src="js/jquery-2.0.3.js"></script>
+        <script type="text/javascript">
+            $(document).bind("mobileinit", function(){
+                $.mobile.defaultPageTransition = 'slide';
+            });
+        </script>
+		<script type="text/javascript" src="js/jquery.mobile-1.4.0.js"></script>
+    	
+		<script type="text/javascript" src="FileTransfer.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+		<script type="text/javascript" src="js/y3.js"></script>
+		<script type="text/javascript" src="js/tolito-1.0.6.js"></script>
+        
+        <script type="application/javascript" src="js/fastclick.js"></script> 
+        <script type="text/javascript" src="PushNotification.js"></script>
+        <script type="text/javascript" src="webintent.js"></script>
+                
+
+		<title>Storci Sync</title>    
+    </head>
+
+    <!--
+    // cambio lo startup come da documentazione
+    // http://docs.phonegap.com/en/3.3.0/cordova_events_events.md.html#deviceready
+	-->
+
+    <body onLoad="mainInit()">
+    	
+        
+        <!--  ======================== HOME PAGE ============================= !-->
+        <div data-role="page" id="homepage" data-theme="a"  class="y3-pageBG">
+        	<div data-role="header" data-position="fixed" data-theme="c" style="text-align:center; border:none;">
+            	<img src="img/splash_logo.png" style="width:30%; height:auto;">
+            </div>
+            
+            <div data-role="content" id="homecontent">
+
+                <div class="ui-body ui-body-a ui-corner-all y3-center" style="margin-top:4em;">
+                    <h3>Nessun file presente</h3>
+                    <p>Per iniziare premi il tasto sync qui sotto.</p>
+                </div>
+                
+            </div>
+
+            <div data-role="footer" data-position="fixed" data-theme="b">
+            	<div data-role="navbar">
+                	<ul>
+                        <!--<li><button class="ui-btn ui-icon-alert ui-btn-icon-top goToTestPage lowerBackButton footer25">Test Page</button></li>!-->
+                        <li><button class="ui-btn ui-icon-gear ui-btn-icon-top goToOptions footer25">Options</button></li>
+                        <li><button class="ui-btn ui-icon-refresh ui-btn-icon-top app-loadJson footer25">sync</button></li>
+                        <!--<li><button class="ui-btn ui-icon-power ui-btn-icon-top y3-exitApp footer25">Exit</button></li>!-->
+                    </ul>
+                </div><!-- /navbar -->
+            </div><!-- /footer -->
+
+		</div><!-- /page --> 
+
+    
+
+
+        <!--  ======================== TESTING PAGE ============================= !-->
+       <!-- <div data-role="page" id="testpage" data-theme="a" class="y3-pageBG">
+        	<div data-role="header" data-position="fixed"  style="text-align:center; background:#F0F0F0;">
+            	<img src="img/splash_logo.png" style="width:30%; height:auto;">
+            </div>
+            <div data-role="content">
+
+				<div class="ui-body ui-body-a ui-corner-all" >
+                <fieldset class="ui-grid-a">
+                    <div class="ui-block-a"><p class="y3-testpage-description">registrati al push</p><input type="button" value="push on" data-theme="c" onclick = app.registerToPush()></div>
+
+                    <div class="ui-block-b"><p class="y3-testpage-description">Scarica un file pdf dal server e lo salva in locale (chrome).</p><input type="button" value="Download file chrome" data-theme="c" onclick = downloadFileChrome(app.toDownloadList[0])></div>
+
+                    <div class="ui-block-a"><p class="y3-testpage-description">unregister to push</p><input type="button" value="push off" data-theme="c" onclick = app.unregisterToPush()></div>
+                    
+                    <div class="ui-block-b"><p class="y3-testpage-description">apre con ibooks</p><input type="button" value="ibook open" data-theme="c" onclick = app.openFile(0,true,true)></div>
+
+                    <div class="ui-block-a"><p class="y3-testpage-description">cancella tutti i files</p><input type="button" value="delete all" data-theme="c" onclick = app.deleteAllFiles()></div>
+
+                    <div class="ui-block-b"><p class="y3-testpage-description">provo un alert</p><input type="button" value="provo un alert" data-theme="c" onClick="app.alertTest()"></div>
+
+                    <div class="ui-block-a"><p class="y3-testpage-description">Imposta i DB come variabili per debug interfaccia in chrome</p><input type="button" value="y3 DB" data-theme="c" onclick = y3.setDBasVariable()></div>
+                    <div class="ui-block-b">
+                        <video controls>
+                          <source id="videotest" src="" type="video/quicktime">
+                           Your browser does not support the video tag.
+                        </video>                     
+                    </div>
+                </fieldset>            
+				</div>
+            </div>
+
+            <div data-role="footer" data-position="fixed" data-theme="b">
+            	<div data-role="navbar">
+                	<ul>
+                        <li><button class="ui-btn ui-icon-back ui-btn-icon-top goToHomepage lowerBackButton footer25">Back</button></li>
+                        <li><button class="ui-btn ui-icon-gear ui-btn-icon-top goToOptions footer25">Options</button></li>
+                        <li><button class="ui-btn ui-icon-refresh ui-btn-icon-top app-loadJson footer25">sync</button></li>
+                        <li><button class="ui-btn ui-icon-power ui-btn-icon-top y3-exitApp footer25">Exit</button></li>
+                    </ul>
+                </div><!-- /navbar -->
+            <!--</div><!-- /footer -->
+
+		<!--</div><!-- /page --> 
+
+
+
+
+
+
+        <!--  ======================== FILE LIST ============================= !-->
+        <div data-role="page" id="filelist" data-theme="a" class="y3-pageBG">
+        	<div data-role="header" data-theme="c" data-position="fixed">
+	            <div class="backButtonContainer"><a href="#" class="goToHomepage upperBackButton" style="text-decoration:none; text-shadow:none;">Back</a></div>
+                <h1 id="listheader">Cataloghi e Schede Tecniche</h1>
+            </div>
+            
+            <div data-role="content" id="filelistcontent">
+                
+                <label for='filterable-input' style='display:none;'>Cerca i files</label>
+                <input type='search' name='search' id='filelist-filter-input'>
+                
+                <ul id='filelist_ul' data-role="listview" data-inset='true' data-filter="true" data-split-icon="delete" data-input="#filelist-filter-input">
+                    
+                </ul>
+                
+
+				
+                
+            </div><!-- /content -->
+
+            <div data-role="footer" data-position="fixed" data-theme="b">
+            	<div data-role="navbar">
+                	<ul>
+                        <!--<li><button class="ui-btn ui-icon-back ui-btn-icon-top goToHomepage lowerBackButton">Back</button></li>!-->
+                        <li><button class="ui-btn ui-icon-gear ui-btn-icon-top goToOptions footer25">Options</button></li>
+                        <li><button class="ui-btn ui-icon-refresh ui-btn-icon-top app-loadJson footer25">sync</button></li>
+                        <!--<li><button class="ui-btn ui-icon-power ui-btn-icon-top y3-exitApp footer25">Exit</button></li>!-->
+                    </ul>
+                </div><!-- /navbar -->
+            </div><!-- /footer -->
+
+		</div><!-- /page --> 
+
+
+        <!--  ======================== DOWNLOAD / UPDATE PAGE ============================= !-->
+        <div data-role="page" id="downloading" data-theme="a" class="y3-pageBG">
+        	<div data-role="header" data-position="fixed" data-theme="c" style="text-align:center; border:none;">
+            	<img src="img/splash_logo.png" style="width:30%; height:auto;">
+            </div>
+            
+            <div data-role="content" id="downloading_cnt">
+            
+            	<div>
+                	<h3></h3>
+	            	<p class="y3-center" style="margin-top:6em;">Files rimanenti <span id="totalnumberoffiles"></span></p>
+	            	<div id="progressbarcontainer"></div>
+            	
+	                <div class="button-wrap y3-center" style="margin-top:6em;"><button class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-left ui-corner-all ui-btn-b " onClick="app.requestAbort()">Annulla</button></div>
+				</div>
+                
+            </div><!-- /content -->
+
+            <div data-role="footer" data-position="fixed" data-theme="b">
+            	<div data-role="navbar" data-iconpos="top">
+                	<ul>
+                        <!--<li><button class="ui-btn ui-icon-back ui-btn-icon-top goToHomepage lowerBackButton">Back</button></li>!-->
+                        <li><button class="ui-btn ui-icon-gear ui-btn-icon-top goToOptions footer25">Options</button></li>
+                        <li><button class="ui-btn ui-icon-refresh ui-btn-icon-top app-loadJson footer25">sync</button></li>
+                        <!--<li><button class="ui-btn ui-icon-power ui-btn-icon-top y3-exitApp footer25">Exit</button></li>!-->
+                    </ul>
+                </div><!-- /navbar -->
+            </div><!-- /footer -->
+
+		</div><!-- /page --> 
+
+
+
+        <!--  ======================== RISULTATO DOWNLOAD ============================= !-->
+        <div data-role="page" id="downloadresult" data-theme="a" class="y3-pageBG">
+
+        	<div data-role="header" data-position="fixed"  style="text-align:center; padding-top:0; background:none; border:none;">
+            	<img src="img/splash_logo.png" style="width:30%; height:auto;">
+            </div>
+
+            
+            <div data-role="content" id="downloading_cnt">
+                <div class="ui-body ui-body-a ui-corner-all y3-center" style="margin-top:4em;">
+                    <h3 id="Downloadresult_title">... in attesa di un titolo ...</h3>
+
+                    <p id="Downloadresult_message">... in attesa di un testo ...</p>
+                    <div class="button-wrap y3-center" style="margin-top:2em;">
+                        <a href="#homepage" class="ui-btn ui-btn-c ui-btn-icon-left ui-icon-check ui-btn-inline ui-corner-all ">Ok</a>
+                    </div>
+                </div>
+            	
+                
+
+            </div><!-- /content -->
+
+            <div data-role="footer" data-position="fixed" data-theme="b">
+            	<div data-role="navbar" data-iconpos="top">
+                	<ul>
+                        <!--<li><button class="ui-btn ui-icon-back ui-btn-icon-top goToHomepage lowerBackButton">Back</button></li>!-->
+                        <li><button class="ui-btn ui-icon-gear ui-btn-icon-top goToOptions footer25">Options</button></li>
+                        <li><button class="ui-btn ui-icon-refresh ui-btn-icon-top app-loadJson footer25">sync</button></li>
+                        <!--<li><button class="ui-btn ui-icon-power ui-btn-icon-top y3-exitApp footer25">Exit</button></li>!-->
+                    </ul>
+                </div><!-- /navbar -->
+            </div><!-- /footer -->
+
+		</div><!-- /page --> 
+
+
+
+        <!--  ======================== DOWNLOAD COMPLETATO ============================= !-->
+        <div data-role="page" id="downloadcompleted" data-theme="a" class="y3-pageBG">
+        	<div data-role="header" data-position="fixed">
+	            <h1>Info</h1>
+            </div>
+            
+            <div data-role="content" id="downloading_cnt">
+            	<p class="y3-center" style="margin-top:6em;">Download completato con successo</p>
+            	
+                <div class="button-wrap y3-center" style="margin-top:6em;"><button class="ui-btn ui-btn-c ui-btn-icon-left ui-icon-check ui-btn-inline ui-corner-all ">Fine</button></div>
+
+            </div><!-- /content -->
+
+            <div data-role="footer" data-position="fixed" data-theme="b">
+            	<div data-role="navbar" data-iconpos="top">
+                	<ul>
+                        <!--<li><button class="ui-btn ui-icon-back ui-btn-icon-top goToHomepage lowerBackButton footer25">Back</button></li>!-->
+                        <li><button class="ui-btn ui-icon-gear ui-btn-icon-top goToOptions footer25">Options</button></li>
+                        <li><button class="ui-btn ui-icon-refresh ui-btn-icon-top app-loadJson footer25">sync</button></li>
+                        <!--<li><button class="ui-btn ui-icon-power ui-btn-icon-top y3-exitApp footer25">Exit</button></li>!-->
+                    </ul>
+                </div><!-- /navbar -->
+            </div><!-- /footer -->
+
+		</div><!-- /page --> 
+
+
+
+        <!--  ======================== PAGINA REGISTRAZIONE ============================= !-->
+        <div data-role="page" id="registration" data-theme="a" class="y3-pageBG">
+            
+        	<div data-role="header" data-position="fixed" data-theme="c" style="text-align:center;">
+            	<img src="img/splash_logo.png" style="width:30%; height:auto;">
+            </div>
+
+
+            <div data-role="content" id="registration_cnt">
+                
+                <div class="ui-body ui-body-a ui-corner-all" style="margin-top:4em;">
+                  <h3 class="y3-center">Attivazione dispositivo</h3>
+                  <p>Per poter scaricare i documenti aziendali è necessaria l'attivazione di questo dispositivo da parte di Storci S.p.a. Per richiedere tale attivazione compilare tutti i campi presenti di seguito ed inviare la richiesta.</p>
+
+                      <form action="" id="registrationForm" method="post">
+    
+                        <div class="ui-field-contain" style="margin-top:3em;">
+                            <label for="nomeCognome">Nome e Cognome:</label>
+                            <input name="nomeCognome" id="nomeCognome" placeholder="Nome e Cognome" value="" type="text" maxlength="100">
+                        </div>                  	
+    
+                        <div class="ui-field-contain">
+                            <label for="email">indirizzo email:</label>
+                            <input name="email" id="email" placeholder="email" value="" type="text" maxlength="100">
+                        </div>                  	
+    
+                        <div class="ui-field-contain">
+                            <label for="tel">Telefono:</label>
+                            <input name="tel" id="tel" placeholder="mobile phone" value="" type="text" maxlength="50">
+                        </div>                  	
+                      </form>
+
+                      <div class="ui-grid-a" style="margin-top:3em;">
+                        <div class="ui-block-a">
+                            <div class="button-wrap y3-marOriz">
+                                <button onClick="app.postRegistration()" class="ui-btn ui-icon-arrow-d ui-btn-icon-left ui-corner-all ui-btn-c">Invia Richiesta</button>
+                            </div>
+                        </div>
+                        <div class="ui-block-b">
+                            <div class="button-wrap y3-marOriz">
+                                <button onClick="$.mobile.changePage("#homepage", { transition: 'slide', reverse: true });" class="ui-btn ui-icon-delete ui-btn-icon-left ui-corner-all ui-btn-b">Annulla</button>
+                            </div>
+                        </div>
+                      </div> 
+                      
+                </div>
+                            	
+                
+
+            </div><!-- /content -->
+
+            <div data-role="footer" data-position="fixed" data-theme="b">
+            	<div data-role="navbar">
+                	<ul>
+                        <!--<li><button class="ui-btn ui-icon-back ui-btn-icon-top goToHomepage lowerBackButton footer25">Back</button></li>!-->
+                        <li><button class="ui-btn ui-icon-gear ui-btn-icon-top goToOptions footer25">Options</button></li>
+                        <li><button class="ui-btn ui-icon-refresh ui-btn-icon-top app-loadJson footer25">sync</button></li>
+                        <!--<li><button class="ui-btn ui-icon-power ui-btn-icon-top y3-exitApp footer25">Exit</button></li>!-->
+                    </ul>
+                </div><!-- /navbar -->
+            </div><!-- /footer -->
+
+		</div><!-- /page --> 
+
+
+        <!--  ======================== OPTIONS PAGE ============================= !-->
+        <div data-role="page" id="options" data-theme="a" class="y3-pageBG">
+        	<div data-role="header" data-position="fixed">
+	            <h1>Options</h1>
+            </div>
+            
+            <div data-role="content" id="options_cnt">
+            	<p class="y3-center" style="margin-top:6em;">Options</p>
+            	
+                <div class="button-wrap y3-center" style="margin-top:6em;">
+                	<button class="ui-btn ui-icon-delete ui-btn-icon-left ui-corner-all ui-btn-b goToHomepage">Chiudi</button>
+                </div>
+
+            </div><!-- /content -->
+
+            <div data-role="footer" data-position="fixed" data-theme="b">
+            	<div data-role="navbar">
+                	<ul>
+                        <!--<li><button class="ui-btn ui-icon-back ui-btn-icon-top goToHomepage lowerBackButton footer25">Back</button></li>!-->
+                        <li><button class="ui-btn ui-icon-gear ui-btn-icon-top goToOptions footer25">Options</button></li>
+                        <li><button class="ui-btn ui-icon-refresh ui-btn-icon-top app-loadJson footer25">sync</button></li>
+                        <!--<li><button class="ui-btn ui-icon-power ui-btn-icon-top y3-exitApp footer25">Exit</button></li>!-->
+                    </ul>
+                </div><!-- /navbar -->
+            </div><!-- /footer -->
+
+		</div><!-- /page --> 
+
+
+	
+        <script type="text/javascript">
+        	var g_mainInit = 0;
+        	function mainInit()
+        	{
+                FastClick.attach(document.body);
+                
+        		g_mainInit++;
+	            app.initialize();
+                y3.preloadImages(y3.icons);
+
+                
+                $(".goToTestPage").click(function(){
+                    $.mobile.navigate('#testpage');
+                });
+                
+                
+                $(".goToHomepage").click(function(){
+                    $.mobile.changePage("#homepage", { transition: 'slide', reverse: true });
+                });
+
+                $(".goToOptions").click(function(){
+                    $.mobile.changePage("#options", { transition: 'slide', reverse: true });
+                });
+
+				$(".y3-exitApp").click(function(){
+					app.exitapp();
+				});
+
+                $(".app-loadJson").click(function(){
+                    app.loadJson();
+                });
+				
+                $("#filelist_ul").listview(); //inizializzo la listview dei file per poterla poi aggiornare più agevolmente
+                
+				// binda il click sulle voci al link per visualizzare i files
+				$("#homecontent").on('click','.filelistlink', function(){
+					y3.taglist = $( this ).attr("tags")
+					y3.listheader = $( this ).attr("listheader")
+					//alert( y3.taglist); //debug
+					y3.populatefilelist('filelistcontent',y3.taglist);
+				});
+
+
+			}
+
+		</script>
+
+
+    </body>
 </html>
