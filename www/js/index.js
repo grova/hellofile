@@ -563,7 +563,7 @@ var app =
 					// lo tolgo
 					fileEntry.remove();
 
-					console.log(fileEntry.fullPath + " NOT found");
+					console.log(fileEntry.getURL() + " NOT found");
 					app.localdb.splice(_i,1);
 					app.fileExistsRecurs(_i,_fileSystem,_done);
 					
@@ -646,11 +646,11 @@ var app =
                 fileSystem.root.getDirectory("bsyncpush",{create: true, exclusive: false},
                         function(dirEntry)
                         {
-                            app.fileSystemRoot = dirEntry.fullPath;
+                            app.fileSystemRoot = dirEntry.toURL();
 				            console.log("fs ok per integrityCheck");
 				            var i = 0;
 				            console.log("name: "+dirEntry.name);
-				            console.log("path: "+dirEntry.fullPath);
+				            console.log("path: "+dirEntry.toURL());
 				            app.fileExistsRecurs(i,fileSystem,done);
                         },
                         function()
@@ -732,7 +732,7 @@ var app =
 			localPath,
 			function(theFile) 
 			{
-			    console.log("download complete: " + theFile.fullPath);
+			    console.log("download complete: " + theFile.getURL());
 			    // download completato devo aggiornare il db locale
 			    var onlyname = localPath.substring(localPath.lastIndexOf('/')+1);
 			    remoteRef.localPath = onlyname;
@@ -1011,7 +1011,7 @@ var app =
                                 var filename = entry[i].name;	// nome senza path
                                 if (!app.isFileInDb(filename))
                                 {
-                                    console.log(name + " about to be deleted ("+entry[i].fullPath+")");
+                                    console.log(name + " about to be deleted ("+entry[i].getURL()+")");
                                     entry[i].remove(win,loose);
                                 }
                             }
@@ -1042,7 +1042,7 @@ var app =
                             for (i=last;i>=0;i--)
                             {
                             	var filename = entry[i].name;
-                            	console.log(filename + " - "+entry[i].fullPath);
+                            	console.log(filename + " - "+entry[i].getURL());
                             }
                         },
                         function(error)
