@@ -1346,4 +1346,28 @@ function errorHandler (error) {
     alert('error = ' + error);
 }
 
+function resolveTest(file)
+{
+	window.resolveFileSystemURL(file,
+		function(entry)
+		{
+			console.log(entry.name);
+		},
+		function(error)
+		{
+			console.log(error.code);
+		});
+
+	window.resolveFileSystemURI(file,
+		function(entry)
+		{
+			console.log(entry.name);
+		},
+		function(error)
+		{
+			console.log(error.code);
+		});
+
+}
+
 
