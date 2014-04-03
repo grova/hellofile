@@ -1361,11 +1361,11 @@ function resolveTest(file)
 	window.resolveLocalFileSystemURI(file,
 		function(entry)
 		{
-			console.log(entry.name);
+			console.log("ok: "+entry.name);
 		},
 		function(error)
 		{
-			console.log(error.code);
+			console.log("fail: "+error.code);
 		});
 
 }
