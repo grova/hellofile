@@ -638,6 +638,7 @@ var app =
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
 			function onFileSystemSuccess(fileSystem) 
 			{
+				console.log("fsok");
 				app.m_fileSystem = fileSystem;
 				console.log("fs name:"+fileSystem.name);
 				console.log("fs root:"+fileSystem.root);
