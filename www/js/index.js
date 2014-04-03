@@ -1348,7 +1348,7 @@ function errorHandler (error) {
 
 function resolveTest(file)
 {
-	window.resolveFileSystemURL(file,
+	window.resolveLocalFileSystemURL(file,
 		function(entry)
 		{
 			console.log(entry.name);
@@ -1358,7 +1358,7 @@ function resolveTest(file)
 			console.log(error.code);
 		});
 
-	window.resolveFileSystemURI(file,
+	window.resolveLocalFileSystemURI(file,
 		function(entry)
 		{
 			console.log(entry.name);
