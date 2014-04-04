@@ -92,9 +92,6 @@ var app =
     onDeviceReady: function() {
         app.initLocalDb();					// check local storage e carica il db dal localstorage
         app.initVersion();  // serve il local storage 
-        
-        
-        //app.registerToPush();		// mi registro al push, lo faccio ala fine di integritycheck
         app.mainIntegrityCheck();	// ne controlla l'itegrita' e inizializza il path della root del filesystem
     },
     
