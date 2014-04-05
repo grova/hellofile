@@ -555,6 +555,7 @@ var app =
 				"bsyncpush/"+filename, {create: true, exclusive: true}, 
 				function gotFileEntry(fileEntry) 
 				{
+					console.log("not found");
 					// lo riesco a creare in esclusiva, non c'era
 					// lo tolgo
 					fileEntry.remove();
@@ -1049,7 +1050,7 @@ var app =
                             for (i=last;i>=0;i--)
                             {
 								console.log("qui:"+i);
-								console.log(entry[i]);
+								console.log(entry[i].name);
 	                        }
                         },
                         function(error)
