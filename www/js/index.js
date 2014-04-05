@@ -638,7 +638,7 @@ var app =
 				console.log("fsok");
 				app.m_fileSystem = fileSystem;
 				console.log("fs name:"+fileSystem.name);
-				console.log("fs root:"+fileSystem.root);
+				console.log("fs root:"+fileSystem.root.toURL());
                 
                 // creo la cartella per me
                 fileSystem.root.getDirectory("bsyncpush",{create: true, exclusive: false},
@@ -1038,6 +1038,7 @@ var app =
                     reader.readEntries(
                         function(entry)
                         {
+						console.log("ok, files:"+entry.length);
                             var i;
                             var last = entry.length-1;
                             for (i=last;i>=0;i--)
@@ -1353,6 +1354,7 @@ function resolveTest(file)
 		function(entry)
 		{
 			console.log(entry.name);
+			console.log(entry);
 		},
 		function(error)
 		{
