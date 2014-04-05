@@ -1052,7 +1052,7 @@ var app =
 								}
 								else
 								{
-									console.log("null entry);
+									console.log("null entry");
 								}
                             }
                         },
