@@ -442,7 +442,6 @@ var app =
 					
 				if ( device.platform == 'android' || device.platform == 'Android' )
 				{
-                    /
                     // e poi mi serve il mime
                     var mime = this.getMIME(filepath);
 					console.log("startactivity on:" + filepath);
