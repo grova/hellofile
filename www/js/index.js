@@ -1031,8 +1031,11 @@ var app =
     	this.m_fileSystem.root.getDirectory("bsyncpush",{create: true, exclusive: false},
                 function(dirEntry)
                 {
-                	console.log("create reader");
-                    dirEntry.createReader().readEntries(
+                	console.log("getdir ok");
+					console.log(dirEntry);
+					var reader = dirEntry.createReader();
+					console.log("reader:"+reader);
+                    reader.readEntries(
                         function(entry)
                         {
                             var i;
