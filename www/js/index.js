@@ -57,7 +57,7 @@ var app =
 {
     m_appData:
     {
-        version: "1.0.0",
+        version: "1.0.1",
         name: "BSyncPush"
     },
     
@@ -90,9 +90,9 @@ var app =
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        //app.initLocalDb();					// check local storage e carica il db dal localstorage
-        //app.initVersion();  // serve il local storage 
-        //app.mainIntegrityCheck();	// ne controlla l'itegrita' e inizializza il path della root del filesystem
+        app.initLocalDb();					// check local storage e carica il db dal localstorage
+        app.initVersion();  // serve il local storage 
+        app.mainIntegrityCheck();	// ne controlla l'itegrita' e inizializza il path della root del filesystem
     },
     
     newInstall : false,
@@ -437,12 +437,12 @@ var app =
 			{
 				var filepath = this.fileSystemRoot + "/" + this.localdb[i].localPath;
 
-
+				// devo togliere il file:// anche da ios
+                filepath = filepath.substring(7);
 					
 				if ( device.platform == 'android' || device.platform == 'Android' )
 				{
-                    // devo togliere il file:
-                    filepath = filepath.substring(7);
+                    /
                     // e poi mi serve il mime
                     var mime = this.getMIME(filepath);
 					console.log("startactivity on:" + filepath);
@@ -474,7 +474,7 @@ var app =
 						
                     	// e poi mi serve il mime
                     	var mime = this.getMIME(filepath);
-                    	console.log("startactivity on:" + filepath);
+                    	console.log("documentInteraction on:" + filepath);
                     	console.log("MIME:" + mime);
 						//window.plugins.documentInteraction.previewDocument(filepath,mime);
 						window.plugins.documentInteraction.previewDocument(filepath);	
