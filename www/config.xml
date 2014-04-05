@@ -73,7 +73,8 @@
 	<preference name="AndroidPersistentFileLocation" value="Internal" />
 	
     <gap:plugin name="com.phonegap.plugins.pushplugin" version="2.1.1" />
-    <gap:plugin name="com.simplec.plugins.powermanagement" version="0.4.0" />
+    <!--<gap:plugin name="com.simplec.plugins.powermanagement" version="0.4.0" />-->
+	<gap:plugin name="nl.x-services.plugins.insomnia" version="3.0" />
     <gap:plugin name="io.github.pwlin.cordova.plugins.fileopener" version="1.0.1" />
     <gap:plugin name="it.y3web.cordova.documentinteraction" version="0.2.3" />
     <gap:plugin name="org.apache.cordova.device" version="0.2.8" />
