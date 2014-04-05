@@ -1038,7 +1038,8 @@ var app =
                     reader.readEntries(
                         function(entry)
                         {
-						console.log("ok, files:"+entry.length);
+							console.log("ok, files:"+entry.length);
+							console.log(entry);
                             var i;
                             var last = entry.length-1;
                             for (i=last;i>=0;i--)
