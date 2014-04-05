@@ -1045,16 +1045,8 @@ var app =
                             for (i=last;i>=0;i--)
                             {
 								console.log("qui:"+i);
-								if (entry[i]!=null)
-								{
-									console.log(entry[i].getURL());
-									console.log(entry[i].name);
-								}
-								else
-								{
-									console.log("null entry");
-								}
-                            }
+								console.log(entry[i]);
+	                        }
                         },
                         function(error)
                         {
