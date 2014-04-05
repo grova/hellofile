@@ -700,7 +700,7 @@ var app =
 		// nome file senza path
 		var filename = remoteFilePath.substring(remoteFilePath.lastIndexOf('/')+1);
 		var localPath = this.fileSystemRoot + filename;
-		localpath = localpath.substring(7);
+		localPath = localPath.substring(7);
 		var uri = encodeURI(remoteFilePath);
 	    console.log("start download of " + remoteFilePath);
 	    console.log("to " + localPath);	
