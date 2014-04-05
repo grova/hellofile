@@ -609,6 +609,7 @@ var app =
 	{
 		console.log("integritycheck");
 
+		/*
 		if (this.useChrome)
 		{
 			console.log("using chome");
@@ -630,6 +631,7 @@ var app =
 			);
 			return;
 		}
+		*/
 
 		// mi serve il filesystem
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
@@ -644,11 +646,12 @@ var app =
                 fileSystem.root.getDirectory("bsyncpush",{create: true, exclusive: false},
                         function(dirEntry)
                         {
-                            app.fileSystemRoot = dirEntry.toURL();
+                            app.fileSystemRoot = dirEntry.nativeURL;
 				            console.log("fs ok per integrityCheck");
 				            var i = 0;
 				            console.log("name: "+dirEntry.name);
 				            console.log("path: "+dirEntry.toURL());
+							console.log("native:"+dirEntry.nativeURL);
 				            app.fileExistsRecurs(i,fileSystem,done);
                         },
                         function()
