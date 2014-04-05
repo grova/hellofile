@@ -69,6 +69,9 @@
     <gap:splash src="res/screen/ios/screen-ipad-portrait-2x.png" gap:platform="ios" width="1536" height="2008" /><!-- Portrait -->
     <gap:splash src="res/screen/ios/screen-ipad-landscape-2x.png" gap:platform="ios" width="2048" height="1496" /><!-- Landscape -->
     
+	<preference name="iosPersistentFileLocation" value="Library" />
+	<preference name="AndroidPersistentFileLocation" value="Internal" />
+	
     <gap:plugin name="com.phonegap.plugins.pushplugin" version="2.1.1" />
     <gap:plugin name="com.simplec.plugins.powermanagement" version="0.4.0" />
     <gap:plugin name="io.github.pwlin.cordova.plugins.fileopener" version="1.0.1" />
