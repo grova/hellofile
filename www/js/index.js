@@ -1045,8 +1045,15 @@ var app =
                             for (i=last;i>=0;i--)
                             {
 								console.log("qui:"+i);
-                            	var filename = entry[i].name;
-                            	console.log(filename + " - "+entry[i].getURL());
+								if (entry[i]!=null)
+								{
+									console.log(entry[i].getURL());
+									console.log(entry[i].name);
+								}
+								else
+								{
+									console.log("null entry);
+								}
                             }
                         },
                         function(error)

@@ -81,7 +81,7 @@
     <gap:plugin name="io.github.pwlin.cordova.plugins.fileopener" />
     <gap:plugin name="org.apache.cordova.media" />
     <gap:plugin name="it.y3web.cordova.documentinteraction" />
-    
+    <gap:plugin name="com.simplec.plugins.powermanagement" version="0.4.0" />
     
     <access origin="*" />
 </widget>
