@@ -1038,12 +1038,13 @@ var app =
                     reader.readEntries(
                         function(entry)
                         {
-							console.log("ok, files:"+entry.length);
+						    console.log("ok, files:"+entry.length);
 							console.log(entry);
                             var i;
                             var last = entry.length-1;
                             for (i=last;i>=0;i--)
                             {
+								console.log("qui:"+i);
                             	var filename = entry[i].name;
                             	console.log(filename + " - "+entry[i].getURL());
                             }
