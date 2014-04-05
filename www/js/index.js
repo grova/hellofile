@@ -560,7 +560,7 @@ var app =
 					// lo tolgo
 					fileEntry.remove();
 
-					console.log(fileEntry.getURL() + " NOT found");
+					console.log(fileEntry.name + " NOT found");
 					app.localdb.splice(_i,1);
 					app.fileExistsRecurs(_i,_fileSystem,_done);
 					
@@ -735,7 +735,7 @@ var app =
 			localPath,
 			function(theFile) 
 			{
-			    console.log("download complete: " + theFile.getURL());
+			    console.log("download complete: " + theFile.name);
 			    // download completato devo aggiornare il db locale
 			    var onlyname = localPath.substring(localPath.lastIndexOf('/')+1);
 			    remoteRef.localPath = onlyname;
@@ -1014,7 +1014,7 @@ var app =
                                 var filename = entry[i].name;	// nome senza path
                                 if (!app.isFileInDb(filename))
                                 {
-                                    console.log(name + " about to be deleted ("+entry[i].getURL()+")");
+                                    console.log(name + " about to be deleted ("+entry[i].name+")");
                                     entry[i].remove(win,loose);
                                 }
                             }
