@@ -348,7 +348,7 @@
             
             <div data-role="content" id="options_cnt">
             	
-                <p class="y3-center" style="margin-top:6em;"><a href="https://build.phonegap.com/apps/719057/download/ios/?qr_key=Y8vSnviAZeRosyyoLMYu" rel="external">Verifica l'esistenza di una nuova versione app</a> </p>
+                <p class="y3-center" style="margin-top:6em;"><a id="updateVersionLink" href="https://build.phonegap.com/apps/719057/download/ios/?qr_key=Y8vSnviAZeRosyyoLMYu" rel="external">Verifica l'esistenza di una nuova versione app</a> </p>
                 
                 <div class="button-wrap y3-center" style="margin-top:6em;">
                 	<button class="ui-btn ui-icon-delete ui-btn-icon-left ui-corner-all ui-btn-b goToHomepage">Chiudi</button>
@@ -413,6 +413,10 @@
 					y3.populatefilelist('filelistcontent',y3.taglist);
 				});
 
+                $('#updateVersionLink').click(function(e){
+                    //verificare se la versione online è superiore a quella installata...
+                    y3.showloading();
+                });
 
 			}
 
