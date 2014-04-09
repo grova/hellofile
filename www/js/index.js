@@ -438,6 +438,8 @@ var app =
 				var filepath = this.fileSystemRoot + "/" + this.localdb[i].localPath;
 
 				// devo togliere il file:// anche da ios
+				alert("full:"+filepath);
+				var full = filepath;
         filepath = filepath.substring(7);
 					
 				if ( device.platform == 'android' || device.platform == 'Android' )
@@ -445,14 +447,14 @@ var app =
                     // e poi mi serve il mime
           var mime = this.getMIME(filepath);
 					
-					filepath = filepath.substring(4);
+					//filepath = filepath.substring(4);
 					
 					console.log("startactivity on:" + filepath);
           console.log("MIME:" + mime);
 					
-					alert("start on1:"+filepath+":"+mime);
+					alert("start on1:"+full+":"+mime);
 					
-	        cordova.plugins.fileOpener.open(filepath,mime);
+	        cordova.plugins.fileOpener.open(full,mime);
                     /*
 					window.plugins.webintent.startActivity(
 						{
