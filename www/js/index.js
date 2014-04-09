@@ -450,7 +450,7 @@ var app =
 					console.log("startactivity on:" + filepath);
           console.log("MIME:" + mime);
 					
-					//alert("start on1:"+filepath+":"+mime);
+					alert("start on1:"+filepath+":"+mime);
 					
 	        cordova.plugins.fileOpener.open(filepath,mime);
                     /*
