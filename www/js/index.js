@@ -444,6 +444,9 @@ var app =
 				{
                     // e poi mi serve il mime
           var mime = this.getMIME(filepath);
+					
+					filepath = filepath.substring(4);
+					
 					console.log("startactivity on:" + filepath);
           console.log("MIME:" + mime);
 					
