@@ -703,7 +703,7 @@ var app =
 		var localPath = this.fileSystemRoot +"/"+ filename;
 		localPath = localPath.substring(7);
 		localPath = localPath.replace(/ /g,"_");
-		localPath = encodeURI(localPath);
+		//localPath = encodeURI(localPath);
 		var uri = encodeURI(remoteFilePath);
 	    console.log("start download of " + remoteFilePath);
 	    console.log("to " + localPath);	
