@@ -443,10 +443,13 @@ var app =
 				if ( device.platform == 'android' || device.platform == 'Android' )
 				{
                     // e poi mi serve il mime
-                    var mime = this.getMIME(filepath);
+          var mime = this.getMIME(filepath);
 					console.log("startactivity on:" + filepath);
-                    console.log("MIME:" + mime);
-                    cordova.plugins.fileOpener.open(filepath,mime);
+          console.log("MIME:" + mime);
+					
+					alert("start on:"+filepath+":"+mime);
+					
+	        cordova.plugins.fileOpener.open(filepath,mime);
                     /*
 					window.plugins.webintent.startActivity(
 						{
