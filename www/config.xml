@@ -70,7 +70,7 @@
     <gap:splash src="res/screen/ios/screen-ipad-landscape-2x.png" gap:platform="ios" width="2048" height="1496" /><!-- Landscape -->
     
 	<preference name="iosPersistentFileLocation" value="Library" />
-	<preference name="AndroidPersistentFileLocation" value="Internal" />
+	<preference name="AndroidPersistentFileLocation" value="Compatibility" />
 	
     <gap:plugin name="com.phonegap.plugins.pushplugin" version="2.1.1" />
     <!--<gap:plugin name="com.simplec.plugins.powermanagement" version="0.4.0" />-->
