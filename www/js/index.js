@@ -452,9 +452,9 @@ var app =
 					console.log("startactivity on:" + filepath);
           console.log("MIME:" + mime);
 					
-					alert("start on1:"+full+":"+mime);
+					alert("start on1:"+filepath+":"+mime);
 					
-	        cordova.plugins.fileOpener.open(full,mime);
+	        cordova.plugins.fileOpener.open(filepath,mime);
                     /*
 					window.plugins.webintent.startActivity(
 						{
