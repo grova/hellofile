@@ -438,7 +438,7 @@ var app =
 				var filepath = this.fileSystemRoot + "/" + this.localdb[i].localPath;
 
 				// devo togliere il file:// anche da ios
-				alert("full:"+filepath);
+				// alert("full:"+filepath);
 				var full = filepath;
         filepath = filepath.substring(7);
 					
@@ -452,7 +452,7 @@ var app =
 					console.log("startactivity on:" + filepath);
           console.log("MIME:" + mime);
 					
-					alert("start on1:"+filepath+":"+mime);
+					// alert("start on1:"+filepath+":"+mime);
 					
 	        cordova.plugins.fileOpener.open(filepath,mime);
                     /*
