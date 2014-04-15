@@ -414,6 +414,7 @@ var y3 = {
     showRemainingFiles: function(){
         t = app.toDownloadList.length;
         $('#totalnumberoffiles').html (t);
+        $('#currentDownloadingSourceFile').html(app.m_currentDownloadingSourceFile);
     },
     
     showDownloadResult: function(errcode){
