@@ -235,7 +235,8 @@ var app =
 
 		//var deviceid = "5617AA9A-6292-4580-AA11-EF708E287BB3";
 		var deviceid = device.uuid;
-		//var deviceid = "147DDF63-11E1-4E78-AB61-7A761CCDED5F";
+		//var deviceid = "59C7EC4D-F096-4CC6-AF9B-76B619BF3E02";
+		
 		
 
 		var jqxhr2 = $.post(url , { deviceID: deviceid , lang: "IT" } ).done
@@ -250,6 +251,8 @@ var app =
 			    catch(err)
 			    {
 			        console.log("error parsing list");
+					y3.hideloading();// nascondo loading in progress..
+					alert("errore di parse della lista dei gruppi");
 			        response.code = -1;
 			    }
 
@@ -271,7 +274,7 @@ var app =
 					
 
 					var deviceid = device.uuid;
-					//var deviceid = "147DDF63-11E1-4E78-AB61-7A761CCDED5F";
+					//var deviceid = "59C7EC4D-F096-4CC6-AF9B-76B619BF3E02";
 
 					// se ci fossero problemi di crossdomain
 					//$.getJSON(url + "?callback=?", null, function(tweets) {
@@ -286,6 +289,7 @@ var app =
 					    catch(err)
 					    {
 					        console.log("error parsing list");
+							alert("errore di parse lista file");
 					        response.list = [];
 					    }
 						// ho scaricato la lista remota, ora devo fare i confronti per vedere quali scaricare
@@ -357,6 +361,7 @@ var app =
 					{
 						y3.hideloading();
 						console.log("error loading filelist");
+						alert("error loading file list");
 						y3.showDownloadResult(3);
 					}
 					);
