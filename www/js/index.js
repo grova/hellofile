@@ -778,6 +778,8 @@ var app =
 			},
 			function(error) 
 			{
+				var err = "error: download source ("+error.source+"), target ("+error.target)+", code ("+error.code+")";
+				alert(err);
 			    console.log("download error source " + error.source);
 			    console.log("download error target " + error.target);
 			    console.log("upload error code: " + error.code);
