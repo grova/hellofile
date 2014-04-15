@@ -703,6 +703,7 @@ var app =
 
 	m_fileTransfer: null,	// tiro fuori l'oggetto per poter chiamare abort
 	m_requestAbort: false,
+	m_currentDownloadingSourceFile: null,
 
 	// scarica il file i-esimo dalla lista todownload
 	// aggiorna la lista todownload e localdb
@@ -745,6 +746,7 @@ var app =
 
 		};
 
+		this.m_currentDownloadingSourceFile = uri;
 	    m_fileTransfer.download(
 			uri,
 			localPath,
