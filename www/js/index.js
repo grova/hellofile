@@ -766,9 +766,9 @@ var app =
 
 		};
 
-		var dwComment = "start download of " + uri + " to " + localPath;
-	    console.log(dwComment);
-		alert(dwComment);
+		//var dwComment = "start download of " + uri + " to " + localPath;
+	    //console.log(dwComment);
+		//alert(dwComment);
 		
 		this.m_currentDownloadingSourceFile = uri;
 	    m_fileTransfer.download(
