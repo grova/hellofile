@@ -343,8 +343,9 @@
 
         <!--  ======================== OPTIONS PAGE ============================= !-->
         <div data-role="page" id="options" data-theme="a" class="y3-pageBG">
-        	<div data-role="header" data-position="fixed">
-	            <h1>Options</h1>
+        	<div data-role="header" data-theme="c" data-position="fixed" >
+	            <div class="backButtonContainer"><a href="#" class="goToHomepage upperBackButton" style="text-decoration:none; text-shadow:none;">Done</a></div>
+                <h1 id="listheader">Options</h1>
             </div>
             
             <div data-role="content" id="options_cnt">
@@ -360,9 +361,7 @@
                     <a id="updateVersionLink" href="https://build.phonegap.com/apps/719057/download/ios/?qr_key=Y8vSnviAZeRosyyoLMYu" rel="external">Verifica l'esistenza di una nuova versione app</a> 
                 </p>
                 
-                <div class="button-wrap y3-center" style="margin-top:6em;">
-                	<button class="ui-btn ui-icon-delete ui-btn-icon-left ui-corner-all ui-btn-b goToHomepage">Chiudi</button>
-                </div>
+
 
             </div><!-- /content -->
 
