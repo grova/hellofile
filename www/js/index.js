@@ -1254,6 +1254,10 @@ var app =
     // mi registro al sito
     postRegistration: function()
     {
+        
+        //disabilito il bottone per prevenire invii multipli
+        $('#registrationSubmitButton').prop('disable',true);
+        
         var objToPost = 
         {
             nomeCognome: $('#nomeCognome').val(),
