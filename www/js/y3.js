@@ -416,11 +416,12 @@ var y3 = {
         $('#totalnumberoffiles').html(t);
         
         if (app.m_currentDownloadingSourceFile != null){
-            //alert("file:" + app.m_currentDownloadingSourceFile + "   length:" + app.m_currentDownloadingSourceFile.length);
             fns = app.m_currentDownloadingSourceFile.split('/');
             $('#currentDownloadingSourceFile').html(fns[fns.length-1]);
         }
-        $('#currentDownloadingSourceFile').html(app.m_currentDownloadingSourceFile);
+        else{
+            $('#currentDownloadingSourceFile').html(app.m_currentDownloadingSourceFile);
+        }
     },
     
     showDownloadResult: function(errcode){
