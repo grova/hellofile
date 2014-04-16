@@ -1256,7 +1256,7 @@ var app =
     {
         
         //disabilito il bottone per prevenire invii multipli
-        $('#registrationSubmitButton').prop('disabled',true);
+        $('#registrationSubmitButton').toggle();
         
         var objToPost = 
         {
@@ -1297,7 +1297,7 @@ var app =
             });
 
         //riabilito il bottone se per caso ci fosse da rifare la registrazione
-        $('#registrationSubmitButton').prop('disabled',false);        
+        $('#registrationSubmitButton').toggle();
     }
 }
 
