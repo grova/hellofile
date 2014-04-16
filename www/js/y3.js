@@ -329,7 +329,7 @@ var y3 = {
                     .isMini(true)
                     .setMax(100)
                     .setStartFrom(0)
-                    .setInterval(10000)
+                    .setInterval(1000000)
                     .showCounter(true)
                     //.logOptions()
                     .build()
@@ -414,8 +414,8 @@ var y3 = {
     showRemainingFiles: function(){
         t = app.toDownloadList.length;
         $('#totalnumberoffiles').html (t);
-        var f = app.m_currentDownloadingSourceFile.split('/');
-        $('#currentDownloadingSourceFile').html(f[f.length-1]);
+        var fns = app.m_currentDownloadingSourceFile.split('/');
+        $('#currentDownloadingSourceFile').html(fns[fns.length-1]);
     },
     
     showDownloadResult: function(errcode){
