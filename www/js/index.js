@@ -747,6 +747,7 @@ var app =
 		$.mobile.navigate("#downloading");
 		//creiamo la barra di download
 		y3.createprogressbar('progressbarcontainer');
+		this.m_currentDownloadingSourceFile = uri;
 		y3.showRemainingFiles();
 
 
@@ -770,7 +771,7 @@ var app =
 	    //console.log(dwComment);
 		//alert(dwComment);
 		
-		this.m_currentDownloadingSourceFile = uri;
+		
 	    m_fileTransfer.download(
 			uri,
 			localPath,
