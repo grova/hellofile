@@ -29,7 +29,7 @@ var y3 = {
     {   
         val = $("#WiFiOnlyCkeckbox").prop('checked');
         app.setWifiOnly(val);
-    }
+    },
     
     getlists: function () {
 		
