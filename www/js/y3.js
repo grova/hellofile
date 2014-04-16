@@ -4,6 +4,7 @@ var y3 = {
     // Application Constructor
     initialize: function (containerid) {
         //this.getlists(); non lo chiamo perche' lo chiamo a mano dal debugger, cosi' posso cambiare
+        this.setWiFiCheckboxState();
 		this.populatecontainer(containerid);
     },
 	
@@ -16,9 +17,14 @@ var y3 = {
 	listheader: '', //contiene la descrizione da passare alla pagina con la lista dei file (da scrivere nell'header)
 	
 
-    icons: ["acrobat_thumb_80x80.jpg", "excel_thumb_80x80.jpg", "doc_thumb_80x80.jpg", "img_thumb_80x80.jpg", "video_thumb_80x80.jpg"],
+    icons: ["acrobat_thumb_80x80.jpg", "excel_thumb_80x80.jpg", "doc_thumb_80x80.jpg", "img_thumb_80x80.jpg", "video_thumb_80x80.jpg", "present_thumb_80x80.jpg", "unknown_thumb_80x80.jpg"],
 	
-		
+    setWiFiCheckboxState: function()
+        {
+         $("#WiFiOnlyCkeckbox").getWifiOnly()
+        
+        },
+    
     getlists: function () {
 		
         this.grouplist = [
