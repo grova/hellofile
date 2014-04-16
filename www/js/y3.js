@@ -417,7 +417,7 @@ var y3 = {
         
         if (app.m_currentDownloadingSourceFile != null){
             fns = app.m_currentDownloadingSourceFile.split('/');
-            $('#currentDownloadingSourceFile').html(fns[fns.length-1]);
+            $('#currentDownloadingSourceFile').html("downloading " + fns[fns.length-1]);
         }
         else{
             $('#currentDownloadingSourceFile').html(app.m_currentDownloadingSourceFile);
