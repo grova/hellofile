@@ -22,13 +22,13 @@ var y3 = {
     setWiFiCheckboxState: function()
         {
          //setto il checkbox in base al valore salvato nelle opzioni locali
-         $("#WiFiOnlyCkeckbox").prop('checked', getWifiOnly());
+         $("#WiFiOnlyCkeckbox").prop('checked', app.getWifiOnly());
         },
     
     updateWiFiSettings: function()
     {   
         val = $("#WiFiOnlyCkeckbox").prop('checked');
-        setWifiOnly(val);
+        app.setWifiOnly(val);
     }
     
     getlists: function () {
