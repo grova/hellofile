@@ -413,9 +413,10 @@ var y3 = {
     
     showRemainingFiles: function(){
         t = app.toDownloadList.length;
-        $('#totalnumberoffiles').html (t);
-        fns = app.m_currentDownloadingSourceFile.split('/');
-        $('#currentDownloadingSourceFile').html(fns[fns.length-1]);
+        $('#totalnumberoffiles').html(t);
+        //fns = app.m_currentDownloadingSourceFile.split('/');
+        //$('#currentDownloadingSourceFile').html(fns[fns.length-1]);
+        $('#currentDownloadingSourceFile').html(app.m_currentDownloadingSourceFile);
     },
     
     showDownloadResult: function(errcode){
