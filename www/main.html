@@ -439,8 +439,9 @@
                 });
                 
                 $("#registrationSubmitButton").click(function(){
-                    this.toggle();
-                    //app.postRegistration()
+                    $(this).prop('disabled', true);
+                    app.postRegistration();
+                    $(this).prop('disabled', false);
                 }); 
 
 			}
