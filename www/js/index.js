@@ -220,13 +220,14 @@ var app =
 
     },
 
-        
+    wifiOnly: true,
+    
     // carico i file json dal server (cablato)
     // e crea la lista dei file da scaricare, quelli non aggiornati
     loadJson: function()
     {
 		var networkState = navigator.connection.type;
-		if (networkState != Connection.WIFI)
+		if (this.wifiOnly && (networkState != Connection.WIFI))
 		{
 			var states = {};
 			states[Connection.UNKNOWN]  = 'Unknown connection';
@@ -737,8 +738,9 @@ var app =
 		localPath = localPath.replace(/ /g,"_");
 		//localPath = encodeURI(localPath);
 		var uri = encodeURI(remoteFilePath);
-	    console.log("start download of " + remoteFilePath);
-	    console.log("to " + localPath);	
+		
+		
+	    
 	    m_fileTransfer = new FileTransfer();
 		
 		//andiamo alla pagina di download....
@@ -764,6 +766,10 @@ var app =
 
 		};
 
+		var dwComment = "start download of " + uri + " to " + localPath;
+	    console.log(dwComment);
+		alert(dwComment);
+		
 		this.m_currentDownloadingSourceFile = uri;
 	    m_fileTransfer.download(
 			uri,
