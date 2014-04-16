@@ -225,6 +225,24 @@ var app =
     // e crea la lista dei file da scaricare, quelli non aggiornati
     loadJson: function()
     {
+		var networkState = navigator.connection.type;
+		if (networkState != Connection.WIFI)
+		{
+			var states = {};
+			states[Connection.UNKNOWN]  = 'Unknown connection';
+			states[Connection.ETHERNET] = 'Ethernet connection';
+			states[Connection.WIFI]     = 'WiFi connection';
+			states[Connection.CELL_2G]  = 'Cell 2G connection';
+			states[Connection.CELL_3G]  = 'Cell 3G connection';
+			states[Connection.CELL_4G]  = 'Cell 4G connection';
+			states[Connection.CELL]     = 'Cell generic connection';
+			states[Connection.NONE]     = 'No network connection';
+
+			alert("connessione WIFI non attiva ("+states[networkState]+")");
+			return;
+		}
+	
+	
         y3.showloading(); //mostro loading in progress...
         
 		this.toDownloadList = new Array();	// qui ci metto quelli da scaricare
