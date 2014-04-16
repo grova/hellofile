@@ -431,7 +431,7 @@ var y3 = {
             break;
         case 2:
             title = 'Errore 002 durante il download';
-            message = "Si è verificato un errore durante lo scaricamento. Riprova in un secondo momento.";
+            message = "Si è verificato un errore durante lo scaricamento di "+app.m_currentDownloadingSourceFile+". Riprova in un secondo momento.";
             break;
         case 3:
             title = 'Errore 003';
