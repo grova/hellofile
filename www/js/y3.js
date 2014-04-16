@@ -420,7 +420,7 @@ var y3 = {
             $('#currentDownloadingSourceFile').html("downloading " + fns[fns.length-1]);
         }
         else{
-            $('#currentDownloadingSourceFile').html(app.m_currentDownloadingSourceFile);
+            $('#currentDownloadingSourceFile').html("donloading files...");
         }
     },
     
