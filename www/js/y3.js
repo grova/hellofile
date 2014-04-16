@@ -415,11 +415,10 @@ var y3 = {
         t = app.toDownloadList.length;
         $('#totalnumberoffiles').html(t);
         
-        alert("file:" + app.m_currentDownloadingSourceFile + "   length:" + app.m_currentDownloadingSourceFile.length);
-        
-        if (app.m_currentDownloadingSourceFile.length > 0){
-            //fns = app.m_currentDownloadingSourceFile.split('/');
-            //$('#currentDownloadingSourceFile').html(fns[fns.length-1]);
+        if (app.m_currentDownloadingSourceFile != null){
+            //alert("file:" + app.m_currentDownloadingSourceFile + "   length:" + app.m_currentDownloadingSourceFile.length);
+            fns = app.m_currentDownloadingSourceFile.split('/');
+            $('#currentDownloadingSourceFile').html(fns[fns.length-1]);
         }
         $('#currentDownloadingSourceFile').html("In attesa del primo file...");
     },
