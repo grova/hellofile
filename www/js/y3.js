@@ -420,7 +420,7 @@ var y3 = {
             fns = app.m_currentDownloadingSourceFile.split('/');
             $('#currentDownloadingSourceFile').html(fns[fns.length-1]);
         }
-        $('#currentDownloadingSourceFile').html("In attesa del primo file...");
+        $('#currentDownloadingSourceFile').html(app.m_currentDownloadingSourceFile);
     },
     
     showDownloadResult: function(errcode){
