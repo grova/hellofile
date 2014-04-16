@@ -190,6 +190,16 @@ var app =
 					this.localdb = null;
 				}
 			}
+			
+			this.wifiOnly = localStorage.getItem("wifiOnly");
+			if (this.wifiOnly == null)
+			{
+				this.wifiOnly = true;
+			}
+			if (this.wifiOnly == undefined)
+			{
+				this.wifiOnly = true;
+			}
 		}
     },
 
@@ -221,7 +231,20 @@ var app =
     },
 
     wifiOnly: true,
-    
+	setWifiOnly: function(_wifi)
+	{
+		if (this.wifiOnly != _wifi)
+		{
+			this.wifiOnly = _wifi;
+			localStorage.setItem("wifiOnly",_wifi);
+		}
+	},
+	
+	getWifiOnly: function()
+	{
+		return this.wifiOnly;
+	},
+	    
     // carico i file json dal server (cablato)
     // e crea la lista dei file da scaricare, quelli non aggiornati
     loadJson: function()
