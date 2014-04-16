@@ -25,8 +25,9 @@ var y3 = {
          $("#WiFiOnlyCkeckbox").prop('checked', getWifiOnly());
         },
     
-    updateWiFiSettings: function(val)
-    {
+    updateWiFiSettings: function()
+    {   
+        val = $("#WiFiOnlyCkeckbox").prop('checked');
         setWifiOnly(val);
     }
     
