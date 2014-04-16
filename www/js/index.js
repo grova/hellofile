@@ -1255,9 +1255,6 @@ var app =
     postRegistration: function()
     {
         
-        //disabilito il bottone per prevenire invii multipli
-        $('#registrationSubmitButton').toggle();
-        
         var objToPost = 
         {
             nomeCognome: $('#nomeCognome').val(),
@@ -1296,8 +1293,7 @@ var app =
                 alert("reg fail");
             });
 
-        //riabilito il bottone se per caso ci fosse da rifare la registrazione
-        $('#registrationSubmitButton').toggle();
+
     }
 }
 

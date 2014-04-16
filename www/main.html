@@ -311,7 +311,7 @@
                       <div class="ui-grid-a" style="margin-top:3em;">
                         <div class="ui-block-a">
                             <div class="button-wrap y3-marOriz">
-                                <button id="registrationSubmitButton" onClick="app.postRegistration()" class="ui-btn ui-icon-arrow-d ui-btn-icon-left ui-corner-all ui-btn-c">Invia Richiesta</button>
+                                <button id="registrationSubmitButton" class="ui-btn ui-icon-arrow-d ui-btn-icon-left ui-corner-all ui-btn-c">Invia Richiesta</button>
                             </div>
                         </div>
                         <div class="ui-block-b">
@@ -437,6 +437,11 @@
                 $("#WiFiOnlyCkeckbox").change(function(){
                     y3.updateWiFiSettings();
                 });
+                
+                $("#registrationSubmitButton").click(function(){
+                    this.toggle();
+                    //app.postRegistration()
+                }); 
 
 			}
 
