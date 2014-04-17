@@ -845,6 +845,7 @@ var app =
 	{
 		console.log("abort req");
 		this.m_requestAbort = true;
+		alert("abortreq:"+this.m_fileTransfer);
 		if (this.m_fileTransfer != null)
 		{
 			alert("blocco un download in corso");
