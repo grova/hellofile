@@ -191,6 +191,7 @@ var app =
 				}
 			}
 			
+			alert(localStorage.getItem("wifiOnly"));
 			this.wifiOnly = localStorage.getItem("wifiOnly");
 			if (this.wifiOnly == null)
 			{
