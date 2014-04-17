@@ -5,7 +5,6 @@ var y3 = {
     initialize: function (containerid) {
         //this.getlists(); non lo chiamo perche' lo chiamo a mano dal debugger, cosi' posso cambiare
         this.setWiFiCheckboxState();
-        alert(app.getWifiOnly());
 		this.populatecontainer(containerid);
     },
 	
@@ -28,7 +27,7 @@ var y3 = {
     
     updateWiFiSettings: function()
     {   
-        val = $("#WiFiOnlyCkeckbox").prop('checked');
+        val = $("#WiFiOnlyCkeckbox").prop('checked').checkboxradio("refresh");
         app.setWifiOnly(val);
     },
     
