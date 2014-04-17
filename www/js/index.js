@@ -792,9 +792,9 @@ var app =
 
 		};
 
-		var dwComment = "start download of " + uri + " to " + localPath;
+		//var dwComment = "start download of " + uri + " to " + localPath;
 	    //console.log(dwComment);
-		alert(dwComment);
+		//alert(dwComment);
 		
 		
 	    this.m_fileTransfer.download(
@@ -830,7 +830,13 @@ var app =
 			},
 			function(error) 
 			{
-				var err = "error: download source ("+error.source+"), target ("+error.target+"), code ("+error.code+")";
+				var states = {};
+				states[FileTransferError.FILE_NOT_FOUND_ERR]  = 'file non trovato';
+				states[FileTransferError.INVALID_URL_ERR] = 'url non valido';
+				states[FileTransferError.CONNECTION_ERR]     = 'errore di connessione';
+				states[FileTransferError.ABORT_ERR]  = 'download interrotto';
+				
+				var err = "error: download source ("+error.source+"), target ("+error.target+"), ("+states[error.code]+")";
 				alert(err);
 			    console.log("download error source " + error.source);
 			    console.log("download error target " + error.target);
