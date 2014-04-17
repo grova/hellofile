@@ -792,9 +792,9 @@ var app =
 
 		};
 
-		//var dwComment = "start download of " + uri + " to " + localPath;
+		var dwComment = "start download of " + uri + " to " + localPath;
 	    //console.log(dwComment);
-		//alert(dwComment);
+		alert(dwComment);
 		
 		
 	    this.m_fileTransfer.download(
@@ -847,7 +847,7 @@ var app =
 		this.m_requestAbort = true;
 		if (this.m_fileTransfer != null)
 		{
-			alert("blocco un download in corso");
+			//alert("blocco un download in corso");
 			console.log("blocco un download in corso");
 			this.m_fileTransfer.abort();
 		}
