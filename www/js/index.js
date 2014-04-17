@@ -238,7 +238,7 @@ var app =
 		{
 			this.wifiOnly = _wifi;
 			localStorage.setItem("wifiOnly",_wifi);
-			alert("wifiOnly:"+_wifi);
+			//alert("wifiOnly:"+_wifi);
 		}
 	},
 	
