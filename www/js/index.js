@@ -766,7 +766,7 @@ var app =
 		
 		
 	    
-	    m_fileTransfer = new FileTransfer();
+	    this.m_fileTransfer = new FileTransfer();
 		
 		//andiamo alla pagina di download....
 		$.mobile.navigate("#downloading");
@@ -777,7 +777,7 @@ var app =
 
 
 	    loadingStatus.m_percent = 0;
-	    m_fileTransfer.onprogress = function(progressEvent) 
+	    this.m_fileTransfer.onprogress = function(progressEvent) 
 	    {
 		    if (progressEvent.lengthComputable) 
 		    {
@@ -797,7 +797,7 @@ var app =
 		//alert(dwComment);
 		
 		
-	    m_fileTransfer.download(
+	    this.m_fileTransfer.download(
 			uri,
 			localPath,
 			function(theFile) 
@@ -845,7 +845,6 @@ var app =
 	{
 		console.log("abort req");
 		this.m_requestAbort = true;
-		alert("abortreq:"+this.m_fileTransfer);
 		if (this.m_fileTransfer != null)
 		{
 			alert("blocco un download in corso");
