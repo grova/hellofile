@@ -21,9 +21,9 @@ var y3 = {
 	
     setWiFiCheckboxState: function() {
          //setto il checkbox in base al valore salvato nelle opzioni locali
-         var val = app.getWifiOnly();
-         $("#WiFiOnlyCkeckbox").prop('checked', val).checkboxradio("refresh");
-         alert('getWifiOnly() è: ' + val  + ',   -   il checkbox è: ' + $("#WiFiOnlyCkeckbox").prop('checked'));
+         var v = app.getWifiOnly();
+         $("#WiFiOnlyCkeckbox").prop("checked", v).checkboxradio("refresh");
+         alert('getWifiOnly() è: ' + v  + ',   -   il checkbox è: ' + $("#WiFiOnlyCkeckbox").prop('checked'));
             
         },
     
