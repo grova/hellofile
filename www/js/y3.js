@@ -19,15 +19,17 @@ var y3 = {
 
     icons: ["acrobat_thumb_80x80.jpg", "excel_thumb_80x80.jpg", "doc_thumb_80x80.jpg", "img_thumb_80x80.jpg", "video_thumb_80x80.jpg", "present_thumb_80x80.jpg", "unknown_thumb_80x80.jpg"],
 	
-    setWiFiCheckboxState: function()
-        {
+    setWiFiCheckboxState: function() {
          //setto il checkbox in base al valore salvato nelle opzioni locali
-         $("#WiFiOnlyCkeckbox").prop('checked', app.getWifiOnly()).checkboxradio("refresh");
+         var val = app.getWifiOnly();
+         $("#WiFiOnlyCkeckbox").prop('checked', val).checkboxradio("refresh");
+         alert('il checkbox è: ' + $("#WiFiOnlyCkeckbox").prop('checked'));
+            
         },
     
     updateWiFiSettings: function()
     {   
-        val = $("#WiFiOnlyCkeckbox").prop('checked');
+        var val = $("#WiFiOnlyCkeckbox").prop('checked');
         app.setWifiOnly(val);
     },
     
