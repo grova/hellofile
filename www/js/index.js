@@ -406,10 +406,11 @@ var app =
                               		var msg = "file(s) to download: " + app.toDownloadList.length;
                                   console.log(msg);
                                   alert(msg);
+                                  navigator.notification.confirm('clicca Scarica per scaricare i nuovi files', y3.triggerDownload, f+' Aggiornamenti disponibili', ['Annulla','Scarica']);
                                   y3.initialize('homecontent');
-                                  alert("1");
+                                  
                                   y3.hideloading();// nascondo loading in progress..
-                                  alert("2");
+                                  
 						          y3.syncresult();
                               }
                                              ); 
