@@ -230,6 +230,8 @@ var app =
 	
 	getWifiOnly: function()
 	{
+		return true;
+		
 		var wifiOnly;
 		var temp = localStorage.getItem("wifiOnly");
 		if (temp == null)
