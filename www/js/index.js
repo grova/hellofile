@@ -191,7 +191,7 @@ var app =
 				}
 			}
 			
-			alert(localStorage.getItem("wifiOnly"));
+			//alert(localStorage.getItem("wifiOnly"));
 		}
     },
 
