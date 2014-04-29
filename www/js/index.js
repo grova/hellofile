@@ -222,7 +222,7 @@ var app =
 
     },
 
-    wifiOnly: true,
+    
 	setWifiOnly: function(_wifi)
 	{
 		localStorage.setItem("wifiOnly",JSON.stringify(_wifi));
@@ -260,7 +260,7 @@ var app =
     loadJson: function()
     {
 		var networkState = navigator.connection.type;
-		if (this.wifiOnly && (networkState != Connection.WIFI))
+		if (this.getWifiOnly() && (networkState != Connection.WIFI))
 		{
 			var states = {};
 			states[Connection.UNKNOWN]  = 'Unknown connection';
