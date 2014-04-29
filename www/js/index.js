@@ -252,7 +252,7 @@ var app =
 				wifiOnly = true;
 			}
 		}
-		alert(wifiOnly);
+		//alert(wifiOnly);
 		return wifiOnly;
 	},
 	    
