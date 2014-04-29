@@ -406,7 +406,7 @@ var app =
                               		var msg = "file(s) to download: " + app.toDownloadList.length;
                                   console.log(msg);
                                   alert(msg);
-                                  navigator.notification.confirm('clicca Scarica per scaricare i nuovi files', y3.triggerDownload, f+' Aggiornamenti disponibili', ['Annulla','Scarica']);
+                                  navigator.notification.confirm('clicca Scarica per scaricare i nuovi files', y3.triggerDownload, app.toDownloadList.length+' Aggiornamenti disponibili', ['Annulla','Scarica']);
                                   y3.initialize('homecontent');
                                   
                                   y3.hideloading();// nascondo loading in progress..
