@@ -361,8 +361,11 @@ var y3 = {
 		//Altrimenti porta l'utente alla pagina #no_filestosync per dirgli che non ci sono aggiornamenti
 		var f = 0;
 		if (app.toDownloadList != null) {f = app.toDownloadList.length};
+
+
 		
 		if (f > 0) {
+			alert("4"+navigator.notification);
 			// scrivo nella pagina filestosync se ho dei files da scaricare
 			if (navigator.notification != undefined)
 			{
@@ -385,6 +388,7 @@ var y3 = {
 		}
 		else
 		{
+			alert("5");
 			// nulla da scaricare, mando alla pagina #no_filestosync
 			if (navigator.notification != undefined)
 			{

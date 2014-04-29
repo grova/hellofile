@@ -407,7 +407,9 @@ var app =
                                   console.log(msg);
                                   alert(msg);
                                   y3.initialize('homecontent');
+                                  alert("1");
                                   y3.hideloading();// nascondo loading in progress..
+                                  alert("2");
 						          y3.syncresult();
                               }
                                              ); 
