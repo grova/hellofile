@@ -24,8 +24,7 @@ var y3 = {
          var v = app.getWifiOnly();
          //var ov = $("#WiFiOnlyCkeckbox").prop('checked');
          $("#WiFiOnlyCkeckbox").prop("checked", v).checkboxradio("refresh");	
-         // alert('getWifiOnly() è: ' + v  + ',   -     il checkbox era: ' + ov + ' ed ora è: ' + $("#WiFiOnlyCkeckbox").prop('checked'));
-            
+         // alert('getWifiOnly() è: ' + v  + ',   -     il checkbox era: ' + ov + ' ed ora è: ' + $("#WiFiOnlyCkeckbox").prop('checked'));            
         },
     
     updateWiFiSettings: function()
