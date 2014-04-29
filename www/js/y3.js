@@ -29,10 +29,11 @@ var y3 = {
          }
          else
          {
+         	alert("1");
          	$("#WiFiOnlyCkeckbox").prop("checked", false).checkboxradio("refresh");
          }
          
-         alert('getWifiOnly() è: ' + v  + ',   -     il checkbox era: ' + ov + ' ed ora è: ' + $("#WiFiOnlyCkeckbox").prop('checked'));
+         //alert('getWifiOnly() è: ' + v  + ',   -     il checkbox era: ' + ov + ' ed ora è: ' + $("#WiFiOnlyCkeckbox").prop('checked'));
             
         },
     
