@@ -366,6 +366,7 @@ var y3 = {
 		
 		if (f > 0) {
 			alert("4"+navigator.notification);
+			navigator.notification.alert("test",null,"test","test");
 			// scrivo nella pagina filestosync se ho dei files da scaricare
 			if (navigator.notification != undefined)
 			{
