@@ -225,19 +225,32 @@ var app =
     wifiOnly: true,
 	setWifiOnly: function(_wifi)
 	{
-		localStorage.setItem("wifiOnly",_wifi);
+		localStorage.setItem("wifiOnly",JSON.stringify(_wifi));
 	},
 	
 	getWifiOnly: function()
 	{
-		var wifiOnly = localStorage.getItem("wifiOnly");
-		if (wifiOnly == null)
+		var wifiOnly;
+		var temp = localStorage.getItem("wifiOnly");
+		if (temp == null)
 		{
 			wifiOnly = true;
 		}
-		if (wifiOnly == undefined)
+		else
+		if (temp == undefined)
 		{
 			wifiOnly = true;
+		}
+		else
+		{
+			try
+			{
+				wifiOnly = $.parseJSON(temp);
+			}
+			catch(err)
+			{
+				wifiOnly = true;
+			}
 		}
 		return wifiOnly;
 	},
