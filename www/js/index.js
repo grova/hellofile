@@ -231,7 +231,7 @@ var app =
 	getWifiOnly: function()
 	{
 		return true;
-		
+
 		var wifiOnly;
 		var temp = localStorage.getItem("wifiOnly");
 		if (temp == null)
@@ -403,7 +403,9 @@ var app =
                         app.deleteUnusedFiles(0,
                             function()
                               {
-                                  console.log("file(s) to download: " + app.toDownloadList.length);
+                              		var msg = "file(s) to download: " + app.toDownloadList.length;
+                                  console.log(msg);
+                                  alert(msg);
                                   y3.initialize('homecontent');
                                   y3.hideloading();// nascondo loading in progress..
 						          y3.syncresult();
