@@ -84,6 +84,7 @@ var app =
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+        app.myAlert("ondeviceready");
         app.initLocalDb();					// check local storage e carica il db dal localstorage
         app.initVersion();  // serve il local storage 
         app.mainIntegrityCheck();	// ne controlla l'itegrita' e inizializza il path della root del filesystem
