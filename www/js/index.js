@@ -875,6 +875,9 @@ var app =
 			this.m_fileTransfer.abort();
 		}
 	},
+	
+	
+	downloadLock: false,
 
 	// privata
 	// 0 ok, 1 abort. 2 errore
