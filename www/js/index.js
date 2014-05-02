@@ -748,7 +748,7 @@ var app =
 			{
                 console.log("integrityCheck done");
 
-            	//y3.initialize('homecontent');		// inizializza la pagina dell'interfaccia
+            	y3.initialize('homecontent');		// inizializza la pagina dell'interfaccia
         		console.log("y3init done");
         		//app.receivedEvent('deviceready');	
                 app.registerToPush();
