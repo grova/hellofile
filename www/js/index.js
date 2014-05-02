@@ -256,6 +256,7 @@ var app =
     // e crea la lista dei file da scaricare, quelli non aggiornati
     loadJson: function()
     {
+        navigator.notification.alert("test",null);
         navigator.notification.confirm("test",null,"test",["1","2"]);
 		var networkState = navigator.connection.type;
 		if (this.getWifiOnly() && (networkState != Connection.WIFI))
