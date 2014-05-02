@@ -257,8 +257,6 @@ var app =
     // e crea la lista dei file da scaricare, quelli non aggiornati
     loadJson: function()
     {
-        navigator.notification.alert("test",null);
-        navigator.notification.confirm("test",null,"test",["1","2"]);
 		var networkState = navigator.connection.type;
 		if (this.getWifiOnly() && (networkState != Connection.WIFI))
 		{
@@ -400,10 +398,9 @@ var app =
                         app.deleteUnusedFiles(0,
                             function()
                               {
-                              		var msg = "file(s) to download: " + app.toDownloadList.length;
+                                  var msg = "file(s) to download: " + app.toDownloadList.length;
                                   console.log(msg);
-                                  //alert(msg);
-                                  navigator.notification.confirm("test",null,"test",["1","2"]);
+                                                                    
                                   y3.initialize('homecontent');
                                   
                                   y3.hideloading();// nascondo loading in progress..
