@@ -84,10 +84,10 @@ var app =
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        app.myAlert("ondeviceready");
+        //app.myAlert("ondeviceready");
         app.initLocalDb();					// check local storage e carica il db dal localstorage
         app.initVersion();  // serve il local storage 
-        //app.mainIntegrityCheck();	// ne controlla l'itegrita' e inizializza il path della root del filesystem
+        app.mainIntegrityCheck();	// ne controlla l'itegrita' e inizializza il path della root del filesystem
     },
     
     newInstall : false,
@@ -748,11 +748,11 @@ var app =
 			{
                 console.log("integrityCheck done");
 
-            	y3.initialize('homecontent');		// inizializza la pagina dell'interfaccia
+            	//y3.initialize('homecontent');		// inizializza la pagina dell'interfaccia
         		console.log("y3init done");
-        		app.receivedEvent('deviceready');	
+        		//app.receivedEvent('deviceready');	
                 app.registerToPush();
-                y3.setWiFiCheckboxState();
+                //y3.setWiFiCheckboxState();
 			}
 			);
 
