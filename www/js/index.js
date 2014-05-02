@@ -749,7 +749,7 @@ var app =
         		console.log("y3init done");
         		//app.receivedEvent('deviceready');	
                 app.registerToPush();
-                //y3.setWiFiCheckboxState();
+                y3.setWiFiCheckboxState();
 			}
 			);
 
