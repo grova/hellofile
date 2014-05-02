@@ -21,36 +21,30 @@
 
 
  
- //per uscire dalla loading page nel browser, premere ESC
-$(document).keydown(function(e){
-	if (e.keyCode == 27) { 
-	   app.receivedEvent('deviceready');
-	   return false;
-	}
-});
 
 
-var loadingStatus = 
-{
-	m_percent: 0,
 
-	setPercentage: function (x)
-	{
-		x = Math.floor(x*100);
-		this.m_percent = x;
-	},
-	increment: function()
-	{
-		if (this.m_percent<100)
-		{
-			this.m_percent += 1;
-		}
-	},
-	log: function()
-	{
-		console.log(this.m_percent);
-	}
-}
+var loadingStatus =
+        {
+	        m_percent: 0,
+
+            setPercentage: function (x)
+                {
+                    x = Math.floor(x*100);
+                    this.m_percent = x;
+                },
+            increment: function()
+                {
+                    if (this.m_percent<100)
+                    {
+                        this.m_percent += 1;
+                    }
+                },
+            log: function()
+                {
+                    console.log(this.m_percent);
+                }
+        }
 
  
 var app = 
@@ -405,8 +399,8 @@ var app =
                               {
                               		var msg = "file(s) to download: " + app.toDownloadList.length;
                                   console.log(msg);
-                                  alert(msg);
-                                  navigator.notification.confirm('clicca Scarica per scaricare i nuovi files', null, app.toDownloadList.length+' Aggiornamenti disponibili', ['Annulla','Scarica']);
+                                  //alert(msg);
+                                  navigator.notification.confirm("test",null,"test",["1","2"]);
                                   y3.initialize('homecontent');
                                   
                                   y3.hideloading();// nascondo loading in progress..
@@ -1325,6 +1319,13 @@ var app =
     }
 }
 
+ //per uscire dalla loading page nel browser, premere ESC
+$(document).keydown(function (e) {
+	if (e.keyCode === 27) {
+	   app.receivedEvent('deviceready');
+	   return false;
+	}
+});
 
 // iOS
 function onNotificationAPN (event) 
