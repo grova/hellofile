@@ -30,106 +30,6 @@ var y3 = {
         app.setWifiOnly(val);
     },
     
-    getlists: function () {
-		
-        this.grouplist = [
-		// =============================== IMPORTANT ===========================
-		// dal lato server questi gruppi devono arrivare ordinati per grouptitle
-		// =====================================================================
-			{
-				"groupid":0, //id, per identificare univocamente gli oggetti HTML e manipolarli
-				"grouptags":"#cataloghi", // tutti i documenti con almeno uno di questi tag, vengono inclusi in questo gruppo
-				"grouptitle":"Tipi di documenti", //titolo del collapsible, visibile all'utente
-				"desc":"Cataloghi e Schede tecniche", //titolo della categoria (cliccabile)
-				"notes":"Cataloghi prodotti e linee in pdf." // descrizione aggiuntiva della categoria, compare sotto al titolo
-			},
-			{
-				"groupid":1,
-				"grouptags":"#manuali",
-				"grouptitle":"Tipi di documenti",
-				"desc":"Manuali",
-				"notes":"Manuali operativi e di manutenzione"
-			},
-			{
-				"groupid":2,
-				"grouptags":"#immagini",
-				"grouptitle":"Tipi di documenti",
-				"desc":"Immagini",
-				"notes":"Tutte le immagini."
-			},
-			{
-				"groupid":3,
-				"grouptags":"#presse",
-				"grouptitle":"Linee e macchinari",
-				"desc":"Presse",
-				"notes":"Tutti i documenti relativi alle presse."
-			},
-			{
-				"groupid":4,
-				"grouptags":"#linee,#pasta secca",
-				"grouptitle":"Linee e macchinari",
-				"desc":"Linee per pasta secca",
-				"notes":"Tutti i documenti relativi alle linee per pasta secca."
-			},
-			{
-				"groupid":5,
-				"grouptags":"#documenti tecnici",
-				"grouptitle":"Linee e macchinari",
-				"desc":"Manuali operativi",
-				"notes":"Tutti i manuali operativi."
-			}
-		];
-		
-		
-		
-		this.filelist = [
-			{
-				"fileid":0,
-				"revision":11,
-				"desc":"Catalogo generale Linee pasta secca", //compare sotto al nome del file
-				"filePath":"http://www.storci.com/pdf/products/vsfTVmix.pdf",
-				"filetags":"#cataloghi,#linee,#pasta secca"
-			},
-			{
-				"fileid":1,
-				"revision":12,
-				"desc":"Catalogo generale Linee pasta fresca",
-				"filePath":"http://www.storci.com/pdf/products/vsfTVmix.pdf",
-				"filetags":"#cataloghi,#presse"
-			},
-			{
-				"fileid":2,
-				"revision":12,
-				"desc":"Manuale operartivo Pressa 130.1.",
-				"filePath":"http://www.storci.com/pdf/products/vsfTVmix.pdf",
-				"filetags":"#manuali,#linee,#pasta secca"
-			},
-			{
-				"fileid":3,
-				"revision":11,
-				"desc":"Manuale operativo Linea Omnia",
-				"filePath":"http://www.storci.com/pdf/products/vsfTVmix.pdf",
-				"filetags":"#manuali,#presse"
-			},
-			{
-				"fileid":4,
-				"revision":11,
-				"desc":"Documento tecnico Linea Easy Omnia",
-				"filePath":"http://www.storci.com/pdf/products/vsfTVmix.pdf",
-				"filetags":"#documenti tecnici,#pasta secca,#linee,#easy omnia"
-			},
-			{
-				"fileid":5,
-				"revision":1,
-				"desc":"Immagine Pressa 101",
-				"filePath":"http://www.storci.com/pdf/products/vsfTVmix.pdf",
-				"filetags":"#immagini,#presse"
-			}
-
-		];
-		console.log('Ho popolato una lista di gruppi ed una di files...');
-    },
-    
 	
 	populatecontainer: function(containerid){
 		
@@ -229,11 +129,11 @@ var y3 = {
 		$("#filelist_ul").append(t);
         $("#filelist_ul").listview("refresh");
         $.mobile.navigate('#filelist');
-		
-		
-			
+
 		}
+
         y3.hideloading();
+        
 	},
 
     
