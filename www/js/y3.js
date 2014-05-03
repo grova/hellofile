@@ -132,7 +132,7 @@ var y3 = {
         $('#filelist_ul').jqmts({
             useNativeMenu: false, // use standard select menu, or enhanced
             showCounts: true, // shows a count of unique listview values or not
-            //className: 'jqmts', // allows the addition of an optional classname
+            className: 'jqmts', // allows the addition of an optional classname
             attributes: {desc: 'Descrizione'}
         });
 
