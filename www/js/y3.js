@@ -288,7 +288,7 @@ var y3 = {
 		}
 		else
 		{
-			alert("5");
+			// alert("5");
 			// nulla da scaricare, mando alla pagina #no_filestosync
 			if (navigator.notification != undefined)
 			{
