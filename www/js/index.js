@@ -450,6 +450,10 @@ var app =
     {
         var ext = this.getFileExtension(name).toLowerCase();
         
+        if (ext == "gif")
+        {
+            return "image/gif";
+        }
         if (ext == "jpg")
         {
             return "image/jpeg";
