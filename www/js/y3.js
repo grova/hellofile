@@ -60,7 +60,8 @@ var y3 = {
 			{// è necessario che nel db i gruppi siano ordinati per groutitle
 				groupid = grouplist[i].groupid; //id del collapsible, viene usato per inserirvi i <li>
 				oldgrouptitle = grouplist[i].grouptitle; // riferimento per sapere quando cambia il tipo di raggruppamento (per fare un nuovo collapsible)
-				if (i>0) datacollapsed = 'true'//il primo collapsible è sempre aperto di default
+				//if (i>0) datacollapsed = 'true'//il primo collapsible è sempre aperto di default
+                datacollapsed = 'true';
 				$("#"+containerid).append("<div data-role='collapsible' data-theme='c' data-collapsed='"+datacollapsed+"' id='collapsible"+groupid+"' class='collapsible_refreshme'>");
 				console.log('ho aggiunto un collabsible');
 				files = y3.countfiles(grouplist[i].grouptags);//contiene i files che presentano TUTTI i tag richiesti da questo gruppo
