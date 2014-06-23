@@ -883,8 +883,8 @@ var app =
 		// prima guardo se ho da scaricare
 		if (this.toDownloadList==null)
 		{
-			//window.plugins.powerManagement.release();
-			window.plugins.insomnia.allowSleepAgain();
+			window.plugins.powerManagement.release();
+			//window.plugins.insomnia.allowSleepAgain();
 			
 			console.log("niente da scaricare (null)");
 			y3.showDownloadResult(0);
@@ -892,8 +892,8 @@ var app =
 		}
 		if (this.toDownloadList.length==0)
 		{
-			//window.plugins.powerManagement.release();
-			window.plugins.insomnia.allowSleepAgain()
+			window.plugins.powerManagement.release();
+			//window.plugins.insomnia.allowSleepAgain()
 			console.log("niente da scaricare (0)");
 			y3.showDownloadResult(0);
 			return;
@@ -910,8 +910,8 @@ var app =
 					if (app.m_requestAbort)
 					{
 						// fine
-						//window.plugins.powerManagement.release();
-						window.plugins.insomnia.allowSleepAgain()
+						window.plugins.powerManagement.release();
+						//window.plugins.insomnia.allowSleepAgain()
 						console.log("abort: fine iterazione download");
 						app.m_requestAbort = false;
 						y3.showDownloadResult(1);
@@ -925,8 +925,8 @@ var app =
 				function()
 				{
 					// c'e' stato un errore o un abort
-					//window.plugins.powerManagement.release();
-					window.plugins.insomnia.allowSleepAgain();
+					window.plugins.powerManagement.release();
+					//window.plugins.insomnia.allowSleepAgain();
 					console.log("download error or abort");
 					var abort = app.m_requestAbort;
 					app.m_requestAbort = false;
@@ -947,8 +947,8 @@ var app =
 	mainDownloadAllFiles: function()
 	{
 		this.m_requestAbort = false;
-		//window.plugins.powerManagement.acquire();
-		window.plugins.insomnia.keepAwake();
+		window.plugins.powerManagement.acquire();
+		//window.plugins.insomnia.keepAwake();
 		this.downloadAllFiles();
 	},
     
