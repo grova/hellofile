@@ -760,6 +760,7 @@ var app =
 
 	m_fileTransfer: null,	// tiro fuori l'oggetto per poter chiamare abort
 	m_requestAbort: false,
+    m_requestSkip: false,
 	m_currentDownloadingSourceFile: null,
 
 	// scarica il file i-esimo dalla lista todownload
@@ -871,6 +872,17 @@ var app =
 			this.m_fileTransfer.abort();
 		}
 	},
+    
+    // pubblica
+    requestSkip: function()
+    {
+        this.m_requestSkip = true;
+        if (this.m_fileTransfer != null)
+		{
+			this.m_fileTransfer.abort();
+		}
+    },
+    
 	
 	
 	downloadLock: false,
@@ -925,19 +937,28 @@ var app =
 				function()
 				{
 					// c'e' stato un errore o un abort
-					window.plugins.powerManagement.release();
-					//window.plugins.insomnia.allowSleepAgain();
-					console.log("download error or abort");
-					var abort = app.m_requestAbort;
-					app.m_requestAbort = false;
-					if (abort)
-					{
-						y3.showDownloadResult(1);
-					}
-					else
-					{
-						y3.showDownloadResult(2);
-					}
+                    // o uno skip
+                    if (app.m_requestSkip)
+                    {
+                        app.m_requestSkip = false;
+                        // continuo
+                    }
+                    else
+                    {
+                        window.plugins.powerManagement.release();
+                        //window.plugins.insomnia.allowSleepAgain();
+                        console.log("download error or abort");
+                        var abort = app.m_requestAbort;
+                        app.m_requestAbort = false;
+                        if (abort)
+                        {
+                            y3.showDownloadResult(1);
+                        }
+                        else
+                        {
+                            y3.showDownloadResult(2);
+                        }
+                    }
 				}
 		);
 
@@ -947,6 +968,7 @@ var app =
 	mainDownloadAllFiles: function()
 	{
 		this.m_requestAbort = false;
+        this.m_requestSkip = false;
 		window.plugins.powerManagement.acquire();
 		//window.plugins.insomnia.keepAwake();
 		this.downloadAllFiles();
