@@ -894,6 +894,7 @@ var app =
 		if (this.toDownloadList==null)
 		{
 			//window.plugins.powerManagement.release();
+			alert("sleep");
 			window.plugins.insomnia.allowSleepAgain();
 			
 			console.log("niente da scaricare (null)");
@@ -903,6 +904,7 @@ var app =
 		if (this.toDownloadList.length==0)
 		{
 			//window.plugins.powerManagement.release();
+			alert("sleep");
 			window.plugins.insomnia.allowSleepAgain()
 			console.log("niente da scaricare (0)");
 			y3.showDownloadResult(0);
@@ -921,6 +923,7 @@ var app =
 					{
 						// fine
 						//window.plugins.powerManagement.release();
+						alert("sleep");
 						window.plugins.insomnia.allowSleepAgain()
 						console.log("abort: fine iterazione download");
 						app.m_requestAbort = false;
@@ -944,6 +947,7 @@ var app =
                     else
                     {
                         //window.plugins.powerManagement.release();
+											alert("sleep");
                         window.plugins.insomnia.allowSleepAgain();
                         console.log("download error or abort");
                         var abort = app.m_requestAbort;
@@ -968,6 +972,7 @@ var app =
 		this.m_requestAbort = false;
         this.m_requestSkip = false;
 		//window.plugins.powerManagement.acquire();
+		alert("awake");
 		window.plugins.insomnia.keepAwake();
 		this.downloadAllFiles();
 	},
