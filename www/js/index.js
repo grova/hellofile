@@ -851,10 +851,8 @@ var app =
 				states[FileTransferError.ABORT_ERR]  = 'download interrotto';
 				
 				var err = "error: download source ("+error.source+"), target ("+error.target+"), ("+states[error.code]+")";
-				alert(err);
-			    console.log("download error source " + error.source);
-			    console.log("download error target " + error.target);
-			    console.log("upload error code: " + error.code);
+				//alert(err);
+			    console.log(err);
 			    _fail();
 			}
 		);
@@ -895,8 +893,8 @@ var app =
 		// prima guardo se ho da scaricare
 		if (this.toDownloadList==null)
 		{
-			window.plugins.powerManagement.release();
-			//window.plugins.insomnia.allowSleepAgain();
+			//window.plugins.powerManagement.release();
+			window.plugins.insomnia.allowSleepAgain();
 			
 			console.log("niente da scaricare (null)");
 			y3.showDownloadResult(0);
@@ -904,8 +902,8 @@ var app =
 		}
 		if (this.toDownloadList.length==0)
 		{
-			window.plugins.powerManagement.release();
-			//window.plugins.insomnia.allowSleepAgain()
+			//window.plugins.powerManagement.release();
+			window.plugins.insomnia.allowSleepAgain()
 			console.log("niente da scaricare (0)");
 			y3.showDownloadResult(0);
 			return;
@@ -922,8 +920,8 @@ var app =
 					if (app.m_requestAbort)
 					{
 						// fine
-						window.plugins.powerManagement.release();
-						//window.plugins.insomnia.allowSleepAgain()
+						//window.plugins.powerManagement.release();
+						window.plugins.insomnia.allowSleepAgain()
 						console.log("abort: fine iterazione download");
 						app.m_requestAbort = false;
 						y3.showDownloadResult(1);
@@ -945,8 +943,8 @@ var app =
                     }
                     else
                     {
-                        window.plugins.powerManagement.release();
-                        //window.plugins.insomnia.allowSleepAgain();
+                        //window.plugins.powerManagement.release();
+                        window.plugins.insomnia.allowSleepAgain();
                         console.log("download error or abort");
                         var abort = app.m_requestAbort;
                         app.m_requestAbort = false;
@@ -969,8 +967,8 @@ var app =
 	{
 		this.m_requestAbort = false;
         this.m_requestSkip = false;
-		window.plugins.powerManagement.acquire();
-		//window.plugins.insomnia.keepAwake();
+		//window.plugins.powerManagement.acquire();
+		window.plugins.insomnia.keepAwake();
 		this.downloadAllFiles();
 	},
     
