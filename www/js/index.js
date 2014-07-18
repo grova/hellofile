@@ -854,6 +854,17 @@ var app =
 				//alert(err);
 			    console.log(err);
 			    _fail();
+                
+                
+                
+                // c'e' stato un problema (o un abort)
+                // ti chiedo se vuoi skippare il file e continuare o bloccare tutto
+                if (navigator.notification != undefined)
+                {
+                    var msg = "problema con il file corrente, vuoi 
+                    navigator.notification.alert("problema con il filmsg,null,"error");
+                }
+                
 			}
 		);
 	},
