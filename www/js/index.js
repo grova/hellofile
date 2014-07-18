@@ -762,6 +762,7 @@ var app =
 	m_requestAbort: false,
     m_requestSkip: false,
 	m_currentDownloadingSourceFile: null,
+    m_nextDownloadFileIndex: 0, // indice del prossimo da scaricare, aumenta con lo skip, si resetta all'inizio del download
 
 	// scarica il file i-esimo dalla lista todownload
 	// aggiorna la lista todownload e localdb
@@ -853,7 +854,7 @@ var app =
 				var err = "error: download source ("+error.source+"), target ("+error.target+"), ("+states[error.code]+")";
 				//alert(err);
 			    console.log(err);
-			    _fail();
+			    //_fail();
                 
                 
                 
@@ -861,8 +862,30 @@ var app =
                 // ti chiedo se vuoi skippare il file e continuare o bloccare tutto
                 if (navigator.notification != undefined)
                 {
-                    var msg = "problema con il file corrente, vuoi 
-                    navigator.notification.alert("problema con il filmsg,null,"error");
+                    var msg = "problema con il file corrente, lo ignori e prosegui?";
+                    navigator.notification.alert(msg,
+                                                function(response)
+                                                 {
+                                                     switch(response)
+                                                     {
+                                                             case 1:
+                                                                // skip
+                                                                app.m_nextDownloadFileIndex++;
+                                                                y3.destroyprogressbar();
+                                                                // cear eventuale abort, cosi' posso andare al prossimo
+                                                                app.m_requestAbort = false;
+                                                             
+                                                                _success();
+                                                                break;
+                                                             default:
+                                                                // abort
+                                                                _fail();
+                                                                break;
+                                                     }
+                                                 },
+                                                 "download",
+                                                 ["continua con il prossimo","interrompi"]
+                                                );
                 }
                 
 			}
@@ -892,7 +915,10 @@ var app =
 		}
     },
     
-	
+	getRemainingFilesCount: function()
+    {
+        return this.toDownloadList.length - this.m_nextDownloadFileIndex;
+    }
 	
 	downloadLock: false,
 
@@ -985,6 +1011,7 @@ var app =
 		//window.plugins.powerManagement.acquire();
 		//alert("awake");
 		window.plugins.insomnia.keepAwake();
+        this.m_nextDownloadFileIndex = 0;
 		this.downloadAllFiles();
 	},
     
