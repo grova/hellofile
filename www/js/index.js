@@ -909,9 +909,8 @@ var app =
 	getRemainingFilesCount: function()
     {
         return this.toDownloadList.length - this.m_nextDownloadFileIndex;
-    }
+    },
 	
-	downloadLock: false,
 
 	// privata
 	// 0 ok, 1 abort. 2 errore
