@@ -256,7 +256,7 @@ var app =
     loadJson: function()
     {
 		var networkState = navigator.connection.type;
-        alert(networkState+","+this.getWifiOnly());
+        
 		if (this.getWifiOnly() && (networkState != Connection.WIFI))
 		{
 			var states = {};
@@ -854,41 +854,39 @@ var app =
 				
 				var err = "error: download source ("+error.source+"), target ("+error.target+"), ("+states[error.code]+")";
 				alert(err);
-			    console.log(err);
+			  console.log(err);
 			    //_fail();
                 
-                
-                
-                // c'e' stato un problema (o un abort)
-                // ti chiedo se vuoi skippare il file e continuare o bloccare tutto
-                if (navigator.notification != undefined)
-                {
-                    var msg = "problema con il file corrente, lo ignori e prosegui?";
-                    navigator.notification.alert(msg,
-                                                function(response)
-                                                 {
-                                                     switch(response)
-                                                     {
-                                                             case 1:
-                                                                // skip
-                                                                app.m_nextDownloadFileIndex++;
-                                                                y3.destroyprogressbar();
-                                                                // cear eventuale abort, cosi' posso andare al prossimo
-                                                                app.m_requestAbort = false;
-                                                             
-                                                                _success();
-                                                                break;
-                                                             default:
-                                                                // abort
-                                                                _fail();
-                                                                break;
-                                                     }
-                                                 },
-                                                 "download",
-                                                 ["continua con il prossimo","interrompi"]
-                                                );
-                }
-                
+				// c'e' stato un problema (o un abort)
+				// ti chiedo se vuoi skippare il file e continuare o bloccare tutto
+				if (navigator.notification != undefined)
+				{
+						var msg = "problema con il file corrente, lo ignori e prosegui?";
+						navigator.notification.confirm(msg,
+									function(response)
+									 {
+											 switch(response)
+											 {
+															 case 1:
+																	// skip
+																	app.m_nextDownloadFileIndex++;
+																	y3.destroyprogressbar();
+																	// cear eventuale abort, cosi' posso andare al prossimo
+																	app.m_requestAbort = false;
+
+																	_success();
+																	break;
+															 default:
+																	// abort
+																	_fail();
+																	break;
+											 }
+									 },
+									 "download",
+									 ["continua con il prossimo","interrompi"]
+									);
+				}
+
 			}
 		);
 	},
