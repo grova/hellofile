@@ -256,6 +256,7 @@ var app =
     loadJson: function()
     {
 		var networkState = navigator.connection.type;
+        alert(networkState+","+this.getWifiOnly());
 		if (this.getWifiOnly() && (networkState != Connection.WIFI))
 		{
 			var states = {};
@@ -852,7 +853,7 @@ var app =
 				states[FileTransferError.ABORT_ERR]  = 'download interrotto';
 				
 				var err = "error: download source ("+error.source+"), target ("+error.target+"), ("+states[error.code]+")";
-				//alert(err);
+				alert(err);
 			    console.log(err);
 			    //_fail();
                 
