@@ -907,7 +907,7 @@ var app =
     
 	getRemainingFilesCount: function()
     {
-        return this.toDownloadList.length - this.m_nextDownloadFileIndex;
+        return this.toDownloadList.length;
     },
 	
 
