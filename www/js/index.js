@@ -853,7 +853,7 @@ var app =
 				states[FileTransferError.ABORT_ERR]  = 'download interrotto';
 				
 				var err = "error: download source ("+error.source+"), target ("+error.target+"), ("+states[error.code]+")";
-				alert(err);
+				//alert(err);
 			  console.log(err);
 			    //_fail();
                 
@@ -937,7 +937,7 @@ var app =
 			return;
 		}
 		
-		this.downloadFile(0,
+		this.downloadFile(this.m_nextDownloadFileIndex,
 				function()
 				{
 					console.log("download success. left:"+app.toDownloadList.length);
