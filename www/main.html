@@ -399,9 +399,11 @@
                 FastClick.attach(document.body);
                 
         		g_mainInit++;
+                navigator.splashscreen.show();
 	            app.initialize();
                 y3.preloadImages(y3.icons);
                 y3.initUpdateVersionLink();
+                navigator.splashscreen.hide();
 
                 
                 $(".goToTestPage").click(function(){
