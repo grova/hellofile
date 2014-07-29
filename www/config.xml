@@ -3,7 +3,7 @@
 
     <preference name="phonegap-version" value="3.3.0" />
     
-    <name>Storci Synch</name>
+    <name>Storci Sync</name>
     <description>
         Hello World sample application that responds to the deviceready event.
     </description>
