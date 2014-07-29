@@ -753,7 +753,6 @@ var app =
         		//app.receivedEvent('deviceready');	
                 app.registerToPush();
                 y3.setWiFiCheckboxState();
-                //y3.initUpdateVersionLink();
 			}
 			);
 

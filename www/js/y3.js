@@ -412,7 +412,7 @@ var y3 = {
         if ( device.platform == 'android' || device.platform == 'Android' )
             {upd = "https://build.phonegap.com/apps/719057/download/android/?qr_key=Y8vSnviAZeRosyyoLMYu";}
         
-        $('updateVersionLink').attr('href', upd);
+        $('#updateVersionLink').attr('href', upd);
     
     }
 
