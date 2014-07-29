@@ -393,13 +393,16 @@
 
 	
         <script type="text/javascript">
+            
+            //mostro splashscreen prima di tutto, così rimane visualizzata
+            navigator.splashscreen.show();
+            
         	var g_mainInit = 0;
         	function mainInit()
         	{
                 FastClick.attach(document.body);
                 
         		g_mainInit++;
-                navigator.splashscreen.show();
 	            app.initialize();
                 y3.preloadImages(y3.icons);
                 y3.initUpdateVersionLink();
