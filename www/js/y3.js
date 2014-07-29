@@ -399,6 +399,21 @@ var y3 = {
             $('.upperBackButton').hide(); //hide lower back buttons
         };
 
+    },
+    
+    initUpdateVersionLink: function(){
+        // setto il link da mettere nella pagina Options per aggiornare l'App
+        
+        var upd = '#';
+        
+        if ( device.platform == 'iOS' )
+            {upd = "https://build.phonegap.com/apps/719057/download/ios/?qr_key=Y8vSnviAZeRosyyoLMYu";}
+
+        if ( device.platform == 'android' || device.platform == 'Android' )
+            {upd = "https://build.phonegap.com/apps/719057/download/android/?qr_key=Y8vSnviAZeRosyyoLMYu";}
+        
+        $('updateVersionLink').attr('href', upd);
+    
     }
 
 	
