@@ -376,6 +376,9 @@
  
                 </p>
                 
+                <h3>Test Gallery</h3>
+                <a href="img/logo.png" class="sticazzi" title="my caption">apri gallery</a>
+                
                 
             </div><!-- /content -->
 
@@ -408,6 +411,7 @@
                 y3.initUpdateVersionLink();
                 navigator.splashscreen.hide();
 
+                $(".sticazzi").swipebox();
                 
                 $(".goToTestPage").click(function(){
                     $.mobile.navigate('#testpage');
