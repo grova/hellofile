@@ -123,13 +123,13 @@ var y3 = {
 				{
 					// li - aggiungo il file alla lista
                     ext = app.getFileExtension(app.localdb[i].localPath);
-                    if (ext == 'jpg'){
+                    if (ext == 'xxjpg'){
 					
                     t = t+("<li id='fileElement"+i+"'><a href='#' class='swipeboxx' src='"+app.localdb[i].localPath+"' onclick='Alert("+app.localdb[i].localPath+")'><img src='img/"+y3.choseThumb(ext)+"' /><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].localPath+"</p></a><a href='#' onclick=app.deleteFile("+app.localdb[i].fileid+"," + i + ")></a></li>");                    }
                     
                     else{
 					
-                        t = t+("<li id='fileElement"+i+"'><a href='#' onclick = app.openFile(" + i +",false,false)><img src='img/"+y3.choseThumb(ext)+"' /><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].localPath+"</p></a><a href='#' onclick=app.deleteFile("+app.localdb[i].fileid+"," + i + ")></a></li>");
+                        t = t+("<li id='fileElement"+i+"'><a href='#' onclick = app.openFile(" + i +",false,false)><img src='img/"+y3.choseThumb(ext)+"' /><h2>"+app.localdb[i].localPath+"</h2><p>"+app.localdb[i].localPath+"</p></a><a href='#' onclick=app.deleteFile("+app.localdb[i].fileid+"," + i + ")></a></li>");
                     }
 				}
 			}
