@@ -123,13 +123,21 @@ var y3 = {
 				{
 					// li - aggiungo il file alla lista
                     ext = app.getFileExtension(app.localdb[i].localPath);
-					t = t+("<li id='fileElement"+i+"'><a href='#' onclick = app.openFile(" + i +",false,false)><img src='img/"+y3.choseThumb(ext)+"' /><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].localPath+"</p></a><a href='#' onclick=app.deleteFile("+app.localdb[i].fileid+"," + i + ")></a></li>");
+                    if (ext == 'jpg'){
+					
+                    t = t+("<li id='fileElement"+i+"'><a href='#' class='swipebox' ><img src='img/"+y3.choseThumb(ext)+"' /><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].localPath+"</p></a><a href='#' onclick=app.deleteFile("+app.localdb[i].fileid+"," + i + ")></a></li>");                    }
+                    
+                    else{
+					
+                        t = t+("<li id='fileElement"+i+"'><a href='#' onclick = app.openFile(" + i +",false,false)><img src='img/"+y3.choseThumb(ext)+"' /><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].localPath+"</p></a><a href='#' onclick=app.deleteFile("+app.localdb[i].fileid+"," + i + ")></a></li>");
+                    }
 				}
 			}
 			
 		$("#filelist_ul").append(t);
 
         $("#filelist_ul").listview("refresh");
+        $( '.swipebox' ).swipebox(); // inizializzo la gallery
         $.mobile.navigate('#filelist');
 
 		}
