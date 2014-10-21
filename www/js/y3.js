@@ -125,7 +125,7 @@ var y3 = {
                     ext = app.getFileExtension(app.localdb[i].localPath);
                     if (ext == 'jpg'){ 
 					
-                    t = t+("<li id='fileElement"+i+"'><a href='#' class='swipebox' src='"+app.fileSystemRoot + "/" +app.localdb[i].localPath+"'><img src='img/"+y3.choseThumb(ext)+"' /><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].localPath+"</p></a><a href='#' onclick=app.deleteFile("+app.localdb[i].fileid+"," + i + ")></a></li>"); }
+                    t = t+("<li id='fileElement"+i+"'><a href='#' class='swipebox' src='"+app.fileSystemRoot + "/" +app.localdb[i].localPath+"' title='"+app.fileSystemRoot+"'><img src='img/"+y3.choseThumb(ext)+"' /><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].localPath+"</p></a><a href='#' onclick=app.deleteFile("+app.localdb[i].fileid+"," + i + ")></a></li>"); }
                     
                     else{
 					
