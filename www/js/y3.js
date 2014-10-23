@@ -128,7 +128,7 @@ var y3 = {
 					fullpath = app.fileSystemRoot + "/" +app.localdb[i].localPath;
                     //fullpath = fullpath.substr(7); //tolgo file://
                         
-                    t = t+("<li id='fileElement"+i+"'><a href='#' class='swipebox' src='"+fullpath+"' alt='"+fullpath+"' title='"+app.fileSystemRoot+"'><img src='img/"+y3.choseThumb(ext)+"' /><h2>"+app.localdb[i].desc+"</h2><p>"+fullpath+"</p></a><a href='#' onclick=app.deleteFile("+app.localdb[i].fileid+"," + i + ")></a></li>"); }
+                    t = t+("<li id='fileElement"+i+"'><a href='"+fullpath+"' src='"+fullpath+"' title='"+app.fileSystemRoot+"'><img src='img/"+y3.choseThumb(ext)+"' /><h2>"+app.localdb[i].desc+"</h2><p>"+fullpath+"</p></a><a href='#' onclick=app.deleteFile("+app.localdb[i].fileid+"," + i + ")></a></li>"); }
                     
                     else{
 					
