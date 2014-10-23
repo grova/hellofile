@@ -550,6 +550,7 @@ var app =
 					}
 					else
 					{
+						var uri = encodeURI(full);
 						if (useIBooks)
 						{
 							filepath = "itms-books:/"+filepath;
@@ -558,11 +559,11 @@ var app =
 						var ref;
 						if (location == true)
 						{
-							ref = window.open(full,'_blank','location=yes,EnableViewPortScale=yes');
+							ref = window.open(uri,'_blank','location=yes,EnableViewPortScale=yes');
 						}
 						else
 						{
-							ref = window.open(full,'_blank','location=no,EnableViewPortScale=yes');
+							ref = window.open(uri,'_blank','location=no,EnableViewPortScale=yes');
 						}
 						
 						ref.addEventListener('loaderror',
