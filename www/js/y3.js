@@ -126,9 +126,9 @@ var y3 = {
                     if (ext == 'jpg'){ 
                         
 					fullpath = app.fileSystemRoot + "/" +app.localdb[i].localPath;
-                    fullpath = encodeURI(fullpath.substr(7)); //tolgo file://
+                    fullpath = fullpath.substr(7); //tolgo file://
                         
-                    t = t+("<li id='fileElement"+i+"'><a href='#' class='swipebox' src='"+fullpath+"' alt='"+fullpath+"' title='"+app.fileSystemRoot+"'><img src='img/"+y3.choseThumb(ext)+"' /><h2>"+fullpath+"</h2><p>"+app.localdb[i].localPath+"</p></a><a href='#' onclick=app.deleteFile("+app.localdb[i].fileid+"," + i + ")></a></li>"); }
+                    t = t+("<li id='fileElement"+i+"'><a href='#' class='swipebox' src='"+fullpath+"' alt='"+fullpath+"' title='"+app.fileSystemRoot+"'><img src='img/"+y3.choseThumb(ext)+"' /><h2>"+app.localdb[i].desc+"</h2><p>"+fullpath+"</p></a><a href='#' onclick=app.deleteFile("+app.localdb[i].fileid+"," + i + ")></a></li>"); }
                     
                     else{
 					
