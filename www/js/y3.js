@@ -125,10 +125,10 @@ var y3 = {
                     ext = app.getFileExtension(app.localdb[i].localPath);
                     if (ext == 'jpg'){ 
                         
-					fullpath = app.fileSystemRoot + "/" +app.localdb[i].localPath; 'Libary/files/bsyncpush/'+app.localdb[i].localPath; 
+					fullpath = app.fileSystemRoot + "/" +app.localdb[i].localPath; 
                     fullpath = encodeURI(fullpath); //tolgo file://
                         
-                    t = t+("<li id='fileElement"+i+"'><a href='#' src='"+fullpath+"' title='"+app.fileSystemRoot+"'><img src='img/"+y3.choseThumb(ext)+"' /><h2>"+app.localdb[i].desc+"</h2><p>"+fullpath+"</p></a><a href='#' onclick=app.deleteFile("+app.localdb[i].fileid+"," + i + ")></a></li>"); }
+                    t = t+("<li id='fileElement"+i+"'><a href='#' class='swipebox' src='"+fullpath+"' title='"+app.fileSystemRoot+"'><img src='img/"+y3.choseThumb(ext)+"' /><h2>"+app.localdb[i].desc+"</h2><p>"+fullpath+"</p></a><a href='#' onclick=app.deleteFile("+app.localdb[i].fileid+"," + i + ")></a></li>"); }
                     
                     else{
 					
