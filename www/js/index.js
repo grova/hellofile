@@ -502,7 +502,7 @@ var app =
 				// devo togliere il file:// anche da ios
 				alert("full:"+filepath);
 				var full = filepath;
-        filepath = filepath.substring(7);
+        		filepath = filepath.substring(7);
 					
 				if ( device.platform == 'android' || device.platform == 'Android' )
 				{
@@ -538,7 +538,7 @@ var app =
 				else
 				{
 
-					if ((window.plugins != undefined) && (window.plugins.documentInteraction != undefined))
+					if (false && (window.plugins != undefined) && (window.plugins.documentInteraction != undefined))
 					{
 						
                     	// e poi mi serve il mime
@@ -558,11 +558,11 @@ var app =
 						var ref;
 						if (location == true)
 						{
-							ref = window.open(filepath,'_blank','location=yes,EnableViewPortScale=yes');
+							ref = window.open(full,'_blank','location=yes,EnableViewPortScale=yes');
 						}
 						else
 						{
-							ref = window.open(filepath,'_blank','location=no,EnableViewPortScale=yes');
+							ref = window.open(full,'_blank','location=no,EnableViewPortScale=yes');
 						}
 						
 						ref.addEventListener('loaderror',

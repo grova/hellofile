@@ -88,5 +88,5 @@
 
     
     <access origin="*" />
-    <access origin="debug.phonegap.com"
+    <access origin="http://debug.phonegap.com"
 </widget>
