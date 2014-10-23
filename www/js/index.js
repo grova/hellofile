@@ -500,7 +500,7 @@ var app =
 				var filepath = this.fileSystemRoot + "/" + this.localdb[i].localPath;
 
 				// devo togliere il file:// anche da ios
-				alert("full:"+filepath);
+				//alert("full:"+filepath);
 				var full = filepath;
         		filepath = filepath.substring(7);
 					
@@ -538,7 +538,7 @@ var app =
 				else
 				{
 
-					if (false && (window.plugins != undefined) && (window.plugins.documentInteraction != undefined))
+					if ((window.plugins != undefined) && (window.plugins.documentInteraction != undefined))
 					{
 						
                     	// e poi mi serve il mime
