@@ -381,7 +381,12 @@
                 -->
  
                 </p>
-                
+                <div id="Gallery">
+                    <a href="img/acrobat_thumb_80x80.jpg" class="swipebox">immagine 1</a>
+                    <a href="img/doc_thumb_80x80.jpg" class="swipebox">immagine 2</a>
+                    <a href="img/icons.png" class="swipebox">immagine 3</a>
+                    <a href="img/logo.png" class="swipebox">immagine 4</a>
+                </div>
                 
             </div><!-- /content -->
 
@@ -402,6 +407,11 @@
 	
         <script type="text/javascript">
             
+            $(document).ready(function(){
+			
+			$("#Gallery a").photoSwipe();
+					
+		      });
             
         	var g_mainInit = 0;
         	function mainInit()
