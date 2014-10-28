@@ -123,7 +123,7 @@ var y3 = {
 				{
 					// li - aggiungo il file alla lista
                     ext = app.getFileExtension(app.localdb[i].localPath);
-                    if (ext == 'jpg'){ 
+                    if (ext.toLowerCase() == 'jpg'){ 
                         
 					fullpath = app.fileSystemRoot + "/" +app.localdb[i].localPath; 
                     fullpath = encodeURI(fullpath); //tolgo file://
