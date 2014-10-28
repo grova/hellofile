@@ -140,7 +140,8 @@ var y3 = {
 		$("#filelist_ul").append(t);
 
         $("#filelist_ul").listview("refresh");
-        $( '.swipebox' ).swipebox(); // inizializzo la gallery
+        //$( '.swipebox' ).swipebox(); // inizializzo la gallery
+        $( '.swipebox' ).photoSwipe();
         $.mobile.navigate('#filelist');
 
 		}
