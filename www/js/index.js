@@ -35,33 +35,41 @@ var extSort =
 
 function compareFunc(a,b)
 {
-	var path1 = a.localPath;
-	var path2 = b.localPath;
-	var ext1 = app.getFileExtension(path1).toLowerCase();
-	var ext2 = app.getFileExtension(path2).toLowerCase();
+	try
+	{
+		var path1 = a.localPath;
+		var path2 = b.localPath;
+		var ext1 = app.getFileExtension(path1).toLowerCase();
+		var ext2 = app.getFileExtension(path2).toLowerCase();
 
-	// prima per estensione
-	var ext1val = extSort.indexOf(ext1);
-	var ext2val = extSort.indexOf(ext2);
-	if (ext1val==-1)
-	{
-		ext1val = extsort.length;
-	}
-	if (ext2val==-1)
-	{
-		ext2val = extsort.length;
-	}
+		// prima per estensione
+		var ext1val = extSort.indexOf(ext1);
+		var ext2val = extSort.indexOf(ext2);
+		if (ext1val==-1)
+		{
+			ext1val = extsort.length;
+		}
+		if (ext2val==-1)
+		{
+			ext2val = extsort.length;
+		}
 
-	if (ext1val>ext2val)
-	{
-		return 1;
-	}
-	if (ext2val>ext1val)
-	{
-		return -1;
-	}
+		if (ext1val>ext2val)
+		{
+			return 1;
+		}
+		if (ext2val>ext1val)
+		{
+			return -1;
+		}
 
-	return path1 > path2;
+		return path1 > path2;
+	}
+	catch(err)
+	{
+		alert("sort error:" + err);
+		return 0;
+	}
 }
 
  
