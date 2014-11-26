@@ -67,7 +67,7 @@ function compareFunc(a,b)
 	}
 	catch(err)
 	{
-		alert("sort error:" + err);
+		//alert("sort error:" + err);
 		return 0;
 	}
 }
@@ -818,8 +818,7 @@ var app =
 			{
                 console.log("integrityCheck done");
                 app.sortLocalDb();
-                alert("sort done");
-
+ 
             	y3.initialize('homecontent');		// inizializza la pagina dell'interfaccia
         		console.log("y3init done");
         		//app.receivedEvent('deviceready');	
