@@ -130,7 +130,6 @@ var app =
     onDeviceReady: function() {
         //app.myAlert("ondeviceready");
         app.initLocalDb();					// check local storage e carica il db dal localstorage
-        app.sortLocalDb();
         app.initVersion();  // serve il local storage 
         app.mainIntegrityCheck();	// ne controlla l'itegrita' e inizializza il path della root del filesystem
     },
@@ -238,7 +237,6 @@ var app =
     // faccio il sort del db locale
     sortLocalDb: function()
     {
-    	return;
     	if (this.localdb!=null)
     	{
     		this.localdb.sort(compareFunc);
@@ -811,6 +809,8 @@ var app =
 			function()
 			{
                 console.log("integrityCheck done");
+                app.sortLocalDb();
+                alert("sort done");
 
             	y3.initialize('homecontent');		// inizializza la pagina dell'interfaccia
         		console.log("y3init done");
@@ -989,7 +989,7 @@ var app =
 			
 			console.log("niente da scaricare (null)");
 			y3.showDownloadResult(0);
-			this.sortLocalDb();
+			//this.sortLocalDb();
 			return;
 		}
 		if (this.toDownloadList.length==0)
@@ -999,7 +999,7 @@ var app =
 			window.plugins.insomnia.allowSleepAgain()
 			console.log("niente da scaricare (0)");
 			y3.showDownloadResult(0);
-			this.sortLocalDb();
+			//this.sortLocalDb();
 			return;
 		}
 		
@@ -1020,7 +1020,7 @@ var app =
 						console.log("abort: fine iterazione download");
 						app.m_requestAbort = false;
 						y3.showDownloadResult(1);
-						this.sortLocalDb();
+						//this.sortLocalDb();
 					}
 					else
 					{
@@ -1040,12 +1040,12 @@ var app =
                     if (abort)
                     {
                         y3.showDownloadResult(1);
-                        this.sortLocalDb();
+                        //this.sortLocalDb();
                     }
                     else
                     {
                         y3.showDownloadResult(2);
-                        this.sortLocalDb();
+                        //this.sortLocalDb();
                     }
 				}
 		);
