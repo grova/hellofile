@@ -37,8 +37,8 @@ function compareFunc(a,b)
 {
 	var path1 = a.localPath;
 	var path2 = b.localPath;
-	var ext1 = app.getFileExtension(path1);
-	var ext2 = app.getFileExtension(path2);
+	var ext1 = app.getFileExtension(path1).toLowerCase();
+	var ext2 = app.getFileExtension(path2).toLowerCase();
 
 	// prima per estensione
 	var ext1val = extSort.indexOf(ext1);
@@ -238,6 +238,7 @@ var app =
     // faccio il sort del db locale
     sortLocalDb: function()
     {
+    	return;
     	if (this.localdb!=null)
     	{
     		this.localdb.sort(compareFunc);
