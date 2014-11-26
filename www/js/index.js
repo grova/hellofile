@@ -18,7 +18,51 @@
  */
 
 
+// localdb[i].localPath
 
+// scelgo come ordinare le estensioni
+var extSort = 
+[
+	"mov",
+	"mp4",
+	"mpg",
+	"gif",
+	"jpg",
+	"pdf",
+	"xls",
+	"xslx"
+];
+
+function compareFunc(a,b)
+{
+	var path1 = a.localPath;
+	var path2 = b.localPath;
+	var ext1 = app.getFileExtension(path1);
+	var ext2 = app.getFileExtension(path2);
+
+	// prima per estensione
+	var ext1val = extSort.indexOf(ext1);
+	var ext2val = extSort.indexOf(ext2);
+	if (ext1val==-1)
+	{
+		ext1val = extsort.length;
+	}
+	if (ext2val==-1)
+	{
+		ext2val = extsort.length;
+	}
+
+	if (ext1val>ext2val)
+	{
+		return 1;
+	}
+	if (ext2val>ext1val)
+	{
+		return -1;
+	}
+
+	return path1 > path2;
+}
 
  
 
@@ -86,6 +130,7 @@ var app =
     onDeviceReady: function() {
         //app.myAlert("ondeviceready");
         app.initLocalDb();					// check local storage e carica il db dal localstorage
+        app.sortLocalDb();
         app.initVersion();  // serve il local storage 
         app.mainIntegrityCheck();	// ne controlla l'itegrita' e inizializza il path della root del filesystem
     },
@@ -188,6 +233,15 @@ var app =
 			
 			//alert(localStorage.getItem("wifiOnly"));
 		}
+    },
+
+    // faccio il sort del db locale
+    sortLocalDb: function()
+    {
+    	if (this.localdb!=null)
+    	{
+    		this.localdb.sort(compareFunc);
+    	}
     },
 
     // salvo il db corrente su localstorage
@@ -507,16 +561,16 @@ var app =
 				if ( device.platform == 'android' || device.platform == 'Android' )
 				{
                     // e poi mi serve il mime
-          var mime = this.getMIME(filepath);
+          			var mime = this.getMIME(filepath);
 					
 					//filepath = filepath.substring(4);
 					
 					console.log("startactivity on:" + filepath);
-          console.log("MIME:" + mime);
+          			console.log("MIME:" + mime);
 					
 					// alert("start on1:"+filepath+":"+mime);
 					
-	        cordova.plugins.fileOpener.open(filepath,mime);
+	        		cordova.plugins.fileOpener.open(filepath,mime);
                     /*
 					window.plugins.webintent.startActivity(
 						{
@@ -592,6 +646,14 @@ var app =
 	{
 		var ext = path.substring(path.lastIndexOf('.')+1);
 		return ext;
+	},
+
+	getFileName: function(path)
+	{
+		var filename = path;
+			// tolgo il path se c'era
+		filename = filename.substring(filename.lastIndexOf('/')+1);
+		return filename;
 	},
 
 
@@ -926,6 +988,7 @@ var app =
 			
 			console.log("niente da scaricare (null)");
 			y3.showDownloadResult(0);
+			this.sortLocalDb();
 			return;
 		}
 		if (this.toDownloadList.length==0)
@@ -935,6 +998,7 @@ var app =
 			window.plugins.insomnia.allowSleepAgain()
 			console.log("niente da scaricare (0)");
 			y3.showDownloadResult(0);
+			this.sortLocalDb();
 			return;
 		}
 		
@@ -955,6 +1019,7 @@ var app =
 						console.log("abort: fine iterazione download");
 						app.m_requestAbort = false;
 						y3.showDownloadResult(1);
+						this.sortLocalDb();
 					}
 					else
 					{
@@ -974,10 +1039,12 @@ var app =
                     if (abort)
                     {
                         y3.showDownloadResult(1);
+                        this.sortLocalDb();
                     }
                     else
                     {
                         y3.showDownloadResult(2);
+                        this.sortLocalDb();
                     }
 				}
 		);
