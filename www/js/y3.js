@@ -123,12 +123,13 @@ var y3 = {
 				{
 					// li - aggiungo il file alla lista
                     ext = app.getFileExtension(app.localdb[i].localPath);
+
                     if (ext.toLowerCase() == 'jpg'){ 
                         
 					fullpath = app.fileSystemRoot + "/" +app.localdb[i].localPath; 
                     fullpath = encodeURI(fullpath); //tolgo file://
                         
-                    t = t+("<li id='fileElement"+i+"'><a href='"+fullpath+"' class='swipebox' title='Image'><img src='"+fullpath+"' style='height:140px;'/><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].localPath+"</p></a><a href='#' onclick=app.deleteFile("+app.localdb[i].fileid+"," + i + ")></a></li>"); }
+                    t = t+("<li id='fileElement"+i+"'><a href='"+fullpath+"' class='swipebox' title='Image'><img src='"+fullpath+"' style='height:180px;'/><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].localPath+"</p></a><a href='#' onclick=app.deleteFile("+app.localdb[i].fileid+"," + i + ")></a></li>"); }
                     
                     else{
 					
