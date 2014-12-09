@@ -4,7 +4,7 @@ var y3 = {
     // Application Constructor
     initialize: function (containerid) {
         //this.getlists(); non lo chiamo perche' lo chiamo a mano dal debugger, cosi' posso cambiare
-		this.populatecontainer(containerid);
+		this.populatecontainer(containerid);  //
     },
 	
 	//grouplist: null, //lista files
@@ -51,7 +51,7 @@ var y3 = {
         else { $("#"+containerid).empty();  }// distruggo il contenuto del containerid
         
 		
-		//collapsible
+		//collapsible (ovvero i menu principali in home)
 		for (i=0;i<grouplist.length;i++)
 		{//collapsible: grouplist
 			
@@ -128,7 +128,7 @@ var y3 = {
 					fullpath = app.fileSystemRoot + "/" +app.localdb[i].localPath; 
                     fullpath = encodeURI(fullpath); //tolgo file://
                         
-                    t = t+("<li id='fileElement"+i+"'><a href='"+fullpath+"' class='swipebox' title='Image'><img src='"+fullpath+"' style='height:100px;'/><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].localPath+"</p></a><a href='#' onclick=app.deleteFile("+app.localdb[i].fileid+"," + i + ")></a></li>"); }
+                    t = t+("<li id='fileElement"+i+"'><a href='"+fullpath+"' class='swipebox' title='Image'><img src='"+fullpath+"' style='height:140px;'/><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].localPath+"</p></a><a href='#' onclick=app.deleteFile("+app.localdb[i].fileid+"," + i + ")></a></li>"); }
                     
                     else{
 					
@@ -141,7 +141,6 @@ var y3 = {
 
         $("#filelist_ul").listview("refresh");
         $( '.swipebox' ).swipebox(); // inizializzo la gallery
-        //$( '.swipebox' ).photoSwipe();
         $.mobile.navigate('#filelist');
 
 		}
