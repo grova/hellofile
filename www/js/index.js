@@ -1057,6 +1057,7 @@ var app =
 					// c'e' stato un errore o un abort
                     //window.plugins.powerManagement.release();
                                         //alert("sleep4");
+                    alert("error on load");
                     window.plugins.insomnia.allowSleepAgain();
                     console.log("download error or abort");
                     var abort = app.m_requestAbort;
