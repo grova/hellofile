@@ -316,26 +316,30 @@ var app =
     // e crea la lista dei file da scaricare, quelli non aggiornati
     loadJson: function()
     {
-		var networkState = navigator.connection.type;
+        if (navigator.connection != undefined)
+        {
         
-		if (this.getWifiOnly() && (networkState != Connection.WIFI))
-		{
-			var states = {};
-			states[Connection.UNKNOWN]  = 'Unknown connection';
-			states[Connection.ETHERNET] = 'Ethernet connection';
-			states[Connection.WIFI]     = 'WiFi connection';
-			states[Connection.CELL_2G]  = 'Cell 2G connection';
-			states[Connection.CELL_3G]  = 'Cell 3G connection';
-			states[Connection.CELL_4G]  = 'Cell 4G connection';
-			states[Connection.CELL]     = 'Cell generic connection';
-			states[Connection.NONE]     = 'No network connection';
+            var networkState = navigator.connection.type;
 
-			alert("connessione WIFI non attiva ("+states[networkState]+")");
-			return;
-		}
+            if (this.getWifiOnly() && (networkState != Connection.WIFI))
+            {
+              var states = {};
+              states[Connection.UNKNOWN]  = 'Unknown connection';
+              states[Connection.ETHERNET] = 'Ethernet connection';
+              states[Connection.WIFI]     = 'WiFi connection';
+              states[Connection.CELL_2G]  = 'Cell 2G connection';
+              states[Connection.CELL_3G]  = 'Cell 3G connection';
+              states[Connection.CELL_4G]  = 'Cell 4G connection';
+              states[Connection.CELL]     = 'Cell generic connection';
+              states[Connection.NONE]     = 'No network connection';
+
+              alert("connessione WIFI non attiva ("+states[networkState]+")");
+              return;
+            }
+        }
+
 	
-	
-        y3.showloading(); //mostro loading in progress...
+    y3.showloading(); //mostro loading in progress...
         
 		this.toDownloadList = new Array();	// qui ci metto quelli da scaricare
 
@@ -343,8 +347,18 @@ var app =
 		var url = "http://www.storci.com/filesync/groups.asp";
 		console.log("loading "+url);
 
-		//var deviceid = "5617AA9A-6292-4580-AA11-EF708E287BB3";
-		var deviceid = device.uuid;
+    if (this.useChrome)
+    {
+        var deviceid = "5617AA9A-6292-4580-AA11-EF708E287BB3";
+        
+        makeCorsRequest(url, { deviceID: deviceid , lang: "IT" });
+        return;
+        
+    }
+    else
+    {
+		  var deviceid = device.uuid;
+    }
 		//var deviceid = "59C7EC4D-F096-4CC6-AF9B-76B619BF3E02";
 		
 		
@@ -749,7 +763,7 @@ var app =
 	{
 		console.log("integritycheck");
 
-		/*
+		
 		if (this.useChrome)
 		{
 			console.log("using chome");
@@ -771,7 +785,7 @@ var app =
 			);
 			return;
 		}
-		*/
+		
 
 		// mi serve il filesystem
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
@@ -1049,8 +1063,11 @@ var app =
                     app.m_requestAbort = false;
                     if (abort)
                     {
+                        alert("sort localdb");
                     	this.sortLocalDb();
+                        alert("showdownloadres");
                         y3.showDownloadResult(1);
+                        alert("initialize");
                         y3.initialize('homecontent');
                     }
                     else
@@ -1612,7 +1629,53 @@ function resolveTest(file)
 		{
 			console.log("fail: "+error.code);
 		});
-
 }
 
+function debugOnChrome()
+{
+    app.useChrome = true;
+    app.loadJson();
+}
+
+
+function createCORSRequest(method, url) {
+  var xhr = new XMLHttpRequest();
+  if ("withCredentials" in xhr) {
+    // XHR for Chrome/Firefox/Opera/Safari.
+    xhr.open(method, url, true);
+  } else if (typeof XDomainRequest != "undefined") {
+    // XDomainRequest for IE.
+    xhr = new XDomainRequest();
+    xhr.open(method, url);
+  } else {
+    // CORS not supported.
+    xhr = null;
+  }
+  return xhr;
+}
+
+//var jqxhr2 = $.post(url , { deviceID: deviceid , lang: "IT" } ).done
+// Make the actual CORS request.
+function makeCorsRequest(url, data) {
+  // All HTML5 Rocks properties support CORS.
+
+  var xhr = createCORSRequest('POST', url);
+  if (!xhr) {
+    alert('CORS not supported');
+    return;
+  }
+
+  // Response handlers.
+  xhr.onload = function() {
+    var text = xhr.responseText;
+    
+    alert('Response from CORS request to ' + url + ': ' + text);
+  };
+
+  xhr.onerror = function() {
+    alert('Woops, there was an error making the request.');
+  };
+
+  xhr.send(data);
+}
 
