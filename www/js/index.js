@@ -983,7 +983,7 @@ var app =
 		this.m_requestAbort = true;
 		if (this.m_fileTransfer != null)
 		{
-			alert("blocco un download in corso");
+			//alert("blocco un download in corso");
 			console.log("blocco un download in corso");
 			this.m_fileTransfer.abort();
 		}
