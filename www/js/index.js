@@ -964,7 +964,7 @@ var app =
 															 default:
 																	// abort
                                                                     alert("abort download");
-																	_fail();
+																	//_fail();
 																	break;
 											 }
 									 },
