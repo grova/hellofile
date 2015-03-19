@@ -938,7 +938,7 @@ var app =
 				states[FileTransferError.ABORT_ERR]  = 'download interrotto';
 				
 				var err = "error: download source ("+error.source+"), target ("+error.target+"), ("+states[error.code]+")";
-				//alert(err);
+				alert(err);
 			  console.log(err);
 			    //_fail();
                 
@@ -963,6 +963,7 @@ var app =
 																	break;
 															 default:
 																	// abort
+                                                                    alert("abort download");
 																	_fail();
 																	break;
 											 }
@@ -983,7 +984,7 @@ var app =
 		this.m_requestAbort = true;
 		if (this.m_fileTransfer != null)
 		{
-			//alert("blocco un download in corso");
+			alert("blocco un download in corso");
 			console.log("blocco un download in corso");
 			this.m_fileTransfer.abort();
 		}
@@ -1029,7 +1030,7 @@ var app =
 		this.downloadFile(this.m_nextDownloadFileIndex,
 				function()
 				{
-					console.log("download success. left:"+app.toDownloadList.length);
+					alert("download success. left:"+app.toDownloadList.length);
 					
 					console.log("view updated");
 					y3.showRemainingFiles();
