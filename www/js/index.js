@@ -1029,7 +1029,7 @@ var app =
 		this.downloadFile(this.m_nextDownloadFileIndex,
 				function()
 				{
-					alert("download success. left:"+app.toDownloadList.length);
+					//alert("download success. left:"+app.toDownloadList.length);
 					
 					console.log("view updated");
 					y3.showRemainingFiles();
