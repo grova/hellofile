@@ -1080,8 +1080,9 @@ var app =
                         y3.showDownloadResult(2);
                         y3.initialize('homecontent');
                     }
+                    */
 				}
-                */
+          
 		);
 
 	},
