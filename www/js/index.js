@@ -938,10 +938,8 @@ var app =
 				states[FileTransferError.ABORT_ERR]  = 'download interrotto';
 				
 				var err = "error: download source ("+error.source+"), target ("+error.target+"), ("+states[error.code]+")";
-				alert(err);
-			  console.log(err);
-			    //_fail();
-                
+				console.log(err);
+			    
 				// c'e' stato un problema (o un abort)
 				// ti chiedo se vuoi skippare il file e continuare o bloccare tutto
 				if (navigator.notification != undefined)
@@ -963,9 +961,9 @@ var app =
 																	break;
 															 default:
 																	// abort
-                                                                    alert("abort download");
-                                                                    app.abortedDownload();
-																	//_fail();
+                                                                    //alert("abort download");
+                                                                    //app.abortedDownload();
+																	_fail();
 																	break;
 											 }
 									 },
@@ -1044,7 +1042,7 @@ var app =
 						window.plugins.insomnia.allowSleepAgain()
 						console.log("abort: fine iterazione download");
 						app.m_requestAbort = false;
-						this.sortLocalDb();
+						app.sortLocalDb();
 						y3.showDownloadResult(1);
 						y3.initialize('homecontent');
 					}
@@ -1059,28 +1057,22 @@ var app =
 					// c'e' stato un errore o un abort
                     //window.plugins.powerManagement.release();
                                         //alert("sleep4");
-                /*
-                    alert("error on load");
                     window.plugins.insomnia.allowSleepAgain();
                     console.log("download error or abort");
                     var abort = app.m_requestAbort;
                     app.m_requestAbort = false;
                     if (abort)
                     {
-                        alert("sort localdb");
-                    	this.sortLocalDb();
-                        alert("showdownloadres");
+                        app.sortLocalDb();
                         y3.showDownloadResult(1);
-                        alert("initialize");
                         y3.initialize('homecontent');
                     }
                     else
                     {
-                    	this.sortLocalDb();
+                    	app.sortLocalDb();
                         y3.showDownloadResult(2);
                         y3.initialize('homecontent');
                     }
-                    */
 				}
           
 		);
