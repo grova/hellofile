@@ -964,6 +964,7 @@ var app =
 															 default:
 																	// abort
                                                                     alert("abort download");
+                                                                    app.abortedDownload();
 																	//_fail();
 																	break;
 											 }
@@ -1058,6 +1059,7 @@ var app =
 					// c'e' stato un errore o un abort
                     //window.plugins.powerManagement.release();
                                         //alert("sleep4");
+                /*
                     alert("error on load");
                     window.plugins.insomnia.allowSleepAgain();
                     console.log("download error or abort");
@@ -1079,9 +1081,36 @@ var app =
                         y3.initialize('homecontent');
                     }
 				}
+                */
 		);
 
 	},
+    
+    // sposto qui del codice per fare test
+    abortedDownload: function() {
+        // c'e' stato un errore o un abort
+        alert("error on load");
+        window.plugins.insomnia.allowSleepAgain();
+        console.log("download error or abort");
+        var abort = app.m_requestAbort;
+        app.m_requestAbort = false;
+        if (abort)
+        {
+            alert("sort localdb");
+            app.sortLocalDb();
+            alert("showdownloadres");
+            y3.showDownloadResult(1);
+            alert("initialize");
+            y3.initialize('homecontent');
+        }
+        else
+        {
+            app.sortLocalDb();
+            y3.showDownloadResult(2);
+            y3.initialize('homecontent');
+        }
+    },
+
 
 	// pubblica
 	mainDownloadAllFiles: function()
