@@ -11,7 +11,7 @@ Codici errore
 
 002 - errore generico durante il download di un file
 
-003 - errore durante il download dei gruppi
+003 - errore durante il download dei gruppi / mancanza connessione
 
 200 - errore generico - procedura interrotta senza preavviso
 
