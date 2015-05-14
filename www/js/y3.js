@@ -133,10 +133,10 @@ var y3 = {
                     ingSize = 
                     
                     //nuovo codice per photoswipe
-                    t = t+("<li id='fileElement"+i+"'><a href='"+fullpath+"' class='swipebox photoSwipe' title='Image' ><img src='"+fullpath+"' class='photoSwipeImage' style='min-width:80px; min-height:80px;' /><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].localPath+"</p></a><a href='#' onclick=app.deleteFile("+app.localdb[i].fileid+"," + i + ")></a></li>"); } 
+                    //t = t+("<li id='fileElement"+i+"'><a href='"+fullpath+"' class='photoSwipe' title='Image' ><img src='"+fullpath+"' class='photoSwipeImage' style='min-width:80px; min-height:80px;' /><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].localPath+"</p></a><a href='#' onclick=app.deleteFile("+app.localdb[i].fileid+"," + i + ")></a></li>"); } 
                         
                     // codice originale per swipeBox
-                    //t = t+("<li id='fileElement"+i+"'><a href='"+fullpath+"' class='swipebox' title='Image'><img src='"+fullpath+"' style='min-width:80px; min-height:80px;'/><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].localPath+"</p></a><a href='#' onclick=app.deleteFile("+app.localdb[i].fileid+"," + i + ")></a></li>"); }
+                    t = t+("<li id='fileElement"+i+"'><a href='"+fullpath+"' class='swipebox' title='Image'><img src='"+fullpath+"' style='min-width:80px; min-height:80px;'/><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].localPath+"</p></a><a href='#' onclick=app.deleteFile("+app.localdb[i].fileid+"," + i + ")></a></li>"); }
                     
                     else{
 					
@@ -151,7 +151,7 @@ var y3 = {
         
         
         //nuovo codice per photoswipe
-        
+        /*
         pswpElement = document.querySelectorAll('.pswp')[0]; //riferimento all'oggetto del DOM in cui mettere la galleria
         photoSwipeItems.length = 0; // resetto l'array che va riempito ex novo ad ogni ingresso in un menu
             
@@ -176,13 +176,13 @@ var y3 = {
             
         gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
         gallery.init();
-        
+        */
             
             
             
             
         // codice originale per swipeBox
-        //$( '.swipebox' ).swipebox(); // inizializzo la gallery
+        $( '.swipebox' ).swipebox(); // inizializzo la gallery
         
             
         $.mobile.navigate('#filelist');
