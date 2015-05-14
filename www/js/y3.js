@@ -151,7 +151,7 @@ var y3 = {
         
         
         //nuovo codice per photoswipe
-            /*
+        
         pswpElement = document.querySelectorAll('.pswp')[0]; //riferimento all'oggetto del DOM in cui mettere la galleria
         photoSwipeItems.length = 0; // resetto l'array che va riempito ex novo ad ogni ingresso in un menu
             
@@ -174,15 +174,15 @@ var y3 = {
         
         options = null;
             
-        var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
+        gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
         gallery.init();
-            */
+        
             
             
             
             
         // codice originale per swipeBox
-        $( '.swipebox' ).swipebox(); // inizializzo la gallery
+        //$( '.swipebox' ).swipebox(); // inizializzo la gallery
         
             
         $.mobile.navigate('#filelist');
