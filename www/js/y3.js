@@ -182,7 +182,7 @@ var y3 = {
             
             
         // codice originale per swipeBox
-        //$( '.swipebox' ).swipebox(); // inizializzo la gallery
+        $( '.swipebox' ).swipebox(); // inizializzo la gallery
         
             
         $.mobile.navigate('#filelist');
