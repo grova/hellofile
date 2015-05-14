@@ -90,6 +90,8 @@ var y3 = {
 
 	populatefilelist: function(containerid,tags)
 	{
+        var imgSize = "800x800";
+        
 		y3.showloading();
         
         if (y3.listheader != null)	$("#listheader").html(y3.listheader); //sistemo l'header della pagina 
@@ -106,7 +108,7 @@ var y3 = {
 		
 		if (y3.countfiles(tags) < 1)//se non ho files con i tag richiesti, lo scrivo nel log (non dovrebbe mai succedere, perchè se non ci sono file, non disegno il gruppo.
 		{
-			console.log("Nessun file con in tag richiesti ("+tags+")"); 
+			console.log("Nessun file con i tag richiesti ("+tags+")"); 
 			t= "<div class='ui-body ui-body-a ui-corner-all y3-center' style='margin-top:4em;'>"+
                "<h3>Avviso</h3>"+
                "<p >Questa lista non contiene alcun file. E' possibile che sia necessario sincronizzare l'applicazione. Premere il tasto sync</p>"+
@@ -128,8 +130,13 @@ var y3 = {
                         
 					fullpath = app.fileSystemRoot + "/" +app.localdb[i].localPath; 
                     fullpath = encodeURI(fullpath); //tolgo file://
+                    ingSize = 
+                    
+                    //nuovo codice per photoswipe
+                    t = t+("<li id='fileElement"+i+"'><a href='"+fullpath+"' class='photoSwipe' title='Image' ><img src='"+fullpath+"' class='photoSwipeImage' style='min-width:80px; min-height:80px;' /><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].localPath+"</p></a><a href='#' onclick=app.deleteFile("+app.localdb[i].fileid+"," + i + ")></a></li>"); } 
                         
-                    t = t+("<li id='fileElement"+i+"'><a href='"+fullpath+"' class='swipebox' title='Image'><img src='"+fullpath+"' style='min-width:80px; min-height:80px;'/><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].localPath+"</p></a><a href='#' onclick=app.deleteFile("+app.localdb[i].fileid+"," + i + ")></a></li>"); }
+                    // codice originale per swipeBox
+                    //t = t+("<li id='fileElement"+i+"'><a href='"+fullpath+"' class='swipebox' title='Image'><img src='"+fullpath+"' style='min-width:80px; min-height:80px;'/><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].localPath+"</p></a><a href='#' onclick=app.deleteFile("+app.localdb[i].fileid+"," + i + ")></a></li>"); }
                     
                     else{
 					
@@ -141,7 +148,42 @@ var y3 = {
 		$("#filelist_ul").append(t);
 
         $("#filelist_ul").listview("refresh");
-        $( '.swipebox' ).swipebox(); // inizializzo la gallery
+        
+        
+        //nuovo codice per photoswipe
+        pswpElement = document.querySelectorAll('.pswp')[0]; //riferimento all'oggetto del DOM in cui mettere la galleria
+        photoSwipeItems.length = 0; // resetto l'array che va riempito ex novo ad ogni ingresso in un menu
+            
+        $('.photoSwipeImage').each(function(){
+        
+            var s_ = ''; //src
+            var w_ = 800; //width
+            var h_ = 800; //height
+            
+            s_ = this.attr('src');
+            w_ = this.naturalWidth;
+            h_ = this.naturalHeight;
+            
+            item = { src: s_, w: w_, h: h_};
+            
+            photoSwipeItems.push(item); // aggiungo item all'elenco delle immagini
+        
+        
+        });
+        
+        options = null;
+            
+        var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
+        gallery.init();
+            
+            
+            
+            
+            
+        // codice originale per swipeBox
+        //$( '.swipebox' ).swipebox(); // inizializzo la gallery
+        
+            
         $.mobile.navigate('#filelist');
 
 		}
