@@ -133,10 +133,10 @@ var y3 = {
                     ingSize = 
                     
                     //nuovo codice per photoswipe
-                    t = t+("<li id='fileElement"+i+"'><a href='"+fullpath+"' class='photoSwipe' title='Image' ><img src='"+fullpath+"' class='photoSwipeImage' style='min-width:80px; min-height:80px;' /><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].localPath+"</p></a><a href='#' onclick=app.deleteFile("+app.localdb[i].fileid+"," + i + ")></a></li>"); } 
+                    //t = t+("<li id='fileElement"+i+"'><a href='"+fullpath+"' class='photoSwipe' title='Image' ><img src='"+fullpath+"' class='photoSwipeImage' style='min-width:80px; min-height:80px;' /><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].localPath+"</p></a><a href='#' onclick=app.deleteFile("+app.localdb[i].fileid+"," + i + ")></a></li>"); } 
                         
                     // codice originale per swipeBox
-                    //t = t+("<li id='fileElement"+i+"'><a href='"+fullpath+"' class='swipebox' title='Image'><img src='"+fullpath+"' style='min-width:80px; min-height:80px;'/><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].localPath+"</p></a><a href='#' onclick=app.deleteFile("+app.localdb[i].fileid+"," + i + ")></a></li>"); }
+                    t = t+("<li id='fileElement"+i+"'><a href='"+fullpath+"' class='swipebox' title='Image'><img src='"+fullpath+"' style='min-width:80px; min-height:80px;'/><h2>"+app.localdb[i].desc+"</h2><p>"+app.localdb[i].localPath+"</p></a><a href='#' onclick=app.deleteFile("+app.localdb[i].fileid+"," + i + ")></a></li>"); }
                     
                     else{
 					
@@ -182,7 +182,7 @@ var y3 = {
             
             
         // codice originale per swipeBox
-        //$( '.swipebox' ).swipebox(); // inizializzo la gallery
+        $( '.swipebox' ).swipebox(); // inizializzo la gallery
         
             
         $.mobile.navigate('#filelist');
