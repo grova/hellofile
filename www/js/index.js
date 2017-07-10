@@ -1351,7 +1351,7 @@ var app =
     	var pushNotification = window.plugins.pushNotification;
     	if (pushNotification == undefined)
     	{
-    		this.myAlert("pushnotification not available");
+    		//this.myAlert("pushnotification not available");
     		return;
     	}
     	if ( device.platform == 'android' || device.platform == 'Android' )

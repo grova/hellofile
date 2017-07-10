@@ -67,8 +67,9 @@
         <gap:plugin name="com.phonegap.plugins.barcodescanner" />
     -->
     <!--
-	<plugin name="https://github.com/phonegap-build/PushPlugin" spec="2.3.1" source="git"/>
-   -->
+	<plugin spec="https://github.com/phonegap-build/PushPlugin.git" />
+    -->
+   
   <!--  <gap:plugin name="com.simplec.plugins.powermanagement" version="0.4.0" /> -->
     <gap:plugin name="nl.x-services.plugins.insomnia" version="4.0.1" source="npm"/>
     <!--  era solo per android
