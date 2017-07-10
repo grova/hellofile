@@ -66,7 +66,7 @@
     <!--
         <gap:plugin name="com.phonegap.plugins.barcodescanner" />
     -->
-	<gap:plugin name="com.phonegap.plugins.pushplugin" version="2.1.1" source="npm"/>
+	<plugin name="https://github.com/phonegap-build/PushPlugin" version="2.1.1" source="git"/>
   <!--  <gap:plugin name="com.simplec.plugins.powermanagement" version="0.4.0" /> -->
     <gap:plugin name="nl.x-services.plugins.insomnia" version="4.0.1" source="npm"/>
     <gap:plugin name="io.github.pwlin.cordova.plugins.fileopener" version="1.0.1" source="npm"/>
