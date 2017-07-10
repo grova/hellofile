@@ -74,7 +74,7 @@
     <!--  era solo per android
     <plugin name="https://github.com/pwlin/cordova-plugin-file-opener2" spec="1.0.11" />
     -->
-    <gap:plugin name="https://github.com/grova/plugin-document-interaction" />
+    <gap:plugin name="https://github.com/grova/plugin-document-interaction.git" />
 
     <!-- Define app icon for each platform. -->
     <icon src="icon.png" />
