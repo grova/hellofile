@@ -53,13 +53,13 @@
     <!-- Core plugins -->
     
     <plugin name="cordova-plugin-device" spec="0.2.8" source="npm" />
-    <gap:plugin name="org.apache.cordova.dialogs" version="0.2.6" source="npm"/>
-    <gap:plugin name="org.apache.cordova.file" version="1.0.1" source="npm"/>
-    <gap:plugin name="org.apache.cordova.file-transfer" version="0.4.2" source="npm"/>
-    <gap:plugin name="org.apache.cordova.inappbrowser" version="0.3.3" source="npm"/>
-    <gap:plugin name="org.apache.cordova.media" version="0.2.8" source="npm"/>
-    <gap:plugin name="org.apache.cordova.splashscreen" version="0.2.7" source="npm"/>
-	<gap:plugin name="org.apache.cordova.network-information" version="0.2.7" source="npm"/>
+    <gap:plugin name="cordova-plugin-dialogs" version="0.2.6" source="npm"/>
+    <gap:plugin name="cordova-plugin-file" version="1.0.1" source="npm"/>
+    <gap:plugin name="cordova-plugin-file-transfer" version="0.4.2" source="npm"/>
+    <gap:plugin name="cordova-plugin-inappbrowser" version="0.3.3" source="npm"/>
+    <gap:plugin name="cordova-plugin-media" version="0.2.8" source="npm"/>
+    <gap:plugin name="cordova-plugin-splashscreen" version="0.2.7" source="npm"/>
+	<gap:plugin name="cordova-plugin-network-information" version="0.2.7" source="npm"/>
 
     <!-- Third party plugins -->
     <!-- A list of available plugins are available at https://build.phonegap.com/plugins -->
